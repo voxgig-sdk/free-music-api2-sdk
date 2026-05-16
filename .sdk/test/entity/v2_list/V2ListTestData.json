@@ -1,0 +1,28 @@
+{
+  "existing": {
+    "v2_list": {
+      "V2_LIST00": {
+        "album": [],
+        "artist_id": "ARTIST01",
+        "id": "V2_LIST00"
+      },
+      "V2_LIST01": {
+        "album": [],
+        "artist_id": "ARTIST01",
+        "id": "V2_LIST01"
+      },
+      "V2_LIST02": {
+        "album": [],
+        "artist_id": "ARTIST01",
+        "id": "V2_LIST02"
+      }
+    }
+  },
+  "new": {
+    "v2_list": {
+      "v2_list_ref01": {
+        "album": []
+      }
+    }
+  }
+}

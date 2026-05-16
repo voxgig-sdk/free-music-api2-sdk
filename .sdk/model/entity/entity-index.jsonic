@@ -1,0 +1,8 @@
+# Entity Models
+
+@"v1_list.jsonic"
+@"v1_lookup.jsonic"
+@"v1_search.jsonic"
+@"v2_list.jsonic"
+@"v2_lookup.jsonic"
+@"v2_search.jsonic"

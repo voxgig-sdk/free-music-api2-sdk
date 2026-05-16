@@ -1,0 +1,32 @@
+# BasicV2LookupFlow
+
+main: kit: flow: BasicV2LookupFlow:
+{
+  entity: "v2_lookup",
+  kind: "basic",
+  name: "BasicV2LookupFlow",
+  step: [
+    {
+      input: {
+        ref: "v2_lookup_ref01",
+        srcdatavar: "v2_lookup_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "v2_lookup01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-v2_lookup_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicV2LookupFlow"
+}

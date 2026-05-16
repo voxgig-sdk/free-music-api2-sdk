@@ -1,0 +1,45 @@
+{
+  "existing": {
+    "v2_lookup": {
+      "V2_LOOKUP00": {
+        "album": [],
+        "artist": [],
+        "track": [],
+        "album_id": "ALBUM01",
+        "artist_id": "ARTIST01",
+        "music_brainz_id": "MUSIC_BRAINZ01",
+        "track_id": "TRACK01",
+        "id": "V2_LOOKUP00"
+      },
+      "V2_LOOKUP01": {
+        "album": [],
+        "artist": [],
+        "track": [],
+        "album_id": "ALBUM01",
+        "artist_id": "ARTIST01",
+        "music_brainz_id": "MUSIC_BRAINZ01",
+        "track_id": "TRACK01",
+        "id": "V2_LOOKUP01"
+      },
+      "V2_LOOKUP02": {
+        "album": [],
+        "artist": [],
+        "track": [],
+        "album_id": "ALBUM01",
+        "artist_id": "ARTIST01",
+        "music_brainz_id": "MUSIC_BRAINZ01",
+        "track_id": "TRACK01",
+        "id": "V2_LOOKUP02"
+      }
+    }
+  },
+  "new": {
+    "v2_lookup": {
+      "v2_lookup_ref01": {
+        "album": [],
+        "artist": [],
+        "track": []
+      }
+    }
+  }
+}

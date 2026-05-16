@@ -1,0 +1,32 @@
+# BasicV2SearchFlow
+
+main: kit: flow: BasicV2SearchFlow:
+{
+  entity: "v2_search",
+  kind: "basic",
+  name: "BasicV2SearchFlow",
+  step: [
+    {
+      input: {
+        ref: "v2_search_ref01",
+        srcdatavar: "v2_search_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "v2_search01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-v2_search_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicV2SearchFlow"
+}

@@ -1,0 +1,155 @@
+# Entity: v2_search
+
+main: kit: entity: v2_search: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "album"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "artist"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "track"
+      req: false
+      type: "`$ARRAY`"
+    }
+  ]
+
+  name: "v2_search"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                example: "parachutes"
+                kind: "param"
+                name: "album_name"
+                orig: "album_name"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/search/album/{albumName}"
+          parts: [
+            "search"
+            "album"
+            "{album_name}"
+          ]
+          rename: {
+            param: {
+              albumName: "album_name"
+            }
+          }
+          select: {
+            exist: [
+              "album_name"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          args: {
+            params: [
+              {
+                example: "coldplay"
+                kind: "param"
+                name: "artist_name"
+                orig: "artist_name"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/search/artist/{artistName}"
+          parts: [
+            "search"
+            "artist"
+            "{artist_name}"
+          ]
+          rename: {
+            param: {
+              artistName: "artist_name"
+            }
+          }
+          select: {
+            exist: [
+              "artist_name"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          args: {
+            params: [
+              {
+                example: "yellow"
+                kind: "param"
+                name: "track_name"
+                orig: "track_name"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/search/track/{trackName}"
+          parts: [
+            "search"
+            "track"
+            "{track_name}"
+          ]
+          rename: {
+            param: {
+              trackName: "track_name"
+            }
+          }
+          select: {
+            exist: [
+              "track_name"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  relations: {
+    ancestors: [
+      [
+        "album"
+      ]
+      [
+        "artist"
+      ]
+      [
+        "track"
+      ]
+    ]
+  }
+
+
+
+}

@@ -1,0 +1,22 @@
+# BasicV1ListFlow
+
+main: kit: flow: BasicV1ListFlow:
+{
+  entity: "v1_list",
+  kind: "basic",
+  name: "BasicV1ListFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "v1_list_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicV1ListFlow"
+}

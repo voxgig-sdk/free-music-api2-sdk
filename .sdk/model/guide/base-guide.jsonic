@@ -1,0 +1,120 @@
+# Guide
+
+guide: {
+  metrics: count: entity: 6
+  metrics: count: path: 28
+  metrics: count: method: 28
+
+  entity: v1_list: {
+    path: "/mostloved.php": {
+      op: list: method: *GET
+    }
+    path: "/mvid-mb.php": {
+      op: list: method: *GET
+    }
+    path: "/mvid.php": {
+      op: list: method: *GET
+    }
+    path: "/track-top10-mb.php": {
+      op: list: method: *GET
+    }
+    path: "/track-top10.php": {
+      op: list: method: *GET
+    }
+    path: "/trending.php": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: v1_lookup: {
+    path: "/album-mb.php": {
+      op: list: method: *GET
+    }
+    path: "/album.php": {
+      op: list: method: *GET
+    }
+    path: "/artist-mb.php": {
+      op: list: method: *GET
+    }
+    path: "/artist-social.php": {
+      op: list: method: *GET
+    }
+    path: "/artist.php": {
+      op: list: method: *GET
+    }
+    path: "/track-mb.php": {
+      op: list: method: *GET
+    }
+    path: "/track.php": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: v1_search: {
+    path: "/discography-mb.php": {
+      op: list: method: *GET
+    }
+    path: "/discography.php": {
+      op: list: method: *GET
+    }
+    path: "/search.php": {
+      op: list: method: *GET
+    }
+    path: "/searchalbum.php": {
+      op: list: method: *GET
+    }
+    path: "/searchtrack.php": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: v2_list: {
+    path: "/list/discography/{artistId}": {
+      rename: param: "artistId": *"artist_id"
+      op: load: method: *GET
+    }
+  }
+
+  entity: v2_lookup: {
+    path: "/lookup/album/{albumId}": {
+      rename: param: "albumId": *"album_id"
+      op: load: method: *GET
+    }
+    path: "/lookup/album_mb/{musicBrainzId}": {
+      rename: param: "musicBrainzId": *"music_brainz_id"
+      op: load: method: *GET
+    }
+    path: "/lookup/artist/{artistId}": {
+      rename: param: "artistId": *"artist_id"
+      op: load: method: *GET
+    }
+    path: "/lookup/artist_mb/{musicBrainzId}": {
+      rename: param: "musicBrainzId": *"music_brainz_id"
+      op: load: method: *GET
+    }
+    path: "/lookup/track/{trackId}": {
+      rename: param: "trackId": *"track_id"
+      op: load: method: *GET
+    }
+    path: "/lookup/track_mb/{musicBrainzId}": {
+      rename: param: "musicBrainzId": *"music_brainz_id"
+      op: load: method: *GET
+    }
+  }
+
+  entity: v2_search: {
+    path: "/search/album/{albumName}": {
+      rename: param: "albumName": *"album_name"
+      op: load: method: *GET
+    }
+    path: "/search/artist/{artistName}": {
+      rename: param: "artistName": *"artist_name"
+      op: load: method: *GET
+    }
+    path: "/search/track/{trackName}": {
+      rename: param: "trackName": *"track_name"
+      op: load: method: *GET
+    }
+  }
+
+}

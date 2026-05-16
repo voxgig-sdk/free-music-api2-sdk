@@ -1,0 +1,22 @@
+# BasicV1LookupFlow
+
+main: kit: flow: BasicV1LookupFlow:
+{
+  entity: "v1_lookup",
+  kind: "basic",
+  name: "BasicV1LookupFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "v1_lookup_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicV1LookupFlow"
+}
