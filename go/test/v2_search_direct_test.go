@@ -110,14 +110,12 @@ func v2_searchDirectSetup(mockres any) *v2_searchDirectSetupResult {
 	env := envOverride(map[string]any{
 		"FREEMUSICAPI__TEST_V__SEARCH_ENTID": map[string]any{},
 		"FREEMUSICAPI__TEST_LIVE":    "FALSE",
-		"FREEMUSICAPI__APIKEY":       "NONE",
 	})
 
 	live := env["FREEMUSICAPI__TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
-			"apikey": env["FREEMUSICAPI__APIKEY"],
 		}
 		client := sdk.NewFreeMusicApi2SDK(mergedOpts)
 

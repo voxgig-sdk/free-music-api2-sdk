@@ -63,14 +63,12 @@ function v1_list_direct_setup(mockres)
   local env = runner.env_override({
     ["FREEMUSICAPI__TEST_V__LIST_ENTID"] = {},
     ["FREEMUSICAPI__TEST_LIVE"] = "FALSE",
-    ["FREEMUSICAPI__APIKEY"] = "NONE",
   })
 
   local live = env["FREEMUSICAPI__TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {
-      apikey = env["FREEMUSICAPI__APIKEY"],
     }
     local client = sdk.new(merged_opts)
     return {

@@ -61,14 +61,12 @@ def _v1_lookup_direct_setup(mockres):
     env = runner.env_override({
         "FREEMUSICAPI__TEST_V__LOOKUP_ENTID": {},
         "FREEMUSICAPI__TEST_LIVE": "FALSE",
-        "FREEMUSICAPI__APIKEY": "NONE",
     })
 
     live = env.get("FREEMUSICAPI__TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
-            "apikey": env.get("FREEMUSICAPI__APIKEY"),
         }
         client = FreeMusicApi2SDK(merged_opts)
         return {

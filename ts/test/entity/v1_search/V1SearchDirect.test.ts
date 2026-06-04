@@ -82,14 +82,12 @@ function directSetup(mockres?: any) {
   const env = envOverride({
     'FREEMUSICAPI__TEST_V__SEARCH_ENTID': {},
     'FREEMUSICAPI__TEST_LIVE': 'FALSE',
-    'FREEMUSICAPI__APIKEY': 'NONE',
   })
 
   const live = 'TRUE' === env.FREEMUSICAPI__TEST_LIVE
 
   if (live) {
     const client = new FreeMusicApi2SDK({
-      apikey: env.FREEMUSICAPI__APIKEY,
     })
 
     let idmap: any = env['FREEMUSICAPI__TEST_V__SEARCH_ENTID']

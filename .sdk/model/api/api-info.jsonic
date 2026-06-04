@@ -31,8 +31,33 @@ main: {
       termsOfService: "https://www.theaudiodb.com"
       title: "Free Music API"
       version: "1.0.0"
+      tagline: "Search and look up artists, albums, tracks, music videos and charts from TheAudioDB's community music metadata catalogue"
+      homepage: "https://www.theaudiodb.com/"
+      docs_url: "https://www.theaudiodb.com/free_music_api"
+      license_short: "Free tier with test key `123`; paid tiers for production use. See TheAudioDB terms."
+      license_md: `- TheAudioDB is a community-maintained metadata and fanart site running since 2012.
+- The free API key \`123\` is intended for testing/development; production usage is expected to use a paid key.
+- Free tier is limited to roughly 30 requests/minute; premium and business tiers raise that ceiling. Exceeding the limit returns HTTP 429.
+- Check TheAudioDB's Terms and Privacy pages for attribution and acceptable-use details.`
+      about_md: `[TheAudioDB](https://www.theaudiodb.com/) is a community-driven music metadata and fanart database. It offers a JSON HTTP API covering artists, albums, tracks, music videos and chart/trending lists, with high-resolution artwork (logos, banners, clearart, thumbs, 3D album cases) for many entries.
+
+What the API exposes:
+
+- Search for artists, albums and tracks by name
+- Look up artists, albums and tracks by TheAudioDB ID or by MusicBrainz ID
+- List music videos for an artist and discography information
+- Retrieve trending and most-loved chart lists
+
+Authentication uses an API key in the URL path for v1 (\`/api/v1/json/{key}/...\`) and the \`X-API-KEY\` header for v2. The test/free key is \`123\`. The v2 endpoints are gated to paid plans. Rate limiting is per-minute and tier-dependent; over-limit requests return 429.`
+      entity_desc: {
+        v1_list: "v1 list endpoints for collections such as an artist's music videos, charts, trending and most-loved items (e.g. `/api/v1/json/{key}/mvid.php`, `/api/v1/json/{key}/trending.php`, `/api/v1/json/{key}/mostloved.php`)."
+        v1_lookup: "v1 lookup endpoints that fetch a single artist, album or track by TheAudioDB ID or MusicBrainz ID (e.g. `/api/v1/json/{key}/artist.php`, `/album.php`, `/track.php`)."
+        v1_search: "v1 search endpoints for finding artists, albums and tracks by name (e.g. `/api/v1/json/{key}/search.php`, `/searchalbum.php`, `/searchtrack.php`)."
+        v2_list: "v2 list endpoints (premium tier) covering artist discography and related collections under `/api/v2/json/...`, authenticated with the `X-API-KEY` header."
+        v2_lookup: "v2 lookup endpoints (premium tier) for fetching individual artists, albums and tracks under `/api/v2/json/...`."
+        v2_search: "v2 search endpoints (premium tier) for artist, album and track search under `/api/v2/json/...`."
+      }
+      auth: false
     }
   }
-}
-
 }
