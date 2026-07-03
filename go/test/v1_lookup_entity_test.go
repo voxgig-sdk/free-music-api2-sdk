@@ -119,6 +119,7 @@ func v1_lookupBasicSetup(extra map[string]any) *entityTestSetup {
 		"FREEMUSICAPI__TEST_V__LOOKUP_ENTID": idmap,
 		"FREEMUSICAPI__TEST_LIVE":      "FALSE",
 		"FREEMUSICAPI__TEST_EXPLAIN":   "FALSE",
+		"FREEMUSICAPI__APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["FREEMUSICAPI__TEST_V__LOOKUP_ENTID"])
@@ -129,6 +130,7 @@ func v1_lookupBasicSetup(extra map[string]any) *entityTestSetup {
 	if env["FREEMUSICAPI__TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
+				"apikey": env["FREEMUSICAPI__APIKEY"],
 			},
 			extra,
 		})

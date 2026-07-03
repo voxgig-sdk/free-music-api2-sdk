@@ -75,12 +75,14 @@ function v2_search_direct_setup($mockres)
     $env = Runner::env_override([
         "FREEMUSICAPI__TEST_V__SEARCH_ENTID" => [],
         "FREEMUSICAPI__TEST_LIVE" => "FALSE",
+        "FREEMUSICAPI__APIKEY" => "NONE",
     ]);
 
     $live = $env["FREEMUSICAPI__TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [
+            "apikey" => $env["FREEMUSICAPI__APIKEY"],
         ];
         $client = new FreeMusicApi2SDK($merged_opts);
         return [

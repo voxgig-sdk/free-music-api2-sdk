@@ -91,6 +91,7 @@ function v2_lookup_basic_setup(extra)
     ["FREEMUSICAPI__TEST_V__LOOKUP_ENTID"] = idmap,
     ["FREEMUSICAPI__TEST_LIVE"] = "FALSE",
     ["FREEMUSICAPI__TEST_EXPLAIN"] = "FALSE",
+    ["FREEMUSICAPI__APIKEY"] = "NONE",
   })
 
   local idmap_resolved = helpers.to_map(
@@ -102,6 +103,7 @@ function v2_lookup_basic_setup(extra)
   if env["FREEMUSICAPI__TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
+        apikey = env["FREEMUSICAPI__APIKEY"],
       },
       extra or {},
     })

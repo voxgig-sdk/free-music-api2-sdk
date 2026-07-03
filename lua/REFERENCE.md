@@ -30,12 +30,12 @@ Create a new SDK client instance.
 
 ### Static Methods
 
-#### `sdk.test(testopts, sdkopts)`
+#### `sdk.test(testopts?, sdkopts?)`
 
-Create a test client with mock features active. Both arguments may be `nil`.
+Create a test client with mock features active. Both arguments are optional.
 
 ```lua
-local client = sdk.test(nil, nil)
+local client = sdk.test()
 ```
 
 
@@ -160,7 +160,7 @@ local v1_list = client:V1List(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:V1List(nil):list(nil, nil)
+local results, err = client:V1List():list()
 ```
 
 ### Common Methods
@@ -323,7 +323,7 @@ local v1_lookup = client:V1Lookup(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:V1Lookup(nil):list(nil, nil)
+local results, err = client:V1Lookup():list()
 ```
 
 ### Common Methods
@@ -481,7 +481,7 @@ local v1_search = client:V1Search(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:V1Search(nil):list(nil, nil)
+local results, err = client:V1Search():list()
 ```
 
 ### Common Methods
@@ -533,7 +533,7 @@ local v2_list = client:V2List(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:V2List(nil):load({ id = "v2_list_id" }, nil)
+local result, err = client:V2List():load({ id = "v2_list_id" })
 ```
 
 ### Common Methods
@@ -587,7 +587,7 @@ local v2_lookup = client:V2Lookup(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:V2Lookup(nil):load({ id = "v2_lookup_id" }, nil)
+local result, err = client:V2Lookup():load({ id = "v2_lookup_id" })
 ```
 
 ### Common Methods
@@ -641,7 +641,7 @@ local v2_search = client:V2Search(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:V2Search(nil):load({ id = "v2_search_id" }, nil)
+local result, err = client:V2Search():load({ id = "v2_search_id" })
 ```
 
 ### Common Methods
