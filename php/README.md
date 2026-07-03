@@ -10,7 +10,7 @@ The PHP SDK for the FreeMusicApi2 API — an entity-oriented client using PHP co
 
 ## Install
 ```bash
-composer require voxgig/free-music-api2-sdk
+composer require voxgig-sdk/free-music-api2
 ```
 
 

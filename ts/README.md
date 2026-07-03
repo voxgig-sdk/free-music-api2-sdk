@@ -10,7 +10,7 @@ The TypeScript SDK for the FreeMusicApi2 API — a type-safe, entity-oriented cl
 
 ## Install
 ```bash
-npm install free-music-api2
+npm install @voxgig-sdk/free-music-api2
 ```
 ## Tutorial: your first API call
 

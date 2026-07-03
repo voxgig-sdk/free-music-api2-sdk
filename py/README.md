@@ -10,7 +10,7 @@ The Python SDK for the FreeMusicApi2 API — an entity-oriented client following
 
 ## Install
 ```bash
-pip install free-music-api2-sdk
+pip install voxgig-sdk-free-music-api2
 ```
 
 Or install from source:
