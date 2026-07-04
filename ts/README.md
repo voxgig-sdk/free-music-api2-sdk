@@ -30,15 +30,15 @@ const client = new FreeMusicApi2SDK({
 })
 ```
 
-### 2. List v1lists
+### 2. List v1list records
+
+`list()` resolves to an array of V1List objects — iterate it directly:
 
 ```ts
-const result = await client.v1list.list()
+const v1lists = await client.V1List().list()
 
-if (result.ok) {
-  for (const item of result.data) {
-    console.log(item.id, item.name)
-  }
+for (const v1list of v1lists) {
+  console.log(v1list)
 }
 ```
 
@@ -56,6 +56,9 @@ const result = await client.direct({
   params: { id: 'example' },
 })
 
+if (result instanceof Error) {
+  throw result
+}
 if (result.ok) {
   console.log(result.status)  // 200
   console.log(result.data)    // response body
@@ -84,9 +87,9 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = FreeMusicApi2SDK.test()
 
-const result = await client.v1list.load({ id: 'test01' })
-// result.ok === true
-// result.data contains mock response data
+const v1list = await client.V1List().load({ id: 'test01' })
+// v1list is a bare entity populated with mock response data
+console.log(v1list)
 ```
 
 You can also use the instance method:
@@ -101,7 +104,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.v1list
+const entity = client.V1List()
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -205,29 +208,30 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `load(reqmatch?, ctrl?): Promise<Result>` | Load a single entity by match criteria. |
-| `list` | `list(reqmatch?, ctrl?): Promise<Result>` | List entities matching the criteria. |
-| `create` | `create(reqdata?, ctrl?): Promise<Result>` | Create a new entity. |
-| `update` | `update(reqdata?, ctrl?): Promise<Result>` | Update an existing entity. |
-| `remove` | `remove(reqmatch?, ctrl?): Promise<Result>` | Remove an entity. |
+| `load` | `load(reqmatch?, ctrl?): Promise<Entity>` | Load a single entity by match criteria. |
+| `list` | `list(reqmatch?, ctrl?): Promise<Entity[]>` | List entities matching the criteria. |
+| `create` | `create(reqdata?, ctrl?): Promise<Entity>` | Create a new entity. |
+| `update` | `update(reqdata?, ctrl?): Promise<Entity>` | Update an existing entity. |
+| `remove` | `remove(reqmatch?, ctrl?): Promise<void>` | Remove an entity. |
 | `data` | `data(data?): any` | Get or set entity data. |
 | `match` | `match(match?): any` | Get or set entity match criteria. |
 | `make` | `make(): Entity` | Create a new instance with the same options. |
 | `client` | `client(): FreeMusicApi2SDK` | Return the parent SDK client. |
 | `entopts` | `entopts(): object` | Return a copy of the entity options. |
 
-#### Result shape
+#### Return values
 
-All entity operations return a Result object:
+Entity operations resolve to the entity data directly — there is no
+result envelope:
 
-```ts
-{
-  ok: boolean      // true if the HTTP status is 2xx
-  status: number   // HTTP status code
-  headers: object  // response headers
-  data: any        // parsed JSON response body
-}
-```
+- `load`, `create` and `update` resolve to a single entity object.
+- `list` resolves to an **array** of entity objects (iterate it directly;
+  there is no `.data` and no `.ok`).
+- `remove` resolves to `void`.
+
+On a failed request these methods **throw**, so wrap calls in
+`try`/`catch` to handle errors. Only `direct()` returns the result
+envelope described below.
 
 ### DirectResult shape
 
@@ -587,7 +591,7 @@ API path: `/search/album/{albumName}`
 
 ### V1List
 
-Create an instance: `const v1_list = client.v1_list`
+Create an instance: `const v1_list = client.V1List()`
 
 #### Operations
 
@@ -644,13 +648,13 @@ Create an instance: `const v1_list = client.v1_list`
 #### Example: List
 
 ```ts
-const v1_lists = await client.v1_list.list()
+const v1_lists = await client.V1List().list()
 ```
 
 
 ### V1Lookup
 
-Create an instance: `const v1_lookup = client.v1_lookup`
+Create an instance: `const v1_lookup = client.V1Lookup()`
 
 #### Operations
 
@@ -778,13 +782,13 @@ Create an instance: `const v1_lookup = client.v1_lookup`
 #### Example: List
 
 ```ts
-const v1_lookups = await client.v1_lookup.list()
+const v1_lookups = await client.V1Lookup().list()
 ```
 
 
 ### V1Search
 
-Create an instance: `const v1_search = client.v1_search`
+Create an instance: `const v1_search = client.V1Search()`
 
 #### Operations
 
@@ -907,13 +911,13 @@ Create an instance: `const v1_search = client.v1_search`
 #### Example: List
 
 ```ts
-const v1_searchs = await client.v1_search.list()
+const v1_searchs = await client.V1Search().list()
 ```
 
 
 ### V2List
 
-Create an instance: `const v2_list = client.v2_list`
+Create an instance: `const v2_list = client.V2List()`
 
 #### Operations
 
@@ -930,13 +934,13 @@ Create an instance: `const v2_list = client.v2_list`
 #### Example: Load
 
 ```ts
-const v2_list = await client.v2_list.load({ id: 'v2_list_id' })
+const v2_list = await client.V2List().load({ id: 'v2_list_id' })
 ```
 
 
 ### V2Lookup
 
-Create an instance: `const v2_lookup = client.v2_lookup`
+Create an instance: `const v2_lookup = client.V2Lookup()`
 
 #### Operations
 
@@ -955,13 +959,13 @@ Create an instance: `const v2_lookup = client.v2_lookup`
 #### Example: Load
 
 ```ts
-const v2_lookup = await client.v2_lookup.load({ id: 'v2_lookup_id' })
+const v2_lookup = await client.V2Lookup().load({ id: 'v2_lookup_id' })
 ```
 
 
 ### V2Search
 
-Create an instance: `const v2_search = client.v2_search`
+Create an instance: `const v2_search = client.V2Search()`
 
 #### Operations
 
@@ -980,7 +984,7 @@ Create an instance: `const v2_search = client.v2_search`
 #### Example: Load
 
 ```ts
-const v2_search = await client.v2_search.load({ id: 'v2_search_id' })
+const v2_search = await client.V2Search().load({ id: 'v2_search_id' })
 ```
 
 
@@ -1051,7 +1055,7 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const v1list = client.v1list
+const v1list = client.V1List()
 await v1list.load({ id: "example_id" })
 
 // v1list.data() now returns the loaded v1list data

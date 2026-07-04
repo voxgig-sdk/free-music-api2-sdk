@@ -107,7 +107,7 @@ same parameters as `direct()`. Raises on error.
 ## V1ListEntity
 
 ```ruby
-v1_list = client.v1_list
+v1_list = client.V1List
 ```
 
 ### Fields
@@ -163,7 +163,7 @@ v1_list = client.v1_list
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.v1_list.list(nil)
+results = client.V1List.list(nil)
 ```
 
 ### Common Methods
@@ -199,7 +199,7 @@ Return the entity name.
 ## V1LookupEntity
 
 ```ruby
-v1_lookup = client.v1_lookup
+v1_lookup = client.V1Lookup
 ```
 
 ### Fields
@@ -326,7 +326,7 @@ v1_lookup = client.v1_lookup
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.v1_lookup.list(nil)
+results = client.V1Lookup.list(nil)
 ```
 
 ### Common Methods
@@ -362,7 +362,7 @@ Return the entity name.
 ## V1SearchEntity
 
 ```ruby
-v1_search = client.v1_search
+v1_search = client.V1Search
 ```
 
 ### Fields
@@ -484,7 +484,7 @@ v1_search = client.v1_search
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.v1_search.list(nil)
+results = client.V1Search.list(nil)
 ```
 
 ### Common Methods
@@ -520,7 +520,7 @@ Return the entity name.
 ## V2ListEntity
 
 ```ruby
-v2_list = client.v2_list
+v2_list = client.V2List
 ```
 
 ### Fields
@@ -536,7 +536,7 @@ v2_list = client.v2_list
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.v2_list.load({ "id" => "v2_list_id" })
+result = client.V2List.load({ "id" => "v2_list_id" })
 ```
 
 ### Common Methods
@@ -572,7 +572,7 @@ Return the entity name.
 ## V2LookupEntity
 
 ```ruby
-v2_lookup = client.v2_lookup
+v2_lookup = client.V2Lookup
 ```
 
 ### Fields
@@ -590,7 +590,7 @@ v2_lookup = client.v2_lookup
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.v2_lookup.load({ "id" => "v2_lookup_id" })
+result = client.V2Lookup.load({ "id" => "v2_lookup_id" })
 ```
 
 ### Common Methods
@@ -626,7 +626,7 @@ Return the entity name.
 ## V2SearchEntity
 
 ```ruby
-v2_search = client.v2_search
+v2_search = client.V2Search
 ```
 
 ### Fields
@@ -644,7 +644,7 @@ v2_search = client.v2_search
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.v2_search.load({ "id" => "v2_search_id" })
+result = client.V2Search.load({ "id" => "v2_search_id" })
 ```
 
 ### Common Methods

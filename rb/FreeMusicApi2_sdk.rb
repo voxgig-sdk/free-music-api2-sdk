@@ -208,78 +208,42 @@ class FreeMusicApi2SDK
   end
 
 
-  # Idiomatic facade: client.v1_list.list / client.v1_list.load({ "id" => ... })
-  def v1_list
-    require_relative 'entity/v1_list_entity'
-    @v1_list ||= V1ListEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.v1_list instead.
+  # Canonical facade: client.V1List.list / client.V1List.load({ "id" => ... })
   def V1List(data = nil)
     require_relative 'entity/v1_list_entity'
     V1ListEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.v1_lookup.list / client.v1_lookup.load({ "id" => ... })
-  def v1_lookup
-    require_relative 'entity/v1_lookup_entity'
-    @v1_lookup ||= V1LookupEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.v1_lookup instead.
+  # Canonical facade: client.V1Lookup.list / client.V1Lookup.load({ "id" => ... })
   def V1Lookup(data = nil)
     require_relative 'entity/v1_lookup_entity'
     V1LookupEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.v1_search.list / client.v1_search.load({ "id" => ... })
-  def v1_search
-    require_relative 'entity/v1_search_entity'
-    @v1_search ||= V1SearchEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.v1_search instead.
+  # Canonical facade: client.V1Search.list / client.V1Search.load({ "id" => ... })
   def V1Search(data = nil)
     require_relative 'entity/v1_search_entity'
     V1SearchEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.v2_list.list / client.v2_list.load({ "id" => ... })
-  def v2_list
-    require_relative 'entity/v2_list_entity'
-    @v2_list ||= V2ListEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.v2_list instead.
+  # Canonical facade: client.V2List.list / client.V2List.load({ "id" => ... })
   def V2List(data = nil)
     require_relative 'entity/v2_list_entity'
     V2ListEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.v2_lookup.list / client.v2_lookup.load({ "id" => ... })
-  def v2_lookup
-    require_relative 'entity/v2_lookup_entity'
-    @v2_lookup ||= V2LookupEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.v2_lookup instead.
+  # Canonical facade: client.V2Lookup.list / client.V2Lookup.load({ "id" => ... })
   def V2Lookup(data = nil)
     require_relative 'entity/v2_lookup_entity'
     V2LookupEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.v2_search.list / client.v2_search.load({ "id" => ... })
-  def v2_search
-    require_relative 'entity/v2_search_entity'
-    @v2_search ||= V2SearchEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.v2_search instead.
+  # Canonical facade: client.V2Search.list / client.V2Search.load({ "id" => ... })
   def V2Search(data = nil)
     require_relative 'entity/v2_search_entity'
     V2SearchEntity.new(self, data)

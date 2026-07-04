@@ -233,10 +233,10 @@ class FreeMusicApi2SDK
 
     private $_v1_list = null;
 
-    // Idiomatic facade: $client->v1_list()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias V1List() (PHP method
-    // names are case-insensitive).
-    public function v1_list($data = null)
+    // Canonical facade: $client->V1List()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->v1_list()
+    // resolves here too.
+    public function V1List($data = null)
     {
         require_once __DIR__ . '/entity/v1_list_entity.php';
         if ($data === null) {
@@ -251,10 +251,10 @@ class FreeMusicApi2SDK
 
     private $_v1_lookup = null;
 
-    // Idiomatic facade: $client->v1_lookup()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias V1Lookup() (PHP method
-    // names are case-insensitive).
-    public function v1_lookup($data = null)
+    // Canonical facade: $client->V1Lookup()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->v1_lookup()
+    // resolves here too.
+    public function V1Lookup($data = null)
     {
         require_once __DIR__ . '/entity/v1_lookup_entity.php';
         if ($data === null) {
@@ -269,10 +269,10 @@ class FreeMusicApi2SDK
 
     private $_v1_search = null;
 
-    // Idiomatic facade: $client->v1_search()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias V1Search() (PHP method
-    // names are case-insensitive).
-    public function v1_search($data = null)
+    // Canonical facade: $client->V1Search()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->v1_search()
+    // resolves here too.
+    public function V1Search($data = null)
     {
         require_once __DIR__ . '/entity/v1_search_entity.php';
         if ($data === null) {
@@ -287,10 +287,10 @@ class FreeMusicApi2SDK
 
     private $_v2_list = null;
 
-    // Idiomatic facade: $client->v2_list()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias V2List() (PHP method
-    // names are case-insensitive).
-    public function v2_list($data = null)
+    // Canonical facade: $client->V2List()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->v2_list()
+    // resolves here too.
+    public function V2List($data = null)
     {
         require_once __DIR__ . '/entity/v2_list_entity.php';
         if ($data === null) {
@@ -305,10 +305,10 @@ class FreeMusicApi2SDK
 
     private $_v2_lookup = null;
 
-    // Idiomatic facade: $client->v2_lookup()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias V2Lookup() (PHP method
-    // names are case-insensitive).
-    public function v2_lookup($data = null)
+    // Canonical facade: $client->V2Lookup()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->v2_lookup()
+    // resolves here too.
+    public function V2Lookup($data = null)
     {
         require_once __DIR__ . '/entity/v2_lookup_entity.php';
         if ($data === null) {
@@ -323,10 +323,10 @@ class FreeMusicApi2SDK
 
     private $_v2_search = null;
 
-    // Idiomatic facade: $client->v2_search()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias V2Search() (PHP method
-    // names are case-insensitive).
-    public function v2_search($data = null)
+    // Canonical facade: $client->V2Search()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->v2_search()
+    // resolves here too.
+    public function V2Search($data = null)
     {
         require_once __DIR__ . '/entity/v2_search_entity.php';
         if ($data === null) {

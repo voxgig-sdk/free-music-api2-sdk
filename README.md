@@ -28,9 +28,11 @@ const client = new FreeMusicApi2SDK({
   apikey: process.env.FREE_MUSIC_API2_APIKEY,
 })
 
-// List all v1lists
-const v1lists = await client.v1list.list()
-console.log(v1lists.data)
+// List all v1lists (returns V1List[])
+const v1lists = await client.V1List().list()
+for (const v1list of v1lists) {
+  console.log(v1list)
+}
 ```
 
 See the [TypeScript README](ts/README.md) for the full guide.
@@ -93,9 +95,10 @@ client = FreeMusicApi2SDK({
     "apikey": os.environ.get("FREE_MUSIC_API2_APIKEY"),
 })
 
-# List all v1lists
-v1lists = client.v1list.list()
-print(v1lists)
+# List all v1lists (returns a list, raises on error)
+v1lists = client.V1List().list({})
+for v1list in v1lists:
+    print(v1list)
 ```
 
 ### PHP
@@ -108,8 +111,8 @@ $client = new FreeMusicApi2SDK([
     "apikey" => getenv("FREE_MUSIC_API2_APIKEY"),
 ]);
 
-// List all v1lists (throws on error)
-$v1lists = $client->v1list()->list();
+// List all v1lists (returns an array; throws on error)
+$v1lists = $client->V1List()->list();
 print_r($v1lists);
 ```
 
@@ -136,8 +139,8 @@ client = FreeMusicApi2SDK.new({
   "apikey" => ENV["FREE_MUSIC_API2_APIKEY"],
 })
 
-# List all v1lists
-v1lists = client.v1list.list
+# List all v1lists (returns an Array; raises on error)
+v1lists = client.V1List.list
 puts v1lists
 ```
 
@@ -151,7 +154,7 @@ local client = sdk.new({
 })
 
 -- List all v1lists
-local v1lists, err = client:v1list():list()
+local v1lists, err = client:V1List():list()
 print(v1lists)
 ```
 
@@ -164,22 +167,27 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = FreeMusicApi2SDK.test()
-const result = await client.v1list.load({ id: 'test01' })
-// result.ok === true, result.data contains mock data
+const v1list = await client.V1List().load({ id: 'test01' })
+// v1list is a bare V1List populated with mock data
+console.log(v1list)
 ```
 
 ### Python
 
 ```python
 client = FreeMusicApi2SDK.test()
-result = client.v1list.load({"id": "test01"})
+v1list = client.V1List().load({"id": "test01"})
+print(v1list)
 ```
 
 ### PHP
 
 ```php
-$client = FreeMusicApi2SDK::test();
-$result = $client->v1list()->load(["id" => "test01"]);
+// Seed fixture data so offline calls resolve without a live server.
+$client = FreeMusicApi2SDK::test([
+    "entity" => ["v1list" => ["test01" => ["id" => "test01"]]],
+]);
+$v1list = $client->V1List()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -194,15 +202,18 @@ result, err := client.V1List(nil).Load(
 ### Ruby
 
 ```ruby
-client = FreeMusicApi2SDK.test
-result = client.v1list.load({ "id" => "test01" })
+# Seed fixture data so offline calls resolve without a live server.
+client = FreeMusicApi2SDK.test({
+  "entity" => { "v1list" => { "test01" => { "id" => "test01" } } },
+})
+v1list = client.V1List.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:v1list():load({ id = "test01" })
+local result, err = client:V1List():load({ id = "test01" })
 ```
 
 ## How it works
@@ -250,6 +261,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
+if (result instanceof Error) {
+  throw result
+}
 console.log(result.data)
 ```
 

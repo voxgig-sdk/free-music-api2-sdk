@@ -209,84 +209,42 @@ class FreeMusicApi2SDK {
 
 
 
-  _v1_list?: V1ListEntity
-
-  // Idiomatic facade: `client.v1_list.list()` / `client.v1_list.load({ id })`.
-  get v1_list(): V1ListEntity {
-    return (this._v1_list ??= new V1ListEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.v1_list` instead. */
+  // Entity access: `client.V1List().list()` / `client.V1List().load({ id })`.
   V1List(data?: any) {
     const self = this
     return new V1ListEntity(self,data)
   }
 
 
-  _v1_lookup?: V1LookupEntity
-
-  // Idiomatic facade: `client.v1_lookup.list()` / `client.v1_lookup.load({ id })`.
-  get v1_lookup(): V1LookupEntity {
-    return (this._v1_lookup ??= new V1LookupEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.v1_lookup` instead. */
+  // Entity access: `client.V1Lookup().list()` / `client.V1Lookup().load({ id })`.
   V1Lookup(data?: any) {
     const self = this
     return new V1LookupEntity(self,data)
   }
 
 
-  _v1_search?: V1SearchEntity
-
-  // Idiomatic facade: `client.v1_search.list()` / `client.v1_search.load({ id })`.
-  get v1_search(): V1SearchEntity {
-    return (this._v1_search ??= new V1SearchEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.v1_search` instead. */
+  // Entity access: `client.V1Search().list()` / `client.V1Search().load({ id })`.
   V1Search(data?: any) {
     const self = this
     return new V1SearchEntity(self,data)
   }
 
 
-  _v2_list?: V2ListEntity
-
-  // Idiomatic facade: `client.v2_list.list()` / `client.v2_list.load({ id })`.
-  get v2_list(): V2ListEntity {
-    return (this._v2_list ??= new V2ListEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.v2_list` instead. */
+  // Entity access: `client.V2List().list()` / `client.V2List().load({ id })`.
   V2List(data?: any) {
     const self = this
     return new V2ListEntity(self,data)
   }
 
 
-  _v2_lookup?: V2LookupEntity
-
-  // Idiomatic facade: `client.v2_lookup.list()` / `client.v2_lookup.load({ id })`.
-  get v2_lookup(): V2LookupEntity {
-    return (this._v2_lookup ??= new V2LookupEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.v2_lookup` instead. */
+  // Entity access: `client.V2Lookup().list()` / `client.V2Lookup().load({ id })`.
   V2Lookup(data?: any) {
     const self = this
     return new V2LookupEntity(self,data)
   }
 
 
-  _v2_search?: V2SearchEntity
-
-  // Idiomatic facade: `client.v2_search.list()` / `client.v2_search.load({ id })`.
-  get v2_search(): V2SearchEntity {
-    return (this._v2_search ??= new V2SearchEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.v2_search` instead. */
+  // Entity access: `client.V2Search().list()` / `client.V2Search().load({ id })`.
   V2Search(data?: any) {
     const self = this
     return new V2SearchEntity(self,data)

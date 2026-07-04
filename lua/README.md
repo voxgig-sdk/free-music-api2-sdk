@@ -33,17 +33,17 @@ local client = sdk.new({
 })
 ```
 
-### 2. List v1lists
+### 2. List v1list records
+
+Entity operations return `(value, err)`. For `list`, `value` is the
+array of records itself — iterate it directly (there is no wrapper).
 
 ```lua
-local result, err = client:v1list():list()
+local v1lists, err = client:V1List():list()
 if err then error(err) end
 
-if type(result) == "table" then
-  for _, item in ipairs(result) do
-    local d = item:data_get()
-    print(d["id"], d["name"])
-  end
+for _, item in ipairs(v1lists) do
+  print(item["id"], item["name"])
 end
 ```
 
@@ -90,8 +90,8 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:v1list():load({ id = "test01" })
--- result contains mock response data
+local result, err = client:V1List():load({ id = "test01" })
+-- result is the loaded data; err is set on failure
 ```
 
 ### Use a custom fetch function
@@ -198,17 +198,22 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `(any, err)`. The first value is a
-`table` with these keys:
+Entity operations return `(value, err)`. The `value` is the operation's
+data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `ok` | `boolean` | `true` if the HTTP status is 2xx. |
-| `status` | `number` | HTTP status code. |
-| `headers` | `table` | Response headers. |
-| `data` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `load` / `create` / `update` / `remove` | the entity record (a `table`) |
+| `list` | an array (`table`) of entity records |
 
-On error, `ok` is `false` and `err` contains the error value.
+Check `err` first (it is non-`nil` on failure), then use `value`:
+
+    local v1_list, err = client:V1List():load({ id = "example_id" })
+    if err then error(err) end
+    -- v1_list is the loaded record
+
+Only `direct()` returns a response envelope — a `table` with `ok`,
+`status`, `headers`, and `data` keys.
 
 ### Entities
 
@@ -540,7 +545,7 @@ API path: `/search/album/{albumName}`
 
 ### V1List
 
-Create an instance: `const v1_list = client.v1_list`
+Create an instance: `local v1_list = client:V1List(nil)`
 
 #### Operations
 
@@ -596,14 +601,14 @@ Create an instance: `const v1_list = client.v1_list`
 
 #### Example: List
 
-```ts
-const v1_lists = await client.v1_list.list()
+```lua
+local v1_lists, err = client:V1List():list()
 ```
 
 
 ### V1Lookup
 
-Create an instance: `const v1_lookup = client.v1_lookup`
+Create an instance: `local v1_lookup = client:V1Lookup(nil)`
 
 #### Operations
 
@@ -730,14 +735,14 @@ Create an instance: `const v1_lookup = client.v1_lookup`
 
 #### Example: List
 
-```ts
-const v1_lookups = await client.v1_lookup.list()
+```lua
+local v1_lookups, err = client:V1Lookup():list()
 ```
 
 
 ### V1Search
 
-Create an instance: `const v1_search = client.v1_search`
+Create an instance: `local v1_search = client:V1Search(nil)`
 
 #### Operations
 
@@ -859,14 +864,14 @@ Create an instance: `const v1_search = client.v1_search`
 
 #### Example: List
 
-```ts
-const v1_searchs = await client.v1_search.list()
+```lua
+local v1_searchs, err = client:V1Search():list()
 ```
 
 
 ### V2List
 
-Create an instance: `const v2_list = client.v2_list`
+Create an instance: `local v2_list = client:V2List(nil)`
 
 #### Operations
 
@@ -882,14 +887,14 @@ Create an instance: `const v2_list = client.v2_list`
 
 #### Example: Load
 
-```ts
-const v2_list = await client.v2_list.load({ id: 'v2_list_id' })
+```lua
+local v2_list, err = client:V2List():load({ id = "v2_list_id" })
 ```
 
 
 ### V2Lookup
 
-Create an instance: `const v2_lookup = client.v2_lookup`
+Create an instance: `local v2_lookup = client:V2Lookup(nil)`
 
 #### Operations
 
@@ -907,14 +912,14 @@ Create an instance: `const v2_lookup = client.v2_lookup`
 
 #### Example: Load
 
-```ts
-const v2_lookup = await client.v2_lookup.load({ id: 'v2_lookup_id' })
+```lua
+local v2_lookup, err = client:V2Lookup():load({ id = "v2_lookup_id" })
 ```
 
 
 ### V2Search
 
-Create an instance: `const v2_search = client.v2_search`
+Create an instance: `local v2_search = client:V2Search(nil)`
 
 #### Operations
 
@@ -932,8 +937,8 @@ Create an instance: `const v2_search = client.v2_search`
 
 #### Example: Load
 
-```ts
-const v2_search = await client.v2_search.load({ id: 'v2_search_id' })
+```lua
+local v2_search, err = client:V2Search():load({ id = "v2_search_id" })
 ```
 
 
@@ -1008,7 +1013,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local v1list = client:v1list()
+local v1list = client:V1List()
 v1list:load({ id = "example_id" })
 
 -- v1list:data_get() now returns the loaded v1list data

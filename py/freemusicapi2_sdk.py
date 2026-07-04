@@ -220,105 +220,45 @@ class FreeMusicApi2SDK:
         }
 
 
-    @property
-    def v1_list(self):
-        """Idiomatic facade: client.v1_list.list() / client.v1_list.load({"id": ...})."""
-        from entity.v1_list_entity import V1ListEntity
-        cached = getattr(self, "_v1_list", None)
-        if cached is None:
-            cached = V1ListEntity(self, None)
-            self._v1_list = cached
-        return cached
-
-    def V1List(self, data=None):
-        # Deprecated: use client.v1_list instead.
+    def V1List(self, data=None) -> "V1ListEntity":
+        """Entity factory: client.V1List().list({}) / client.V1List().load({"id": ...})."""
         from entity.v1_list_entity import V1ListEntity
         return V1ListEntity(self, data)
 
 
-    @property
-    def v1_lookup(self):
-        """Idiomatic facade: client.v1_lookup.list() / client.v1_lookup.load({"id": ...})."""
-        from entity.v1_lookup_entity import V1LookupEntity
-        cached = getattr(self, "_v1_lookup", None)
-        if cached is None:
-            cached = V1LookupEntity(self, None)
-            self._v1_lookup = cached
-        return cached
-
-    def V1Lookup(self, data=None):
-        # Deprecated: use client.v1_lookup instead.
+    def V1Lookup(self, data=None) -> "V1LookupEntity":
+        """Entity factory: client.V1Lookup().list({}) / client.V1Lookup().load({"id": ...})."""
         from entity.v1_lookup_entity import V1LookupEntity
         return V1LookupEntity(self, data)
 
 
-    @property
-    def v1_search(self):
-        """Idiomatic facade: client.v1_search.list() / client.v1_search.load({"id": ...})."""
-        from entity.v1_search_entity import V1SearchEntity
-        cached = getattr(self, "_v1_search", None)
-        if cached is None:
-            cached = V1SearchEntity(self, None)
-            self._v1_search = cached
-        return cached
-
-    def V1Search(self, data=None):
-        # Deprecated: use client.v1_search instead.
+    def V1Search(self, data=None) -> "V1SearchEntity":
+        """Entity factory: client.V1Search().list({}) / client.V1Search().load({"id": ...})."""
         from entity.v1_search_entity import V1SearchEntity
         return V1SearchEntity(self, data)
 
 
-    @property
-    def v2_list(self):
-        """Idiomatic facade: client.v2_list.list() / client.v2_list.load({"id": ...})."""
-        from entity.v2_list_entity import V2ListEntity
-        cached = getattr(self, "_v2_list", None)
-        if cached is None:
-            cached = V2ListEntity(self, None)
-            self._v2_list = cached
-        return cached
-
-    def V2List(self, data=None):
-        # Deprecated: use client.v2_list instead.
+    def V2List(self, data=None) -> "V2ListEntity":
+        """Entity factory: client.V2List().list({}) / client.V2List().load({"id": ...})."""
         from entity.v2_list_entity import V2ListEntity
         return V2ListEntity(self, data)
 
 
-    @property
-    def v2_lookup(self):
-        """Idiomatic facade: client.v2_lookup.list() / client.v2_lookup.load({"id": ...})."""
-        from entity.v2_lookup_entity import V2LookupEntity
-        cached = getattr(self, "_v2_lookup", None)
-        if cached is None:
-            cached = V2LookupEntity(self, None)
-            self._v2_lookup = cached
-        return cached
-
-    def V2Lookup(self, data=None):
-        # Deprecated: use client.v2_lookup instead.
+    def V2Lookup(self, data=None) -> "V2LookupEntity":
+        """Entity factory: client.V2Lookup().list({}) / client.V2Lookup().load({"id": ...})."""
         from entity.v2_lookup_entity import V2LookupEntity
         return V2LookupEntity(self, data)
 
 
-    @property
-    def v2_search(self):
-        """Idiomatic facade: client.v2_search.list() / client.v2_search.load({"id": ...})."""
-        from entity.v2_search_entity import V2SearchEntity
-        cached = getattr(self, "_v2_search", None)
-        if cached is None:
-            cached = V2SearchEntity(self, None)
-            self._v2_search = cached
-        return cached
-
-    def V2Search(self, data=None):
-        # Deprecated: use client.v2_search instead.
+    def V2Search(self, data=None) -> "V2SearchEntity":
+        """Entity factory: client.V2Search().list({}) / client.V2Search().load({"id": ...})."""
         from entity.v2_search_entity import V2SearchEntity
         return V2SearchEntity(self, data)
 
 
 
     @classmethod
-    def test(cls, testopts=None, sdkopts=None):
+    def test(cls, testopts=None, sdkopts=None) -> "FreeMusicApi2SDK":
         if sdkopts is None:
             sdkopts = {}
         sdkopts = vs.clone(sdkopts)
@@ -338,3 +278,14 @@ class FreeMusicApi2SDK:
         sdk.mode = "test"
 
         return sdk
+
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from entity.v1_list_entity import V1ListEntity
+    from entity.v1_lookup_entity import V1LookupEntity
+    from entity.v1_search_entity import V1SearchEntity
+    from entity.v2_list_entity import V2ListEntity
+    from entity.v2_lookup_entity import V2LookupEntity
+    from entity.v2_search_entity import V2SearchEntity

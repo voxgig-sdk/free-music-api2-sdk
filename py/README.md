@@ -34,14 +34,16 @@ client = FreeMusicApi2SDK({
 })
 ```
 
-### 2. List v1lists
+### 2. List v1list records
+
+`list()` returns a `list` of records (each a `dict`) and raises on
+error — iterate it directly.
 
 ```python
 try:
-    result = client.v1list.list()
-    for item in result:
-        d = item.data_get()
-        print(d["id"], d["name"])
+    v1lists = client.V1List().list({})
+    for v1list in v1lists:
+        print(v1list)
 except Exception as err:
     print(f"list failed: {err}")
 ```
@@ -89,8 +91,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = FreeMusicApi2SDK.test()
 
-result = client.v1list.load({"id": "test01"})
-# result contains mock response data
+# Entity ops return the bare record and raise on error.
+v1list = client.V1List().load({"id": "test01"})
+# v1list contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -541,7 +544,7 @@ API path: `/search/album/{albumName}`
 
 ### V1List
 
-Create an instance: `const v1_list = client.v1_list`
+Create an instance: `v1_list = client.V1List()`
 
 #### Operations
 
@@ -597,14 +600,14 @@ Create an instance: `const v1_list = client.v1_list`
 
 #### Example: List
 
-```ts
-const v1_lists = await client.v1_list.list()
+```python
+v1_lists = client.V1List().list({})
 ```
 
 
 ### V1Lookup
 
-Create an instance: `const v1_lookup = client.v1_lookup`
+Create an instance: `v1_lookup = client.V1Lookup()`
 
 #### Operations
 
@@ -731,14 +734,14 @@ Create an instance: `const v1_lookup = client.v1_lookup`
 
 #### Example: List
 
-```ts
-const v1_lookups = await client.v1_lookup.list()
+```python
+v1_lookups = client.V1Lookup().list({})
 ```
 
 
 ### V1Search
 
-Create an instance: `const v1_search = client.v1_search`
+Create an instance: `v1_search = client.V1Search()`
 
 #### Operations
 
@@ -860,14 +863,14 @@ Create an instance: `const v1_search = client.v1_search`
 
 #### Example: List
 
-```ts
-const v1_searchs = await client.v1_search.list()
+```python
+v1_searchs = client.V1Search().list({})
 ```
 
 
 ### V2List
 
-Create an instance: `const v2_list = client.v2_list`
+Create an instance: `v2_list = client.V2List()`
 
 #### Operations
 
@@ -883,14 +886,14 @@ Create an instance: `const v2_list = client.v2_list`
 
 #### Example: Load
 
-```ts
-const v2_list = await client.v2_list.load({ id: 'v2_list_id' })
+```python
+v2_list = client.V2List().load({"id": "v2_list_id"})
 ```
 
 
 ### V2Lookup
 
-Create an instance: `const v2_lookup = client.v2_lookup`
+Create an instance: `v2_lookup = client.V2Lookup()`
 
 #### Operations
 
@@ -908,14 +911,14 @@ Create an instance: `const v2_lookup = client.v2_lookup`
 
 #### Example: Load
 
-```ts
-const v2_lookup = await client.v2_lookup.load({ id: 'v2_lookup_id' })
+```python
+v2_lookup = client.V2Lookup().load({"id": "v2_lookup_id"})
 ```
 
 
 ### V2Search
 
-Create an instance: `const v2_search = client.v2_search`
+Create an instance: `v2_search = client.V2Search()`
 
 #### Operations
 
@@ -933,8 +936,8 @@ Create an instance: `const v2_search = client.v2_search`
 
 #### Example: Load
 
-```ts
-const v2_search = await client.v2_search.load({ id: 'v2_search_id' })
+```python
+v2_search = client.V2Search().load({"id": "v2_search_id"})
 ```
 
 
@@ -1008,7 +1011,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-v1list = client.v1list
+v1list = client.V1List()
 v1list.load({"id": "example_id"})
 
 # v1list.data_get() now returns the loaded v1list data

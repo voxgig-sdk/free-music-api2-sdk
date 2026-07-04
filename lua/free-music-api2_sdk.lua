@@ -244,8 +244,9 @@ end
 
 
 
--- Idiomatic facade: client:v1_list():list() / client:v1_list():load({ id = ... })
-function FreeMusicApi2SDK:v1_list(data)
+-- Idiomatic facade: client:V1List():list() / client:V1List():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function FreeMusicApi2SDK:V1List(data)
   local EntityMod = require("entity.v1_list_entity")
   if data == nil then
     if self._v1_list == nil then
@@ -256,15 +257,10 @@ function FreeMusicApi2SDK:v1_list(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:v1_list() instead.
-function FreeMusicApi2SDK:V1List(data)
-  local EntityMod = require("entity.v1_list_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:v1_lookup():list() / client:v1_lookup():load({ id = ... })
-function FreeMusicApi2SDK:v1_lookup(data)
+-- Idiomatic facade: client:V1Lookup():list() / client:V1Lookup():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function FreeMusicApi2SDK:V1Lookup(data)
   local EntityMod = require("entity.v1_lookup_entity")
   if data == nil then
     if self._v1_lookup == nil then
@@ -275,15 +271,10 @@ function FreeMusicApi2SDK:v1_lookup(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:v1_lookup() instead.
-function FreeMusicApi2SDK:V1Lookup(data)
-  local EntityMod = require("entity.v1_lookup_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:v1_search():list() / client:v1_search():load({ id = ... })
-function FreeMusicApi2SDK:v1_search(data)
+-- Idiomatic facade: client:V1Search():list() / client:V1Search():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function FreeMusicApi2SDK:V1Search(data)
   local EntityMod = require("entity.v1_search_entity")
   if data == nil then
     if self._v1_search == nil then
@@ -294,15 +285,10 @@ function FreeMusicApi2SDK:v1_search(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:v1_search() instead.
-function FreeMusicApi2SDK:V1Search(data)
-  local EntityMod = require("entity.v1_search_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:v2_list():list() / client:v2_list():load({ id = ... })
-function FreeMusicApi2SDK:v2_list(data)
+-- Idiomatic facade: client:V2List():list() / client:V2List():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function FreeMusicApi2SDK:V2List(data)
   local EntityMod = require("entity.v2_list_entity")
   if data == nil then
     if self._v2_list == nil then
@@ -313,15 +299,10 @@ function FreeMusicApi2SDK:v2_list(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:v2_list() instead.
-function FreeMusicApi2SDK:V2List(data)
-  local EntityMod = require("entity.v2_list_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:v2_lookup():list() / client:v2_lookup():load({ id = ... })
-function FreeMusicApi2SDK:v2_lookup(data)
+-- Idiomatic facade: client:V2Lookup():list() / client:V2Lookup():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function FreeMusicApi2SDK:V2Lookup(data)
   local EntityMod = require("entity.v2_lookup_entity")
   if data == nil then
     if self._v2_lookup == nil then
@@ -332,15 +313,10 @@ function FreeMusicApi2SDK:v2_lookup(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:v2_lookup() instead.
-function FreeMusicApi2SDK:V2Lookup(data)
-  local EntityMod = require("entity.v2_lookup_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:v2_search():list() / client:v2_search():load({ id = ... })
-function FreeMusicApi2SDK:v2_search(data)
+-- Idiomatic facade: client:V2Search():list() / client:V2Search():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function FreeMusicApi2SDK:V2Search(data)
   local EntityMod = require("entity.v2_search_entity")
   if data == nil then
     if self._v2_search == nil then
@@ -348,12 +324,6 @@ function FreeMusicApi2SDK:v2_search(data)
     end
     return self._v2_search
   end
-  return EntityMod.new(self, data)
-end
-
--- Deprecated: use client:v2_search() instead.
-function FreeMusicApi2SDK:V2Search(data)
-  local EntityMod = require("entity.v2_search_entity")
   return EntityMod.new(self, data)
 end
 

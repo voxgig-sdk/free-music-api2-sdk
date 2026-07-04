@@ -104,7 +104,7 @@ same parameters as `direct()`.
 ## V1ListEntity
 
 ```lua
-local v1_list = client:v1_list(nil)
+local v1_list = client:V1List(nil)
 ```
 
 ### Fields
@@ -160,7 +160,7 @@ local v1_list = client:v1_list(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:v1_list():list()
+local results, err = client:V1List():list()
 ```
 
 ### Common Methods
@@ -196,7 +196,7 @@ Return the entity name.
 ## V1LookupEntity
 
 ```lua
-local v1_lookup = client:v1_lookup(nil)
+local v1_lookup = client:V1Lookup(nil)
 ```
 
 ### Fields
@@ -323,7 +323,7 @@ local v1_lookup = client:v1_lookup(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:v1_lookup():list()
+local results, err = client:V1Lookup():list()
 ```
 
 ### Common Methods
@@ -359,7 +359,7 @@ Return the entity name.
 ## V1SearchEntity
 
 ```lua
-local v1_search = client:v1_search(nil)
+local v1_search = client:V1Search(nil)
 ```
 
 ### Fields
@@ -481,7 +481,7 @@ local v1_search = client:v1_search(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:v1_search():list()
+local results, err = client:V1Search():list()
 ```
 
 ### Common Methods
@@ -517,7 +517,7 @@ Return the entity name.
 ## V2ListEntity
 
 ```lua
-local v2_list = client:v2_list(nil)
+local v2_list = client:V2List(nil)
 ```
 
 ### Fields
@@ -533,7 +533,7 @@ local v2_list = client:v2_list(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:v2_list():load({ id = "v2_list_id" })
+local result, err = client:V2List():load({ id = "v2_list_id" })
 ```
 
 ### Common Methods
@@ -569,7 +569,7 @@ Return the entity name.
 ## V2LookupEntity
 
 ```lua
-local v2_lookup = client:v2_lookup(nil)
+local v2_lookup = client:V2Lookup(nil)
 ```
 
 ### Fields
@@ -587,7 +587,7 @@ local v2_lookup = client:v2_lookup(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:v2_lookup():load({ id = "v2_lookup_id" })
+local result, err = client:V2Lookup():load({ id = "v2_lookup_id" })
 ```
 
 ### Common Methods
@@ -623,7 +623,7 @@ Return the entity name.
 ## V2SearchEntity
 
 ```lua
-local v2_search = client:v2_search(nil)
+local v2_search = client:V2Search(nil)
 ```
 
 ### Fields
@@ -641,7 +641,7 @@ local v2_search = client:v2_search(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:v2_search():load({ id = "v2_search_id" })
+local result, err = client:V2Search():load({ id = "v2_search_id" })
 ```
 
 ### Common Methods
