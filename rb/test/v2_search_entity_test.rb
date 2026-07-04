@@ -42,8 +42,7 @@ class V2SearchEntityTest < Minitest::Test
     # LOAD
     v2_search_ref01_ent = client.V2Search(nil)
     v2_search_ref01_match_dt0 = {}
-    v2_search_ref01_data_dt0_loaded, err = v2_search_ref01_ent.load(v2_search_ref01_match_dt0, nil)
-    assert_nil err
+    v2_search_ref01_data_dt0_loaded = v2_search_ref01_ent.load(v2_search_ref01_match_dt0, nil)
     assert !v2_search_ref01_data_dt0_loaded.nil?
 
   end

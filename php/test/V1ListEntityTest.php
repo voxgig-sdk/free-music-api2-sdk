@@ -50,8 +50,7 @@ class V1ListEntityTest extends TestCase
         $v1_list_ref01_ent = $client->V1List(null);
         $v1_list_ref01_match = [];
 
-        [$v1_list_ref01_list_result, $err] = $v1_list_ref01_ent->list($v1_list_ref01_match, null);
-        $this->assertNull($err);
+        $v1_list_ref01_list_result = $v1_list_ref01_ent->list($v1_list_ref01_match, null);
         $this->assertIsArray($v1_list_ref01_list_result);
 
     }

@@ -9,9 +9,10 @@ The PHP SDK for the FreeMusicApi2 API — an entity-oriented client using PHP co
 
 
 ## Install
-```bash
-composer require voxgig-sdk/free-music-api2
-```
+This package is not yet published to Packagist. Install it from the
+GitHub release tag (`php/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/free-music-api2-sdk/releases](https://github.com/voxgig-sdk/free-music-api2-sdk/releases)
 
 
 ## Tutorial: your first API call
@@ -26,21 +27,23 @@ loading a specific record.
 require_once 'freemusicapi2_sdk.php';
 
 $client = new FreeMusicApi2SDK([
-    "apikey" => getenv("FREE-MUSIC-API2_APIKEY"),
+    "apikey" => getenv("FREE_MUSIC_API2_APIKEY"),
 ]);
 ```
 
 ### 2. List v1lists
 
 ```php
-[$result, $err] = $client->V1List()->list();
-if ($err) { throw new \Exception($err); }
-
-if (is_array($result)) {
-    foreach ($result as $item) {
-        $d = $item->data_get();
-        echo $d["id"] . " " . $d["name"] . "\n";
+try {
+    $result = $client->v1list()->list();
+    if (is_array($result)) {
+        foreach ($result as $item) {
+            $d = $item->data_get();
+            echo $d["id"] . " " . $d["name"] . "\n";
+        }
     }
+} catch (\Exception $err) {
+    echo "Error: " . $err->getMessage();
 }
 ```
 
@@ -52,28 +55,31 @@ if (is_array($result)) {
 For endpoints not covered by entity methods:
 
 ```php
-[$result, $err] = $client->direct([
+// direct() is the raw-HTTP escape hatch: it returns a result array
+// (it does not throw). Branch on $result["ok"].
+$result = $client->direct([
     "path" => "/api/resource/{id}",
     "method" => "GET",
     "params" => ["id" => "example"],
 ]);
-if ($err) { throw new \Exception($err); }
 
 if ($result["ok"]) {
     echo $result["status"];  // 200
     print_r($result["data"]);  // response body
+} else {
+    echo "Error: " . $result["err"]->getMessage();
 }
 ```
 
 ### Prepare a request without sending it
 
 ```php
-[$fetchdef, $err] = $client->prepare([
+// prepare() throws on error and returns the fetch definition.
+$fetchdef = $client->prepare([
     "path" => "/api/resource/{id}",
     "method" => "DELETE",
     "params" => ["id" => "example"],
 ]);
-if ($err) { throw new \Exception($err); }
 
 echo $fetchdef["url"];
 echo $fetchdef["method"];
@@ -87,7 +93,7 @@ Create a mock client for unit testing — no server required:
 ```php
 $client = FreeMusicApi2SDK::test();
 
-[$result, $err] = $client->FreeMusicApi2()->load(["id" => "test01"]);
+$result = $client->v1list()->load(["id" => "test01"]);
 // $result contains mock response data
 ```
 
@@ -121,8 +127,8 @@ $client = new FreeMusicApi2SDK([
 Create a `.env.local` file at the project root:
 
 ```
-FREE-MUSIC-API2_TEST_LIVE=TRUE
-FREE-MUSIC-API2_APIKEY=<your-key>
+FREE_MUSIC_API2_TEST_LIVE=TRUE
+FREE_MUSIC_API2_APIKEY=<your-key>
 ```
 
 Then run:
@@ -196,8 +202,12 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `[$result, $err]`. The first value is an
-`array` with these keys:
+Entity operations return the bare result data (an `array` for single-entity
+ops, a `list` for `list`) and throw on error. Wrap calls in
+`try`/`catch` to handle failures.
+
+The `direct()` escape hatch never throws — it returns a result `array`
+you branch on via `$result["ok"]`:
 
 | Key | Type | Description |
 | --- | --- | --- |
@@ -538,7 +548,7 @@ API path: `/search/album/{albumName}`
 
 ### V1List
 
-Create an instance: `const v1_list = client.V1List()`
+Create an instance: `const v1_list = client.v1_list`
 
 #### Operations
 
@@ -595,13 +605,13 @@ Create an instance: `const v1_list = client.V1List()`
 #### Example: List
 
 ```ts
-const v1_lists = await client.V1List().list()
+const v1_lists = await client.v1_list.list()
 ```
 
 
 ### V1Lookup
 
-Create an instance: `const v1_lookup = client.V1Lookup()`
+Create an instance: `const v1_lookup = client.v1_lookup`
 
 #### Operations
 
@@ -729,13 +739,13 @@ Create an instance: `const v1_lookup = client.V1Lookup()`
 #### Example: List
 
 ```ts
-const v1_lookups = await client.V1Lookup().list()
+const v1_lookups = await client.v1_lookup.list()
 ```
 
 
 ### V1Search
 
-Create an instance: `const v1_search = client.V1Search()`
+Create an instance: `const v1_search = client.v1_search`
 
 #### Operations
 
@@ -858,13 +868,13 @@ Create an instance: `const v1_search = client.V1Search()`
 #### Example: List
 
 ```ts
-const v1_searchs = await client.V1Search().list()
+const v1_searchs = await client.v1_search.list()
 ```
 
 
 ### V2List
 
-Create an instance: `const v2_list = client.V2List()`
+Create an instance: `const v2_list = client.v2_list`
 
 #### Operations
 
@@ -881,13 +891,13 @@ Create an instance: `const v2_list = client.V2List()`
 #### Example: Load
 
 ```ts
-const v2_list = await client.V2List().load({ id: 'v2_list_id' })
+const v2_list = await client.v2_list.load({ id: 'v2_list_id' })
 ```
 
 
 ### V2Lookup
 
-Create an instance: `const v2_lookup = client.V2Lookup()`
+Create an instance: `const v2_lookup = client.v2_lookup`
 
 #### Operations
 
@@ -906,13 +916,13 @@ Create an instance: `const v2_lookup = client.V2Lookup()`
 #### Example: Load
 
 ```ts
-const v2_lookup = await client.V2Lookup().load({ id: 'v2_lookup_id' })
+const v2_lookup = await client.v2_lookup.load({ id: 'v2_lookup_id' })
 ```
 
 
 ### V2Search
 
-Create an instance: `const v2_search = client.V2Search()`
+Create an instance: `const v2_search = client.v2_search`
 
 #### Operations
 
@@ -931,7 +941,7 @@ Create an instance: `const v2_search = client.V2Search()`
 #### Example: Load
 
 ```ts
-const v2_search = await client.V2Search().load({ id: 'v2_search_id' })
+const v2_search = await client.v2_search.load({ id: 'v2_search_id' })
 ```
 
 
@@ -1006,11 +1016,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$moon = $client->Moon();
-[$result, $err] = $moon->load(["planet_id" => "earth", "id" => "luna"]);
+$v1list = $client->v1list();
+$v1list->load(["id" => "example_id"]);
 
-// $moon->dataGet() now returns the loaded moon data
-// $moon->matchGet() returns the last match criteria
+// $v1list->dataGet() now returns the loaded v1list data
+// $v1list->matchGet() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

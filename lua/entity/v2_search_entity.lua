@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch V2SearchLoadMatch
+---@param ctrl? table
+---@return V2Search
+---@return string? err
 function V2SearchEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

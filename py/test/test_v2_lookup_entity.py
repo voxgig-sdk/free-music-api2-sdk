@@ -49,8 +49,7 @@ class TestV2LookupEntity:
         # LOAD
         v2_lookup_ref01_ent = client.V2Lookup(None)
         v2_lookup_ref01_match_dt0 = {}
-        v2_lookup_ref01_data_dt0_loaded, err = v2_lookup_ref01_ent.load(v2_lookup_ref01_match_dt0, None)
-        assert err is None
+        v2_lookup_ref01_data_dt0_loaded = v2_lookup_ref01_ent.load(v2_lookup_ref01_match_dt0, None)
         assert v2_lookup_ref01_data_dt0_loaded is not None
 
 

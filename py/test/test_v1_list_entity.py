@@ -50,8 +50,7 @@ class TestV1ListEntity:
         v1_list_ref01_ent = client.V1List(None)
         v1_list_ref01_match = {}
 
-        v1_list_ref01_list_result, err = v1_list_ref01_ent.list(v1_list_ref01_match, None)
-        assert err is None
+        v1_list_ref01_list_result = v1_list_ref01_ent.list(v1_list_ref01_match, None)
         assert isinstance(v1_list_ref01_list_result, list)
 
 

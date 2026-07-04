@@ -245,31 +245,49 @@ func (sdk *FreeMusicApi2SDK) Direct(fetchargs map[string]any) (map[string]any, e
 }
 
 
+// V1List returns a V1List entity bound to this client.
+// Idiomatic usage: client.V1List(nil).List(nil, nil) or
+// client.V1List(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *FreeMusicApi2SDK) V1List(data map[string]any) FreeMusicApi2Entity {
 	return NewV1ListEntityFunc(sdk, data)
 }
 
 
+// V1Lookup returns a V1Lookup entity bound to this client.
+// Idiomatic usage: client.V1Lookup(nil).List(nil, nil) or
+// client.V1Lookup(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *FreeMusicApi2SDK) V1Lookup(data map[string]any) FreeMusicApi2Entity {
 	return NewV1LookupEntityFunc(sdk, data)
 }
 
 
+// V1Search returns a V1Search entity bound to this client.
+// Idiomatic usage: client.V1Search(nil).List(nil, nil) or
+// client.V1Search(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *FreeMusicApi2SDK) V1Search(data map[string]any) FreeMusicApi2Entity {
 	return NewV1SearchEntityFunc(sdk, data)
 }
 
 
+// V2List returns a V2List entity bound to this client.
+// Idiomatic usage: client.V2List(nil).List(nil, nil) or
+// client.V2List(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *FreeMusicApi2SDK) V2List(data map[string]any) FreeMusicApi2Entity {
 	return NewV2ListEntityFunc(sdk, data)
 }
 
 
+// V2Lookup returns a V2Lookup entity bound to this client.
+// Idiomatic usage: client.V2Lookup(nil).List(nil, nil) or
+// client.V2Lookup(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *FreeMusicApi2SDK) V2Lookup(data map[string]any) FreeMusicApi2Entity {
 	return NewV2LookupEntityFunc(sdk, data)
 }
 
 
+// V2Search returns a V2Search entity bound to this client.
+// Idiomatic usage: client.V2Search(nil).List(nil, nil) or
+// client.V2Search(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *FreeMusicApi2SDK) V2Search(data map[string]any) FreeMusicApi2Entity {
 	return NewV2SearchEntityFunc(sdk, data)
 }

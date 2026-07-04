@@ -170,7 +170,7 @@ Alias for `FreeMusicApi2SDK.test()`.
 ## V1ListEntity
 
 ```ts
-const v1_list = client.V1List()
+const v1_list = client.v1_list
 ```
 
 ### Fields
@@ -226,7 +226,7 @@ const v1_list = client.V1List()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.V1List().list()
+const results = await client.v1_list.list()
 ```
 
 ### Common Methods
@@ -260,7 +260,7 @@ Return a copy of the entity options.
 ## V1LookupEntity
 
 ```ts
-const v1_lookup = client.V1Lookup()
+const v1_lookup = client.v1_lookup
 ```
 
 ### Fields
@@ -387,7 +387,7 @@ const v1_lookup = client.V1Lookup()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.V1Lookup().list()
+const results = await client.v1_lookup.list()
 ```
 
 ### Common Methods
@@ -421,7 +421,7 @@ Return a copy of the entity options.
 ## V1SearchEntity
 
 ```ts
-const v1_search = client.V1Search()
+const v1_search = client.v1_search
 ```
 
 ### Fields
@@ -543,7 +543,7 @@ const v1_search = client.V1Search()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.V1Search().list()
+const results = await client.v1_search.list()
 ```
 
 ### Common Methods
@@ -577,7 +577,7 @@ Return a copy of the entity options.
 ## V2ListEntity
 
 ```ts
-const v2_list = client.V2List()
+const v2_list = client.v2_list
 ```
 
 ### Fields
@@ -593,7 +593,7 @@ const v2_list = client.V2List()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.V2List().load({ id: 'v2_list_id' })
+const result = await client.v2_list.load({ id: 'v2_list_id' })
 ```
 
 ### Common Methods
@@ -627,7 +627,7 @@ Return a copy of the entity options.
 ## V2LookupEntity
 
 ```ts
-const v2_lookup = client.V2Lookup()
+const v2_lookup = client.v2_lookup
 ```
 
 ### Fields
@@ -645,7 +645,7 @@ const v2_lookup = client.V2Lookup()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.V2Lookup().load({ id: 'v2_lookup_id' })
+const result = await client.v2_lookup.load({ id: 'v2_lookup_id' })
 ```
 
 ### Common Methods
@@ -679,7 +679,7 @@ Return a copy of the entity options.
 ## V2SearchEntity
 
 ```ts
-const v2_search = client.V2Search()
+const v2_search = client.v2_search
 ```
 
 ### Fields
@@ -697,7 +697,7 @@ const v2_search = client.V2Search()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.V2Search().load({ id: 'v2_search_id' })
+const result = await client.v2_search.load({ id: 'v2_search_id' })
 ```
 
 ### Common Methods

@@ -50,8 +50,7 @@ class V1SearchEntityTest extends TestCase
         $v1_search_ref01_ent = $client->V1Search(null);
         $v1_search_ref01_match = [];
 
-        [$v1_search_ref01_list_result, $err] = $v1_search_ref01_ent->list($v1_search_ref01_match, null);
-        $this->assertNull($err);
+        $v1_search_ref01_list_result = $v1_search_ref01_ent->list($v1_search_ref01_match, null);
         $this->assertIsArray($v1_search_ref01_list_result);
 
     }

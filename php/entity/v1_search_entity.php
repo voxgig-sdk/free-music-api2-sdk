@@ -55,6 +55,9 @@ class V1SearchEntity
         return new V1SearchEntity($this->_client, $opts);
     }
 
+    /**
+     * @param V1Search|array $args V1Search data (assoc-array) to store.
+     */
     public function data_set($args): void
     {
         if ($args) {
@@ -63,12 +66,18 @@ class V1SearchEntity
         }
     }
 
+    /**
+     * @return V1Search|array The current V1Search data as an assoc-array.
+     */
     public function data_get()
     {
         ($this->_utility->feature_hook)($this->_entctx, "GetData");
         return Struct::clone($this->_data);
     }
 
+    /**
+     * @param array $args Match filter (any subset of V1Search fields).
+     */
     public function match_set($args): void
     {
         if ($args) {
@@ -77,6 +86,9 @@ class V1SearchEntity
         }
     }
 
+    /**
+     * @return array The current match filter (any subset of V1Search fields).
+     */
     public function match_get()
     {
         ($this->_utility->feature_hook)($this->_entctx, "GetMatch");
@@ -86,7 +98,16 @@ class V1SearchEntity
     
 
     
-    public function list($reqmatch, $ctrl = null): array
+    /**
+     * List V1Search items matching the given filter.
+     *
+     * @param V1SearchListMatch|array|null $reqmatch Match filter (any subset
+     *   of V1Search fields) as an assoc-array; V1SearchListMatch names the shape.
+     * @param mixed $ctrl Optional per-call control overrides.
+     * @return V1Search[]|array A list of V1Search items as assoc-arrays at
+     *   the SDK boundary; throws FreeMusicApi2Error on failure (item-5 convention).
+     */
+    public function list(?array $reqmatch = null, $ctrl = null): mixed
     {
         $utility = $this->_utility;
         $ctx = ($utility->make_context)([
@@ -114,7 +135,7 @@ class V1SearchEntity
 
     
 
-    private function _run_op($ctx, callable $post_done): array
+    private function _run_op($ctx, callable $post_done): mixed
     {
         $utility = $this->_utility;
 

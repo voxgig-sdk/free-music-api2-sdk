@@ -1,0 +1,310 @@
+-- Typed models for the FreeMusicApi2 SDK (LuaLS annotations).
+--
+-- GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
+-- params (op.<name>.points[].args.params[]). Field/param types come from the
+-- canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
+-- @voxgig/apidef VALID_CANON). Annotations only — no runtime effect. Do not
+-- edit by hand.
+
+---@class V1List
+---@field id_album? number
+---@field id_artist? number
+---@field id_imvdb? number
+---@field id_lyric? number
+---@field id_track? number
+---@field int_cd? number
+---@field int_duration? number
+---@field int_loved? number
+---@field int_music_vid_comment? number
+---@field int_music_vid_dislike? number
+---@field int_music_vid_favorite? number
+---@field int_music_vid_like? number
+---@field int_music_vid_view? number
+---@field int_score? number
+---@field int_score_vote? number
+---@field int_total_listener? number
+---@field int_total_play? number
+---@field int_track_number? number
+---@field loved? table
+---@field str_album? string
+---@field str_artist? string
+---@field str_artist_alternate? string
+---@field str_description_en? string
+---@field str_genre? string
+---@field str_locked? string
+---@field str_mood? string
+---@field str_music_brainz_album_id? string
+---@field str_music_brainz_artist_id? string
+---@field str_music_brainz_id? string
+---@field str_music_vid? string
+---@field str_music_vid_company? string
+---@field str_music_vid_director? string
+---@field str_music_vid_screen1? string
+---@field str_music_vid_screen2? string
+---@field str_music_vid_screen3? string
+---@field str_style? string
+---@field str_theme? string
+---@field str_track? string
+---@field str_track_lyric? string
+---@field str_track_thumb? string
+---@field trending? table
+
+---@class V1ListListMatch
+
+---@class V1Lookup
+---@field id_album? number
+---@field id_artist? number
+---@field id_imvdb? number
+---@field id_label? number
+---@field id_lyric? number
+---@field id_track? number
+---@field int_born_year? number
+---@field int_cd? number
+---@field int_charted? number
+---@field int_died_year? number
+---@field int_duration? number
+---@field int_formed_year? number
+---@field int_loved? number
+---@field int_member? number
+---@field int_music_vid_comment? number
+---@field int_music_vid_dislike? number
+---@field int_music_vid_favorite? number
+---@field int_music_vid_like? number
+---@field int_music_vid_view? number
+---@field int_sale? number
+---@field int_score? number
+---@field int_score_vote? number
+---@field int_total_listener? number
+---@field int_total_play? number
+---@field int_track_number? number
+---@field int_year_released? number
+---@field str_album? string
+---@field str_album3_d_case? string
+---@field str_album3_d_face? string
+---@field str_album3_d_flat? string
+---@field str_album3_d_thumb? string
+---@field str_album_c_dart? string
+---@field str_album_spine? string
+---@field str_album_stripped? string
+---@field str_album_thumb? string
+---@field str_album_thumb_back? string
+---@field str_album_thumb_hq? string
+---@field str_all_music_id? string
+---@field str_amazon_id? string
+---@field str_apple_music? string
+---@field str_artist? string
+---@field str_artist_alternate? string
+---@field str_artist_banner? string
+---@field str_artist_clearart? string
+---@field str_artist_cutout? string
+---@field str_artist_fanart? string
+---@field str_artist_fanart2? string
+---@field str_artist_fanart3? string
+---@field str_artist_fanart4? string
+---@field str_artist_logo? string
+---@field str_artist_stripped? string
+---@field str_artist_thumb? string
+---@field str_artist_wide_thumb? string
+---@field str_bbc_review_id? string
+---@field str_biography_cn? string
+---@field str_biography_de? string
+---@field str_biography_e? string
+---@field str_biography_en? string
+---@field str_biography_fr? string
+---@field str_biography_hu? string
+---@field str_biography_il? string
+---@field str_biography_it? string
+---@field str_biography_jp? string
+---@field str_biography_nl? string
+---@field str_biography_no? string
+---@field str_biography_pl? string
+---@field str_biography_pt? string
+---@field str_biography_ru? string
+---@field str_biography_se? string
+---@field str_country? string
+---@field str_country_code? string
+---@field str_description_en? string
+---@field str_disbanded? string
+---@field str_discogs_id? string
+---@field str_facebook? string
+---@field str_gender? string
+---@field str_genius_id? string
+---@field str_genre? string
+---@field str_instagram? string
+---@field str_itunes_id? string
+---@field str_label? string
+---@field str_last_fm_chart? string
+---@field str_location? string
+---@field str_locked? string
+---@field str_lyric_wiki_id? string
+---@field str_mood? string
+---@field str_music_brainz_album_id? string
+---@field str_music_brainz_artist_id? string
+---@field str_music_brainz_id? string
+---@field str_music_moz_id? string
+---@field str_music_vid? string
+---@field str_music_vid_company? string
+---@field str_music_vid_director? string
+---@field str_music_vid_screen1? string
+---@field str_music_vid_screen2? string
+---@field str_music_vid_screen3? string
+---@field str_rate_your_music_id? string
+---@field str_release_format? string
+---@field str_review? string
+---@field str_sound_cloud? string
+---@field str_speed? string
+---@field str_spotify? string
+---@field str_style? string
+---@field str_theme? string
+---@field str_track? string
+---@field str_track_lyric? string
+---@field str_track_thumb? string
+---@field str_twitter? string
+---@field str_website? string
+---@field str_wikidata_id? string
+---@field str_wikipedia_id? string
+---@field str_youtube? string
+
+---@class V1LookupListMatch
+
+---@class V1Search
+---@field id_album? number
+---@field id_artist? number
+---@field id_imvdb? number
+---@field id_label? number
+---@field id_lyric? number
+---@field id_track? number
+---@field int_born_year? number
+---@field int_cd? number
+---@field int_charted? number
+---@field int_died_year? number
+---@field int_duration? number
+---@field int_formed_year? number
+---@field int_loved? number
+---@field int_member? number
+---@field int_music_vid_comment? number
+---@field int_music_vid_dislike? number
+---@field int_music_vid_favorite? number
+---@field int_music_vid_like? number
+---@field int_music_vid_view? number
+---@field int_sale? number
+---@field int_score? number
+---@field int_score_vote? number
+---@field int_total_listener? number
+---@field int_total_play? number
+---@field int_track_number? number
+---@field int_year_released? number
+---@field str_album? string
+---@field str_album3_d_case? string
+---@field str_album3_d_face? string
+---@field str_album3_d_flat? string
+---@field str_album3_d_thumb? string
+---@field str_album_c_dart? string
+---@field str_album_spine? string
+---@field str_album_stripped? string
+---@field str_album_thumb? string
+---@field str_album_thumb_back? string
+---@field str_album_thumb_hq? string
+---@field str_all_music_id? string
+---@field str_amazon_id? string
+---@field str_artist? string
+---@field str_artist_alternate? string
+---@field str_artist_banner? string
+---@field str_artist_clearart? string
+---@field str_artist_cutout? string
+---@field str_artist_fanart? string
+---@field str_artist_fanart2? string
+---@field str_artist_fanart3? string
+---@field str_artist_fanart4? string
+---@field str_artist_logo? string
+---@field str_artist_stripped? string
+---@field str_artist_thumb? string
+---@field str_artist_wide_thumb? string
+---@field str_bbc_review_id? string
+---@field str_biography_cn? string
+---@field str_biography_de? string
+---@field str_biography_e? string
+---@field str_biography_en? string
+---@field str_biography_fr? string
+---@field str_biography_hu? string
+---@field str_biography_il? string
+---@field str_biography_it? string
+---@field str_biography_jp? string
+---@field str_biography_nl? string
+---@field str_biography_no? string
+---@field str_biography_pl? string
+---@field str_biography_pt? string
+---@field str_biography_ru? string
+---@field str_biography_se? string
+---@field str_country? string
+---@field str_country_code? string
+---@field str_description_en? string
+---@field str_disbanded? string
+---@field str_discogs_id? string
+---@field str_facebook? string
+---@field str_gender? string
+---@field str_genius_id? string
+---@field str_genre? string
+---@field str_itunes_id? string
+---@field str_label? string
+---@field str_last_fm_chart? string
+---@field str_location? string
+---@field str_locked? string
+---@field str_lyric_wiki_id? string
+---@field str_mood? string
+---@field str_music_brainz_album_id? string
+---@field str_music_brainz_artist_id? string
+---@field str_music_brainz_id? string
+---@field str_music_moz_id? string
+---@field str_music_vid? string
+---@field str_music_vid_company? string
+---@field str_music_vid_director? string
+---@field str_music_vid_screen1? string
+---@field str_music_vid_screen2? string
+---@field str_music_vid_screen3? string
+---@field str_rate_your_music_id? string
+---@field str_release_format? string
+---@field str_review? string
+---@field str_speed? string
+---@field str_style? string
+---@field str_theme? string
+---@field str_track? string
+---@field str_track_lyric? string
+---@field str_track_thumb? string
+---@field str_twitter? string
+---@field str_website? string
+---@field str_wikidata_id? string
+---@field str_wikipedia_id? string
+
+---@class V1SearchListMatch
+
+---@class V2List
+---@field album? table
+
+---@class V2ListLoadMatch
+---@field artist_id number
+
+---@class V2Lookup
+---@field album? table
+---@field artist? table
+---@field track? table
+
+---@class V2LookupLoadMatch
+---@field album_id number
+---@field artist_id number
+---@field music_brainz_id string
+---@field track_id number
+
+---@class V2Search
+---@field album? table
+---@field artist? table
+---@field track? table
+
+---@class V2SearchLoadMatch
+---@field album_name string
+---@field artist_name string
+---@field track_name string
+
+local M = {}
+
+return M

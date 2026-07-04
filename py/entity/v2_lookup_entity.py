@@ -1,7 +1,13 @@
 # FreeMusicApi2 SDK V2Lookup entity
 
+from __future__ import annotations
+
 from utility.voxgig_struct import voxgig_struct as vs
 from core import helpers
+from freemusicapi2_types import (
+    V2Lookup,
+    V2LookupLoadMatch,
+)
 
 
 class V2LookupEntity:
@@ -44,7 +50,7 @@ class V2LookupEntity:
             self._data = helpers.to_map(vs.clone(args)) or {}
             self._utility.feature_hook(self._entctx, "SetData")
 
-    def data_get(self):
+    def data_get(self) -> V2Lookup:
         self._utility.feature_hook(self._entctx, "GetData")
         return vs.clone(self._data)
 
@@ -53,12 +59,12 @@ class V2LookupEntity:
             self._match = helpers.to_map(vs.clone(args)) or {}
             self._utility.feature_hook(self._entctx, "SetMatch")
 
-    def match_get(self):
+    def match_get(self) -> V2Lookup:
         self._utility.feature_hook(self._entctx, "GetMatch")
         return vs.clone(self._match)
 
     
-    def load(self, reqmatch, ctrl=None):
+    def load(self, reqmatch: V2LookupLoadMatch, ctrl=None) -> V2Lookup:
         utility = self._utility
         ctx = utility.make_context({
             "opname": "load",

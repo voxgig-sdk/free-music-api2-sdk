@@ -42,8 +42,7 @@ class V2ListEntityTest < Minitest::Test
     # LOAD
     v2_list_ref01_ent = client.V2List(nil)
     v2_list_ref01_match_dt0 = {}
-    v2_list_ref01_data_dt0_loaded, err = v2_list_ref01_ent.load(v2_list_ref01_match_dt0, nil)
-    assert_nil err
+    v2_list_ref01_data_dt0_loaded = v2_list_ref01_ent.load(v2_list_ref01_match_dt0, nil)
     assert !v2_list_ref01_data_dt0_loaded.nil?
 
   end

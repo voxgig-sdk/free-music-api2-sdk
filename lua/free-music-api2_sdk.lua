@@ -244,36 +244,114 @@ end
 
 
 
+-- Idiomatic facade: client:v1_list():list() / client:v1_list():load({ id = ... })
+function FreeMusicApi2SDK:v1_list(data)
+  local EntityMod = require("entity.v1_list_entity")
+  if data == nil then
+    if self._v1_list == nil then
+      self._v1_list = EntityMod.new(self, nil)
+    end
+    return self._v1_list
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:v1_list() instead.
 function FreeMusicApi2SDK:V1List(data)
   local EntityMod = require("entity.v1_list_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:v1_lookup():list() / client:v1_lookup():load({ id = ... })
+function FreeMusicApi2SDK:v1_lookup(data)
+  local EntityMod = require("entity.v1_lookup_entity")
+  if data == nil then
+    if self._v1_lookup == nil then
+      self._v1_lookup = EntityMod.new(self, nil)
+    end
+    return self._v1_lookup
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:v1_lookup() instead.
 function FreeMusicApi2SDK:V1Lookup(data)
   local EntityMod = require("entity.v1_lookup_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:v1_search():list() / client:v1_search():load({ id = ... })
+function FreeMusicApi2SDK:v1_search(data)
+  local EntityMod = require("entity.v1_search_entity")
+  if data == nil then
+    if self._v1_search == nil then
+      self._v1_search = EntityMod.new(self, nil)
+    end
+    return self._v1_search
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:v1_search() instead.
 function FreeMusicApi2SDK:V1Search(data)
   local EntityMod = require("entity.v1_search_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:v2_list():list() / client:v2_list():load({ id = ... })
+function FreeMusicApi2SDK:v2_list(data)
+  local EntityMod = require("entity.v2_list_entity")
+  if data == nil then
+    if self._v2_list == nil then
+      self._v2_list = EntityMod.new(self, nil)
+    end
+    return self._v2_list
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:v2_list() instead.
 function FreeMusicApi2SDK:V2List(data)
   local EntityMod = require("entity.v2_list_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:v2_lookup():list() / client:v2_lookup():load({ id = ... })
+function FreeMusicApi2SDK:v2_lookup(data)
+  local EntityMod = require("entity.v2_lookup_entity")
+  if data == nil then
+    if self._v2_lookup == nil then
+      self._v2_lookup = EntityMod.new(self, nil)
+    end
+    return self._v2_lookup
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:v2_lookup() instead.
 function FreeMusicApi2SDK:V2Lookup(data)
   local EntityMod = require("entity.v2_lookup_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:v2_search():list() / client:v2_search():load({ id = ... })
+function FreeMusicApi2SDK:v2_search(data)
+  local EntityMod = require("entity.v2_search_entity")
+  if data == nil then
+    if self._v2_search == nil then
+      self._v2_search = EntityMod.new(self, nil)
+    end
+    return self._v2_search
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:v2_search() instead.
 function FreeMusicApi2SDK:V2Search(data)
   local EntityMod = require("entity.v2_search_entity")
   return EntityMod.new(self, data)

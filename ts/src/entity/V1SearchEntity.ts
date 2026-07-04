@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  V1Search,
+  V1SearchListMatch,
+} from '../FreeMusicApi2Types'
 
 // TODO: needs Entity superclass
-class V1SearchEntity extends FreeMusicApi2EntityBase {
+class V1SearchEntity extends FreeMusicApi2EntityBase<V1Search> {
 
   constructor(client: FreeMusicApi2SDK, entopts: any) {
     super(client, entopts)
@@ -33,7 +37,7 @@ class V1SearchEntity extends FreeMusicApi2EntityBase {
 
 
 
-  async list(this: any, reqmatch?: any, ctrl?: Control) {
+  async list(this: any, reqmatch?: V1SearchListMatch, ctrl?: Control): Promise<V1Search[]> {
 
     const utility = this._utility
 
@@ -133,7 +137,9 @@ class V1SearchEntity extends FreeMusicApi2EntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<V1Search[]> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

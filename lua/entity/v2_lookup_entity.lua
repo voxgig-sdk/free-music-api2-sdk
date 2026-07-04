@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch V2LookupLoadMatch
+---@param ctrl? table
+---@return V2Lookup
+---@return string? err
 function V2LookupEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

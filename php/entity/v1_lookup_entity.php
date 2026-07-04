@@ -55,6 +55,9 @@ class V1LookupEntity
         return new V1LookupEntity($this->_client, $opts);
     }
 
+    /**
+     * @param V1Lookup|array $args V1Lookup data (assoc-array) to store.
+     */
     public function data_set($args): void
     {
         if ($args) {
@@ -63,12 +66,18 @@ class V1LookupEntity
         }
     }
 
+    /**
+     * @return V1Lookup|array The current V1Lookup data as an assoc-array.
+     */
     public function data_get()
     {
         ($this->_utility->feature_hook)($this->_entctx, "GetData");
         return Struct::clone($this->_data);
     }
 
+    /**
+     * @param array $args Match filter (any subset of V1Lookup fields).
+     */
     public function match_set($args): void
     {
         if ($args) {
@@ -77,6 +86,9 @@ class V1LookupEntity
         }
     }
 
+    /**
+     * @return array The current match filter (any subset of V1Lookup fields).
+     */
     public function match_get()
     {
         ($this->_utility->feature_hook)($this->_entctx, "GetMatch");
@@ -86,7 +98,16 @@ class V1LookupEntity
     
 
     
-    public function list($reqmatch, $ctrl = null): array
+    /**
+     * List V1Lookup items matching the given filter.
+     *
+     * @param V1LookupListMatch|array|null $reqmatch Match filter (any subset
+     *   of V1Lookup fields) as an assoc-array; V1LookupListMatch names the shape.
+     * @param mixed $ctrl Optional per-call control overrides.
+     * @return V1Lookup[]|array A list of V1Lookup items as assoc-arrays at
+     *   the SDK boundary; throws FreeMusicApi2Error on failure (item-5 convention).
+     */
+    public function list(?array $reqmatch = null, $ctrl = null): mixed
     {
         $utility = $this->_utility;
         $ctx = ($utility->make_context)([
@@ -114,7 +135,7 @@ class V1LookupEntity
 
     
 
-    private function _run_op($ctx, callable $post_done): array
+    private function _run_op($ctx, callable $post_done): mixed
     {
         $utility = $this->_utility;
 

@@ -81,6 +81,10 @@ end
 
 
 
+---@param reqmatch V1SearchListMatch
+---@param ctrl? table
+---@return V1Search[]
+---@return string? err
 function V1SearchEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

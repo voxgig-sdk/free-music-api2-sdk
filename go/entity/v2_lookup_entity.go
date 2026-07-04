@@ -85,6 +85,27 @@ func (e *V2LookupEntity) Match(args ...any) any {
 	return out
 }
 
+// DataTyped is the statically-typed accessor for this entity's data. With no
+// argument it returns the current data as an V2Lookup; with an argument it
+// sets the data and returns the stored value. It delegates to the untyped Data
+// (identical runtime) and converts at the typed boundary.
+func (e *V2LookupEntity) DataTyped(data ...V2Lookup) V2Lookup {
+	if len(data) > 0 {
+		return typedFrom[V2Lookup](e.Data(asMap(data[0])))
+	}
+	return typedFrom[V2Lookup](e.Data())
+}
+
+// MatchTyped mirrors DataTyped for the entity's match filter. The match is a
+// partial of the entity, so it round-trips through V2Lookup (all fields
+// optional at the wire level).
+func (e *V2LookupEntity) MatchTyped(match ...V2Lookup) V2Lookup {
+	if len(match) > 0 {
+		return typedFrom[V2Lookup](e.Match(asMap(match[0])))
+	}
+	return typedFrom[V2Lookup](e.Match())
+}
+
 
 func (e *V2LookupEntity) Load(reqmatch map[string]any, ctrl map[string]any) (any, error) {
 	utility := e.utility
@@ -109,6 +130,17 @@ func (e *V2LookupEntity) Load(reqmatch map[string]any, ctrl map[string]any) (any
 			}
 		}
 	})
+}
+
+// LoadTyped is the statically-typed variant of Load: it takes an
+// V2LookupLoadMatch and returns an V2Lookup. It delegates to the untyped
+// Load (identical runtime) and converts at the typed boundary.
+func (e *V2LookupEntity) LoadTyped(reqmatch V2LookupLoadMatch, ctrl map[string]any) (V2Lookup, error) {
+	res, err := e.Load(asMap(reqmatch), ctrl)
+	if err != nil {
+		return V2Lookup{}, err
+	}
+	return typedFrom[V2Lookup](res), nil
 }
 
 

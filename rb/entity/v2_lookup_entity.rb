@@ -45,6 +45,7 @@ class V2LookupEntity
     end
   end
 
+  # @return [V2Lookup, Hash] the current V2Lookup data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,12 +58,18 @@ class V2LookupEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of V2Lookup fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
   end
 
   
+  # Load a single V2Lookup.
+  #
+  # @param reqmatch [V2LookupLoadMatch, Hash, nil] match criteria (id/query fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [V2Lookup, Hash] the loaded V2Lookup; raises FreeMusicApi2Error on failure
   def load(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

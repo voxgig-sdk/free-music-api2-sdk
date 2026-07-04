@@ -2586,7 +2586,8 @@ class Config {
                     "name": "artist_id",
                     "orig": "artist_id",
                     "reqd": true,
-                    "type": "`$INTEGER`"
+                    "type": "`$INTEGER`",
+                    "index$": 0
                   }
                 ]
               },
@@ -2666,7 +2667,8 @@ class Config {
                     "name": "album_id",
                     "orig": "album_id",
                     "reqd": true,
-                    "type": "`$INTEGER`"
+                    "type": "`$INTEGER`",
+                    "index$": 0
                   }
                 ]
               },
@@ -2704,7 +2706,8 @@ class Config {
                     "name": "artist_id",
                     "orig": "artist_id",
                     "reqd": true,
-                    "type": "`$INTEGER`"
+                    "type": "`$INTEGER`",
+                    "index$": 0
                   }
                 ]
               },
@@ -2742,7 +2745,8 @@ class Config {
                     "name": "music_brainz_id",
                     "orig": "music_brainz_id",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },
@@ -2780,7 +2784,8 @@ class Config {
                     "name": "music_brainz_id",
                     "orig": "music_brainz_id",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },
@@ -2818,7 +2823,8 @@ class Config {
                     "name": "music_brainz_id",
                     "orig": "music_brainz_id",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },
@@ -2856,7 +2862,8 @@ class Config {
                     "name": "track_id",
                     "orig": "track_id",
                     "reqd": true,
-                    "type": "`$INTEGER`"
+                    "type": "`$INTEGER`",
+                    "index$": 0
                   }
                 ]
               },
@@ -2951,7 +2958,8 @@ class Config {
                     "name": "album_name",
                     "orig": "album_name",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },
@@ -2989,7 +2997,8 @@ class Config {
                     "name": "artist_name",
                     "orig": "artist_name",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },
@@ -3027,7 +3036,8 @@ class Config {
                     "name": "track_name",
                     "orig": "track_name",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },

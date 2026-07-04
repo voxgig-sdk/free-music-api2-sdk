@@ -50,8 +50,7 @@ class V1LookupEntityTest extends TestCase
         $v1_lookup_ref01_ent = $client->V1Lookup(null);
         $v1_lookup_ref01_match = [];
 
-        [$v1_lookup_ref01_list_result, $err] = $v1_lookup_ref01_ent->list($v1_lookup_ref01_match, null);
-        $this->assertNull($err);
+        $v1_lookup_ref01_list_result = $v1_lookup_ref01_ent->list($v1_lookup_ref01_match, null);
         $this->assertIsArray($v1_lookup_ref01_list_result);
 
     }

@@ -45,6 +45,7 @@ class V1ListEntity
     end
   end
 
+  # @return [V1List, Hash] the current V1List data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,6 +58,7 @@ class V1ListEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of V1List fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
@@ -65,6 +67,11 @@ class V1ListEntity
   
 
   
+  # List V1List items matching the given filter.
+  #
+  # @param reqmatch [V1ListListMatch, Hash, nil] match filter (any subset of V1List fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Array<V1List>, Array] the matching V1List items; raises FreeMusicApi2Error on failure
   def list(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

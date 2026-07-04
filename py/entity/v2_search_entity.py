@@ -1,7 +1,13 @@
 # FreeMusicApi2 SDK V2Search entity
 
+from __future__ import annotations
+
 from utility.voxgig_struct import voxgig_struct as vs
 from core import helpers
+from freemusicapi2_types import (
+    V2Search,
+    V2SearchLoadMatch,
+)
 
 
 class V2SearchEntity:
@@ -44,7 +50,7 @@ class V2SearchEntity:
             self._data = helpers.to_map(vs.clone(args)) or {}
             self._utility.feature_hook(self._entctx, "SetData")
 
-    def data_get(self):
+    def data_get(self) -> V2Search:
         self._utility.feature_hook(self._entctx, "GetData")
         return vs.clone(self._data)
 
@@ -53,12 +59,12 @@ class V2SearchEntity:
             self._match = helpers.to_map(vs.clone(args)) or {}
             self._utility.feature_hook(self._entctx, "SetMatch")
 
-    def match_get(self):
+    def match_get(self) -> V2Search:
         self._utility.feature_hook(self._entctx, "GetMatch")
         return vs.clone(self._match)
 
     
-    def load(self, reqmatch, ctrl=None):
+    def load(self, reqmatch: V2SearchLoadMatch, ctrl=None) -> V2Search:
         utility = self._utility
         ctx = utility.make_context({
             "opname": "load",

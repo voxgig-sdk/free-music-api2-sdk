@@ -74,9 +74,9 @@ Return a deep copy of the current SDK options.
 
 Return a copy of the SDK utility object.
 
-#### `direct(fetchargs=None) -> tuple`
+#### `direct(fetchargs=None) -> dict`
 
-Make a direct HTTP request to any API endpoint. Returns `(result, err)`.
+Make a direct HTTP request to any API endpoint. Returns a result `dict` with `ok`, `status`, `headers`, and `data` (or `err` on failure). This escape hatch never raises — branch on `result["ok"]`.
 
 **Parameters:**
 
@@ -89,11 +89,11 @@ Make a direct HTTP request to any API endpoint. Returns `(result, err)`.
 | `fetchargs["headers"]` | `dict` | Request headers (merged with defaults). |
 | `fetchargs["body"]` | `any` | Request body (dicts are JSON-serialized). |
 
-**Returns:** `(result_dict, err)`
+**Returns:** `result_dict`
 
-#### `prepare(fetchargs=None) -> tuple`
+#### `prepare(fetchargs=None) -> dict`
 
-Prepare a fetch definition without sending. Returns `(fetchdef, err)`.
+Prepare a fetch definition without sending. Returns the `fetchdef` and raises on error.
 
 
 ---
@@ -101,7 +101,7 @@ Prepare a fetch definition without sending. Returns `(fetchdef, err)`.
 ## V1ListEntity
 
 ```python
-v1_list = client.V1List()
+v1_list = client.v1_list
 ```
 
 ### Fields
@@ -152,12 +152,12 @@ v1_list = client.V1List()
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> tuple`
+#### `list(reqmatch, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results, err = client.V1List().list({})
+results = client.v1_list.list({})
 ```
 
 ### Common Methods
@@ -192,7 +192,7 @@ Return the entity name.
 ## V1LookupEntity
 
 ```python
-v1_lookup = client.V1Lookup()
+v1_lookup = client.v1_lookup
 ```
 
 ### Fields
@@ -314,12 +314,12 @@ v1_lookup = client.V1Lookup()
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> tuple`
+#### `list(reqmatch, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results, err = client.V1Lookup().list({})
+results = client.v1_lookup.list({})
 ```
 
 ### Common Methods
@@ -354,7 +354,7 @@ Return the entity name.
 ## V1SearchEntity
 
 ```python
-v1_search = client.V1Search()
+v1_search = client.v1_search
 ```
 
 ### Fields
@@ -471,12 +471,12 @@ v1_search = client.V1Search()
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> tuple`
+#### `list(reqmatch, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results, err = client.V1Search().list({})
+results = client.v1_search.list({})
 ```
 
 ### Common Methods
@@ -511,7 +511,7 @@ Return the entity name.
 ## V2ListEntity
 
 ```python
-v2_list = client.V2List()
+v2_list = client.v2_list
 ```
 
 ### Fields
@@ -522,12 +522,12 @@ v2_list = client.V2List()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.V2List().load({"id": "v2_list_id"})
+result = client.v2_list.load({"id": "v2_list_id"})
 ```
 
 ### Common Methods
@@ -562,7 +562,7 @@ Return the entity name.
 ## V2LookupEntity
 
 ```python
-v2_lookup = client.V2Lookup()
+v2_lookup = client.v2_lookup
 ```
 
 ### Fields
@@ -575,12 +575,12 @@ v2_lookup = client.V2Lookup()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.V2Lookup().load({"id": "v2_lookup_id"})
+result = client.v2_lookup.load({"id": "v2_lookup_id"})
 ```
 
 ### Common Methods
@@ -615,7 +615,7 @@ Return the entity name.
 ## V2SearchEntity
 
 ```python
-v2_search = client.V2Search()
+v2_search = client.v2_search
 ```
 
 ### Fields
@@ -628,12 +628,12 @@ v2_search = client.V2Search()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.V2Search().load({"id": "v2_search_id"})
+result = client.v2_search.load({"id": "v2_search_id"})
 ```
 
 ### Common Methods

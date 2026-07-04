@@ -13,6 +13,9 @@ require_relative 'config'
 require_relative 'feature/base_feature'
 require_relative 'features'
 
+# Load typed models (Struct value objects).
+require_relative 'FreeMusicApi2_types'
+
 
 class FreeMusicApi2SDK
   attr_accessor :mode, :features, :options
@@ -131,7 +134,7 @@ class FreeMusicApi2SDK
     end
 
     _, err = utility.prepare_auth.call(ctx)
-    return nil, err if err
+    raise err if err
 
     utility.make_fetch_def.call(ctx)
   end
@@ -139,8 +142,14 @@ class FreeMusicApi2SDK
   def direct(fetchargs = {})
     utility = @_utility
 
-    fetchdef, err = prepare(fetchargs)
-    return { "ok" => false, "err" => err }, nil if err
+    # direct() is the raw-HTTP escape hatch: it always returns a result hash
+    # ({ "ok" => ..., ... }) and never raises. prepare() raises on error, so
+    # trap that and surface it in the hash.
+    begin
+      fetchdef = prepare(fetchargs)
+    rescue FreeMusicApi2Error => err
+      return { "ok" => false, "err" => err }
+    end
 
     fetchargs ||= {}
     ctrl = FreeMusicApi2Helpers.to_map(VoxgigStruct.getprop(fetchargs, "ctrl")) || {}
@@ -153,13 +162,13 @@ class FreeMusicApi2SDK
     url = fetchdef["url"] || ""
     fetched, fetch_err = utility.fetcher.call(ctx, url, fetchdef)
 
-    return { "ok" => false, "err" => fetch_err }, nil if fetch_err
+    return { "ok" => false, "err" => fetch_err } if fetch_err
 
     if fetched.nil?
       return {
         "ok" => false,
         "err" => ctx.make_error("direct_no_response", "response: undefined"),
-      }, nil
+      }
     end
 
     if fetched.is_a?(Hash)
@@ -189,46 +198,88 @@ class FreeMusicApi2SDK
         "status" => status,
         "headers" => headers,
         "data" => json_data,
-      }, nil
+      }
     end
 
     return {
       "ok" => false,
       "err" => ctx.make_error("direct_invalid", "invalid response type"),
-    }, nil
+    }
   end
 
 
+  # Idiomatic facade: client.v1_list.list / client.v1_list.load({ "id" => ... })
+  def v1_list
+    require_relative 'entity/v1_list_entity'
+    @v1_list ||= V1ListEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.v1_list instead.
   def V1List(data = nil)
     require_relative 'entity/v1_list_entity'
     V1ListEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.v1_lookup.list / client.v1_lookup.load({ "id" => ... })
+  def v1_lookup
+    require_relative 'entity/v1_lookup_entity'
+    @v1_lookup ||= V1LookupEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.v1_lookup instead.
   def V1Lookup(data = nil)
     require_relative 'entity/v1_lookup_entity'
     V1LookupEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.v1_search.list / client.v1_search.load({ "id" => ... })
+  def v1_search
+    require_relative 'entity/v1_search_entity'
+    @v1_search ||= V1SearchEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.v1_search instead.
   def V1Search(data = nil)
     require_relative 'entity/v1_search_entity'
     V1SearchEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.v2_list.list / client.v2_list.load({ "id" => ... })
+  def v2_list
+    require_relative 'entity/v2_list_entity'
+    @v2_list ||= V2ListEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.v2_list instead.
   def V2List(data = nil)
     require_relative 'entity/v2_list_entity'
     V2ListEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.v2_lookup.list / client.v2_lookup.load({ "id" => ... })
+  def v2_lookup
+    require_relative 'entity/v2_lookup_entity'
+    @v2_lookup ||= V2LookupEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.v2_lookup instead.
   def V2Lookup(data = nil)
     require_relative 'entity/v2_lookup_entity'
     V2LookupEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.v2_search.list / client.v2_search.load({ "id" => ... })
+  def v2_search
+    require_relative 'entity/v2_search_entity'
+    @v2_search ||= V2SearchEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.v2_search instead.
   def V2Search(data = nil)
     require_relative 'entity/v2_search_entity'
     V2SearchEntity.new(self, data)

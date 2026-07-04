@@ -45,6 +45,7 @@ class V2ListEntity
     end
   end
 
+  # @return [V2List, Hash] the current V2List data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,12 +58,18 @@ class V2ListEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of V2List fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
   end
 
   
+  # Load a single V2List.
+  #
+  # @param reqmatch [V2ListLoadMatch, Hash, nil] match criteria (id/query fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [V2List, Hash] the loaded V2List; raises FreeMusicApi2Error on failure
   def load(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

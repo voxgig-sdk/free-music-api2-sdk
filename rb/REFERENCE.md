@@ -74,9 +74,11 @@ Return a deep copy of the current SDK options.
 
 Return a copy of the SDK utility object.
 
-#### `direct(fetchargs = {}) -> Hash, err`
+#### `direct(fetchargs = {}) -> Hash`
 
-Make a direct HTTP request to any API endpoint.
+Make a direct HTTP request to any API endpoint. Returns a result hash
+(`{ "ok" => ..., "status" => ..., "data" => ..., "err" => ... }`); it
+does not raise — inspect `result["ok"]`.
 
 **Parameters:**
 
@@ -90,14 +92,14 @@ Make a direct HTTP request to any API endpoint.
 | `fetchargs["body"]` | `any` | Request body (hashes are JSON-serialized). |
 | `fetchargs["ctrl"]` | `Hash` | Control options (e.g. `{ "explain" => true }`). |
 
-**Returns:** `Hash, err`
+**Returns:** `Hash`
 
-#### `prepare(fetchargs = {}) -> Hash, err`
+#### `prepare(fetchargs = {}) -> Hash`
 
 Prepare a fetch definition without sending the request. Accepts the
-same parameters as `direct()`.
+same parameters as `direct()`. Raises on error.
 
-**Returns:** `Hash, err`
+**Returns:** `Hash` (the fetch definition; raises on error)
 
 
 ---
@@ -105,7 +107,7 @@ same parameters as `direct()`.
 ## V1ListEntity
 
 ```ruby
-v1_list = client.V1List
+v1_list = client.v1_list
 ```
 
 ### Fields
@@ -156,12 +158,12 @@ v1_list = client.V1List
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> result, err`
+#### `list(reqmatch, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results, err = client.V1List.list(nil)
+results = client.v1_list.list(nil)
 ```
 
 ### Common Methods
@@ -197,7 +199,7 @@ Return the entity name.
 ## V1LookupEntity
 
 ```ruby
-v1_lookup = client.V1Lookup
+v1_lookup = client.v1_lookup
 ```
 
 ### Fields
@@ -319,12 +321,12 @@ v1_lookup = client.V1Lookup
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> result, err`
+#### `list(reqmatch, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results, err = client.V1Lookup.list(nil)
+results = client.v1_lookup.list(nil)
 ```
 
 ### Common Methods
@@ -360,7 +362,7 @@ Return the entity name.
 ## V1SearchEntity
 
 ```ruby
-v1_search = client.V1Search
+v1_search = client.v1_search
 ```
 
 ### Fields
@@ -477,12 +479,12 @@ v1_search = client.V1Search
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> result, err`
+#### `list(reqmatch, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results, err = client.V1Search.list(nil)
+results = client.v1_search.list(nil)
 ```
 
 ### Common Methods
@@ -518,7 +520,7 @@ Return the entity name.
 ## V2ListEntity
 
 ```ruby
-v2_list = client.V2List
+v2_list = client.v2_list
 ```
 
 ### Fields
@@ -529,12 +531,12 @@ v2_list = client.V2List
 
 ### Operations
 
-#### `load(reqmatch, ctrl = nil) -> result, err`
+#### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result, err = client.V2List.load({ "id" => "v2_list_id" })
+result = client.v2_list.load({ "id" => "v2_list_id" })
 ```
 
 ### Common Methods
@@ -570,7 +572,7 @@ Return the entity name.
 ## V2LookupEntity
 
 ```ruby
-v2_lookup = client.V2Lookup
+v2_lookup = client.v2_lookup
 ```
 
 ### Fields
@@ -583,12 +585,12 @@ v2_lookup = client.V2Lookup
 
 ### Operations
 
-#### `load(reqmatch, ctrl = nil) -> result, err`
+#### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result, err = client.V2Lookup.load({ "id" => "v2_lookup_id" })
+result = client.v2_lookup.load({ "id" => "v2_lookup_id" })
 ```
 
 ### Common Methods
@@ -624,7 +626,7 @@ Return the entity name.
 ## V2SearchEntity
 
 ```ruby
-v2_search = client.V2Search
+v2_search = client.v2_search
 ```
 
 ### Fields
@@ -637,12 +639,12 @@ v2_search = client.V2Search
 
 ### Operations
 
-#### `load(reqmatch, ctrl = nil) -> result, err`
+#### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result, err = client.V2Search.load({ "id" => "v2_search_id" })
+result = client.v2_search.load({ "id" => "v2_search_id" })
 ```
 
 ### Common Methods

@@ -144,16 +144,23 @@ class FreeMusicApi2SDK:
 
         _, err = utility.prepare_auth(ctx)
         if err is not None:
-            return None, err
+            raise err
 
-        return utility.make_fetch_def(ctx)
+        fetchdef, err = utility.make_fetch_def(ctx)
+        if err is not None:
+            raise err
+
+        return fetchdef
 
     def direct(self, fetchargs=None):
         utility = self._utility
 
-        fetchdef, err = self.prepare(fetchargs)
-        if err is not None:
-            return {"ok": False, "err": err}, None
+        try:
+            fetchdef = self.prepare(fetchargs)
+        except Exception as err:
+            # direct() is the raw-HTTP escape hatch: it never raises, it
+            # returns a result object callers branch on via result["ok"].
+            return {"ok": False, "err": err}
 
         if fetchargs is None:
             fetchargs = {}
@@ -170,13 +177,13 @@ class FreeMusicApi2SDK:
         fetched, fetch_err = utility.fetcher(ctx, url, fetchdef)
 
         if fetch_err is not None:
-            return {"ok": False, "err": fetch_err}, None
+            return {"ok": False, "err": fetch_err}
 
         if fetched is None:
             return {
                 "ok": False,
                 "err": ctx.make_error("direct_no_response", "response: undefined"),
-            }, None
+            }
 
         if isinstance(fetched, dict):
             status = helpers.to_int(vs.getprop(fetched, "status"))
@@ -205,40 +212,106 @@ class FreeMusicApi2SDK:
                 "status": status,
                 "headers": headers,
                 "data": json_data,
-            }, None
+            }
 
         return {
             "ok": False,
             "err": ctx.make_error("direct_invalid", "invalid response type"),
-        }, None
+        }
 
+
+    @property
+    def v1_list(self):
+        """Idiomatic facade: client.v1_list.list() / client.v1_list.load({"id": ...})."""
+        from entity.v1_list_entity import V1ListEntity
+        cached = getattr(self, "_v1_list", None)
+        if cached is None:
+            cached = V1ListEntity(self, None)
+            self._v1_list = cached
+        return cached
 
     def V1List(self, data=None):
+        # Deprecated: use client.v1_list instead.
         from entity.v1_list_entity import V1ListEntity
         return V1ListEntity(self, data)
 
 
+    @property
+    def v1_lookup(self):
+        """Idiomatic facade: client.v1_lookup.list() / client.v1_lookup.load({"id": ...})."""
+        from entity.v1_lookup_entity import V1LookupEntity
+        cached = getattr(self, "_v1_lookup", None)
+        if cached is None:
+            cached = V1LookupEntity(self, None)
+            self._v1_lookup = cached
+        return cached
+
     def V1Lookup(self, data=None):
+        # Deprecated: use client.v1_lookup instead.
         from entity.v1_lookup_entity import V1LookupEntity
         return V1LookupEntity(self, data)
 
 
+    @property
+    def v1_search(self):
+        """Idiomatic facade: client.v1_search.list() / client.v1_search.load({"id": ...})."""
+        from entity.v1_search_entity import V1SearchEntity
+        cached = getattr(self, "_v1_search", None)
+        if cached is None:
+            cached = V1SearchEntity(self, None)
+            self._v1_search = cached
+        return cached
+
     def V1Search(self, data=None):
+        # Deprecated: use client.v1_search instead.
         from entity.v1_search_entity import V1SearchEntity
         return V1SearchEntity(self, data)
 
 
+    @property
+    def v2_list(self):
+        """Idiomatic facade: client.v2_list.list() / client.v2_list.load({"id": ...})."""
+        from entity.v2_list_entity import V2ListEntity
+        cached = getattr(self, "_v2_list", None)
+        if cached is None:
+            cached = V2ListEntity(self, None)
+            self._v2_list = cached
+        return cached
+
     def V2List(self, data=None):
+        # Deprecated: use client.v2_list instead.
         from entity.v2_list_entity import V2ListEntity
         return V2ListEntity(self, data)
 
 
+    @property
+    def v2_lookup(self):
+        """Idiomatic facade: client.v2_lookup.list() / client.v2_lookup.load({"id": ...})."""
+        from entity.v2_lookup_entity import V2LookupEntity
+        cached = getattr(self, "_v2_lookup", None)
+        if cached is None:
+            cached = V2LookupEntity(self, None)
+            self._v2_lookup = cached
+        return cached
+
     def V2Lookup(self, data=None):
+        # Deprecated: use client.v2_lookup instead.
         from entity.v2_lookup_entity import V2LookupEntity
         return V2LookupEntity(self, data)
 
 
+    @property
+    def v2_search(self):
+        """Idiomatic facade: client.v2_search.list() / client.v2_search.load({"id": ...})."""
+        from entity.v2_search_entity import V2SearchEntity
+        cached = getattr(self, "_v2_search", None)
+        if cached is None:
+            cached = V2SearchEntity(self, None)
+            self._v2_search = cached
+        return cached
+
     def V2Search(self, data=None):
+        # Deprecated: use client.v2_search instead.
         from entity.v2_search_entity import V2SearchEntity
         return V2SearchEntity(self, data)
 

@@ -49,8 +49,7 @@ class V2SearchEntityTest extends TestCase
         // LOAD
         $v2_search_ref01_ent = $client->V2Search(null);
         $v2_search_ref01_match_dt0 = [];
-        [$v2_search_ref01_data_dt0_loaded, $err] = $v2_search_ref01_ent->load($v2_search_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $v2_search_ref01_data_dt0_loaded = $v2_search_ref01_ent->load($v2_search_ref01_match_dt0, null);
         $this->assertNotNull($v2_search_ref01_data_dt0_loaded);
 
     }
