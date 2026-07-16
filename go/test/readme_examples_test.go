@@ -1,6 +1,7 @@
 package sdktest
 
 import (
+	"fmt"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -10,42 +11,46 @@ import (
 	"testing"
 )
 
-// TestReadmeGoSnippets extracts every ```go fenced block from the module
-// README (../README.md) and compiles them with `go build`. This is a
-// static, offline check: it does not run any snippet, only proves the
-// example code type-checks against the real generated SDK.
-//
-//   - Complete programs (a block containing `func main`) are built as-is.
-//   - Statement fragments are wrapped in a function with a test-mode
-//     `client` in scope, then built.
-//
-// A snippet that calls a method that does not exist, passes the wrong
-// argument types, or accesses a field the value does not have — e.g.
-// `.data` / `.ok` on an entity-op result, which is the bare data value,
-// NOT a `{ok,data,...}` envelope (only Direct returns that) — fails to
-// compile, and so fails this test.
-//
-// Illustrative blocks are skipped: bare signatures (a `func` line with no
-// body) and blocks that contain a `/* ... */` placeholder value.
+// testSeed is a test-mode fixture seeded for every entity. It is spliced as
+// literal Go source into fragment wrappers and into the test-mode variant of
+// complete programs, so the offline mock transport has data to return.
+const testSeed = `map[string]any{"entity": map[string]any{"v1_list": map[string]any{"example_id": map[string]any{"id": "example_id"}}, "v1_lookup": map[string]any{"example_id": map[string]any{"id": "example_id"}}, "v1_search": map[string]any{"example_id": map[string]any{"id": "example_id"}}, "v2_list": map[string]any{"example_id": map[string]any{"id": "example_id"}}, "v2_lookup": map[string]any{"example_id": map[string]any{"id": "example_id"}}, "v2_search": map[string]any{"example_id": map[string]any{"id": "example_id"}}}}`
+
+// doc names one of the three docs that carry go examples, with its path
+// relative to this test file's directory (which is <repo>/go/test): the root
+// README is two levels up, the go docs are one.
+type doc struct {
+	label   string
+	relpath string
+}
+
+// docStat accumulates the completeness bookkeeping for one doc.
+type docStat struct {
+	total        int
+	compiled     int
+	illustration int
+	leaked       []int
+}
+
+// TestReadmeGoSnippets is a completeness gate over every ```go fenced block
+// in the root README.md, go/README.md, and go/REFERENCE.md. Fragments are
+// `go build`-checked with a seeded test client injected; complete programs
+// are built as-is and their test-mode variant is run with `go run`; and per
+// doc, total == compiled + illustration is asserted.
 func TestReadmeGoSnippets(t *testing.T) {
 	_, thisFile, _, _ := runtime.Caller(0)
 	testDir := filepath.Dir(thisFile)
 	moduleRoot := filepath.Dir(testDir)
-	readmePath := filepath.Join(testDir, "..", "README.md")
-
-	src, err := os.ReadFile(readmePath)
-	if err != nil {
-		t.Skipf("README not found at %s: %v", readmePath, err)
-	}
 
 	modulePath := readModulePath(moduleRoot)
 	if modulePath == "" {
-		t.Skip("could not read module path from go.mod")
+		t.Fatal("could not read module path from go.mod")
 	}
 
-	blocks := extractFencedBlocks(string(src), "go")
-	if len(blocks) == 0 {
-		t.Skip("no go code blocks in README")
+	docs := []doc{
+		{"root README", filepath.Join(testDir, "..", "..", "README.md")},
+		{"go/README", filepath.Join(testDir, "..", "README.md")},
+		{"go/REFERENCE", filepath.Join(testDir, "..", "REFERENCE.md")},
 	}
 
 	work, err := os.MkdirTemp(moduleRoot, "readmecheck-")
@@ -63,26 +68,72 @@ func TestReadmeGoSnippets(t *testing.T) {
 	fragDir := filepath.Join(work, "frag")
 	fragFiles := map[string]string{}
 	var progDirs []string
+	var runDirs []string
 	progCount := 0
 
-	for _, block := range blocks {
-		if skipBlock(block) {
-			continue
+	stats := make([]*docStat, len(docs))
+
+	for di, d := range docs {
+		src, err := os.ReadFile(d.relpath)
+		if err != nil {
+			t.Fatalf("%s not found at %s: %v", d.label, d.relpath, err)
 		}
-		if strings.Contains(block, "func main") {
-			dir := filepath.Join(work, "prog"+strconv.Itoa(progCount))
-			if err := os.MkdirAll(dir, 0o755); err != nil {
-				t.Fatal(err)
-			}
-			if err := os.WriteFile(filepath.Join(dir, "main.go"), []byte(block), 0o644); err != nil {
-				t.Fatal(err)
-			}
-			progDirs = append(progDirs, "./"+rel+"/prog"+strconv.Itoa(progCount))
-			progCount++
-			continue
+		blocks := extractFencedBlocks(string(src), "go")
+		if len(blocks) == 0 {
+			t.Fatalf("no go code blocks in %s", d.label)
 		}
-		name := "snip" + strconv.Itoa(len(fragFiles))
-		fragFiles[name] = wrapFragment(name, block, modulePath)
+		st := &docStat{total: len(blocks)}
+		stats[di] = st
+
+		for bi, block := range blocks {
+			if isIllustration(block) {
+				st.illustration++
+				continue
+			}
+			if strings.Contains(block, "/*") {
+				// Real code hidden behind a block comment: neither a
+				// recognized illustration nor safely compilable as-is. Flag
+				// it so the completeness assertion catches a would-be
+				// silently-skipped example rather than dropping it.
+				st.leaked = append(st.leaked, bi+1)
+				continue
+			}
+			if strings.Contains(block, "func main") {
+				// The documented program (possibly using the live sdk.New)
+				// must compile as-is.
+				dir := filepath.Join(work, "prog"+strconv.Itoa(progCount))
+				if err := os.MkdirAll(dir, 0o755); err != nil {
+					t.Fatal(err)
+				}
+				if err := os.WriteFile(filepath.Join(dir, "main.go"), []byte(block), 0o644); err != nil {
+					t.Fatal(err)
+				}
+				progDirs = append(progDirs, "./"+rel+"/prog"+strconv.Itoa(progCount))
+
+				// A test-mode variant — constructor rewritten to a seeded
+				// sdk.TestSDK(...) — is run offline to prove the program runs.
+				if variant, ok := rewriteCtorsToTest(block); ok {
+					if !strings.Contains(variant, "os.") {
+						variant = removeImportLine(variant, "os")
+					}
+					runDir := filepath.Join(work, "run"+strconv.Itoa(progCount))
+					if err := os.MkdirAll(runDir, 0o755); err != nil {
+						t.Fatal(err)
+					}
+					if err := os.WriteFile(filepath.Join(runDir, "main.go"), []byte(variant), 0o644); err != nil {
+						t.Fatal(err)
+					}
+					runDirs = append(runDirs, "./"+rel+"/run"+strconv.Itoa(progCount))
+				}
+
+				progCount++
+				st.compiled++
+				continue
+			}
+			name := "snip" + strconv.Itoa(len(fragFiles))
+			fragFiles[name] = wrapFragment(name, block, modulePath)
+			st.compiled++
+		}
 	}
 
 	fragPkg := ""
@@ -94,14 +145,19 @@ func TestReadmeGoSnippets(t *testing.T) {
 	}
 
 	if len(progDirs) == 0 && fragPkg == "" {
-		t.Skip("no buildable go snippets in README")
+		t.Fatal("no buildable go snippets across docs")
 	}
 
 	// Build. The Go compiler is the oracle for unused imports/vars in the
 	// wrapped fragments: blank them out and rebuild. Any OTHER error is a
-	// genuine snippet bug and fails the test.
+	// genuine snippet bug and fails the test. The loop is progress-based,
+	// not attempt-capped: `-gcflags=-e` lifts the compiler's 10-error cap so
+	// every error surfaces in one round, applyFixes repairs them all, and
+	// the loop continues while a round makes progress. It fails hard when no
+	// fix applies, and fails as non-converged when a round changes nothing
+	// in the build output (the fixes stopped helping).
 	var lastOut string
-	for attempt := 0; attempt < 15; attempt++ {
+	for {
 		for name, content := range fragFiles {
 			if err := os.WriteFile(filepath.Join(fragDir, name+".go"), []byte(content), 0o644); err != nil {
 				t.Fatal(err)
@@ -109,25 +165,155 @@ func TestReadmeGoSnippets(t *testing.T) {
 		}
 		out, buildErr := runGoBuild(moduleRoot, binDir, progDirs, fragPkg)
 		if buildErr == nil {
-			return
+			break
+		}
+		if out == lastOut {
+			t.Fatalf("README go snippets did not converge to a clean build:\n%s", out)
 		}
 		lastOut = out
 		if !applyFixes(out, fragFiles) {
 			t.Fatalf("README go snippet failed to compile:\n%s", out)
 		}
 	}
-	t.Fatalf("README go snippets did not converge to a clean build:\n%s", lastOut)
+
+	// Everything compiled. Now RUN the test-mode variants of the complete
+	// programs and fail on a genuine runtime panic.
+	if fail := runProgs(moduleRoot, runDirs); fail != "" {
+		t.Fatal(fail)
+	}
+
+	// Completeness: every block in every doc is either compiled/run or a
+	// recognized (narrow) illustration. A leaked block or a count mismatch is
+	// a silently-untested example and fails the gate.
+	for di, d := range docs {
+		st := stats[di]
+		if len(st.leaked) > 0 {
+			t.Errorf("%s: go block(s) %v are neither compiled nor a "+
+				"recognized illustration (silently untested) — use // "+
+				"comments with real code, or a bare signature / /* ... */ "+
+				"placeholder", d.label, st.leaked)
+		}
+		if st.total != st.compiled+st.illustration {
+			t.Errorf("%s completeness: total %d != compiled %d + "+
+				"illustration %d", d.label, st.total, st.compiled,
+				st.illustration)
+		}
+		fmt.Printf("[readme-go] %s: total=%d compiled=%d illustration=%d\n",
+			d.label, st.total, st.compiled, st.illustration)
+	}
 }
 
-// runGoBuild type-checks the fragment package with a plain `go build`
-// (a non-main package produces no output but is still fully type-checked
-// — unlike `go build -o dir/`, which skips non-main packages), and builds
-// each complete program with `-o binDir/`. Any compile error from either
-// is returned.
+// runProgs executes each test-mode program variant with `go run` and reports
+// a genuine runtime panic (nil pointer / nil map / index / interface
+// conversion). A tolerated not-found domain error (panic(err) on an offline
+// fixture miss) is not a failure. A run-variant that fails to even compile is
+// skipped — the documented program already passed the strict build check, so
+// a rewrite artefact must not manufacture a false failure.
+func runProgs(moduleRoot string, dirs []string) string {
+	runtimeSigs := []string{
+		"runtime error",
+		"invalid memory address",
+		"nil pointer dereference",
+		"index out of range",
+		"slice bounds out of range",
+		"interface conversion",
+		"assignment to entry in nil map",
+	}
+	for _, d := range dirs {
+		cmd := exec.Command("go", "run", d)
+		cmd.Dir = moduleRoot
+		out, err := cmd.CombinedOutput()
+		if err == nil {
+			continue
+		}
+		s := string(out)
+		if !strings.Contains(s, "panic:") {
+			// Did not run (compile artefact of the rewrite) — tolerate.
+			continue
+		}
+		for _, sig := range runtimeSigs {
+			if strings.Contains(s, sig) {
+				return "README go complete program panicked at runtime " +
+					"(nil / type bug in a documented call):\n" + s
+			}
+		}
+		// Domain-error panic (e.g. offline fixture miss) — tolerated.
+	}
+	return ""
+}
+
+// rewriteCtorsToTest replaces every sdk.New.../sdk.Test... constructor call
+// in src with a seeded test-mode client, so a documented (possibly live)
+// program runs offline against the mock, and a fragment whose constructor
+// takes undefined placeholder variables still type-checks. Single
+// left-to-right pass with balanced-paren matching; returns the rewritten
+// source and whether any replacement was made.
+func rewriteCtorsToTest(src string) (string, bool) {
+	repl := "sdk.TestSDK(" + testSeed + ", nil)"
+	var b strings.Builder
+	changed := false
+	i := 0
+	for i < len(src) {
+		matched := ""
+		if strings.HasPrefix(src[i:], "sdk.New") {
+			matched = "sdk.New"
+		} else if strings.HasPrefix(src[i:], "sdk.Test") {
+			matched = "sdk.Test"
+		}
+		if matched == "" {
+			b.WriteByte(src[i])
+			i++
+			continue
+		}
+		// Consume the rest of the identifier (e.g. NewAdviceSlipSDK, TestSDK).
+		j := i + len(matched)
+		for j < len(src) && isIdentByte(src[j]) {
+			j++
+		}
+		if j >= len(src) || src[j] != '(' {
+			b.WriteString(src[i:j])
+			i = j
+			continue
+		}
+		// Scan the balanced ( ... ) argument list.
+		depth := 0
+		k := j
+		for k < len(src) {
+			switch src[k] {
+			case '(':
+				depth++
+			case ')':
+				depth--
+			}
+			k++
+			if depth == 0 {
+				break
+			}
+		}
+		b.WriteString(repl)
+		changed = true
+		i = k
+	}
+	return b.String(), changed
+}
+
+func isIdentByte(c byte) bool {
+	return c == '_' ||
+		(c >= 'a' && c <= 'z') ||
+		(c >= 'A' && c <= 'Z') ||
+		(c >= '0' && c <= '9')
+}
+
+// runGoBuild type-checks the fragment package with `go build -gcflags=-e`
+// (a non-main package produces no output but is still fully type-checked —
+// unlike `go build -o dir/`, which skips non-main packages — and `-e` lifts
+// the compiler's 10-errors-per-package cap so EVERY unused-var/import error
+// surfaces in a single round), and builds each complete program with
+// `-o binDir/`. Any compile error from either is returned.
 func runGoBuild(dir, binDir string, progDirs []string, fragPkg string) (string, error) {
 	var out strings.Builder
 	if fragPkg != "" {
-		cmd := exec.Command("go", "build", fragPkg)
+		cmd := exec.Command("go", "build", "-gcflags=-e", fragPkg)
 		cmd.Dir = dir
 		o, err := cmd.CombinedOutput()
 		out.Write(o)
@@ -136,7 +322,7 @@ func runGoBuild(dir, binDir string, progDirs []string, fragPkg string) (string, 
 		}
 	}
 	if len(progDirs) > 0 {
-		args := append([]string{"build", "-o", binDir + string(os.PathSeparator)}, progDirs...)
+		args := append([]string{"build", "-gcflags=-e", "-o", binDir + string(os.PathSeparator)}, progDirs...)
 		cmd := exec.Command("go", args...)
 		cmd.Dir = dir
 		o, err := cmd.CombinedOutput()
@@ -173,19 +359,110 @@ func extractFencedBlocks(md, lang string) []string {
 	return blocks
 }
 
-func skipBlock(block string) bool {
-	if strings.Contains(block, "/*") {
-		return true
-	}
-	// Bare signature: a top-level func line with no body.
+// isIllustration is the NARROW class of blocks that are intentionally not
+// compiled:
+//   - a bare signature: a top-level func line with no body;
+//   - a comment-only block: nothing remains after stripping // and /* */;
+//   - a /* ... */ value-slot placeholder: a fill-in-the-blank template such as
+//     "field": /* type */, that is deliberately not compilable.
+// Every other block is compiled or run.
+func isIllustration(block string) bool {
 	trimmed := strings.TrimSpace(block)
 	if strings.HasPrefix(trimmed, "func ") && !strings.Contains(block, "{") {
+		return true
+	}
+	if strings.TrimSpace(stripGoComments(block)) == "" {
+		return true
+	}
+	if hasPlaceholderComment(block) {
 		return true
 	}
 	return false
 }
 
+// hasPlaceholderComment reports whether the block uses a /* ... */ comment in a
+// value slot — immediately after ':', '=', '(', '{' or ',' (ignoring spaces) —
+// i.e. the comment stands in for a value (`"field": /* type */,`), making the
+// block a non-compilable illustration. A /* ... */ elsewhere (an incidental
+// block comment) is NOT a placeholder, so a block that merely contains one is
+// left for the completeness gate to flag rather than silently skip.
+func hasPlaceholderComment(block string) bool {
+	i := 0
+	for {
+		j := strings.Index(block[i:], "/*")
+		if j < 0 {
+			return false
+		}
+		start := i + j
+		p := start - 1
+		for p >= 0 && (block[p] == ' ' || block[p] == '\t') {
+			p--
+		}
+		if p >= 0 {
+			switch block[p] {
+			case ':', '=', '(', '{', ',':
+				return true
+			}
+		}
+		end := strings.Index(block[start+2:], "*/")
+		if end < 0 {
+			return false
+		}
+		i = start + 2 + end + 2
+	}
+}
+
+// stripGoComments removes /* ... */ block comments and // line comments so a
+// placeholder-only block can be recognized.
+func stripGoComments(s string) string {
+	var b strings.Builder
+	i := 0
+	for i < len(s) {
+		if i+1 < len(s) && s[i] == '/' && s[i+1] == '*' {
+			j := strings.Index(s[i+2:], "*/")
+			if j < 0 {
+				break
+			}
+			i = i + 2 + j + 2
+			continue
+		}
+		if i+1 < len(s) && s[i] == '/' && s[i+1] == '/' {
+			k := strings.IndexByte(s[i:], '\n')
+			if k < 0 {
+				break
+			}
+			i += k
+			continue
+		}
+		b.WriteByte(s[i])
+		i++
+	}
+	return b.String()
+}
+
+// stripImportLines drops any single-line `import ...` statement from a
+// fragment. Quick-start fragments carry their own import line (e.g.
+// `import sdk "..."`), which is illegal inside the function wrapper; the
+// wrapper re-adds the correct imports itself.
+func stripImportLines(block string) string {
+	var kept []string
+	for _, line := range strings.Split(block, "\n") {
+		if strings.HasPrefix(strings.TrimSpace(line), "import ") {
+			continue
+		}
+		kept = append(kept, line)
+	}
+	return strings.Join(kept, "\n")
+}
+
 func wrapFragment(name, block, modulePath string) string {
+	// Drop stray import lines and rewrite constructors to the seeded test
+	// client so placeholder args (options, testopts, ...) type-check.
+	block = stripImportLines(block)
+	if rewritten, ok := rewriteCtorsToTest(block); ok {
+		block = rewritten
+	}
+
 	declaresClient := strings.Contains(block, "client :=")
 	injectClient := !declaresClient && strings.Contains(block, "client")
 
@@ -221,7 +498,8 @@ func wrapFragment(name, block, modulePath string) string {
 	}
 	b.WriteString("func " + name + "() {\n")
 	if injectClient {
-		b.WriteString("\tclient := sdk.Test()\n")
+		// Seeded test client so the fragment's documented calls have data.
+		b.WriteString("\tclient := sdk.TestSDK(" + testSeed + ", nil)\n")
 	}
 	b.WriteString(block)
 	b.WriteString("\n}\n")

@@ -58,7 +58,7 @@ class V1List
     public ?array $trending = null;
 }
 
-/** Match filter for V1List#list (any subset of V1List fields). */
+/** Request payload for V1List#list. */
 class V1ListListMatch
 {
     public ?int $id_album = null;
@@ -221,7 +221,7 @@ class V1Lookup
     public ?string $str_youtube = null;
 }
 
-/** Match filter for V1Lookup#list (any subset of V1Lookup fields). */
+/** Request payload for V1Lookup#list. */
 class V1LookupListMatch
 {
     public ?int $id_album = null;
@@ -450,7 +450,7 @@ class V1Search
     public ?string $str_wikipedia_id = null;
 }
 
-/** Match filter for V1Search#list (any subset of V1Search fields). */
+/** Request payload for V1Search#list. */
 class V1SearchListMatch
 {
     public ?int $id_album = null;
@@ -585,10 +585,10 @@ class V2Lookup
 /** Request payload for V2Lookup#load. */
 class V2LookupLoadMatch
 {
-    public int $album_id;
-    public int $artist_id;
-    public string $music_brainz_id;
-    public int $track_id;
+    public ?int $album_id = null;
+    public ?int $artist_id = null;
+    public ?string $music_brainz_id = null;
+    public ?int $track_id = null;
 }
 
 /** V2Search entity data model. */
@@ -602,8 +602,8 @@ class V2Search
 /** Request payload for V2Search#load. */
 class V2SearchLoadMatch
 {
-    public string $album_name;
-    public string $artist_name;
-    public string $track_name;
+    public ?string $album_name = null;
+    public ?string $artist_name = null;
+    public ?string $track_name = null;
 }
 

@@ -6,9 +6,6 @@
     },
     "kit": {
       "config": {
-        "auth": {
-          "prefix": "Bearer"
-        },
         "docs_order": [
           "ts",
           "py",
@@ -3021,6 +3018,14 @@
           "url": "https://www.theaudiodb.com"
         },
         "description": "The Free Music API by TheAudioDB provides access to various music-related data, including artist details, album information, track listings, and music charts. It supports multiple query types, allowing users to search by artist or album name, retrieve top tracks, and manage user ratings.",
+        "meta_source": "https://www.freepublicapis.com",
+        "security": {
+          "in": "header",
+          "name": "X-API-KEY",
+          "prefix": "",
+          "scheme": "ApiKeyAuth",
+          "type": "apiKey"
+        },
         "servers": [
           {
             "description": "v1 API Server (Free Tier)",
@@ -3041,9 +3046,11 @@
             "url": "https://www.theaudiodb.com/api/v2/json"
           }
         ],
+        "summary": "The Free Music API by TheAudioDB provides access to various music-related data, including artist details, album information, track listings, and music charts.",
         "termsOfService": "https://www.theaudiodb.com",
         "title": "Free Music API",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "website": "https://www.theaudiodb.com/free_music_api"
       },
       "option": {},
       "target": {
@@ -3096,6 +3103,9 @@
           },
           "name": "go-cli",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },
@@ -3146,6 +3156,9 @@
           },
           "name": "go-mcp",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },

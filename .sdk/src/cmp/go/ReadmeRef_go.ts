@@ -1,10 +1,12 @@
 
-import { cmp, each, Content, File, isAuthActive } from '@voxgig/sdkgen'
+import { cmp, each, Content, canonToType, File, isAuthActive, entityIdField, entityOps, opRequestShape } from '@voxgig/sdkgen'
 
 import {
   KIT,
   getModelPath,
 } from '@voxgig/apidef'
+
+import { exampleValue, goVarName } from './utility_go'
 
 
 const OP_SIGNATURES: Record<string, { sig: string, returns: string, desc: string }> = {
@@ -158,8 +160,16 @@ same parameters as \`Direct()\`.
 
     // Entity reference sections
     publishedEntities.map((ent: any) => {
-      const opnames = Object.keys(ent.op || {})
+      // ACTIVE ops only — an inactive op generates no method, so an example
+      // calling it would not compile.
+      const opnames = entityOps(ent)
       const fields = ent.fields || []
+      // Model-driven id key: null when this entity has no id-like field, in
+      // which case load/remove pass a nil match and update omits the id.
+      const idF = entityIdField(ent)
+      // camelCase Go identifier (a `status_embed_config` entity must not bind
+      // a snake_case Go variable).
+      const eVar = goVarName(ent.name)
 
       Content(`
 ---
@@ -175,7 +185,8 @@ same parameters as \`Direct()\`.
       }
 
       Content(`\`\`\`go
-${ent.name} := client.${ent.Name}(nil)
+${eVar} := client.${ent.Name}(nil)
+fmt.Println(${eVar}.GetName()) // "${ent.name}"
 \`\`\`
 
 `)
@@ -191,7 +202,7 @@ ${ent.name} := client.${ent.Name}(nil)
         each(fields, (field: any) => {
           const req = field.req ? 'Yes' : 'No'
           const desc = field.short || ''
-          Content(`| \`${field.name}\` | \`${field.type || 'any'}\` | ${req} | ${desc} |
+          Content(`| \`${field.name}\` | \`${canonToType(field.type, target.name)}\` | ${req} | ${desc} |
 `)
         })
 
@@ -201,15 +212,19 @@ ${ent.name} := client.${ent.Name}(nil)
         // Field operations breakdown
         const hasFieldOps = fields.some((f: any) => f.op && Object.keys(f.op).length > 0)
         if (hasFieldOps) {
+          // Only emit columns for operations this entity actually exposes —
+          // never advertise a create/update/remove column the entity lacks
+          // (opnames already carries active ops only).
+          const opcols = ['load', 'list', 'create', 'update', 'remove']
+            .filter((op: string) => opnames.includes(op))
           Content(`### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
+| Field | ${opcols.join(' | ')} |
+| --- | ${opcols.map(() => '---').join(' | ')} |
 `)
           each(fields, (field: any) => {
             const fops = field.op || {}
-            const cols = ['load', 'list', 'create', 'update', 'remove'].map((op: string) => {
-              if (!opnames.includes(op)) return '-'
+            const cols = opcols.map((op: string) => {
               const fop = fops[op]
               if (null == fop) return '-'
               if (fop.active === false) return '-'
@@ -241,11 +256,29 @@ ${info.desc}
 
 `)
 
-          // Show example
+          // Show example. Every compiled example is self-consuming — check
+          // `err` and print the result — so the doc gate builds it without
+          // unused-variable repairs, and readers see the idiomatic pattern.
           if ('load' === opname || 'remove' === opname) {
             const goOpName = opname.charAt(0).toUpperCase() + opname.slice(1)
+            // The id key plus every REQUIRED match key (parent path params
+            // like page_id) — the same shape that generates the op's request
+            // match, so the example always carries the keys the route needs.
+            const matchItems = opRequestShape(ent, opname).items
+              .filter((it: any) => !it.optional || it.name === idF)
+              .sort((a: any, b: any) =>
+                (a.name === idF ? 0 : 1) - (b.name === idF ? 0 : 1))
+            const arg = 0 < matchItems.length
+              ? `map[string]any{${matchItems.map((it: any) =>
+                `"${it.name}": ${exampleValue(ent, ent.op && ent.op[opname], it.name,
+                  it.name === idF ? ent.name + '_id' : it.name)}`).join(', ')}}`
+              : 'nil'
             Content(`\`\`\`go
-result, err := client.${ent.Name}(nil).${goOpName}(map[string]any{"id": "${ent.name}_id"}, nil)
+result, err := client.${ent.Name}(nil).${goOpName}(${arg}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 \`\`\`
 
 `)
@@ -253,31 +286,57 @@ result, err := client.${ent.Name}(nil).${goOpName}(map[string]any{"id": "${ent.n
           else if ('list' === opname) {
             Content(`\`\`\`go
 results, err := client.${ent.Name}(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 \`\`\`
 
 `)
           }
           else if ('create' === opname) {
+            // Members come from the SAME shape that generates the op's
+            // request data (every required member appears, including a
+            // required id), each with a type-correct example VALUE via
+            // exampleValue — a `"name": /* type */` comment is not a value
+            // and yields uncompilable Go.
+            const createItems = opRequestShape(ent, 'create').items
+              .filter((it: any) => !it.optional)
             Content(`\`\`\`go
 result, err := client.${ent.Name}(nil).Create(map[string]any{
 `)
-            each(fields, (field: any) => {
-              if ('id' !== field.name && field.req) {
-                Content(`    "${field.name}": /* ${field.type || 'value'} */,
+            createItems.map((it: any) => {
+              Content(`    "${it.name}": ${exampleValue(ent, ent.op && ent.op.create, it.name, 'example_' + it.name)},
 `)
-              }
             })
             Content(`}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 \`\`\`
 
 `)
           }
           else if ('update' === opname) {
+            // The id key plus every REQUIRED data member — the same shape
+            // that generates the op's request data — then the patch-fields
+            // note.
+            const updateItems = opRequestShape(ent, 'update').items
+              .filter((it: any) => !it.optional || it.name === idF)
+              .sort((a: any, b: any) =>
+                (a.name === idF ? 0 : 1) - (b.name === idF ? 0 : 1))
+            const updateLines = updateItems.map((it: any) =>
+              `    "${it.name}": ${exampleValue(ent, ent.op && ent.op.update, it.name,
+                it.name === idF ? ent.name + '_id' : it.name)},\n`).join('')
             Content(`\`\`\`go
 result, err := client.${ent.Name}(nil).Update(map[string]any{
-    "id": "${ent.name}_id",
-    // Fields to update
+${updateLines}    // Fields to update
 }, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 \`\`\`
 
 `)

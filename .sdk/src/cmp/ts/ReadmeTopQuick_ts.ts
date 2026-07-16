@@ -1,5 +1,5 @@
 
-import { cmp, Content, canonKey, isAuthActive, packageName, envName } from '@voxgig/sdkgen'
+import { cmp, Content, isAuthActive, packageName, envName, entityIdField, entityOps, opRequestShape, safeVarName } from '@voxgig/sdkgen'
 
 import {
   KIT,
@@ -7,18 +7,7 @@ import {
   nom,
 } from '@voxgig/apidef'
 
-
-// A type-correct example literal for a named field: numeric canon types
-// must render as a bare number (the generated match/field types are
-// `number`, so a quoted string would be a compile error in the snippet
-// test), booleans as `true`, everything else as a quoted placeholder.
-function litForField(entity: any, fieldName: string, placeholder: string): string {
-  const f = (entity.fields || []).find((x: any) => x.name === fieldName)
-  const key = canonKey(f && f.type)
-  if ('INTEGER' === key || 'NUMBER' === key) return '1'
-  if ('BOOLEAN' === key) return 'true'
-  return `'${placeholder}'`
-}
+import { exampleValue } from './utility_ts'
 
 
 const ReadmeTopQuick = cmp(function ReadmeTopQuick(props: any) {
@@ -41,38 +30,55 @@ const client = ${ctor}
 
   if (exampleEntity) {
     const eName = nom(exampleEntity, 'Name')
-    const opnames = Object.keys(exampleEntity.op || {})
+    const eVar = safeVarName(eName.toLowerCase(), 'ts')
+    const opnames = entityOps(exampleEntity)
 
     let hasCall = false
 
     if (opnames.includes('list')) {
       Content(`// List all ${eName.toLowerCase()}s (returns ${eName}[])
-const ${eName.toLowerCase()}s = await client.${eName}().list()
-for (const ${eName.toLowerCase()} of ${eName.toLowerCase()}s) {
-  console.log(${eName.toLowerCase()})
+const ${eVar}s = await client.${eName}().list()
+for (const ${eVar} of ${eVar}s) {
+  console.log(${eVar})
 }
 `)
       hasCall = true
     }
 
-    // Find a nested entity for a more interesting example
+    // Find a nested entity for a more interesting example: one with a parent
+    // chain, an active load op of its OWN, and a required non-id load param
+    // to demonstrate (the parent key, e.g. page_id).
     const nestedEntity = Object.values(entity).find((e: any) =>
-      e.active !== false && e.ancestors && e.ancestors.length > 0
+      e.active !== false &&
+      e.relations && e.relations.ancestors && 0 < e.relations.ancestors.length &&
+      entityOps(e).includes('load') &&
+      opRequestShape(e, 'load').items.some((it: any) =>
+        !it.optional && it.name !== entityIdField(e))
     ) as any
 
-    if (nestedEntity && opnames.includes('load')) {
+    if (nestedEntity) {
       const neName = nom(nestedEntity, 'Name')
-      const parentFields = (nestedEntity.fields || [])
-        .filter((f: any) => f.name !== 'id' && f.name.endsWith('_id'))
-      const parentParam = parentFields.length > 0 ? parentFields[0].name : 'parent_id'
+      const neVar = safeVarName(neName.toLowerCase(), 'ts')
+      const loadOp = nestedEntity.op && nestedEntity.op.load
+
+      // Every REQUIRED load-match key (parent keys first, own id last) — the
+      // same shape that generates <Name>LoadMatch, so the example
+      // type-checks.
+      const neIdF = entityIdField(nestedEntity)
+      const neMatchLines = opRequestShape(nestedEntity, 'load').items
+        .filter((it: any) => !it.optional || it.name === neIdF)
+        .sort((a: any, b: any) =>
+          (a.name === neIdF ? 1 : 0) - (b.name === neIdF ? 1 : 0))
+        .map((it: any) =>
+          `  ${it.name}: ${exampleValue(nestedEntity, loadOp, it.name,
+            it.name === neIdF ? 'example_id' : 'example_' + it.name)},`)
 
       Content(`
 // Load a specific ${neName.toLowerCase()} (returns a ${neName})
-const ${neName.toLowerCase()} = await client.${neName}().load({
-  ${parentParam}: ${litForField(nestedEntity, parentParam, 'example')},
-  id: ${litForField(nestedEntity, 'id', 'example_id')},
+const ${neVar} = await client.${neName}().load({
+${neMatchLines.join('\n')}
 })
-console.log(${neName.toLowerCase()})
+console.log(${neVar})
 `)
       hasCall = true
     }
@@ -82,8 +88,8 @@ console.log(${neName.toLowerCase()})
     // match is always valid (the match arg is optional).
     if (!hasCall && opnames.includes('load')) {
       Content(`// Load ${eName.toLowerCase()} data (returns a ${eName})
-const ${eName.toLowerCase()} = await client.${eName}().load()
-console.log(${eName.toLowerCase()})
+const ${eVar} = await client.${eName}().load()
+console.log(${eVar})
 `)
       hasCall = true
     }

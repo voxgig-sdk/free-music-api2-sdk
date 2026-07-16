@@ -1,10 +1,12 @@
 
-import { cmp, each, Content, File, isAuthActive } from '@voxgig/sdkgen'
+import { cmp, each, Content, canonToType, File, isAuthActive, entityIdField, opRequestShape, safeVarName } from '@voxgig/sdkgen'
 
 import {
   KIT,
   getModelPath,
 } from '@voxgig/apidef'
+
+import { exampleValue } from './utility_ts'
 
 
 const OP_SIGNATURES: Record<string, { sig: string, returns: string, desc: string }> = {
@@ -179,6 +181,11 @@ Alias for \`${model.Name}SDK.test()\`.
     publishedEntities.map((ent: any) => {
       const opnames = Object.keys(ent.op || {})
       const fields = ent.fields || []
+      // Model-driven id key: null when this entity has no id-like field, in
+      // which case load/remove match on no argument and update omits the id.
+      const idF = entityIdField(ent)
+      // Variable-safe lowercase name (a `Delete` entity must not bind `delete`).
+      const eVar = safeVarName(ent.name, target.name)
 
       Content(`
 ---
@@ -194,7 +201,7 @@ Alias for \`${model.Name}SDK.test()\`.
       }
 
       Content(`\`\`\`ts
-const ${ent.name} = client.${ent.Name}()
+const ${eVar} = client.${ent.Name}()
 \`\`\`
 
 `)
@@ -210,7 +217,7 @@ const ${ent.name} = client.${ent.Name}()
         each(fields, (field: any) => {
           const req = field.req ? 'Yes' : 'No'
           const desc = field.short || ''
-          Content(`| \`${field.name}\` | \`${field.type || 'any'}\` | ${req} | ${desc} |
+          Content(`| \`${field.name}\` | \`${canonToType(field.type, target.name)}\` | ${req} | ${desc} |
 `)
         })
 
@@ -220,15 +227,18 @@ const ${ent.name} = client.${ent.Name}()
         // Field operations breakdown
         const hasFieldOps = fields.some((f: any) => f.op && Object.keys(f.op).length > 0)
         if (hasFieldOps) {
+          // Only emit columns for operations this entity actually exposes —
+          // never advertise a create/update/remove column the entity lacks.
+          const opcols = ['load', 'list', 'create', 'update', 'remove']
+            .filter((op: string) => opnames.includes(op) && ent.op[op]?.active !== false)
           Content(`### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
+| Field | ${opcols.join(' | ')} |
+| --- | ${opcols.map(() => '---').join(' | ')} |
 `)
           each(fields, (field: any) => {
             const fops = field.op || {}
-            const cols = ['load', 'list', 'create', 'update', 'remove'].map((op: string) => {
-              if (!opnames.includes(op)) return '-'
+            const cols = opcols.map((op: string) => {
               const fop = fops[op]
               if (null == fop) return '-'
               if (fop.active === false) return '-'
@@ -262,8 +272,20 @@ ${info.desc}
 
           // Show example
           if ('load' === opname || 'remove' === opname) {
+            // The id key plus every REQUIRED match key (parent path params
+            // like page_id) — the same shape that generates <Name><Op>Match,
+            // so the example always type-checks.
+            const matchItems = opRequestShape(ent, opname).items
+              .filter((it: any) => !it.optional || it.name === idF)
+              .sort((a: any, b: any) =>
+                (a.name === idF ? 0 : 1) - (b.name === idF ? 0 : 1))
+            const arg = 0 < matchItems.length
+              ? `{ ${matchItems.map((it: any) =>
+                `${it.name}: ${exampleValue(ent, ent.op && ent.op[opname], it.name,
+                  it.name === idF ? ent.name + '_id' : it.name)}`).join(', ')} }`
+              : ''
             Content(`\`\`\`ts
-const result = await client.${ent.Name}().${opname}({ id: '${ent.name}_id' })
+const result = await client.${ent.Name}().${opname}(${arg})
 \`\`\`
 
 `)
@@ -276,14 +298,18 @@ const results = await client.${ent.Name}().${opname}()
 `)
           }
           else if ('create' === opname) {
+            // Members come from the SAME shape that generates
+            // <Name>CreateData (every required member appears), each with a
+            // type-correct example VALUE via exampleValue — a `name: /* type */`
+            // comment is not a value and yields invalid TS (TS1109).
+            const createItems = opRequestShape(ent, 'create').items
+              .filter((it: any) => !it.optional)
             Content(`\`\`\`ts
 const result = await client.${ent.Name}().create({
 `)
-            each(fields, (field: any) => {
-              if ('id' !== field.name && field.req) {
-                Content(`  ${field.name}: /* ${field.type || 'value'} */,
+            createItems.map((it: any) => {
+              Content(`  ${it.name}: ${exampleValue(ent, ent.op && ent.op.create, it.name, 'example_' + it.name)},
 `)
-              }
             })
             Content(`})
 \`\`\`
@@ -291,10 +317,18 @@ const result = await client.${ent.Name}().create({
 `)
           }
           else if ('update' === opname) {
+            // The id key plus every REQUIRED data member — the same shape
+            // that generates <Name>UpdateData — then the patch-fields note.
+            const updateItems = opRequestShape(ent, 'update').items
+              .filter((it: any) => !it.optional || it.name === idF)
+              .sort((a: any, b: any) =>
+                (a.name === idF ? 0 : 1) - (b.name === idF ? 0 : 1))
+            const updateLines = updateItems.map((it: any) =>
+              `  ${it.name}: ${exampleValue(ent, ent.op && ent.op.update, it.name,
+                it.name === idF ? ent.name + '_id' : it.name)},\n`).join('')
             Content(`\`\`\`ts
 const result = await client.${ent.Name}().update({
-  id: '${ent.name}_id',
-  // Fields to update
+${updateLines}  // Fields to update
 })
 \`\`\`
 

@@ -1,5 +1,5 @@
 
-import { cmp, Content, canonKey } from '@voxgig/sdkgen'
+import { cmp, Content, entityIdField, pickExampleEntity, opRequestShape, safeVarName } from '@voxgig/sdkgen'
 
 import {
   KIT,
@@ -7,36 +7,52 @@ import {
   nom,
 } from '@voxgig/apidef'
 
-
-// A type-correct example literal for a field: numeric canon types must
-// render as a bare number (the generated match/field types are `number`,
-// so a quoted string would be a compile error in the TS snippet test).
-function exampleLiteral(entity: any, placeholder: string): string {
-  const idName = (entity.id && entity.id.field) || 'id'
-  const idField = (entity.fields || []).find((f: any) => f.name === idName)
-  const key = canonKey(idField && idField.type)
-  if ('INTEGER' === key || 'NUMBER' === key) return '1'
-  if ('BOOLEAN' === key) return 'true'
-  return `'${placeholder}'`
-}
+import { exampleValue } from './utility_ts'
 
 
 const ReadmeTopTest = cmp(function ReadmeTopTest(props: any) {
   const { target, ctx$: { model } } = props
 
   const entity = getModelPath(model, `main.${KIT}.entity`)
-  const exampleEntity = Object.values(entity).find((e: any) => e.active !== false) as any
+  // Pick an entity with a real op (prefer a read op) — never fabricate a
+  // `load` on an op-less entity like Cloudsmith's `Abort`.
+  const { entity: exampleEntity, primaryOp } = pickExampleEntity(entity)
 
   Content(`\`\`\`ts
 const client = ${model.const.Name}SDK.test()
 `)
 
-  if (exampleEntity) {
+  if (exampleEntity && primaryOp) {
     const eName = nom(exampleEntity, 'Name')
-    const idName = (exampleEntity.id && exampleEntity.id.field) || 'id'
-    Content(`const ${eName.toLowerCase()} = await client.${eName}().load({ ${idName}: ${exampleLiteral(exampleEntity, 'test01')} })
-// ${eName.toLowerCase()} is a bare ${eName} populated with mock data
-console.log(${eName.toLowerCase()})
+    // A list() result is an array — name the variable accordingly.
+    const eVar = safeVarName(eName.toLowerCase(), 'ts') +
+      ('list' === primaryOp ? 's' : '')
+    const primaryOpDef = exampleEntity.op && exampleEntity.op[primaryOp]
+    const idF = entityIdField(exampleEntity)
+    let arg = ''
+    if ('load' === primaryOp || 'remove' === primaryOp) {
+      // Every REQUIRED match key (id first) — the same shape that generates
+      // the op's Match type, so the block type-checks.
+      const items = opRequestShape(exampleEntity, primaryOp).items
+        .filter((it: any) => !it.optional || it.name === idF)
+        .sort((a: any, b: any) =>
+          (a.name === idF ? 0 : 1) - (b.name === idF ? 0 : 1))
+      arg = 0 < items.length
+        ? `{ ${items.map((it: any) =>
+          `${it.name}: ${exampleValue(exampleEntity, primaryOpDef, it.name,
+            it.name === idF ? 'test01' : 'example_' + it.name)}`).join(', ')} }`
+        : ''
+    } else if ('create' === primaryOp || 'update' === primaryOp) {
+      const items = opRequestShape(exampleEntity, primaryOp).items
+        .filter((it: any) => it.name !== idF && it.name !== 'id')
+      const required = items.filter((it: any) => !it.optional)
+      const chosen = required.length ? required : items.slice(0, 3)
+      arg = `{ ${chosen.map((it: any) =>
+        `${it.name}: ${exampleValue(exampleEntity, primaryOpDef, it.name, 'example_' + it.name)}`).join(', ')} }`
+    }
+    Content(`const ${eVar} = await client.${eName}().${primaryOp}(${arg})
+// ${eVar} is ${'list' === primaryOp ? `an array of bare ${eName} records` : `a bare ${eName}`} populated with mock data
+console.log(${eVar})
 `)
   }
 

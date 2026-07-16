@@ -53,8 +53,7 @@ type V1List struct {
 	Trending *[]any `json:"trending,omitempty"`
 }
 
-// V1ListListMatch mirrors the v1_list fields as an all-optional match
-// filter (Go analog of Partial<V1List>).
+// V1ListListMatch is the typed request payload for V1List.ListTyped.
 type V1ListListMatch struct {
 	IdAlbum *int `json:"id_album,omitempty"`
 	IdArtist *int `json:"id_artist,omitempty"`
@@ -215,8 +214,7 @@ type V1Lookup struct {
 	StrYoutube *string `json:"str_youtube,omitempty"`
 }
 
-// V1LookupListMatch mirrors the v1_lookup fields as an all-optional match
-// filter (Go analog of Partial<V1Lookup>).
+// V1LookupListMatch is the typed request payload for V1Lookup.ListTyped.
 type V1LookupListMatch struct {
 	IdAlbum *int `json:"id_album,omitempty"`
 	IdArtist *int `json:"id_artist,omitempty"`
@@ -443,8 +441,7 @@ type V1Search struct {
 	StrWikipediaId *string `json:"str_wikipedia_id,omitempty"`
 }
 
-// V1SearchListMatch mirrors the v1_search fields as an all-optional match
-// filter (Go analog of Partial<V1Search>).
+// V1SearchListMatch is the typed request payload for V1Search.ListTyped.
 type V1SearchListMatch struct {
 	IdAlbum *int `json:"id_album,omitempty"`
 	IdArtist *int `json:"id_artist,omitempty"`
@@ -574,10 +571,10 @@ type V2Lookup struct {
 
 // V2LookupLoadMatch is the typed request payload for V2Lookup.LoadTyped.
 type V2LookupLoadMatch struct {
-	AlbumId int `json:"album_id"`
-	ArtistId int `json:"artist_id"`
-	MusicBrainzId string `json:"music_brainz_id"`
-	TrackId int `json:"track_id"`
+	AlbumId *int `json:"album_id,omitempty"`
+	ArtistId *int `json:"artist_id,omitempty"`
+	MusicBrainzId *string `json:"music_brainz_id,omitempty"`
+	TrackId *int `json:"track_id,omitempty"`
 }
 
 // V2Search is the typed data model for the v2_search entity.
@@ -589,9 +586,9 @@ type V2Search struct {
 
 // V2SearchLoadMatch is the typed request payload for V2Search.LoadTyped.
 type V2SearchLoadMatch struct {
-	AlbumName string `json:"album_name"`
-	ArtistName string `json:"artist_name"`
-	TrackName string `json:"track_name"`
+	AlbumName *string `json:"album_name,omitempty"`
+	ArtistName *string `json:"artist_name,omitempty"`
+	TrackName *string `json:"track_name,omitempty"`
 }
 
 // asMap turns a typed request/data struct into the map[string]any the

@@ -46,14 +46,17 @@ class FreeMusicApi2SDK
 
     @_rootctx.options = @options
 
-    # Add features from config.
+    # Add features in the resolved order (make_options puts an explicit array
+    # order first, else defaults to test-first). Ordering matters: the `test`
+    # feature installs the base mock transport and the transport features
+    # (retry/cache/netsim/proxy/ratelimit) wrap whatever is current, so `test`
+    # must be added before them to sit at the base of the chain.
     feature_opts = FreeMusicApi2Helpers.to_map(VoxgigStruct.getprop(@options, "feature"))
     if feature_opts
-      items = VoxgigStruct.items(feature_opts)
-      if items
-        items.each do |item|
-          fname = item[0]
-          fopts = FreeMusicApi2Helpers.to_map(item[1])
+      featureorder = VoxgigStruct.getpath(@options, "__derived__.featureorder")
+      if featureorder.is_a?(Array)
+        featureorder.each do |fname|
+          fopts = FreeMusicApi2Helpers.to_map(feature_opts[fname])
           if fopts && fopts["active"] == true
             utility.feature_add.call(@_rootctx, FreeMusicApi2Features.make_feature(fname))
           end
@@ -136,7 +139,14 @@ class FreeMusicApi2SDK
     _, err = utility.prepare_auth.call(ctx)
     raise err if err
 
-    utility.make_fetch_def.call(ctx)
+    # make_fetch_def returns a (fetchdef, err) tuple; destructure it and
+    # return just the fetchdef Hash (raising on error) so callers — including
+    # direct(), which indexes fetchdef["url"] — receive a Hash, mirroring the
+    # ts/py prepare().
+    fetchdef, fd_err = utility.make_fetch_def.call(ctx)
+    raise fd_err if fd_err
+
+    fetchdef
   end
 
   def direct(fetchargs = {})

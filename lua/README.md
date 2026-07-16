@@ -4,6 +4,8 @@
 
 The Lua SDK for the FreeMusicApi2 API — an entity-oriented client using Lua conventions.
 
+It exposes the API as capitalised, semantic **Entities** — e.g. `client:V1List()` — each with the same small set of operations (`list`, `load`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -43,8 +45,40 @@ local v1lists, err = client:V1List():list()
 if err then error(err) end
 
 for _, item in ipairs(v1lists) do
-  print(item["id"], item["name"])
+  print(item["str_album"])
 end
+```
+
+### 3. Load a v2list
+
+V2List is nested under artist, so provide the `artist_id`.
+
+```lua
+local v2list, err = client:V2List():load({ artist_id = 1 })
+if err then error(err) end
+print(v2list)
+```
+
+
+## Error handling
+
+Entity operations return `(value, err)`. Check `err` before using
+the value:
+
+```lua
+local v1lists, err = client:V1List():list()
+if err then error(err) end
+```
+
+`direct` follows the same `(value, err)` convention:
+
+```lua
+local result, err = client:direct({
+  path = "/api/resource/{id}",
+  method = "GET",
+  params = { id = "example_id" },
+})
+if err then error(err) end
 ```
 
 
@@ -90,8 +124,8 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:V1List():load({ id = "test01" })
--- result is the loaded data; err is set on failure
+local result, err = client:V1List():list()
+-- result is the returned data; err is set on failure
 ```
 
 ### Use a custom fetch function
@@ -186,9 +220,6 @@ All entities share the same interface.
 | --- | --- | --- |
 | `load` | `(reqmatch, ctrl) -> any, err` | Load a single entity by match criteria. |
 | `list` | `(reqmatch, ctrl) -> any, err` | List entities matching the criteria. |
-| `create` | `(reqdata, ctrl) -> any, err` | Create a new entity. |
-| `update` | `(reqdata, ctrl) -> any, err` | Update an existing entity. |
-| `remove` | `(reqmatch, ctrl) -> any, err` | Remove an entity. |
 | `data_get` | `() -> table` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> table` | Get entity match criteria. |
@@ -203,12 +234,12 @@ data **directly** — there is no wrapper:
 
 | Operation | `value` |
 | --- | --- |
-| `load` / `create` / `update` / `remove` | the entity record (a `table`) |
+| `load` | the entity record (a `table`) |
 | `list` | an array (`table`) of entity records |
 
 Check `err` first (it is non-`nil` on failure), then use `value`:
 
-    local v1_list, err = client:V1List():load({ id = "example_id" })
+    local v1_list, err = client:V1List():load()
     if err then error(err) end
     -- v1_list is the loaded record
 
@@ -557,47 +588,47 @@ Create an instance: `local v1_list = client:V1List(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id_album` | ``$INTEGER`` |  |
-| `id_artist` | ``$INTEGER`` |  |
-| `id_imvdb` | ``$INTEGER`` |  |
-| `id_lyric` | ``$INTEGER`` |  |
-| `id_track` | ``$INTEGER`` |  |
-| `int_cd` | ``$INTEGER`` |  |
-| `int_duration` | ``$INTEGER`` |  |
-| `int_loved` | ``$INTEGER`` |  |
-| `int_music_vid_comment` | ``$INTEGER`` |  |
-| `int_music_vid_dislike` | ``$INTEGER`` |  |
-| `int_music_vid_favorite` | ``$INTEGER`` |  |
-| `int_music_vid_like` | ``$INTEGER`` |  |
-| `int_music_vid_view` | ``$INTEGER`` |  |
-| `int_score` | ``$INTEGER`` |  |
-| `int_score_vote` | ``$INTEGER`` |  |
-| `int_total_listener` | ``$INTEGER`` |  |
-| `int_total_play` | ``$INTEGER`` |  |
-| `int_track_number` | ``$INTEGER`` |  |
-| `loved` | ``$ARRAY`` |  |
-| `str_album` | ``$STRING`` |  |
-| `str_artist` | ``$STRING`` |  |
-| `str_artist_alternate` | ``$STRING`` |  |
-| `str_description_en` | ``$STRING`` |  |
-| `str_genre` | ``$STRING`` |  |
-| `str_locked` | ``$STRING`` |  |
-| `str_mood` | ``$STRING`` |  |
-| `str_music_brainz_album_id` | ``$STRING`` |  |
-| `str_music_brainz_artist_id` | ``$STRING`` |  |
-| `str_music_brainz_id` | ``$STRING`` |  |
-| `str_music_vid` | ``$STRING`` |  |
-| `str_music_vid_company` | ``$STRING`` |  |
-| `str_music_vid_director` | ``$STRING`` |  |
-| `str_music_vid_screen1` | ``$STRING`` |  |
-| `str_music_vid_screen2` | ``$STRING`` |  |
-| `str_music_vid_screen3` | ``$STRING`` |  |
-| `str_style` | ``$STRING`` |  |
-| `str_theme` | ``$STRING`` |  |
-| `str_track` | ``$STRING`` |  |
-| `str_track_lyric` | ``$STRING`` |  |
-| `str_track_thumb` | ``$STRING`` |  |
-| `trending` | ``$ARRAY`` |  |
+| `id_album` | `number` |  |
+| `id_artist` | `number` |  |
+| `id_imvdb` | `number` |  |
+| `id_lyric` | `number` |  |
+| `id_track` | `number` |  |
+| `int_cd` | `number` |  |
+| `int_duration` | `number` |  |
+| `int_loved` | `number` |  |
+| `int_music_vid_comment` | `number` |  |
+| `int_music_vid_dislike` | `number` |  |
+| `int_music_vid_favorite` | `number` |  |
+| `int_music_vid_like` | `number` |  |
+| `int_music_vid_view` | `number` |  |
+| `int_score` | `number` |  |
+| `int_score_vote` | `number` |  |
+| `int_total_listener` | `number` |  |
+| `int_total_play` | `number` |  |
+| `int_track_number` | `number` |  |
+| `loved` | `table` |  |
+| `str_album` | `string` |  |
+| `str_artist` | `string` |  |
+| `str_artist_alternate` | `string` |  |
+| `str_description_en` | `string` |  |
+| `str_genre` | `string` |  |
+| `str_locked` | `string` |  |
+| `str_mood` | `string` |  |
+| `str_music_brainz_album_id` | `string` |  |
+| `str_music_brainz_artist_id` | `string` |  |
+| `str_music_brainz_id` | `string` |  |
+| `str_music_vid` | `string` |  |
+| `str_music_vid_company` | `string` |  |
+| `str_music_vid_director` | `string` |  |
+| `str_music_vid_screen1` | `string` |  |
+| `str_music_vid_screen2` | `string` |  |
+| `str_music_vid_screen3` | `string` |  |
+| `str_style` | `string` |  |
+| `str_theme` | `string` |  |
+| `str_track` | `string` |  |
+| `str_track_lyric` | `string` |  |
+| `str_track_thumb` | `string` |  |
+| `trending` | `table` |  |
 
 #### Example: List
 
@@ -620,118 +651,118 @@ Create an instance: `local v1_lookup = client:V1Lookup(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id_album` | ``$INTEGER`` |  |
-| `id_artist` | ``$INTEGER`` |  |
-| `id_imvdb` | ``$INTEGER`` |  |
-| `id_label` | ``$INTEGER`` |  |
-| `id_lyric` | ``$INTEGER`` |  |
-| `id_track` | ``$INTEGER`` |  |
-| `int_born_year` | ``$INTEGER`` |  |
-| `int_cd` | ``$INTEGER`` |  |
-| `int_charted` | ``$INTEGER`` |  |
-| `int_died_year` | ``$INTEGER`` |  |
-| `int_duration` | ``$INTEGER`` |  |
-| `int_formed_year` | ``$INTEGER`` |  |
-| `int_loved` | ``$INTEGER`` |  |
-| `int_member` | ``$INTEGER`` |  |
-| `int_music_vid_comment` | ``$INTEGER`` |  |
-| `int_music_vid_dislike` | ``$INTEGER`` |  |
-| `int_music_vid_favorite` | ``$INTEGER`` |  |
-| `int_music_vid_like` | ``$INTEGER`` |  |
-| `int_music_vid_view` | ``$INTEGER`` |  |
-| `int_sale` | ``$INTEGER`` |  |
-| `int_score` | ``$INTEGER`` |  |
-| `int_score_vote` | ``$INTEGER`` |  |
-| `int_total_listener` | ``$INTEGER`` |  |
-| `int_total_play` | ``$INTEGER`` |  |
-| `int_track_number` | ``$INTEGER`` |  |
-| `int_year_released` | ``$INTEGER`` |  |
-| `str_album` | ``$STRING`` |  |
-| `str_album3_d_case` | ``$STRING`` |  |
-| `str_album3_d_face` | ``$STRING`` |  |
-| `str_album3_d_flat` | ``$STRING`` |  |
-| `str_album3_d_thumb` | ``$STRING`` |  |
-| `str_album_c_dart` | ``$STRING`` |  |
-| `str_album_spine` | ``$STRING`` |  |
-| `str_album_stripped` | ``$STRING`` |  |
-| `str_album_thumb` | ``$STRING`` |  |
-| `str_album_thumb_back` | ``$STRING`` |  |
-| `str_album_thumb_hq` | ``$STRING`` |  |
-| `str_all_music_id` | ``$STRING`` |  |
-| `str_amazon_id` | ``$STRING`` |  |
-| `str_apple_music` | ``$STRING`` |  |
-| `str_artist` | ``$STRING`` |  |
-| `str_artist_alternate` | ``$STRING`` |  |
-| `str_artist_banner` | ``$STRING`` |  |
-| `str_artist_clearart` | ``$STRING`` |  |
-| `str_artist_cutout` | ``$STRING`` |  |
-| `str_artist_fanart` | ``$STRING`` |  |
-| `str_artist_fanart2` | ``$STRING`` |  |
-| `str_artist_fanart3` | ``$STRING`` |  |
-| `str_artist_fanart4` | ``$STRING`` |  |
-| `str_artist_logo` | ``$STRING`` |  |
-| `str_artist_stripped` | ``$STRING`` |  |
-| `str_artist_thumb` | ``$STRING`` |  |
-| `str_artist_wide_thumb` | ``$STRING`` |  |
-| `str_bbc_review_id` | ``$STRING`` |  |
-| `str_biography_cn` | ``$STRING`` |  |
-| `str_biography_de` | ``$STRING`` |  |
-| `str_biography_e` | ``$STRING`` |  |
-| `str_biography_en` | ``$STRING`` |  |
-| `str_biography_fr` | ``$STRING`` |  |
-| `str_biography_hu` | ``$STRING`` |  |
-| `str_biography_il` | ``$STRING`` |  |
-| `str_biography_it` | ``$STRING`` |  |
-| `str_biography_jp` | ``$STRING`` |  |
-| `str_biography_nl` | ``$STRING`` |  |
-| `str_biography_no` | ``$STRING`` |  |
-| `str_biography_pl` | ``$STRING`` |  |
-| `str_biography_pt` | ``$STRING`` |  |
-| `str_biography_ru` | ``$STRING`` |  |
-| `str_biography_se` | ``$STRING`` |  |
-| `str_country` | ``$STRING`` |  |
-| `str_country_code` | ``$STRING`` |  |
-| `str_description_en` | ``$STRING`` |  |
-| `str_disbanded` | ``$STRING`` |  |
-| `str_discogs_id` | ``$STRING`` |  |
-| `str_facebook` | ``$STRING`` |  |
-| `str_gender` | ``$STRING`` |  |
-| `str_genius_id` | ``$STRING`` |  |
-| `str_genre` | ``$STRING`` |  |
-| `str_instagram` | ``$STRING`` |  |
-| `str_itunes_id` | ``$STRING`` |  |
-| `str_label` | ``$STRING`` |  |
-| `str_last_fm_chart` | ``$STRING`` |  |
-| `str_location` | ``$STRING`` |  |
-| `str_locked` | ``$STRING`` |  |
-| `str_lyric_wiki_id` | ``$STRING`` |  |
-| `str_mood` | ``$STRING`` |  |
-| `str_music_brainz_album_id` | ``$STRING`` |  |
-| `str_music_brainz_artist_id` | ``$STRING`` |  |
-| `str_music_brainz_id` | ``$STRING`` |  |
-| `str_music_moz_id` | ``$STRING`` |  |
-| `str_music_vid` | ``$STRING`` |  |
-| `str_music_vid_company` | ``$STRING`` |  |
-| `str_music_vid_director` | ``$STRING`` |  |
-| `str_music_vid_screen1` | ``$STRING`` |  |
-| `str_music_vid_screen2` | ``$STRING`` |  |
-| `str_music_vid_screen3` | ``$STRING`` |  |
-| `str_rate_your_music_id` | ``$STRING`` |  |
-| `str_release_format` | ``$STRING`` |  |
-| `str_review` | ``$STRING`` |  |
-| `str_sound_cloud` | ``$STRING`` |  |
-| `str_speed` | ``$STRING`` |  |
-| `str_spotify` | ``$STRING`` |  |
-| `str_style` | ``$STRING`` |  |
-| `str_theme` | ``$STRING`` |  |
-| `str_track` | ``$STRING`` |  |
-| `str_track_lyric` | ``$STRING`` |  |
-| `str_track_thumb` | ``$STRING`` |  |
-| `str_twitter` | ``$STRING`` |  |
-| `str_website` | ``$STRING`` |  |
-| `str_wikidata_id` | ``$STRING`` |  |
-| `str_wikipedia_id` | ``$STRING`` |  |
-| `str_youtube` | ``$STRING`` |  |
+| `id_album` | `number` |  |
+| `id_artist` | `number` |  |
+| `id_imvdb` | `number` |  |
+| `id_label` | `number` |  |
+| `id_lyric` | `number` |  |
+| `id_track` | `number` |  |
+| `int_born_year` | `number` |  |
+| `int_cd` | `number` |  |
+| `int_charted` | `number` |  |
+| `int_died_year` | `number` |  |
+| `int_duration` | `number` |  |
+| `int_formed_year` | `number` |  |
+| `int_loved` | `number` |  |
+| `int_member` | `number` |  |
+| `int_music_vid_comment` | `number` |  |
+| `int_music_vid_dislike` | `number` |  |
+| `int_music_vid_favorite` | `number` |  |
+| `int_music_vid_like` | `number` |  |
+| `int_music_vid_view` | `number` |  |
+| `int_sale` | `number` |  |
+| `int_score` | `number` |  |
+| `int_score_vote` | `number` |  |
+| `int_total_listener` | `number` |  |
+| `int_total_play` | `number` |  |
+| `int_track_number` | `number` |  |
+| `int_year_released` | `number` |  |
+| `str_album` | `string` |  |
+| `str_album3_d_case` | `string` |  |
+| `str_album3_d_face` | `string` |  |
+| `str_album3_d_flat` | `string` |  |
+| `str_album3_d_thumb` | `string` |  |
+| `str_album_c_dart` | `string` |  |
+| `str_album_spine` | `string` |  |
+| `str_album_stripped` | `string` |  |
+| `str_album_thumb` | `string` |  |
+| `str_album_thumb_back` | `string` |  |
+| `str_album_thumb_hq` | `string` |  |
+| `str_all_music_id` | `string` |  |
+| `str_amazon_id` | `string` |  |
+| `str_apple_music` | `string` |  |
+| `str_artist` | `string` |  |
+| `str_artist_alternate` | `string` |  |
+| `str_artist_banner` | `string` |  |
+| `str_artist_clearart` | `string` |  |
+| `str_artist_cutout` | `string` |  |
+| `str_artist_fanart` | `string` |  |
+| `str_artist_fanart2` | `string` |  |
+| `str_artist_fanart3` | `string` |  |
+| `str_artist_fanart4` | `string` |  |
+| `str_artist_logo` | `string` |  |
+| `str_artist_stripped` | `string` |  |
+| `str_artist_thumb` | `string` |  |
+| `str_artist_wide_thumb` | `string` |  |
+| `str_bbc_review_id` | `string` |  |
+| `str_biography_cn` | `string` |  |
+| `str_biography_de` | `string` |  |
+| `str_biography_e` | `string` |  |
+| `str_biography_en` | `string` |  |
+| `str_biography_fr` | `string` |  |
+| `str_biography_hu` | `string` |  |
+| `str_biography_il` | `string` |  |
+| `str_biography_it` | `string` |  |
+| `str_biography_jp` | `string` |  |
+| `str_biography_nl` | `string` |  |
+| `str_biography_no` | `string` |  |
+| `str_biography_pl` | `string` |  |
+| `str_biography_pt` | `string` |  |
+| `str_biography_ru` | `string` |  |
+| `str_biography_se` | `string` |  |
+| `str_country` | `string` |  |
+| `str_country_code` | `string` |  |
+| `str_description_en` | `string` |  |
+| `str_disbanded` | `string` |  |
+| `str_discogs_id` | `string` |  |
+| `str_facebook` | `string` |  |
+| `str_gender` | `string` |  |
+| `str_genius_id` | `string` |  |
+| `str_genre` | `string` |  |
+| `str_instagram` | `string` |  |
+| `str_itunes_id` | `string` |  |
+| `str_label` | `string` |  |
+| `str_last_fm_chart` | `string` |  |
+| `str_location` | `string` |  |
+| `str_locked` | `string` |  |
+| `str_lyric_wiki_id` | `string` |  |
+| `str_mood` | `string` |  |
+| `str_music_brainz_album_id` | `string` |  |
+| `str_music_brainz_artist_id` | `string` |  |
+| `str_music_brainz_id` | `string` |  |
+| `str_music_moz_id` | `string` |  |
+| `str_music_vid` | `string` |  |
+| `str_music_vid_company` | `string` |  |
+| `str_music_vid_director` | `string` |  |
+| `str_music_vid_screen1` | `string` |  |
+| `str_music_vid_screen2` | `string` |  |
+| `str_music_vid_screen3` | `string` |  |
+| `str_rate_your_music_id` | `string` |  |
+| `str_release_format` | `string` |  |
+| `str_review` | `string` |  |
+| `str_sound_cloud` | `string` |  |
+| `str_speed` | `string` |  |
+| `str_spotify` | `string` |  |
+| `str_style` | `string` |  |
+| `str_theme` | `string` |  |
+| `str_track` | `string` |  |
+| `str_track_lyric` | `string` |  |
+| `str_track_thumb` | `string` |  |
+| `str_twitter` | `string` |  |
+| `str_website` | `string` |  |
+| `str_wikidata_id` | `string` |  |
+| `str_wikipedia_id` | `string` |  |
+| `str_youtube` | `string` |  |
 
 #### Example: List
 
@@ -754,113 +785,113 @@ Create an instance: `local v1_search = client:V1Search(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id_album` | ``$INTEGER`` |  |
-| `id_artist` | ``$INTEGER`` |  |
-| `id_imvdb` | ``$INTEGER`` |  |
-| `id_label` | ``$INTEGER`` |  |
-| `id_lyric` | ``$INTEGER`` |  |
-| `id_track` | ``$INTEGER`` |  |
-| `int_born_year` | ``$INTEGER`` |  |
-| `int_cd` | ``$INTEGER`` |  |
-| `int_charted` | ``$INTEGER`` |  |
-| `int_died_year` | ``$INTEGER`` |  |
-| `int_duration` | ``$INTEGER`` |  |
-| `int_formed_year` | ``$INTEGER`` |  |
-| `int_loved` | ``$INTEGER`` |  |
-| `int_member` | ``$INTEGER`` |  |
-| `int_music_vid_comment` | ``$INTEGER`` |  |
-| `int_music_vid_dislike` | ``$INTEGER`` |  |
-| `int_music_vid_favorite` | ``$INTEGER`` |  |
-| `int_music_vid_like` | ``$INTEGER`` |  |
-| `int_music_vid_view` | ``$INTEGER`` |  |
-| `int_sale` | ``$INTEGER`` |  |
-| `int_score` | ``$INTEGER`` |  |
-| `int_score_vote` | ``$INTEGER`` |  |
-| `int_total_listener` | ``$INTEGER`` |  |
-| `int_total_play` | ``$INTEGER`` |  |
-| `int_track_number` | ``$INTEGER`` |  |
-| `int_year_released` | ``$INTEGER`` |  |
-| `str_album` | ``$STRING`` |  |
-| `str_album3_d_case` | ``$STRING`` |  |
-| `str_album3_d_face` | ``$STRING`` |  |
-| `str_album3_d_flat` | ``$STRING`` |  |
-| `str_album3_d_thumb` | ``$STRING`` |  |
-| `str_album_c_dart` | ``$STRING`` |  |
-| `str_album_spine` | ``$STRING`` |  |
-| `str_album_stripped` | ``$STRING`` |  |
-| `str_album_thumb` | ``$STRING`` |  |
-| `str_album_thumb_back` | ``$STRING`` |  |
-| `str_album_thumb_hq` | ``$STRING`` |  |
-| `str_all_music_id` | ``$STRING`` |  |
-| `str_amazon_id` | ``$STRING`` |  |
-| `str_artist` | ``$STRING`` |  |
-| `str_artist_alternate` | ``$STRING`` |  |
-| `str_artist_banner` | ``$STRING`` |  |
-| `str_artist_clearart` | ``$STRING`` |  |
-| `str_artist_cutout` | ``$STRING`` |  |
-| `str_artist_fanart` | ``$STRING`` |  |
-| `str_artist_fanart2` | ``$STRING`` |  |
-| `str_artist_fanart3` | ``$STRING`` |  |
-| `str_artist_fanart4` | ``$STRING`` |  |
-| `str_artist_logo` | ``$STRING`` |  |
-| `str_artist_stripped` | ``$STRING`` |  |
-| `str_artist_thumb` | ``$STRING`` |  |
-| `str_artist_wide_thumb` | ``$STRING`` |  |
-| `str_bbc_review_id` | ``$STRING`` |  |
-| `str_biography_cn` | ``$STRING`` |  |
-| `str_biography_de` | ``$STRING`` |  |
-| `str_biography_e` | ``$STRING`` |  |
-| `str_biography_en` | ``$STRING`` |  |
-| `str_biography_fr` | ``$STRING`` |  |
-| `str_biography_hu` | ``$STRING`` |  |
-| `str_biography_il` | ``$STRING`` |  |
-| `str_biography_it` | ``$STRING`` |  |
-| `str_biography_jp` | ``$STRING`` |  |
-| `str_biography_nl` | ``$STRING`` |  |
-| `str_biography_no` | ``$STRING`` |  |
-| `str_biography_pl` | ``$STRING`` |  |
-| `str_biography_pt` | ``$STRING`` |  |
-| `str_biography_ru` | ``$STRING`` |  |
-| `str_biography_se` | ``$STRING`` |  |
-| `str_country` | ``$STRING`` |  |
-| `str_country_code` | ``$STRING`` |  |
-| `str_description_en` | ``$STRING`` |  |
-| `str_disbanded` | ``$STRING`` |  |
-| `str_discogs_id` | ``$STRING`` |  |
-| `str_facebook` | ``$STRING`` |  |
-| `str_gender` | ``$STRING`` |  |
-| `str_genius_id` | ``$STRING`` |  |
-| `str_genre` | ``$STRING`` |  |
-| `str_itunes_id` | ``$STRING`` |  |
-| `str_label` | ``$STRING`` |  |
-| `str_last_fm_chart` | ``$STRING`` |  |
-| `str_location` | ``$STRING`` |  |
-| `str_locked` | ``$STRING`` |  |
-| `str_lyric_wiki_id` | ``$STRING`` |  |
-| `str_mood` | ``$STRING`` |  |
-| `str_music_brainz_album_id` | ``$STRING`` |  |
-| `str_music_brainz_artist_id` | ``$STRING`` |  |
-| `str_music_brainz_id` | ``$STRING`` |  |
-| `str_music_moz_id` | ``$STRING`` |  |
-| `str_music_vid` | ``$STRING`` |  |
-| `str_music_vid_company` | ``$STRING`` |  |
-| `str_music_vid_director` | ``$STRING`` |  |
-| `str_music_vid_screen1` | ``$STRING`` |  |
-| `str_music_vid_screen2` | ``$STRING`` |  |
-| `str_music_vid_screen3` | ``$STRING`` |  |
-| `str_rate_your_music_id` | ``$STRING`` |  |
-| `str_release_format` | ``$STRING`` |  |
-| `str_review` | ``$STRING`` |  |
-| `str_speed` | ``$STRING`` |  |
-| `str_style` | ``$STRING`` |  |
-| `str_theme` | ``$STRING`` |  |
-| `str_track` | ``$STRING`` |  |
-| `str_track_lyric` | ``$STRING`` |  |
-| `str_track_thumb` | ``$STRING`` |  |
-| `str_twitter` | ``$STRING`` |  |
-| `str_website` | ``$STRING`` |  |
-| `str_wikidata_id` | ``$STRING`` |  |
-| `str_wikipedia_id` | ``$STRING`` |  |
+| `id_album` | `number` |  |
+| `id_artist` | `number` |  |
+| `id_imvdb` | `number` |  |
+| `id_label` | `number` |  |
+| `id_lyric` | `number` |  |
+| `id_track` | `number` |  |
+| `int_born_year` | `number` |  |
+| `int_cd` | `number` |  |
+| `int_charted` | `number` |  |
+| `int_died_year` | `number` |  |
+| `int_duration` | `number` |  |
+| `int_formed_year` | `number` |  |
+| `int_loved` | `number` |  |
+| `int_member` | `number` |  |
+| `int_music_vid_comment` | `number` |  |
+| `int_music_vid_dislike` | `number` |  |
+| `int_music_vid_favorite` | `number` |  |
+| `int_music_vid_like` | `number` |  |
+| `int_music_vid_view` | `number` |  |
+| `int_sale` | `number` |  |
+| `int_score` | `number` |  |
+| `int_score_vote` | `number` |  |
+| `int_total_listener` | `number` |  |
+| `int_total_play` | `number` |  |
+| `int_track_number` | `number` |  |
+| `int_year_released` | `number` |  |
+| `str_album` | `string` |  |
+| `str_album3_d_case` | `string` |  |
+| `str_album3_d_face` | `string` |  |
+| `str_album3_d_flat` | `string` |  |
+| `str_album3_d_thumb` | `string` |  |
+| `str_album_c_dart` | `string` |  |
+| `str_album_spine` | `string` |  |
+| `str_album_stripped` | `string` |  |
+| `str_album_thumb` | `string` |  |
+| `str_album_thumb_back` | `string` |  |
+| `str_album_thumb_hq` | `string` |  |
+| `str_all_music_id` | `string` |  |
+| `str_amazon_id` | `string` |  |
+| `str_artist` | `string` |  |
+| `str_artist_alternate` | `string` |  |
+| `str_artist_banner` | `string` |  |
+| `str_artist_clearart` | `string` |  |
+| `str_artist_cutout` | `string` |  |
+| `str_artist_fanart` | `string` |  |
+| `str_artist_fanart2` | `string` |  |
+| `str_artist_fanart3` | `string` |  |
+| `str_artist_fanart4` | `string` |  |
+| `str_artist_logo` | `string` |  |
+| `str_artist_stripped` | `string` |  |
+| `str_artist_thumb` | `string` |  |
+| `str_artist_wide_thumb` | `string` |  |
+| `str_bbc_review_id` | `string` |  |
+| `str_biography_cn` | `string` |  |
+| `str_biography_de` | `string` |  |
+| `str_biography_e` | `string` |  |
+| `str_biography_en` | `string` |  |
+| `str_biography_fr` | `string` |  |
+| `str_biography_hu` | `string` |  |
+| `str_biography_il` | `string` |  |
+| `str_biography_it` | `string` |  |
+| `str_biography_jp` | `string` |  |
+| `str_biography_nl` | `string` |  |
+| `str_biography_no` | `string` |  |
+| `str_biography_pl` | `string` |  |
+| `str_biography_pt` | `string` |  |
+| `str_biography_ru` | `string` |  |
+| `str_biography_se` | `string` |  |
+| `str_country` | `string` |  |
+| `str_country_code` | `string` |  |
+| `str_description_en` | `string` |  |
+| `str_disbanded` | `string` |  |
+| `str_discogs_id` | `string` |  |
+| `str_facebook` | `string` |  |
+| `str_gender` | `string` |  |
+| `str_genius_id` | `string` |  |
+| `str_genre` | `string` |  |
+| `str_itunes_id` | `string` |  |
+| `str_label` | `string` |  |
+| `str_last_fm_chart` | `string` |  |
+| `str_location` | `string` |  |
+| `str_locked` | `string` |  |
+| `str_lyric_wiki_id` | `string` |  |
+| `str_mood` | `string` |  |
+| `str_music_brainz_album_id` | `string` |  |
+| `str_music_brainz_artist_id` | `string` |  |
+| `str_music_brainz_id` | `string` |  |
+| `str_music_moz_id` | `string` |  |
+| `str_music_vid` | `string` |  |
+| `str_music_vid_company` | `string` |  |
+| `str_music_vid_director` | `string` |  |
+| `str_music_vid_screen1` | `string` |  |
+| `str_music_vid_screen2` | `string` |  |
+| `str_music_vid_screen3` | `string` |  |
+| `str_rate_your_music_id` | `string` |  |
+| `str_release_format` | `string` |  |
+| `str_review` | `string` |  |
+| `str_speed` | `string` |  |
+| `str_style` | `string` |  |
+| `str_theme` | `string` |  |
+| `str_track` | `string` |  |
+| `str_track_lyric` | `string` |  |
+| `str_track_thumb` | `string` |  |
+| `str_twitter` | `string` |  |
+| `str_website` | `string` |  |
+| `str_wikidata_id` | `string` |  |
+| `str_wikipedia_id` | `string` |  |
 
 #### Example: List
 
@@ -883,12 +914,12 @@ Create an instance: `local v2_list = client:V2List(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `album` | ``$ARRAY`` |  |
+| `album` | `table` |  |
 
 #### Example: Load
 
 ```lua
-local v2_list, err = client:V2List():load({ id = "v2_list_id" })
+local v2_list, err = client:V2List():load({ artist_id = 1 })
 ```
 
 
@@ -906,14 +937,14 @@ Create an instance: `local v2_lookup = client:V2Lookup(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `album` | ``$ARRAY`` |  |
-| `artist` | ``$ARRAY`` |  |
-| `track` | ``$ARRAY`` |  |
+| `album` | `table` |  |
+| `artist` | `table` |  |
+| `track` | `table` |  |
 
 #### Example: Load
 
 ```lua
-local v2_lookup, err = client:V2Lookup():load({ id = "v2_lookup_id" })
+local v2_lookup, err = client:V2Lookup():load()
 ```
 
 
@@ -931,23 +962,27 @@ Create an instance: `local v2_search = client:V2Search(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `album` | ``$ARRAY`` |  |
-| `artist` | ``$ARRAY`` |  |
-| `track` | ``$ARRAY`` |  |
+| `album` | `table` |  |
+| `artist` | `table` |  |
+| `track` | `table` |  |
 
 #### Example: Load
 
 ```lua
-local v2_search, err = client:V2Search():load({ id = "v2_search_id" })
+local v2_search, err = client:V2Search():load()
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -964,8 +999,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as a second return value.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -1009,14 +1045,14 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
 local v1list = client:V1List()
-v1list:load({ id = "example_id" })
+v1list:list()
 
--- v1list:data_get() now returns the loaded v1list data
+-- v1list:data_get() now returns the v1list data from the last list
 -- v1list:match_get() returns the last match criteria
 ```
 

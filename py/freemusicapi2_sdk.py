@@ -41,14 +41,17 @@ class FreeMusicApi2SDK:
 
         self._rootctx.options = self.options
 
-        # Add features from config.
+        # Add features in the resolved order (make_options puts an explicit
+        # list order first, else defaults to test-first). Ordering matters: the
+        # `test` feature installs the base mock transport and the transport
+        # features (retry/cache/netsim/proxy/ratelimit) wrap whatever is
+        # current, so `test` must be added before them to sit at the base.
         feature_opts = helpers.to_map(vs.getprop(self.options, "feature"))
         if feature_opts is not None:
-            feature_items = vs.items(feature_opts)
-            if feature_items is not None:
-                for item in feature_items:
-                    fname = item[0]
-                    fopts = helpers.to_map(item[1])
+            featureorder = vs.getpath(self.options, "__derived__.featureorder")
+            if isinstance(featureorder, list):
+                for fname in featureorder:
+                    fopts = helpers.to_map(feature_opts.get(fname))
                     if fopts is not None and fopts.get("active") is True:
                         utility.feature_add(self._rootctx, _make_feature(fname))
 
@@ -221,37 +224,37 @@ class FreeMusicApi2SDK:
 
 
     def V1List(self, data=None) -> "V1ListEntity":
-        """Entity factory: client.V1List().list({}) / client.V1List().load({"id": ...})."""
+        """Entity factory: client.V1List().list() / client.V1List().load({"id": ...})."""
         from entity.v1_list_entity import V1ListEntity
         return V1ListEntity(self, data)
 
 
     def V1Lookup(self, data=None) -> "V1LookupEntity":
-        """Entity factory: client.V1Lookup().list({}) / client.V1Lookup().load({"id": ...})."""
+        """Entity factory: client.V1Lookup().list() / client.V1Lookup().load({"id": ...})."""
         from entity.v1_lookup_entity import V1LookupEntity
         return V1LookupEntity(self, data)
 
 
     def V1Search(self, data=None) -> "V1SearchEntity":
-        """Entity factory: client.V1Search().list({}) / client.V1Search().load({"id": ...})."""
+        """Entity factory: client.V1Search().list() / client.V1Search().load({"id": ...})."""
         from entity.v1_search_entity import V1SearchEntity
         return V1SearchEntity(self, data)
 
 
     def V2List(self, data=None) -> "V2ListEntity":
-        """Entity factory: client.V2List().list({}) / client.V2List().load({"id": ...})."""
+        """Entity factory: client.V2List().list() / client.V2List().load({"id": ...})."""
         from entity.v2_list_entity import V2ListEntity
         return V2ListEntity(self, data)
 
 
     def V2Lookup(self, data=None) -> "V2LookupEntity":
-        """Entity factory: client.V2Lookup().list({}) / client.V2Lookup().load({"id": ...})."""
+        """Entity factory: client.V2Lookup().list() / client.V2Lookup().load({"id": ...})."""
         from entity.v2_lookup_entity import V2LookupEntity
         return V2LookupEntity(self, data)
 
 
     def V2Search(self, data=None) -> "V2SearchEntity":
-        """Entity factory: client.V2Search().list({}) / client.V2Search().load({"id": ...})."""
+        """Entity factory: client.V2Search().list() / client.V2Search().load({"id": ...})."""
         from entity.v2_search_entity import V2SearchEntity
         return V2SearchEntity(self, data)
 

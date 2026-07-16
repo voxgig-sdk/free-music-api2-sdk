@@ -177,7 +177,7 @@ V1List = Struct.new(
   keyword_init: true
 )
 
-# Match filter for V1List#list (any subset of V1List fields).
+# Request payload for V1List#list.
 #
 # @!attribute [rw] id_album
 #   @return [Integer, nil]
@@ -799,7 +799,7 @@ V1Lookup = Struct.new(
   keyword_init: true
 )
 
-# Match filter for V1Lookup#list (any subset of V1Lookup fields).
+# Request payload for V1Lookup#list.
 #
 # @!attribute [rw] id_album
 #   @return [Integer, nil]
@@ -1685,7 +1685,7 @@ V1Search = Struct.new(
   keyword_init: true
 )
 
-# Match filter for V1Search#list (any subset of V1Search fields).
+# Request payload for V1Search#list.
 #
 # @!attribute [rw] id_album
 #   @return [Integer, nil]
@@ -2156,16 +2156,16 @@ V2Lookup = Struct.new(
 # Request payload for V2Lookup#load.
 #
 # @!attribute [rw] album_id
-#   @return [Integer]
+#   @return [Integer, nil]
 #
 # @!attribute [rw] artist_id
-#   @return [Integer]
+#   @return [Integer, nil]
 #
 # @!attribute [rw] music_brainz_id
-#   @return [String]
+#   @return [String, nil]
 #
 # @!attribute [rw] track_id
-#   @return [Integer]
+#   @return [Integer, nil]
 V2LookupLoadMatch = Struct.new(
   :album_id,
   :artist_id,
@@ -2194,13 +2194,13 @@ V2Search = Struct.new(
 # Request payload for V2Search#load.
 #
 # @!attribute [rw] album_name
-#   @return [String]
+#   @return [String, nil]
 #
 # @!attribute [rw] artist_name
-#   @return [String]
+#   @return [String, nil]
 #
 # @!attribute [rw] track_name
-#   @return [String]
+#   @return [String, nil]
 V2SearchLoadMatch = Struct.new(
   :album_name,
   :artist_name,

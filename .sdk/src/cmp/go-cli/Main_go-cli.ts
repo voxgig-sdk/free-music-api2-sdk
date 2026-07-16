@@ -20,6 +20,16 @@ import {
 // eng/go/v<X.Y.Z>. Bump here when adopting a newer engine.
 const AQL_ENG_VERSION = 'v0.0.1'
 
+// go.sum entries for AQL_ENG_VERSION and its transitive deps. The sibling
+// SDK dep needs no entry (path replace). Deterministic because the version
+// is pinned above — regenerate with `go mod tidy` and update BOTH constants
+// together when bumping AQL_ENG_VERSION.
+const AQL_ENG_GOSUM = `github.com/aql-lang/aql/eng/go v0.0.1 h1:qvopmpIX5xL6cpAC4otSUO7fUDA46x/y+2lT2zoxTaA=
+github.com/aql-lang/aql/eng/go v0.0.1/go.mod h1:7LmNG+pASY2jlPZB0iFAt/ZNdmc8qxvaf+njVmaSFks=
+github.com/jsonicjs/jsonic/go v0.1.6 h1:oUw4vxCK6tqa7SGN87vjCtx3sCpeHXdqfl25hx5LKP0=
+github.com/jsonicjs/jsonic/go v0.1.6/go.mod h1:ObNKlCG7esWoi4AHCpdgkILvPINV8bpvkbCd4llGGUg=
+`
+
 
 const Main = cmp(function Main(props: any) {
   const { target } = props
@@ -34,13 +44,59 @@ const Main = cmp(function Main(props: any) {
 
   const FRAGMENT = Path.normalize(__dirname + '/../../../src/cmp/go-cli/fragment')
 
-  // .gitignore — the compiled binary lands at /<modulename>-cli; ignore it.
-  File({ name: '.gitignore' }, () => Content(`/${model.name}-cli
+  // .gitignore — build output (dist/) and any stray top-level binaries.
+  File({ name: '.gitignore' }, () => Content(`/dist/
+/${model.name}-cli
+/go-cli
 `))
 
   // README.md — usage guide for the AQL-driven CLI.
   const entityList = entityNames.length > 0 ? entityNames.join(' ') : '(none)'
-  const firstEntity = entityNames[0] || 'entity'
+
+  // MODEL-DRIVEN verbs. The CLI implements three AQL words (list / load /
+  // update; see words.fragment.go + runOp). Each README verb row is
+  // advertised ONLY when at least one active entity actually exposes that
+  // op (op.<name>.active !== false) — never document an operation no entity
+  // supports.
+  const CLI_VERB_ROWS: Record<string, string> = {
+    list:   '| `list`   | `[entity]` · `[query entity]`                | List records               |',
+    load:   '| `load`   | `[entity]` · `[query entity]`                | Load a single record       |',
+    update: '| `update` | `[entity]` · `[query entity]`                | Update a record            |',
+  }
+  const supportedOps = new Set<string>()
+  each(entityMap, (entity: any) => {
+    if (entity && entity.active === false) return
+    const ops = (entity && entity.op) || {}
+    for (const opname of Object.keys(ops)) {
+      if (ops[opname] && ops[opname].active !== false) supportedOps.add(opname)
+    }
+  })
+  const verbRows = ['list', 'load', 'update']
+    .filter(op => supportedOps.has(op))
+    .map(op => CLI_VERB_ROWS[op])
+    .join('\n')
+
+  // MODEL-DRIVEN run examples, gated on the first entity's own ops so the
+  // Run section never demonstrates a verb the example entity lacks.
+  const firstEntityObj: any =
+    Object.values(entityMap).find((e: any) => e && e.active !== false)
+  const firstEntity = firstEntityObj
+    ? String(firstEntityObj.name).toLowerCase()
+    : (entityNames[0] || 'entity')
+  const firstOps: any = (firstEntityObj && firstEntityObj.op) || {}
+  const firstHas = (op: string) => !!(firstOps[op] && firstOps[op].active !== false)
+  const runLines: string[] = ['# One-shot: arguments form a single AQL expression']
+  if (firstHas('list')) {
+    runLines.push(`./${model.name}-cli list ${firstEntity}`)
+  }
+  if (firstHas('load')) {
+    runLines.push(`./${model.name}-cli load 1 ${firstEntity}`)
+    runLines.push(`./${model.name}-cli load '{id:1}' ${firstEntity}`)
+  }
+  if (firstHas('update')) {
+    runLines.push(`./${model.name}-cli update '{id:1}' ${firstEntity}`)
+  }
+
   File({ name: 'README.md' }, () => Content(`# ${model.name}-cli
 
 AQL-driven CLI and REPL for the ${model.Name} SDK. Positional arguments are
@@ -58,10 +114,7 @@ go build -o ${model.name}-cli ./...
 ## Run
 
 \`\`\`sh
-# One-shot: arguments form a single AQL expression
-./${model.name}-cli list ${firstEntity}
-./${model.name}-cli load 1 ${firstEntity}
-./${model.name}-cli load '{id:1}' ${firstEntity}
+${runLines.join('\n')}
 
 # REPL
 ./${model.name}-cli
@@ -71,9 +124,7 @@ go build -o ${model.name}-cli ./...
 
 | Word     | Signatures                                   | Description                |
 |----------|----------------------------------------------|----------------------------|
-| \`list\`   | \`[entity]\` · \`[query entity]\`                | List records               |
-| \`load\`   | \`[entity]\` · \`[query entity]\`                | Load a single record       |
-| \`update\` | \`[entity]\` · \`[query entity]\`                | Update a record            |
+${verbRows}
 
 \`query\` is either a Map (\`{id:1}\`) or a Scalar (\`1\`, treated as \`{id:1}\`).
 \`entity\` is one of the SDK's entity names (auto-quoted as an atom).
@@ -95,15 +146,54 @@ sdkgen \`go-cli\` target. See the target source under
 `))
 
   // go.mod — sibling SDK via relative replace; aql/eng/go from the
-  // public Go module proxy.
+  // public Go module proxy. The go directive must be >= aql/eng/go's own
+  // (go 1.24.7 at eng/go/v0.0.1) — keep in step with AQL_ENG_VERSION.
   File({ name: 'go.mod' }, () => Content(`module ${cliModule}
 
-go 1.21
+go 1.24.7
 
 require ${sdkModule} v0.0.0
 require github.com/aql-lang/aql/eng/go ${AQL_ENG_VERSION}
 
+require github.com/jsonicjs/jsonic/go v0.1.6 // indirect
+
 replace ${sdkModule} => ../go
+`))
+
+  // go.sum — required for `go build` to accept the aql/eng/go dependency
+  // (the path-replaced sibling SDK needs no entry). Pinned alongside
+  // AQL_ENG_VERSION above.
+  File({ name: 'go.sum' }, () => Content(AQL_ENG_GOSUM))
+
+  // Makefile — `make build` for the current machine, `make build-all` to
+  // cross-compile for the three desktop OSes (linux, darwin, windows) on
+  // amd64 + arm64. Every binary is named ${model.name}-cli (+ .exe on windows)
+  // inside its own dist/<os>-<arch>/ folder — no loose top-level binary.
+  File({ name: 'Makefile' }, () => Content(`# ${model.name}-cli build. GENERATED by @voxgig/sdkgen go-cli target.
+BINARY := ${model.name}-cli
+DIST := dist
+GOOS := $(shell go env GOOS)
+GOARCH := $(shell go env GOARCH)
+EXT := $(if $(filter windows,$(GOOS)),.exe,)
+
+.PHONY: build build-all clean
+
+# Native build for the current machine -> dist/<os>-<arch>/${model.name}-cli.
+build:
+\tgo build -o $(DIST)/$(GOOS)-$(GOARCH)/$(BINARY)$(EXT) .
+
+# Cross-compiled release binaries: three desktop OSes x amd64/arm64, each named
+# ${model.name}-cli (+ .exe on windows) inside its own dist/<os>-<arch>/ folder.
+build-all: clean
+\tGOOS=linux   GOARCH=amd64 go build -o $(DIST)/linux-amd64/$(BINARY) .
+\tGOOS=linux   GOARCH=arm64 go build -o $(DIST)/linux-arm64/$(BINARY) .
+\tGOOS=darwin  GOARCH=amd64 go build -o $(DIST)/darwin-amd64/$(BINARY) .
+\tGOOS=darwin  GOARCH=arm64 go build -o $(DIST)/darwin-arm64/$(BINARY) .
+\tGOOS=windows GOARCH=amd64 go build -o $(DIST)/windows-amd64/$(BINARY).exe .
+\tGOOS=windows GOARCH=arm64 go build -o $(DIST)/windows-arm64/$(BINARY).exe .
+
+clean:
+\trm -rf $(DIST) $(BINARY) go-cli
 `))
 
   // main.go — produced from fragment/main.fragment.go with two Slots
@@ -115,6 +205,10 @@ replace ${sdkModule} => ../go
         replace: {
           ...props.ctx$.stdrep,
           GOMODULE: sdkModule,
+          // Env vars the CLI reads: <PROJ>_APIKEY for the key and <PROJ>_BASE
+          // to override the API base URL (both injectable by a secrets vault).
+          APIKEYENVVAR: String(model.name).toUpperCase().replace(/[^A-Z0-9]/g, '_') + '_APIKEY',
+          BASEENVVAR: String(model.name).toUpperCase().replace(/[^A-Z0-9]/g, '_') + '_BASE',
         },
       },
       () => {

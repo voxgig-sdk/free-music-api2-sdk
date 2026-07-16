@@ -25,11 +25,11 @@
 // Package_php.ts) so `new <Name>()` / type references resolve globally.
 
 import {
-  cmp, each,
+  cmp, each, names,
   File, Content, Folder,
 } from '@voxgig/sdkgen'
 
-import { canonToType } from '@voxgig/sdkgen'
+import { canonToType, opTypeName, opRequestShape } from '@voxgig/sdkgen'
 
 import {
   KIT,
@@ -40,32 +40,10 @@ import {
 const LANG = 'php'
 
 
-// The five ops, and whether their request payload is a `Match` (query/id) or
-// `Data` (body) — this fixes the generated type-name suffix per op.
-const OP_SUFFIX: Record<string, 'Match' | 'Data'> = {
-  load: 'Match',
-  list: 'Match',
-  remove: 'Match',
-  create: 'Data',
-  update: 'Data',
-}
-
-
 // A valid PHP property/label name (identifiers only; the corpus never carries
 // exotic field names, but guard so a bad name can never emit invalid PHP).
 function validName(name: string): boolean {
   return /^[A-Za-z_\x80-\xff][A-Za-z0-9_\x80-\xff]*$/.test(name)
-}
-
-
-function cap(s: string): string {
-  return s.charAt(0).toUpperCase() + s.slice(1)
-}
-
-
-// The generated type name for an op's request payload, e.g. ActivityLoadMatch.
-function opTypeName(Name: string, opname: string): string {
-  return Name + cap(opname) + (OP_SUFFIX[opname] || 'Match')
 }
 
 
@@ -85,29 +63,15 @@ function propLine(name: string, sentinel: unknown, optional: boolean): string {
 }
 
 
-// Collect an op's params, deduped by name across all of its points.
-function opParams(op: any): any[] {
-  const points = op && op.points ? each(op.points) : []
-  const seen: Record<string, boolean> = {}
-  const out: any[] = []
-  points.forEach((pt: any) => {
-    const params = pt && pt.args && pt.args.params ? each(pt.args.params) : []
-    params.forEach((p: any) => {
-      if (p && null != p.name && !seen[p.name]) {
-        seen[p.name] = true
-        out.push(p)
-      }
-    })
-  })
-  return out
-}
-
-
 const EntityTypes = cmp(function EntityTypes(props: any) {
   const { model } = props.ctx$
 
   const entity = getModelPath(model, `main.${KIT}.entity`)
   const entityList = each(entity).filter((e: any) => e.active !== false)
+  // Derive the PascalCase Name up-front — it is set LAZILY by names(), so an
+  // entity not yet named (e.g. a fieldless placeholder) would otherwise read
+  // `Name = undefined` below. Parity with the go emitter's fix.
+  entityList.forEach((e: any) => { if (null == e.Name) names(e, e.name) })
 
   Folder({ name: 'types' }, () => {
 
@@ -146,45 +110,30 @@ class ${Name}
 
 `)
 
-        // Per active op: a request/match class. With params -> a typed class of
-        // those params; without params -> a match class over the entity fields,
-        // all-optional (the PHP stand-in for TS Partial<${Name}>).
+        // Per active op: a request/match class. Members and their optionality
+        // come from the shared partiality policy (opRequestShape); this file
+        // only renders them as a PHP value-object class.
         const ops = ent.op || {}
         ;['load', 'list', 'create', 'update', 'remove'].forEach((opname: string) => {
-          const op = ops[opname]
-          if (null == op) {
+          if (null == ops[opname]) {
             return
           }
 
           const typeName = opTypeName(Name, opname)
-          const params = opParams(op)
+          const { items } = opRequestShape(ent, opname)
 
-          if (0 < params.length) {
-            Content(`/** Request payload for ${Name}#${opname}. */
+          Content(`/** Request payload for ${Name}#${opname}. */
 class ${typeName}
 {
 `)
-            params.forEach((p: any) => {
-              if (validName(p.name)) {
-                Content(propLine(p.name, p.type, false === p.reqd))
-              }
-            })
-            Content(`}
+          items.forEach((it: any) => {
+            if (validName(it.name)) {
+              Content(propLine(it.name, it.type, it.optional))
+            }
+          })
+          Content(`}
 
 `)
-          }
-          else {
-            Content(`/** Match filter for ${Name}#${opname} (any subset of ${Name} fields). */
-class ${typeName}
-{
-`)
-            fields.forEach((f: any) => {
-              Content(propLine(f.name, f.type, true))
-            })
-            Content(`}
-
-`)
-          }
         })
       })
     })

@@ -1,10 +1,12 @@
 
-import { cmp, each, Content } from '@voxgig/sdkgen'
+import { cmp, each, Content, canonToType, entityIdField, opRequestShape, safeVarName } from '@voxgig/sdkgen'
 
 import {
   KIT,
   getModelPath,
 } from '@voxgig/apidef'
+
+import { exampleValue } from './utility_ts'
 
 
 // Operation method spelling differs between Go and other languages — Go
@@ -41,6 +43,10 @@ const ReadmeEntity = cmp(function ReadmeEntity(props: any) {
   publishedEntities.map((entity: any) => {
     const opnames = Object.keys(entity.op || {})
     const fields = entity.fields || []
+    // Model-driven id key: null when this entity has no id-like field.
+    const idF = entityIdField(entity)
+    // Variable-safe lowercase name (a `Delete` entity must not bind `delete`).
+    const eVar = safeVarName(entity.name, target.name)
 
     Content(`
 ### ${entity.Name}
@@ -53,7 +59,7 @@ const ReadmeEntity = cmp(function ReadmeEntity(props: any) {
 `)
     }
 
-    Content(`Create an instance: \`const ${entity.name} = client.${entity.Name}()\`
+    Content(`Create an instance: \`const ${eVar} = client.${entity.Name}()\`
 
 `)
 
@@ -84,7 +90,7 @@ const ReadmeEntity = cmp(function ReadmeEntity(props: any) {
 
       each(fields, (field: any) => {
         const desc = field.short || ''
-        Content(`| \`${field.name}\` | \`${field.type || 'any'}\` | ${desc} |
+        Content(`| \`${field.name}\` | \`${canonToType(field.type, target.name)}\` | ${desc} |
 `)
       })
 
@@ -93,10 +99,22 @@ const ReadmeEntity = cmp(function ReadmeEntity(props: any) {
     }
 
     if (opnames.includes('load')) {
+      // The id key plus every REQUIRED match key (parent path params like
+      // page_id) — the same shape that generates <Name>LoadMatch, so the
+      // example always type-checks.
+      const loadItems = opRequestShape(entity, 'load').items
+        .filter((it: any) => !it.optional || it.name === idF)
+        .sort((a: any, b: any) =>
+          (a.name === idF ? 0 : 1) - (b.name === idF ? 0 : 1))
+      const loadArg = 0 < loadItems.length
+        ? `{ ${loadItems.map((it: any) =>
+          `${it.name}: ${exampleValue(entity, entity.op && entity.op.load, it.name,
+            it.name === idF ? entity.name + '_id' : it.name)}`).join(', ')} }`
+        : ''
       Content(`#### Example: Load
 
 \`\`\`ts
-const ${entity.name} = await client.${entity.Name}().load({ id: '${entity.name}_id' })
+const ${eVar} = await client.${entity.Name}().load(${loadArg})
 \`\`\`
 
 `)
@@ -106,23 +124,27 @@ const ${entity.name} = await client.${entity.Name}().load({ id: '${entity.name}_
       Content(`#### Example: List
 
 \`\`\`ts
-const ${entity.name}s = await client.${entity.Name}().list()
+const ${eVar}s = await client.${entity.Name}().list()
 \`\`\`
 
 `)
     }
 
     if (opnames.includes('create')) {
+      // Members come from the SAME shape that generates <Name>CreateData
+      // (every required member appears), with a type-correct example VALUE
+      // via exampleValue — a `name: /* type */` comment is not a value and
+      // yields invalid TS (TS1109), so the example must carry a real literal.
+      const createItems = opRequestShape(entity, 'create').items
+        .filter((it: any) => !it.optional)
       Content(`#### Example: Create
 
 \`\`\`ts
-const ${entity.name} = await client.${entity.Name}().create({
+const ${eVar} = await client.${entity.Name}().create({
 `)
-      each(fields, (field: any) => {
-        if ('id' !== field.name && field.req) {
-          Content(`  ${field.name}: /* ${field.type || 'value'} */,
+      createItems.map((it: any) => {
+        Content(`  ${it.name}: ${exampleValue(entity, entity.op && entity.op.create, it.name, 'example_' + it.name)},
 `)
-        }
       })
       Content(`})
 \`\`\`

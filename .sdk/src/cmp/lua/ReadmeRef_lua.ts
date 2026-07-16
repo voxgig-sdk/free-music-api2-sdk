@@ -1,10 +1,28 @@
 
-import { cmp, each, Content, File, isAuthActive } from '@voxgig/sdkgen'
+import { cmp, each, Content, canonToType, canonKey, File, isAuthActive, entityIdField, opRequestShape, safeVarName } from '@voxgig/sdkgen'
 
 import {
   KIT,
   getModelPath,
 } from '@voxgig/apidef'
+
+
+// A type-correct, executable Lua literal for a param: numeric/boolean/table
+// params render a typed literal; strings render the quoted placeholder (the
+// doc test EXECUTES runnable blocks, so a comment placeholder would not
+// parse).
+function luaLit(type: any, placeholder: string = 'example'): string {
+  const k = canonKey(type)
+  if ('INTEGER' === k || 'NUMBER' === k) return '1'
+  if ('BOOLEAN' === k) return 'true'
+  if ('ARRAY' === k || 'OBJECT' === k) return '{}'
+  return `"${placeholder}"`
+}
+
+// Non-identifier table keys use bracket syntax.
+function luaKey(name: string): string {
+  return /^[A-Za-z_]\w*$/.test(name) ? name : `["${name}"]`
+}
 
 
 const OP_SIGNATURES: Record<string, { sig: string, returns: string, desc: string }> = {
@@ -153,6 +171,12 @@ same parameters as \`direct()\`.
     publishedEntities.map((ent: any) => {
       const opnames = Object.keys(ent.op || {})
       const fields = ent.fields || []
+      // Model-driven id key: null when this entity has no id-like field, in
+      // which case load/remove match on no argument and update omits the id.
+      const idF = entityIdField(ent)
+      // Sanitise the local variable name — an entity whose lowercased name is
+      // a Lua keyword (e.g. `end`) would otherwise emit uncompilable code.
+      const eVar = safeVarName(ent.name, 'lua')
 
       Content(`
 ---
@@ -168,7 +192,7 @@ same parameters as \`direct()\`.
       }
 
       Content(`\`\`\`lua
-local ${ent.name} = client:${ent.Name}(nil)
+local ${eVar} = client:${ent.Name}(nil)
 \`\`\`
 
 `)
@@ -184,7 +208,7 @@ local ${ent.name} = client:${ent.Name}(nil)
         each(fields, (field: any) => {
           const req = field.req ? 'Yes' : 'No'
           const desc = field.short || ''
-          Content(`| \`${field.name}\` | \`${field.type || 'any'}\` | ${req} | ${desc} |
+          Content(`| \`${field.name}\` | \`${canonToType(field.type, target.name)}\` | ${req} | ${desc} |
 `)
         })
 
@@ -194,15 +218,18 @@ local ${ent.name} = client:${ent.Name}(nil)
         // Field operations breakdown
         const hasFieldOps = fields.some((f: any) => f.op && Object.keys(f.op).length > 0)
         if (hasFieldOps) {
+          // Only emit columns for operations this entity actually exposes —
+          // never advertise a create/update/remove column the entity lacks.
+          const opcols = ['load', 'list', 'create', 'update', 'remove']
+            .filter((op: string) => opnames.includes(op) && ent.op[op]?.active !== false)
           Content(`### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
+| Field | ${opcols.join(' | ')} |
+| --- | ${opcols.map(() => '---').join(' | ')} |
 `)
           each(fields, (field: any) => {
             const fops = field.op || {}
-            const cols = ['load', 'list', 'create', 'update', 'remove'].map((op: string) => {
-              if (!opnames.includes(op)) return '-'
+            const cols = opcols.map((op: string) => {
               const fop = fops[op]
               if (null == fop) return '-'
               if (fop.active === false) return '-'
@@ -236,8 +263,20 @@ ${info.desc}
 
           // Show example
           if ('load' === opname || 'remove' === opname) {
+            // The id key plus every REQUIRED match key (parent path params
+            // like page_id) — the same shape the runtime resolves path
+            // params from, so the example always works.
+            const matchItems = opRequestShape(ent, opname).items
+              .filter((it: any) => !it.optional || it.name === idF)
+              .sort((a: any, b: any) =>
+                (a.name === idF ? 0 : 1) - (b.name === idF ? 0 : 1))
+            const arg = 0 < matchItems.length
+              ? `{ ${matchItems.map((it: any) =>
+                `${luaKey(it.name)} = ${luaLit(it.type,
+                  it.name === idF ? ent.name + '_id' : it.name)}`).join(', ')} }`
+              : ''
             Content(`\`\`\`lua
-local result, err = client:${ent.Name}():${opname}({ id = "${ent.name}_id" })
+local result, err = client:${ent.Name}():${opname}(${arg})
 \`\`\`
 
 `)
@@ -250,14 +289,19 @@ local results, err = client:${ent.Name}():list()
 `)
           }
           else if ('create' === opname) {
+            // Members come from the SAME shape the runtime validates
+            // (opRequestShape): every required member must appear — including
+            // a required id and parent keys like page_id (the --[[ type ]]
+            // placeholders mark the block as an illustration for the doc
+            // gate).
+            const createItems = opRequestShape(ent, 'create').items
+              .filter((it: any) => !it.optional)
             Content(`\`\`\`lua
 local result, err = client:${ent.Name}():create({
 `)
-            each(fields, (field: any) => {
-              if ('id' !== field.name && field.req) {
-                Content(`  ${field.name} = --[[ ${field.type || 'value'} ]],
+            createItems.map((it: any) => {
+              Content(`  ${luaKey(it.name)} = --[[ ${canonToType(it.type, target.name)} ]],
 `)
-              }
             })
             Content(`})
 \`\`\`
@@ -265,10 +309,18 @@ local result, err = client:${ent.Name}():create({
 `)
           }
           else if ('update' === opname) {
+            // The id key plus every REQUIRED data member — the same shape the
+            // runtime validates — then the patch-fields note.
+            const updateItems = opRequestShape(ent, 'update').items
+              .filter((it: any) => !it.optional || it.name === idF)
+              .sort((a: any, b: any) =>
+                (a.name === idF ? 0 : 1) - (b.name === idF ? 0 : 1))
+            const updateLines = updateItems.map((it: any) =>
+              `  ${luaKey(it.name)} = ${luaLit(it.type,
+                it.name === idF ? ent.name + '_id' : it.name)},\n`).join('')
             Content(`\`\`\`lua
 local result, err = client:${ent.Name}():update({
-  id = "${ent.name}_id",
-  -- Fields to update
+${updateLines}  -- Fields to update
 })
 \`\`\`
 

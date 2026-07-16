@@ -1,8 +1,0 @@
-# Flows
-
-@"BasicV1ListFlow.jsonic"
-@"BasicV1LookupFlow.jsonic"
-@"BasicV1SearchFlow.jsonic"
-@"BasicV2ListFlow.jsonic"
-@"BasicV2LookupFlow.jsonic"
-@"BasicV2SearchFlow.jsonic"
