@@ -10,2120 +10,2120 @@
 
 # V1List entity data model.
 #
-# @!attribute [rw] id_album
+# @!attribute [rw] idAlbum
 #   @return [Integer, nil]
 #
-# @!attribute [rw] id_artist
+# @!attribute [rw] idArtist
 #   @return [Integer, nil]
 #
-# @!attribute [rw] id_imvdb
+# @!attribute [rw] idIMVDB
 #   @return [Integer, nil]
 #
-# @!attribute [rw] id_lyric
+# @!attribute [rw] idLyric
 #   @return [Integer, nil]
 #
-# @!attribute [rw] id_track
+# @!attribute [rw] idTrack
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_cd
+# @!attribute [rw] intCD
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_duration
+# @!attribute [rw] intDuration
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_loved
+# @!attribute [rw] intLoved
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_music_vid_comment
+# @!attribute [rw] intMusicVidComments
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_music_vid_dislike
+# @!attribute [rw] intMusicVidDislikes
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_music_vid_favorite
+# @!attribute [rw] intMusicVidFavorites
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_music_vid_like
+# @!attribute [rw] intMusicVidLikes
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_music_vid_view
+# @!attribute [rw] intMusicVidViews
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_score
+# @!attribute [rw] intScore
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_score_vote
+# @!attribute [rw] intScoreVotes
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_total_listener
+# @!attribute [rw] intTotalListeners
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_total_play
+# @!attribute [rw] intTotalPlays
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_track_number
+# @!attribute [rw] intTrackNumber
 #   @return [Integer, nil]
 #
 # @!attribute [rw] loved
 #   @return [Array, nil]
 #
-# @!attribute [rw] str_album
+# @!attribute [rw] strAlbum
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist
+# @!attribute [rw] strArtist
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_alternate
+# @!attribute [rw] strArtistAlternate
 #   @return [String, nil]
 #
-# @!attribute [rw] str_description_en
+# @!attribute [rw] strDescriptionEN
 #   @return [String, nil]
 #
-# @!attribute [rw] str_genre
+# @!attribute [rw] strGenre
 #   @return [String, nil]
 #
-# @!attribute [rw] str_locked
+# @!attribute [rw] strLocked
 #   @return [String, nil]
 #
-# @!attribute [rw] str_mood
+# @!attribute [rw] strMood
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_brainz_album_id
+# @!attribute [rw] strMusicBrainzAlbumID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_brainz_artist_id
+# @!attribute [rw] strMusicBrainzArtistID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_brainz_id
+# @!attribute [rw] strMusicBrainzID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_vid
+# @!attribute [rw] strMusicVid
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_vid_company
+# @!attribute [rw] strMusicVidCompany
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_vid_director
+# @!attribute [rw] strMusicVidDirector
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_vid_screen1
+# @!attribute [rw] strMusicVidScreen1
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_vid_screen2
+# @!attribute [rw] strMusicVidScreen2
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_vid_screen3
+# @!attribute [rw] strMusicVidScreen3
 #   @return [String, nil]
 #
-# @!attribute [rw] str_style
+# @!attribute [rw] strStyle
 #   @return [String, nil]
 #
-# @!attribute [rw] str_theme
+# @!attribute [rw] strTheme
 #   @return [String, nil]
 #
-# @!attribute [rw] str_track
+# @!attribute [rw] strTrack
 #   @return [String, nil]
 #
-# @!attribute [rw] str_track_lyric
+# @!attribute [rw] strTrackLyrics
 #   @return [String, nil]
 #
-# @!attribute [rw] str_track_thumb
+# @!attribute [rw] strTrackThumb
 #   @return [String, nil]
 #
 # @!attribute [rw] trending
 #   @return [Array, nil]
 V1List = Struct.new(
-  :id_album,
-  :id_artist,
-  :id_imvdb,
-  :id_lyric,
-  :id_track,
-  :int_cd,
-  :int_duration,
-  :int_loved,
-  :int_music_vid_comment,
-  :int_music_vid_dislike,
-  :int_music_vid_favorite,
-  :int_music_vid_like,
-  :int_music_vid_view,
-  :int_score,
-  :int_score_vote,
-  :int_total_listener,
-  :int_total_play,
-  :int_track_number,
+  :idAlbum,
+  :idArtist,
+  :idIMVDB,
+  :idLyric,
+  :idTrack,
+  :intCD,
+  :intDuration,
+  :intLoved,
+  :intMusicVidComments,
+  :intMusicVidDislikes,
+  :intMusicVidFavorites,
+  :intMusicVidLikes,
+  :intMusicVidViews,
+  :intScore,
+  :intScoreVotes,
+  :intTotalListeners,
+  :intTotalPlays,
+  :intTrackNumber,
   :loved,
-  :str_album,
-  :str_artist,
-  :str_artist_alternate,
-  :str_description_en,
-  :str_genre,
-  :str_locked,
-  :str_mood,
-  :str_music_brainz_album_id,
-  :str_music_brainz_artist_id,
-  :str_music_brainz_id,
-  :str_music_vid,
-  :str_music_vid_company,
-  :str_music_vid_director,
-  :str_music_vid_screen1,
-  :str_music_vid_screen2,
-  :str_music_vid_screen3,
-  :str_style,
-  :str_theme,
-  :str_track,
-  :str_track_lyric,
-  :str_track_thumb,
+  :strAlbum,
+  :strArtist,
+  :strArtistAlternate,
+  :strDescriptionEN,
+  :strGenre,
+  :strLocked,
+  :strMood,
+  :strMusicBrainzAlbumID,
+  :strMusicBrainzArtistID,
+  :strMusicBrainzID,
+  :strMusicVid,
+  :strMusicVidCompany,
+  :strMusicVidDirector,
+  :strMusicVidScreen1,
+  :strMusicVidScreen2,
+  :strMusicVidScreen3,
+  :strStyle,
+  :strTheme,
+  :strTrack,
+  :strTrackLyrics,
+  :strTrackThumb,
   :trending,
   keyword_init: true
 )
 
 # Request payload for V1List#list.
 #
-# @!attribute [rw] id_album
+# @!attribute [rw] idAlbum
 #   @return [Integer, nil]
 #
-# @!attribute [rw] id_artist
+# @!attribute [rw] idArtist
 #   @return [Integer, nil]
 #
-# @!attribute [rw] id_imvdb
+# @!attribute [rw] idIMVDB
 #   @return [Integer, nil]
 #
-# @!attribute [rw] id_lyric
+# @!attribute [rw] idLyric
 #   @return [Integer, nil]
 #
-# @!attribute [rw] id_track
+# @!attribute [rw] idTrack
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_cd
+# @!attribute [rw] intCD
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_duration
+# @!attribute [rw] intDuration
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_loved
+# @!attribute [rw] intLoved
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_music_vid_comment
+# @!attribute [rw] intMusicVidComments
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_music_vid_dislike
+# @!attribute [rw] intMusicVidDislikes
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_music_vid_favorite
+# @!attribute [rw] intMusicVidFavorites
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_music_vid_like
+# @!attribute [rw] intMusicVidLikes
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_music_vid_view
+# @!attribute [rw] intMusicVidViews
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_score
+# @!attribute [rw] intScore
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_score_vote
+# @!attribute [rw] intScoreVotes
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_total_listener
+# @!attribute [rw] intTotalListeners
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_total_play
+# @!attribute [rw] intTotalPlays
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_track_number
+# @!attribute [rw] intTrackNumber
 #   @return [Integer, nil]
 #
 # @!attribute [rw] loved
 #   @return [Array, nil]
 #
-# @!attribute [rw] str_album
+# @!attribute [rw] strAlbum
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist
+# @!attribute [rw] strArtist
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_alternate
+# @!attribute [rw] strArtistAlternate
 #   @return [String, nil]
 #
-# @!attribute [rw] str_description_en
+# @!attribute [rw] strDescriptionEN
 #   @return [String, nil]
 #
-# @!attribute [rw] str_genre
+# @!attribute [rw] strGenre
 #   @return [String, nil]
 #
-# @!attribute [rw] str_locked
+# @!attribute [rw] strLocked
 #   @return [String, nil]
 #
-# @!attribute [rw] str_mood
+# @!attribute [rw] strMood
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_brainz_album_id
+# @!attribute [rw] strMusicBrainzAlbumID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_brainz_artist_id
+# @!attribute [rw] strMusicBrainzArtistID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_brainz_id
+# @!attribute [rw] strMusicBrainzID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_vid
+# @!attribute [rw] strMusicVid
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_vid_company
+# @!attribute [rw] strMusicVidCompany
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_vid_director
+# @!attribute [rw] strMusicVidDirector
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_vid_screen1
+# @!attribute [rw] strMusicVidScreen1
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_vid_screen2
+# @!attribute [rw] strMusicVidScreen2
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_vid_screen3
+# @!attribute [rw] strMusicVidScreen3
 #   @return [String, nil]
 #
-# @!attribute [rw] str_style
+# @!attribute [rw] strStyle
 #   @return [String, nil]
 #
-# @!attribute [rw] str_theme
+# @!attribute [rw] strTheme
 #   @return [String, nil]
 #
-# @!attribute [rw] str_track
+# @!attribute [rw] strTrack
 #   @return [String, nil]
 #
-# @!attribute [rw] str_track_lyric
+# @!attribute [rw] strTrackLyrics
 #   @return [String, nil]
 #
-# @!attribute [rw] str_track_thumb
+# @!attribute [rw] strTrackThumb
 #   @return [String, nil]
 #
 # @!attribute [rw] trending
 #   @return [Array, nil]
 V1ListListMatch = Struct.new(
-  :id_album,
-  :id_artist,
-  :id_imvdb,
-  :id_lyric,
-  :id_track,
-  :int_cd,
-  :int_duration,
-  :int_loved,
-  :int_music_vid_comment,
-  :int_music_vid_dislike,
-  :int_music_vid_favorite,
-  :int_music_vid_like,
-  :int_music_vid_view,
-  :int_score,
-  :int_score_vote,
-  :int_total_listener,
-  :int_total_play,
-  :int_track_number,
+  :idAlbum,
+  :idArtist,
+  :idIMVDB,
+  :idLyric,
+  :idTrack,
+  :intCD,
+  :intDuration,
+  :intLoved,
+  :intMusicVidComments,
+  :intMusicVidDislikes,
+  :intMusicVidFavorites,
+  :intMusicVidLikes,
+  :intMusicVidViews,
+  :intScore,
+  :intScoreVotes,
+  :intTotalListeners,
+  :intTotalPlays,
+  :intTrackNumber,
   :loved,
-  :str_album,
-  :str_artist,
-  :str_artist_alternate,
-  :str_description_en,
-  :str_genre,
-  :str_locked,
-  :str_mood,
-  :str_music_brainz_album_id,
-  :str_music_brainz_artist_id,
-  :str_music_brainz_id,
-  :str_music_vid,
-  :str_music_vid_company,
-  :str_music_vid_director,
-  :str_music_vid_screen1,
-  :str_music_vid_screen2,
-  :str_music_vid_screen3,
-  :str_style,
-  :str_theme,
-  :str_track,
-  :str_track_lyric,
-  :str_track_thumb,
+  :strAlbum,
+  :strArtist,
+  :strArtistAlternate,
+  :strDescriptionEN,
+  :strGenre,
+  :strLocked,
+  :strMood,
+  :strMusicBrainzAlbumID,
+  :strMusicBrainzArtistID,
+  :strMusicBrainzID,
+  :strMusicVid,
+  :strMusicVidCompany,
+  :strMusicVidDirector,
+  :strMusicVidScreen1,
+  :strMusicVidScreen2,
+  :strMusicVidScreen3,
+  :strStyle,
+  :strTheme,
+  :strTrack,
+  :strTrackLyrics,
+  :strTrackThumb,
   :trending,
   keyword_init: true
 )
 
 # V1Lookup entity data model.
 #
-# @!attribute [rw] id_album
+# @!attribute [rw] idAlbum
 #   @return [Integer, nil]
 #
-# @!attribute [rw] id_artist
+# @!attribute [rw] idArtist
 #   @return [Integer, nil]
 #
-# @!attribute [rw] id_imvdb
+# @!attribute [rw] idIMVDB
 #   @return [Integer, nil]
 #
-# @!attribute [rw] id_label
+# @!attribute [rw] idLabel
 #   @return [Integer, nil]
 #
-# @!attribute [rw] id_lyric
+# @!attribute [rw] idLyric
 #   @return [Integer, nil]
 #
-# @!attribute [rw] id_track
+# @!attribute [rw] idTrack
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_born_year
+# @!attribute [rw] intBornYear
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_cd
+# @!attribute [rw] intCD
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_charted
+# @!attribute [rw] intCharted
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_died_year
+# @!attribute [rw] intDiedYear
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_duration
+# @!attribute [rw] intDuration
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_formed_year
+# @!attribute [rw] intFormedYear
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_loved
+# @!attribute [rw] intLoved
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_member
+# @!attribute [rw] intMembers
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_music_vid_comment
+# @!attribute [rw] intMusicVidComments
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_music_vid_dislike
+# @!attribute [rw] intMusicVidDislikes
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_music_vid_favorite
+# @!attribute [rw] intMusicVidFavorites
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_music_vid_like
+# @!attribute [rw] intMusicVidLikes
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_music_vid_view
+# @!attribute [rw] intMusicVidViews
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_sale
+# @!attribute [rw] intSales
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_score
+# @!attribute [rw] intScore
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_score_vote
+# @!attribute [rw] intScoreVotes
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_total_listener
+# @!attribute [rw] intTotalListeners
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_total_play
+# @!attribute [rw] intTotalPlays
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_track_number
+# @!attribute [rw] intTrackNumber
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_year_released
+# @!attribute [rw] intYearReleased
 #   @return [Integer, nil]
 #
-# @!attribute [rw] str_album
+# @!attribute [rw] strAlbum
 #   @return [String, nil]
 #
-# @!attribute [rw] str_album3_d_case
+# @!attribute [rw] strAlbum3DCase
 #   @return [String, nil]
 #
-# @!attribute [rw] str_album3_d_face
+# @!attribute [rw] strAlbum3DFace
 #   @return [String, nil]
 #
-# @!attribute [rw] str_album3_d_flat
+# @!attribute [rw] strAlbum3DFlat
 #   @return [String, nil]
 #
-# @!attribute [rw] str_album3_d_thumb
+# @!attribute [rw] strAlbum3DThumb
 #   @return [String, nil]
 #
-# @!attribute [rw] str_album_c_dart
+# @!attribute [rw] strAlbumCDart
 #   @return [String, nil]
 #
-# @!attribute [rw] str_album_spine
+# @!attribute [rw] strAlbumSpine
 #   @return [String, nil]
 #
-# @!attribute [rw] str_album_stripped
+# @!attribute [rw] strAlbumStripped
 #   @return [String, nil]
 #
-# @!attribute [rw] str_album_thumb
+# @!attribute [rw] strAlbumThumb
 #   @return [String, nil]
 #
-# @!attribute [rw] str_album_thumb_back
+# @!attribute [rw] strAlbumThumbBack
 #   @return [String, nil]
 #
-# @!attribute [rw] str_album_thumb_hq
+# @!attribute [rw] strAlbumThumbHQ
 #   @return [String, nil]
 #
-# @!attribute [rw] str_all_music_id
+# @!attribute [rw] strAllMusicID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_amazon_id
+# @!attribute [rw] strAmazonID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_apple_music
+# @!attribute [rw] strAppleMusic
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist
+# @!attribute [rw] strArtist
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_alternate
+# @!attribute [rw] strArtistAlternate
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_banner
+# @!attribute [rw] strArtistBanner
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_clearart
+# @!attribute [rw] strArtistClearart
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_cutout
+# @!attribute [rw] strArtistCutout
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_fanart
+# @!attribute [rw] strArtistFanart
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_fanart2
+# @!attribute [rw] strArtistFanart2
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_fanart3
+# @!attribute [rw] strArtistFanart3
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_fanart4
+# @!attribute [rw] strArtistFanart4
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_logo
+# @!attribute [rw] strArtistLogo
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_stripped
+# @!attribute [rw] strArtistStripped
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_thumb
+# @!attribute [rw] strArtistThumb
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_wide_thumb
+# @!attribute [rw] strArtistWideThumb
 #   @return [String, nil]
 #
-# @!attribute [rw] str_bbc_review_id
+# @!attribute [rw] strBBCReviewID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_cn
+# @!attribute [rw] strBiographyCN
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_de
+# @!attribute [rw] strBiographyDE
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_e
+# @!attribute [rw] strBiographyEN
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_en
+# @!attribute [rw] strBiographyES
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_fr
+# @!attribute [rw] strBiographyFR
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_hu
+# @!attribute [rw] strBiographyHU
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_il
+# @!attribute [rw] strBiographyIL
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_it
+# @!attribute [rw] strBiographyIT
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_jp
+# @!attribute [rw] strBiographyJP
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_nl
+# @!attribute [rw] strBiographyNL
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_no
+# @!attribute [rw] strBiographyNO
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_pl
+# @!attribute [rw] strBiographyPL
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_pt
+# @!attribute [rw] strBiographyPT
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_ru
+# @!attribute [rw] strBiographyRU
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_se
+# @!attribute [rw] strBiographySE
 #   @return [String, nil]
 #
-# @!attribute [rw] str_country
+# @!attribute [rw] strCountry
 #   @return [String, nil]
 #
-# @!attribute [rw] str_country_code
+# @!attribute [rw] strCountryCode
 #   @return [String, nil]
 #
-# @!attribute [rw] str_description_en
+# @!attribute [rw] strDescriptionEN
 #   @return [String, nil]
 #
-# @!attribute [rw] str_disbanded
+# @!attribute [rw] strDisbanded
 #   @return [String, nil]
 #
-# @!attribute [rw] str_discogs_id
+# @!attribute [rw] strDiscogsID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_facebook
+# @!attribute [rw] strFacebook
 #   @return [String, nil]
 #
-# @!attribute [rw] str_gender
+# @!attribute [rw] strGender
 #   @return [String, nil]
 #
-# @!attribute [rw] str_genius_id
+# @!attribute [rw] strGeniusID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_genre
+# @!attribute [rw] strGenre
 #   @return [String, nil]
 #
-# @!attribute [rw] str_instagram
+# @!attribute [rw] strInstagram
 #   @return [String, nil]
 #
-# @!attribute [rw] str_itunes_id
+# @!attribute [rw] strItunesID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_label
+# @!attribute [rw] strLabel
 #   @return [String, nil]
 #
-# @!attribute [rw] str_last_fm_chart
+# @!attribute [rw] strLastFMChart
 #   @return [String, nil]
 #
-# @!attribute [rw] str_location
+# @!attribute [rw] strLocation
 #   @return [String, nil]
 #
-# @!attribute [rw] str_locked
+# @!attribute [rw] strLocked
 #   @return [String, nil]
 #
-# @!attribute [rw] str_lyric_wiki_id
+# @!attribute [rw] strLyricWikiID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_mood
+# @!attribute [rw] strMood
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_brainz_album_id
+# @!attribute [rw] strMusicBrainzAlbumID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_brainz_artist_id
+# @!attribute [rw] strMusicBrainzArtistID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_brainz_id
+# @!attribute [rw] strMusicBrainzID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_moz_id
+# @!attribute [rw] strMusicMozID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_vid
+# @!attribute [rw] strMusicVid
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_vid_company
+# @!attribute [rw] strMusicVidCompany
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_vid_director
+# @!attribute [rw] strMusicVidDirector
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_vid_screen1
+# @!attribute [rw] strMusicVidScreen1
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_vid_screen2
+# @!attribute [rw] strMusicVidScreen2
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_vid_screen3
+# @!attribute [rw] strMusicVidScreen3
 #   @return [String, nil]
 #
-# @!attribute [rw] str_rate_your_music_id
+# @!attribute [rw] strRateYourMusicID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_release_format
+# @!attribute [rw] strReleaseFormat
 #   @return [String, nil]
 #
-# @!attribute [rw] str_review
+# @!attribute [rw] strReview
 #   @return [String, nil]
 #
-# @!attribute [rw] str_sound_cloud
+# @!attribute [rw] strSoundCloud
 #   @return [String, nil]
 #
-# @!attribute [rw] str_speed
+# @!attribute [rw] strSpeed
 #   @return [String, nil]
 #
-# @!attribute [rw] str_spotify
+# @!attribute [rw] strSpotify
 #   @return [String, nil]
 #
-# @!attribute [rw] str_style
+# @!attribute [rw] strStyle
 #   @return [String, nil]
 #
-# @!attribute [rw] str_theme
+# @!attribute [rw] strTheme
 #   @return [String, nil]
 #
-# @!attribute [rw] str_track
+# @!attribute [rw] strTrack
 #   @return [String, nil]
 #
-# @!attribute [rw] str_track_lyric
+# @!attribute [rw] strTrackLyrics
 #   @return [String, nil]
 #
-# @!attribute [rw] str_track_thumb
+# @!attribute [rw] strTrackThumb
 #   @return [String, nil]
 #
-# @!attribute [rw] str_twitter
+# @!attribute [rw] strTwitter
 #   @return [String, nil]
 #
-# @!attribute [rw] str_website
+# @!attribute [rw] strWebsite
 #   @return [String, nil]
 #
-# @!attribute [rw] str_wikidata_id
+# @!attribute [rw] strWikidataID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_wikipedia_id
+# @!attribute [rw] strWikipediaID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_youtube
+# @!attribute [rw] strYoutube
 #   @return [String, nil]
 V1Lookup = Struct.new(
-  :id_album,
-  :id_artist,
-  :id_imvdb,
-  :id_label,
-  :id_lyric,
-  :id_track,
-  :int_born_year,
-  :int_cd,
-  :int_charted,
-  :int_died_year,
-  :int_duration,
-  :int_formed_year,
-  :int_loved,
-  :int_member,
-  :int_music_vid_comment,
-  :int_music_vid_dislike,
-  :int_music_vid_favorite,
-  :int_music_vid_like,
-  :int_music_vid_view,
-  :int_sale,
-  :int_score,
-  :int_score_vote,
-  :int_total_listener,
-  :int_total_play,
-  :int_track_number,
-  :int_year_released,
-  :str_album,
-  :str_album3_d_case,
-  :str_album3_d_face,
-  :str_album3_d_flat,
-  :str_album3_d_thumb,
-  :str_album_c_dart,
-  :str_album_spine,
-  :str_album_stripped,
-  :str_album_thumb,
-  :str_album_thumb_back,
-  :str_album_thumb_hq,
-  :str_all_music_id,
-  :str_amazon_id,
-  :str_apple_music,
-  :str_artist,
-  :str_artist_alternate,
-  :str_artist_banner,
-  :str_artist_clearart,
-  :str_artist_cutout,
-  :str_artist_fanart,
-  :str_artist_fanart2,
-  :str_artist_fanart3,
-  :str_artist_fanart4,
-  :str_artist_logo,
-  :str_artist_stripped,
-  :str_artist_thumb,
-  :str_artist_wide_thumb,
-  :str_bbc_review_id,
-  :str_biography_cn,
-  :str_biography_de,
-  :str_biography_e,
-  :str_biography_en,
-  :str_biography_fr,
-  :str_biography_hu,
-  :str_biography_il,
-  :str_biography_it,
-  :str_biography_jp,
-  :str_biography_nl,
-  :str_biography_no,
-  :str_biography_pl,
-  :str_biography_pt,
-  :str_biography_ru,
-  :str_biography_se,
-  :str_country,
-  :str_country_code,
-  :str_description_en,
-  :str_disbanded,
-  :str_discogs_id,
-  :str_facebook,
-  :str_gender,
-  :str_genius_id,
-  :str_genre,
-  :str_instagram,
-  :str_itunes_id,
-  :str_label,
-  :str_last_fm_chart,
-  :str_location,
-  :str_locked,
-  :str_lyric_wiki_id,
-  :str_mood,
-  :str_music_brainz_album_id,
-  :str_music_brainz_artist_id,
-  :str_music_brainz_id,
-  :str_music_moz_id,
-  :str_music_vid,
-  :str_music_vid_company,
-  :str_music_vid_director,
-  :str_music_vid_screen1,
-  :str_music_vid_screen2,
-  :str_music_vid_screen3,
-  :str_rate_your_music_id,
-  :str_release_format,
-  :str_review,
-  :str_sound_cloud,
-  :str_speed,
-  :str_spotify,
-  :str_style,
-  :str_theme,
-  :str_track,
-  :str_track_lyric,
-  :str_track_thumb,
-  :str_twitter,
-  :str_website,
-  :str_wikidata_id,
-  :str_wikipedia_id,
-  :str_youtube,
+  :idAlbum,
+  :idArtist,
+  :idIMVDB,
+  :idLabel,
+  :idLyric,
+  :idTrack,
+  :intBornYear,
+  :intCD,
+  :intCharted,
+  :intDiedYear,
+  :intDuration,
+  :intFormedYear,
+  :intLoved,
+  :intMembers,
+  :intMusicVidComments,
+  :intMusicVidDislikes,
+  :intMusicVidFavorites,
+  :intMusicVidLikes,
+  :intMusicVidViews,
+  :intSales,
+  :intScore,
+  :intScoreVotes,
+  :intTotalListeners,
+  :intTotalPlays,
+  :intTrackNumber,
+  :intYearReleased,
+  :strAlbum,
+  :strAlbum3DCase,
+  :strAlbum3DFace,
+  :strAlbum3DFlat,
+  :strAlbum3DThumb,
+  :strAlbumCDart,
+  :strAlbumSpine,
+  :strAlbumStripped,
+  :strAlbumThumb,
+  :strAlbumThumbBack,
+  :strAlbumThumbHQ,
+  :strAllMusicID,
+  :strAmazonID,
+  :strAppleMusic,
+  :strArtist,
+  :strArtistAlternate,
+  :strArtistBanner,
+  :strArtistClearart,
+  :strArtistCutout,
+  :strArtistFanart,
+  :strArtistFanart2,
+  :strArtistFanart3,
+  :strArtistFanart4,
+  :strArtistLogo,
+  :strArtistStripped,
+  :strArtistThumb,
+  :strArtistWideThumb,
+  :strBBCReviewID,
+  :strBiographyCN,
+  :strBiographyDE,
+  :strBiographyEN,
+  :strBiographyES,
+  :strBiographyFR,
+  :strBiographyHU,
+  :strBiographyIL,
+  :strBiographyIT,
+  :strBiographyJP,
+  :strBiographyNL,
+  :strBiographyNO,
+  :strBiographyPL,
+  :strBiographyPT,
+  :strBiographyRU,
+  :strBiographySE,
+  :strCountry,
+  :strCountryCode,
+  :strDescriptionEN,
+  :strDisbanded,
+  :strDiscogsID,
+  :strFacebook,
+  :strGender,
+  :strGeniusID,
+  :strGenre,
+  :strInstagram,
+  :strItunesID,
+  :strLabel,
+  :strLastFMChart,
+  :strLocation,
+  :strLocked,
+  :strLyricWikiID,
+  :strMood,
+  :strMusicBrainzAlbumID,
+  :strMusicBrainzArtistID,
+  :strMusicBrainzID,
+  :strMusicMozID,
+  :strMusicVid,
+  :strMusicVidCompany,
+  :strMusicVidDirector,
+  :strMusicVidScreen1,
+  :strMusicVidScreen2,
+  :strMusicVidScreen3,
+  :strRateYourMusicID,
+  :strReleaseFormat,
+  :strReview,
+  :strSoundCloud,
+  :strSpeed,
+  :strSpotify,
+  :strStyle,
+  :strTheme,
+  :strTrack,
+  :strTrackLyrics,
+  :strTrackThumb,
+  :strTwitter,
+  :strWebsite,
+  :strWikidataID,
+  :strWikipediaID,
+  :strYoutube,
   keyword_init: true
 )
 
 # Request payload for V1Lookup#list.
 #
-# @!attribute [rw] id_album
+# @!attribute [rw] idAlbum
 #   @return [Integer, nil]
 #
-# @!attribute [rw] id_artist
+# @!attribute [rw] idArtist
 #   @return [Integer, nil]
 #
-# @!attribute [rw] id_imvdb
+# @!attribute [rw] idIMVDB
 #   @return [Integer, nil]
 #
-# @!attribute [rw] id_label
+# @!attribute [rw] idLabel
 #   @return [Integer, nil]
 #
-# @!attribute [rw] id_lyric
+# @!attribute [rw] idLyric
 #   @return [Integer, nil]
 #
-# @!attribute [rw] id_track
+# @!attribute [rw] idTrack
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_born_year
+# @!attribute [rw] intBornYear
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_cd
+# @!attribute [rw] intCD
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_charted
+# @!attribute [rw] intCharted
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_died_year
+# @!attribute [rw] intDiedYear
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_duration
+# @!attribute [rw] intDuration
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_formed_year
+# @!attribute [rw] intFormedYear
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_loved
+# @!attribute [rw] intLoved
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_member
+# @!attribute [rw] intMembers
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_music_vid_comment
+# @!attribute [rw] intMusicVidComments
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_music_vid_dislike
+# @!attribute [rw] intMusicVidDislikes
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_music_vid_favorite
+# @!attribute [rw] intMusicVidFavorites
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_music_vid_like
+# @!attribute [rw] intMusicVidLikes
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_music_vid_view
+# @!attribute [rw] intMusicVidViews
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_sale
+# @!attribute [rw] intSales
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_score
+# @!attribute [rw] intScore
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_score_vote
+# @!attribute [rw] intScoreVotes
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_total_listener
+# @!attribute [rw] intTotalListeners
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_total_play
+# @!attribute [rw] intTotalPlays
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_track_number
+# @!attribute [rw] intTrackNumber
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_year_released
+# @!attribute [rw] intYearReleased
 #   @return [Integer, nil]
 #
-# @!attribute [rw] str_album
+# @!attribute [rw] strAlbum
 #   @return [String, nil]
 #
-# @!attribute [rw] str_album3_d_case
+# @!attribute [rw] strAlbum3DCase
 #   @return [String, nil]
 #
-# @!attribute [rw] str_album3_d_face
+# @!attribute [rw] strAlbum3DFace
 #   @return [String, nil]
 #
-# @!attribute [rw] str_album3_d_flat
+# @!attribute [rw] strAlbum3DFlat
 #   @return [String, nil]
 #
-# @!attribute [rw] str_album3_d_thumb
+# @!attribute [rw] strAlbum3DThumb
 #   @return [String, nil]
 #
-# @!attribute [rw] str_album_c_dart
+# @!attribute [rw] strAlbumCDart
 #   @return [String, nil]
 #
-# @!attribute [rw] str_album_spine
+# @!attribute [rw] strAlbumSpine
 #   @return [String, nil]
 #
-# @!attribute [rw] str_album_stripped
+# @!attribute [rw] strAlbumStripped
 #   @return [String, nil]
 #
-# @!attribute [rw] str_album_thumb
+# @!attribute [rw] strAlbumThumb
 #   @return [String, nil]
 #
-# @!attribute [rw] str_album_thumb_back
+# @!attribute [rw] strAlbumThumbBack
 #   @return [String, nil]
 #
-# @!attribute [rw] str_album_thumb_hq
+# @!attribute [rw] strAlbumThumbHQ
 #   @return [String, nil]
 #
-# @!attribute [rw] str_all_music_id
+# @!attribute [rw] strAllMusicID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_amazon_id
+# @!attribute [rw] strAmazonID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_apple_music
+# @!attribute [rw] strAppleMusic
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist
+# @!attribute [rw] strArtist
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_alternate
+# @!attribute [rw] strArtistAlternate
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_banner
+# @!attribute [rw] strArtistBanner
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_clearart
+# @!attribute [rw] strArtistClearart
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_cutout
+# @!attribute [rw] strArtistCutout
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_fanart
+# @!attribute [rw] strArtistFanart
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_fanart2
+# @!attribute [rw] strArtistFanart2
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_fanart3
+# @!attribute [rw] strArtistFanart3
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_fanart4
+# @!attribute [rw] strArtistFanart4
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_logo
+# @!attribute [rw] strArtistLogo
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_stripped
+# @!attribute [rw] strArtistStripped
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_thumb
+# @!attribute [rw] strArtistThumb
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_wide_thumb
+# @!attribute [rw] strArtistWideThumb
 #   @return [String, nil]
 #
-# @!attribute [rw] str_bbc_review_id
+# @!attribute [rw] strBBCReviewID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_cn
+# @!attribute [rw] strBiographyCN
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_de
+# @!attribute [rw] strBiographyDE
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_e
+# @!attribute [rw] strBiographyEN
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_en
+# @!attribute [rw] strBiographyES
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_fr
+# @!attribute [rw] strBiographyFR
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_hu
+# @!attribute [rw] strBiographyHU
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_il
+# @!attribute [rw] strBiographyIL
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_it
+# @!attribute [rw] strBiographyIT
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_jp
+# @!attribute [rw] strBiographyJP
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_nl
+# @!attribute [rw] strBiographyNL
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_no
+# @!attribute [rw] strBiographyNO
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_pl
+# @!attribute [rw] strBiographyPL
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_pt
+# @!attribute [rw] strBiographyPT
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_ru
+# @!attribute [rw] strBiographyRU
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_se
+# @!attribute [rw] strBiographySE
 #   @return [String, nil]
 #
-# @!attribute [rw] str_country
+# @!attribute [rw] strCountry
 #   @return [String, nil]
 #
-# @!attribute [rw] str_country_code
+# @!attribute [rw] strCountryCode
 #   @return [String, nil]
 #
-# @!attribute [rw] str_description_en
+# @!attribute [rw] strDescriptionEN
 #   @return [String, nil]
 #
-# @!attribute [rw] str_disbanded
+# @!attribute [rw] strDisbanded
 #   @return [String, nil]
 #
-# @!attribute [rw] str_discogs_id
+# @!attribute [rw] strDiscogsID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_facebook
+# @!attribute [rw] strFacebook
 #   @return [String, nil]
 #
-# @!attribute [rw] str_gender
+# @!attribute [rw] strGender
 #   @return [String, nil]
 #
-# @!attribute [rw] str_genius_id
+# @!attribute [rw] strGeniusID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_genre
+# @!attribute [rw] strGenre
 #   @return [String, nil]
 #
-# @!attribute [rw] str_instagram
+# @!attribute [rw] strInstagram
 #   @return [String, nil]
 #
-# @!attribute [rw] str_itunes_id
+# @!attribute [rw] strItunesID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_label
+# @!attribute [rw] strLabel
 #   @return [String, nil]
 #
-# @!attribute [rw] str_last_fm_chart
+# @!attribute [rw] strLastFMChart
 #   @return [String, nil]
 #
-# @!attribute [rw] str_location
+# @!attribute [rw] strLocation
 #   @return [String, nil]
 #
-# @!attribute [rw] str_locked
+# @!attribute [rw] strLocked
 #   @return [String, nil]
 #
-# @!attribute [rw] str_lyric_wiki_id
+# @!attribute [rw] strLyricWikiID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_mood
+# @!attribute [rw] strMood
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_brainz_album_id
+# @!attribute [rw] strMusicBrainzAlbumID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_brainz_artist_id
+# @!attribute [rw] strMusicBrainzArtistID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_brainz_id
+# @!attribute [rw] strMusicBrainzID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_moz_id
+# @!attribute [rw] strMusicMozID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_vid
+# @!attribute [rw] strMusicVid
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_vid_company
+# @!attribute [rw] strMusicVidCompany
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_vid_director
+# @!attribute [rw] strMusicVidDirector
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_vid_screen1
+# @!attribute [rw] strMusicVidScreen1
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_vid_screen2
+# @!attribute [rw] strMusicVidScreen2
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_vid_screen3
+# @!attribute [rw] strMusicVidScreen3
 #   @return [String, nil]
 #
-# @!attribute [rw] str_rate_your_music_id
+# @!attribute [rw] strRateYourMusicID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_release_format
+# @!attribute [rw] strReleaseFormat
 #   @return [String, nil]
 #
-# @!attribute [rw] str_review
+# @!attribute [rw] strReview
 #   @return [String, nil]
 #
-# @!attribute [rw] str_sound_cloud
+# @!attribute [rw] strSoundCloud
 #   @return [String, nil]
 #
-# @!attribute [rw] str_speed
+# @!attribute [rw] strSpeed
 #   @return [String, nil]
 #
-# @!attribute [rw] str_spotify
+# @!attribute [rw] strSpotify
 #   @return [String, nil]
 #
-# @!attribute [rw] str_style
+# @!attribute [rw] strStyle
 #   @return [String, nil]
 #
-# @!attribute [rw] str_theme
+# @!attribute [rw] strTheme
 #   @return [String, nil]
 #
-# @!attribute [rw] str_track
+# @!attribute [rw] strTrack
 #   @return [String, nil]
 #
-# @!attribute [rw] str_track_lyric
+# @!attribute [rw] strTrackLyrics
 #   @return [String, nil]
 #
-# @!attribute [rw] str_track_thumb
+# @!attribute [rw] strTrackThumb
 #   @return [String, nil]
 #
-# @!attribute [rw] str_twitter
+# @!attribute [rw] strTwitter
 #   @return [String, nil]
 #
-# @!attribute [rw] str_website
+# @!attribute [rw] strWebsite
 #   @return [String, nil]
 #
-# @!attribute [rw] str_wikidata_id
+# @!attribute [rw] strWikidataID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_wikipedia_id
+# @!attribute [rw] strWikipediaID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_youtube
+# @!attribute [rw] strYoutube
 #   @return [String, nil]
 V1LookupListMatch = Struct.new(
-  :id_album,
-  :id_artist,
-  :id_imvdb,
-  :id_label,
-  :id_lyric,
-  :id_track,
-  :int_born_year,
-  :int_cd,
-  :int_charted,
-  :int_died_year,
-  :int_duration,
-  :int_formed_year,
-  :int_loved,
-  :int_member,
-  :int_music_vid_comment,
-  :int_music_vid_dislike,
-  :int_music_vid_favorite,
-  :int_music_vid_like,
-  :int_music_vid_view,
-  :int_sale,
-  :int_score,
-  :int_score_vote,
-  :int_total_listener,
-  :int_total_play,
-  :int_track_number,
-  :int_year_released,
-  :str_album,
-  :str_album3_d_case,
-  :str_album3_d_face,
-  :str_album3_d_flat,
-  :str_album3_d_thumb,
-  :str_album_c_dart,
-  :str_album_spine,
-  :str_album_stripped,
-  :str_album_thumb,
-  :str_album_thumb_back,
-  :str_album_thumb_hq,
-  :str_all_music_id,
-  :str_amazon_id,
-  :str_apple_music,
-  :str_artist,
-  :str_artist_alternate,
-  :str_artist_banner,
-  :str_artist_clearart,
-  :str_artist_cutout,
-  :str_artist_fanart,
-  :str_artist_fanart2,
-  :str_artist_fanart3,
-  :str_artist_fanart4,
-  :str_artist_logo,
-  :str_artist_stripped,
-  :str_artist_thumb,
-  :str_artist_wide_thumb,
-  :str_bbc_review_id,
-  :str_biography_cn,
-  :str_biography_de,
-  :str_biography_e,
-  :str_biography_en,
-  :str_biography_fr,
-  :str_biography_hu,
-  :str_biography_il,
-  :str_biography_it,
-  :str_biography_jp,
-  :str_biography_nl,
-  :str_biography_no,
-  :str_biography_pl,
-  :str_biography_pt,
-  :str_biography_ru,
-  :str_biography_se,
-  :str_country,
-  :str_country_code,
-  :str_description_en,
-  :str_disbanded,
-  :str_discogs_id,
-  :str_facebook,
-  :str_gender,
-  :str_genius_id,
-  :str_genre,
-  :str_instagram,
-  :str_itunes_id,
-  :str_label,
-  :str_last_fm_chart,
-  :str_location,
-  :str_locked,
-  :str_lyric_wiki_id,
-  :str_mood,
-  :str_music_brainz_album_id,
-  :str_music_brainz_artist_id,
-  :str_music_brainz_id,
-  :str_music_moz_id,
-  :str_music_vid,
-  :str_music_vid_company,
-  :str_music_vid_director,
-  :str_music_vid_screen1,
-  :str_music_vid_screen2,
-  :str_music_vid_screen3,
-  :str_rate_your_music_id,
-  :str_release_format,
-  :str_review,
-  :str_sound_cloud,
-  :str_speed,
-  :str_spotify,
-  :str_style,
-  :str_theme,
-  :str_track,
-  :str_track_lyric,
-  :str_track_thumb,
-  :str_twitter,
-  :str_website,
-  :str_wikidata_id,
-  :str_wikipedia_id,
-  :str_youtube,
+  :idAlbum,
+  :idArtist,
+  :idIMVDB,
+  :idLabel,
+  :idLyric,
+  :idTrack,
+  :intBornYear,
+  :intCD,
+  :intCharted,
+  :intDiedYear,
+  :intDuration,
+  :intFormedYear,
+  :intLoved,
+  :intMembers,
+  :intMusicVidComments,
+  :intMusicVidDislikes,
+  :intMusicVidFavorites,
+  :intMusicVidLikes,
+  :intMusicVidViews,
+  :intSales,
+  :intScore,
+  :intScoreVotes,
+  :intTotalListeners,
+  :intTotalPlays,
+  :intTrackNumber,
+  :intYearReleased,
+  :strAlbum,
+  :strAlbum3DCase,
+  :strAlbum3DFace,
+  :strAlbum3DFlat,
+  :strAlbum3DThumb,
+  :strAlbumCDart,
+  :strAlbumSpine,
+  :strAlbumStripped,
+  :strAlbumThumb,
+  :strAlbumThumbBack,
+  :strAlbumThumbHQ,
+  :strAllMusicID,
+  :strAmazonID,
+  :strAppleMusic,
+  :strArtist,
+  :strArtistAlternate,
+  :strArtistBanner,
+  :strArtistClearart,
+  :strArtistCutout,
+  :strArtistFanart,
+  :strArtistFanart2,
+  :strArtistFanart3,
+  :strArtistFanart4,
+  :strArtistLogo,
+  :strArtistStripped,
+  :strArtistThumb,
+  :strArtistWideThumb,
+  :strBBCReviewID,
+  :strBiographyCN,
+  :strBiographyDE,
+  :strBiographyEN,
+  :strBiographyES,
+  :strBiographyFR,
+  :strBiographyHU,
+  :strBiographyIL,
+  :strBiographyIT,
+  :strBiographyJP,
+  :strBiographyNL,
+  :strBiographyNO,
+  :strBiographyPL,
+  :strBiographyPT,
+  :strBiographyRU,
+  :strBiographySE,
+  :strCountry,
+  :strCountryCode,
+  :strDescriptionEN,
+  :strDisbanded,
+  :strDiscogsID,
+  :strFacebook,
+  :strGender,
+  :strGeniusID,
+  :strGenre,
+  :strInstagram,
+  :strItunesID,
+  :strLabel,
+  :strLastFMChart,
+  :strLocation,
+  :strLocked,
+  :strLyricWikiID,
+  :strMood,
+  :strMusicBrainzAlbumID,
+  :strMusicBrainzArtistID,
+  :strMusicBrainzID,
+  :strMusicMozID,
+  :strMusicVid,
+  :strMusicVidCompany,
+  :strMusicVidDirector,
+  :strMusicVidScreen1,
+  :strMusicVidScreen2,
+  :strMusicVidScreen3,
+  :strRateYourMusicID,
+  :strReleaseFormat,
+  :strReview,
+  :strSoundCloud,
+  :strSpeed,
+  :strSpotify,
+  :strStyle,
+  :strTheme,
+  :strTrack,
+  :strTrackLyrics,
+  :strTrackThumb,
+  :strTwitter,
+  :strWebsite,
+  :strWikidataID,
+  :strWikipediaID,
+  :strYoutube,
   keyword_init: true
 )
 
 # V1Search entity data model.
 #
-# @!attribute [rw] id_album
+# @!attribute [rw] idAlbum
 #   @return [Integer, nil]
 #
-# @!attribute [rw] id_artist
+# @!attribute [rw] idArtist
 #   @return [Integer, nil]
 #
-# @!attribute [rw] id_imvdb
+# @!attribute [rw] idIMVDB
 #   @return [Integer, nil]
 #
-# @!attribute [rw] id_label
+# @!attribute [rw] idLabel
 #   @return [Integer, nil]
 #
-# @!attribute [rw] id_lyric
+# @!attribute [rw] idLyric
 #   @return [Integer, nil]
 #
-# @!attribute [rw] id_track
+# @!attribute [rw] idTrack
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_born_year
+# @!attribute [rw] intBornYear
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_cd
+# @!attribute [rw] intCD
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_charted
+# @!attribute [rw] intCharted
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_died_year
+# @!attribute [rw] intDiedYear
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_duration
+# @!attribute [rw] intDuration
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_formed_year
+# @!attribute [rw] intFormedYear
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_loved
+# @!attribute [rw] intLoved
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_member
+# @!attribute [rw] intMembers
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_music_vid_comment
+# @!attribute [rw] intMusicVidComments
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_music_vid_dislike
+# @!attribute [rw] intMusicVidDislikes
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_music_vid_favorite
+# @!attribute [rw] intMusicVidFavorites
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_music_vid_like
+# @!attribute [rw] intMusicVidLikes
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_music_vid_view
+# @!attribute [rw] intMusicVidViews
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_sale
+# @!attribute [rw] intSales
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_score
+# @!attribute [rw] intScore
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_score_vote
+# @!attribute [rw] intScoreVotes
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_total_listener
+# @!attribute [rw] intTotalListeners
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_total_play
+# @!attribute [rw] intTotalPlays
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_track_number
+# @!attribute [rw] intTrackNumber
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_year_released
+# @!attribute [rw] intYearReleased
 #   @return [Integer, nil]
 #
-# @!attribute [rw] str_album
+# @!attribute [rw] strAlbum
 #   @return [String, nil]
 #
-# @!attribute [rw] str_album3_d_case
+# @!attribute [rw] strAlbum3DCase
 #   @return [String, nil]
 #
-# @!attribute [rw] str_album3_d_face
+# @!attribute [rw] strAlbum3DFace
 #   @return [String, nil]
 #
-# @!attribute [rw] str_album3_d_flat
+# @!attribute [rw] strAlbum3DFlat
 #   @return [String, nil]
 #
-# @!attribute [rw] str_album3_d_thumb
+# @!attribute [rw] strAlbum3DThumb
 #   @return [String, nil]
 #
-# @!attribute [rw] str_album_c_dart
+# @!attribute [rw] strAlbumCDart
 #   @return [String, nil]
 #
-# @!attribute [rw] str_album_spine
+# @!attribute [rw] strAlbumSpine
 #   @return [String, nil]
 #
-# @!attribute [rw] str_album_stripped
+# @!attribute [rw] strAlbumStripped
 #   @return [String, nil]
 #
-# @!attribute [rw] str_album_thumb
+# @!attribute [rw] strAlbumThumb
 #   @return [String, nil]
 #
-# @!attribute [rw] str_album_thumb_back
+# @!attribute [rw] strAlbumThumbBack
 #   @return [String, nil]
 #
-# @!attribute [rw] str_album_thumb_hq
+# @!attribute [rw] strAlbumThumbHQ
 #   @return [String, nil]
 #
-# @!attribute [rw] str_all_music_id
+# @!attribute [rw] strAllMusicID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_amazon_id
+# @!attribute [rw] strAmazonID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist
+# @!attribute [rw] strArtist
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_alternate
+# @!attribute [rw] strArtistAlternate
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_banner
+# @!attribute [rw] strArtistBanner
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_clearart
+# @!attribute [rw] strArtistClearart
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_cutout
+# @!attribute [rw] strArtistCutout
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_fanart
+# @!attribute [rw] strArtistFanart
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_fanart2
+# @!attribute [rw] strArtistFanart2
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_fanart3
+# @!attribute [rw] strArtistFanart3
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_fanart4
+# @!attribute [rw] strArtistFanart4
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_logo
+# @!attribute [rw] strArtistLogo
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_stripped
+# @!attribute [rw] strArtistStripped
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_thumb
+# @!attribute [rw] strArtistThumb
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_wide_thumb
+# @!attribute [rw] strArtistWideThumb
 #   @return [String, nil]
 #
-# @!attribute [rw] str_bbc_review_id
+# @!attribute [rw] strBBCReviewID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_cn
+# @!attribute [rw] strBiographyCN
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_de
+# @!attribute [rw] strBiographyDE
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_e
+# @!attribute [rw] strBiographyEN
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_en
+# @!attribute [rw] strBiographyES
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_fr
+# @!attribute [rw] strBiographyFR
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_hu
+# @!attribute [rw] strBiographyHU
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_il
+# @!attribute [rw] strBiographyIL
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_it
+# @!attribute [rw] strBiographyIT
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_jp
+# @!attribute [rw] strBiographyJP
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_nl
+# @!attribute [rw] strBiographyNL
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_no
+# @!attribute [rw] strBiographyNO
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_pl
+# @!attribute [rw] strBiographyPL
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_pt
+# @!attribute [rw] strBiographyPT
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_ru
+# @!attribute [rw] strBiographyRU
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_se
+# @!attribute [rw] strBiographySE
 #   @return [String, nil]
 #
-# @!attribute [rw] str_country
+# @!attribute [rw] strCountry
 #   @return [String, nil]
 #
-# @!attribute [rw] str_country_code
+# @!attribute [rw] strCountryCode
 #   @return [String, nil]
 #
-# @!attribute [rw] str_description_en
+# @!attribute [rw] strDescriptionEN
 #   @return [String, nil]
 #
-# @!attribute [rw] str_disbanded
+# @!attribute [rw] strDisbanded
 #   @return [String, nil]
 #
-# @!attribute [rw] str_discogs_id
+# @!attribute [rw] strDiscogsID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_facebook
+# @!attribute [rw] strFacebook
 #   @return [String, nil]
 #
-# @!attribute [rw] str_gender
+# @!attribute [rw] strGender
 #   @return [String, nil]
 #
-# @!attribute [rw] str_genius_id
+# @!attribute [rw] strGeniusID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_genre
+# @!attribute [rw] strGenre
 #   @return [String, nil]
 #
-# @!attribute [rw] str_itunes_id
+# @!attribute [rw] strItunesID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_label
+# @!attribute [rw] strLabel
 #   @return [String, nil]
 #
-# @!attribute [rw] str_last_fm_chart
+# @!attribute [rw] strLastFMChart
 #   @return [String, nil]
 #
-# @!attribute [rw] str_location
+# @!attribute [rw] strLocation
 #   @return [String, nil]
 #
-# @!attribute [rw] str_locked
+# @!attribute [rw] strLocked
 #   @return [String, nil]
 #
-# @!attribute [rw] str_lyric_wiki_id
+# @!attribute [rw] strLyricWikiID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_mood
+# @!attribute [rw] strMood
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_brainz_album_id
+# @!attribute [rw] strMusicBrainzAlbumID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_brainz_artist_id
+# @!attribute [rw] strMusicBrainzArtistID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_brainz_id
+# @!attribute [rw] strMusicBrainzID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_moz_id
+# @!attribute [rw] strMusicMozID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_vid
+# @!attribute [rw] strMusicVid
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_vid_company
+# @!attribute [rw] strMusicVidCompany
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_vid_director
+# @!attribute [rw] strMusicVidDirector
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_vid_screen1
+# @!attribute [rw] strMusicVidScreen1
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_vid_screen2
+# @!attribute [rw] strMusicVidScreen2
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_vid_screen3
+# @!attribute [rw] strMusicVidScreen3
 #   @return [String, nil]
 #
-# @!attribute [rw] str_rate_your_music_id
+# @!attribute [rw] strRateYourMusicID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_release_format
+# @!attribute [rw] strReleaseFormat
 #   @return [String, nil]
 #
-# @!attribute [rw] str_review
+# @!attribute [rw] strReview
 #   @return [String, nil]
 #
-# @!attribute [rw] str_speed
+# @!attribute [rw] strSpeed
 #   @return [String, nil]
 #
-# @!attribute [rw] str_style
+# @!attribute [rw] strStyle
 #   @return [String, nil]
 #
-# @!attribute [rw] str_theme
+# @!attribute [rw] strTheme
 #   @return [String, nil]
 #
-# @!attribute [rw] str_track
+# @!attribute [rw] strTrack
 #   @return [String, nil]
 #
-# @!attribute [rw] str_track_lyric
+# @!attribute [rw] strTrackLyrics
 #   @return [String, nil]
 #
-# @!attribute [rw] str_track_thumb
+# @!attribute [rw] strTrackThumb
 #   @return [String, nil]
 #
-# @!attribute [rw] str_twitter
+# @!attribute [rw] strTwitter
 #   @return [String, nil]
 #
-# @!attribute [rw] str_website
+# @!attribute [rw] strWebsite
 #   @return [String, nil]
 #
-# @!attribute [rw] str_wikidata_id
+# @!attribute [rw] strWikidataID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_wikipedia_id
+# @!attribute [rw] strWikipediaID
 #   @return [String, nil]
 V1Search = Struct.new(
-  :id_album,
-  :id_artist,
-  :id_imvdb,
-  :id_label,
-  :id_lyric,
-  :id_track,
-  :int_born_year,
-  :int_cd,
-  :int_charted,
-  :int_died_year,
-  :int_duration,
-  :int_formed_year,
-  :int_loved,
-  :int_member,
-  :int_music_vid_comment,
-  :int_music_vid_dislike,
-  :int_music_vid_favorite,
-  :int_music_vid_like,
-  :int_music_vid_view,
-  :int_sale,
-  :int_score,
-  :int_score_vote,
-  :int_total_listener,
-  :int_total_play,
-  :int_track_number,
-  :int_year_released,
-  :str_album,
-  :str_album3_d_case,
-  :str_album3_d_face,
-  :str_album3_d_flat,
-  :str_album3_d_thumb,
-  :str_album_c_dart,
-  :str_album_spine,
-  :str_album_stripped,
-  :str_album_thumb,
-  :str_album_thumb_back,
-  :str_album_thumb_hq,
-  :str_all_music_id,
-  :str_amazon_id,
-  :str_artist,
-  :str_artist_alternate,
-  :str_artist_banner,
-  :str_artist_clearart,
-  :str_artist_cutout,
-  :str_artist_fanart,
-  :str_artist_fanart2,
-  :str_artist_fanart3,
-  :str_artist_fanart4,
-  :str_artist_logo,
-  :str_artist_stripped,
-  :str_artist_thumb,
-  :str_artist_wide_thumb,
-  :str_bbc_review_id,
-  :str_biography_cn,
-  :str_biography_de,
-  :str_biography_e,
-  :str_biography_en,
-  :str_biography_fr,
-  :str_biography_hu,
-  :str_biography_il,
-  :str_biography_it,
-  :str_biography_jp,
-  :str_biography_nl,
-  :str_biography_no,
-  :str_biography_pl,
-  :str_biography_pt,
-  :str_biography_ru,
-  :str_biography_se,
-  :str_country,
-  :str_country_code,
-  :str_description_en,
-  :str_disbanded,
-  :str_discogs_id,
-  :str_facebook,
-  :str_gender,
-  :str_genius_id,
-  :str_genre,
-  :str_itunes_id,
-  :str_label,
-  :str_last_fm_chart,
-  :str_location,
-  :str_locked,
-  :str_lyric_wiki_id,
-  :str_mood,
-  :str_music_brainz_album_id,
-  :str_music_brainz_artist_id,
-  :str_music_brainz_id,
-  :str_music_moz_id,
-  :str_music_vid,
-  :str_music_vid_company,
-  :str_music_vid_director,
-  :str_music_vid_screen1,
-  :str_music_vid_screen2,
-  :str_music_vid_screen3,
-  :str_rate_your_music_id,
-  :str_release_format,
-  :str_review,
-  :str_speed,
-  :str_style,
-  :str_theme,
-  :str_track,
-  :str_track_lyric,
-  :str_track_thumb,
-  :str_twitter,
-  :str_website,
-  :str_wikidata_id,
-  :str_wikipedia_id,
+  :idAlbum,
+  :idArtist,
+  :idIMVDB,
+  :idLabel,
+  :idLyric,
+  :idTrack,
+  :intBornYear,
+  :intCD,
+  :intCharted,
+  :intDiedYear,
+  :intDuration,
+  :intFormedYear,
+  :intLoved,
+  :intMembers,
+  :intMusicVidComments,
+  :intMusicVidDislikes,
+  :intMusicVidFavorites,
+  :intMusicVidLikes,
+  :intMusicVidViews,
+  :intSales,
+  :intScore,
+  :intScoreVotes,
+  :intTotalListeners,
+  :intTotalPlays,
+  :intTrackNumber,
+  :intYearReleased,
+  :strAlbum,
+  :strAlbum3DCase,
+  :strAlbum3DFace,
+  :strAlbum3DFlat,
+  :strAlbum3DThumb,
+  :strAlbumCDart,
+  :strAlbumSpine,
+  :strAlbumStripped,
+  :strAlbumThumb,
+  :strAlbumThumbBack,
+  :strAlbumThumbHQ,
+  :strAllMusicID,
+  :strAmazonID,
+  :strArtist,
+  :strArtistAlternate,
+  :strArtistBanner,
+  :strArtistClearart,
+  :strArtistCutout,
+  :strArtistFanart,
+  :strArtistFanart2,
+  :strArtistFanart3,
+  :strArtistFanart4,
+  :strArtistLogo,
+  :strArtistStripped,
+  :strArtistThumb,
+  :strArtistWideThumb,
+  :strBBCReviewID,
+  :strBiographyCN,
+  :strBiographyDE,
+  :strBiographyEN,
+  :strBiographyES,
+  :strBiographyFR,
+  :strBiographyHU,
+  :strBiographyIL,
+  :strBiographyIT,
+  :strBiographyJP,
+  :strBiographyNL,
+  :strBiographyNO,
+  :strBiographyPL,
+  :strBiographyPT,
+  :strBiographyRU,
+  :strBiographySE,
+  :strCountry,
+  :strCountryCode,
+  :strDescriptionEN,
+  :strDisbanded,
+  :strDiscogsID,
+  :strFacebook,
+  :strGender,
+  :strGeniusID,
+  :strGenre,
+  :strItunesID,
+  :strLabel,
+  :strLastFMChart,
+  :strLocation,
+  :strLocked,
+  :strLyricWikiID,
+  :strMood,
+  :strMusicBrainzAlbumID,
+  :strMusicBrainzArtistID,
+  :strMusicBrainzID,
+  :strMusicMozID,
+  :strMusicVid,
+  :strMusicVidCompany,
+  :strMusicVidDirector,
+  :strMusicVidScreen1,
+  :strMusicVidScreen2,
+  :strMusicVidScreen3,
+  :strRateYourMusicID,
+  :strReleaseFormat,
+  :strReview,
+  :strSpeed,
+  :strStyle,
+  :strTheme,
+  :strTrack,
+  :strTrackLyrics,
+  :strTrackThumb,
+  :strTwitter,
+  :strWebsite,
+  :strWikidataID,
+  :strWikipediaID,
   keyword_init: true
 )
 
 # Request payload for V1Search#list.
 #
-# @!attribute [rw] id_album
+# @!attribute [rw] idAlbum
 #   @return [Integer, nil]
 #
-# @!attribute [rw] id_artist
+# @!attribute [rw] idArtist
 #   @return [Integer, nil]
 #
-# @!attribute [rw] id_imvdb
+# @!attribute [rw] idIMVDB
 #   @return [Integer, nil]
 #
-# @!attribute [rw] id_label
+# @!attribute [rw] idLabel
 #   @return [Integer, nil]
 #
-# @!attribute [rw] id_lyric
+# @!attribute [rw] idLyric
 #   @return [Integer, nil]
 #
-# @!attribute [rw] id_track
+# @!attribute [rw] idTrack
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_born_year
+# @!attribute [rw] intBornYear
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_cd
+# @!attribute [rw] intCD
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_charted
+# @!attribute [rw] intCharted
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_died_year
+# @!attribute [rw] intDiedYear
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_duration
+# @!attribute [rw] intDuration
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_formed_year
+# @!attribute [rw] intFormedYear
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_loved
+# @!attribute [rw] intLoved
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_member
+# @!attribute [rw] intMembers
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_music_vid_comment
+# @!attribute [rw] intMusicVidComments
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_music_vid_dislike
+# @!attribute [rw] intMusicVidDislikes
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_music_vid_favorite
+# @!attribute [rw] intMusicVidFavorites
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_music_vid_like
+# @!attribute [rw] intMusicVidLikes
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_music_vid_view
+# @!attribute [rw] intMusicVidViews
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_sale
+# @!attribute [rw] intSales
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_score
+# @!attribute [rw] intScore
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_score_vote
+# @!attribute [rw] intScoreVotes
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_total_listener
+# @!attribute [rw] intTotalListeners
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_total_play
+# @!attribute [rw] intTotalPlays
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_track_number
+# @!attribute [rw] intTrackNumber
 #   @return [Integer, nil]
 #
-# @!attribute [rw] int_year_released
+# @!attribute [rw] intYearReleased
 #   @return [Integer, nil]
 #
-# @!attribute [rw] str_album
+# @!attribute [rw] strAlbum
 #   @return [String, nil]
 #
-# @!attribute [rw] str_album3_d_case
+# @!attribute [rw] strAlbum3DCase
 #   @return [String, nil]
 #
-# @!attribute [rw] str_album3_d_face
+# @!attribute [rw] strAlbum3DFace
 #   @return [String, nil]
 #
-# @!attribute [rw] str_album3_d_flat
+# @!attribute [rw] strAlbum3DFlat
 #   @return [String, nil]
 #
-# @!attribute [rw] str_album3_d_thumb
+# @!attribute [rw] strAlbum3DThumb
 #   @return [String, nil]
 #
-# @!attribute [rw] str_album_c_dart
+# @!attribute [rw] strAlbumCDart
 #   @return [String, nil]
 #
-# @!attribute [rw] str_album_spine
+# @!attribute [rw] strAlbumSpine
 #   @return [String, nil]
 #
-# @!attribute [rw] str_album_stripped
+# @!attribute [rw] strAlbumStripped
 #   @return [String, nil]
 #
-# @!attribute [rw] str_album_thumb
+# @!attribute [rw] strAlbumThumb
 #   @return [String, nil]
 #
-# @!attribute [rw] str_album_thumb_back
+# @!attribute [rw] strAlbumThumbBack
 #   @return [String, nil]
 #
-# @!attribute [rw] str_album_thumb_hq
+# @!attribute [rw] strAlbumThumbHQ
 #   @return [String, nil]
 #
-# @!attribute [rw] str_all_music_id
+# @!attribute [rw] strAllMusicID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_amazon_id
+# @!attribute [rw] strAmazonID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist
+# @!attribute [rw] strArtist
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_alternate
+# @!attribute [rw] strArtistAlternate
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_banner
+# @!attribute [rw] strArtistBanner
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_clearart
+# @!attribute [rw] strArtistClearart
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_cutout
+# @!attribute [rw] strArtistCutout
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_fanart
+# @!attribute [rw] strArtistFanart
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_fanart2
+# @!attribute [rw] strArtistFanart2
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_fanart3
+# @!attribute [rw] strArtistFanart3
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_fanart4
+# @!attribute [rw] strArtistFanart4
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_logo
+# @!attribute [rw] strArtistLogo
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_stripped
+# @!attribute [rw] strArtistStripped
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_thumb
+# @!attribute [rw] strArtistThumb
 #   @return [String, nil]
 #
-# @!attribute [rw] str_artist_wide_thumb
+# @!attribute [rw] strArtistWideThumb
 #   @return [String, nil]
 #
-# @!attribute [rw] str_bbc_review_id
+# @!attribute [rw] strBBCReviewID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_cn
+# @!attribute [rw] strBiographyCN
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_de
+# @!attribute [rw] strBiographyDE
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_e
+# @!attribute [rw] strBiographyEN
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_en
+# @!attribute [rw] strBiographyES
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_fr
+# @!attribute [rw] strBiographyFR
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_hu
+# @!attribute [rw] strBiographyHU
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_il
+# @!attribute [rw] strBiographyIL
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_it
+# @!attribute [rw] strBiographyIT
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_jp
+# @!attribute [rw] strBiographyJP
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_nl
+# @!attribute [rw] strBiographyNL
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_no
+# @!attribute [rw] strBiographyNO
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_pl
+# @!attribute [rw] strBiographyPL
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_pt
+# @!attribute [rw] strBiographyPT
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_ru
+# @!attribute [rw] strBiographyRU
 #   @return [String, nil]
 #
-# @!attribute [rw] str_biography_se
+# @!attribute [rw] strBiographySE
 #   @return [String, nil]
 #
-# @!attribute [rw] str_country
+# @!attribute [rw] strCountry
 #   @return [String, nil]
 #
-# @!attribute [rw] str_country_code
+# @!attribute [rw] strCountryCode
 #   @return [String, nil]
 #
-# @!attribute [rw] str_description_en
+# @!attribute [rw] strDescriptionEN
 #   @return [String, nil]
 #
-# @!attribute [rw] str_disbanded
+# @!attribute [rw] strDisbanded
 #   @return [String, nil]
 #
-# @!attribute [rw] str_discogs_id
+# @!attribute [rw] strDiscogsID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_facebook
+# @!attribute [rw] strFacebook
 #   @return [String, nil]
 #
-# @!attribute [rw] str_gender
+# @!attribute [rw] strGender
 #   @return [String, nil]
 #
-# @!attribute [rw] str_genius_id
+# @!attribute [rw] strGeniusID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_genre
+# @!attribute [rw] strGenre
 #   @return [String, nil]
 #
-# @!attribute [rw] str_itunes_id
+# @!attribute [rw] strItunesID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_label
+# @!attribute [rw] strLabel
 #   @return [String, nil]
 #
-# @!attribute [rw] str_last_fm_chart
+# @!attribute [rw] strLastFMChart
 #   @return [String, nil]
 #
-# @!attribute [rw] str_location
+# @!attribute [rw] strLocation
 #   @return [String, nil]
 #
-# @!attribute [rw] str_locked
+# @!attribute [rw] strLocked
 #   @return [String, nil]
 #
-# @!attribute [rw] str_lyric_wiki_id
+# @!attribute [rw] strLyricWikiID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_mood
+# @!attribute [rw] strMood
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_brainz_album_id
+# @!attribute [rw] strMusicBrainzAlbumID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_brainz_artist_id
+# @!attribute [rw] strMusicBrainzArtistID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_brainz_id
+# @!attribute [rw] strMusicBrainzID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_moz_id
+# @!attribute [rw] strMusicMozID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_vid
+# @!attribute [rw] strMusicVid
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_vid_company
+# @!attribute [rw] strMusicVidCompany
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_vid_director
+# @!attribute [rw] strMusicVidDirector
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_vid_screen1
+# @!attribute [rw] strMusicVidScreen1
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_vid_screen2
+# @!attribute [rw] strMusicVidScreen2
 #   @return [String, nil]
 #
-# @!attribute [rw] str_music_vid_screen3
+# @!attribute [rw] strMusicVidScreen3
 #   @return [String, nil]
 #
-# @!attribute [rw] str_rate_your_music_id
+# @!attribute [rw] strRateYourMusicID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_release_format
+# @!attribute [rw] strReleaseFormat
 #   @return [String, nil]
 #
-# @!attribute [rw] str_review
+# @!attribute [rw] strReview
 #   @return [String, nil]
 #
-# @!attribute [rw] str_speed
+# @!attribute [rw] strSpeed
 #   @return [String, nil]
 #
-# @!attribute [rw] str_style
+# @!attribute [rw] strStyle
 #   @return [String, nil]
 #
-# @!attribute [rw] str_theme
+# @!attribute [rw] strTheme
 #   @return [String, nil]
 #
-# @!attribute [rw] str_track
+# @!attribute [rw] strTrack
 #   @return [String, nil]
 #
-# @!attribute [rw] str_track_lyric
+# @!attribute [rw] strTrackLyrics
 #   @return [String, nil]
 #
-# @!attribute [rw] str_track_thumb
+# @!attribute [rw] strTrackThumb
 #   @return [String, nil]
 #
-# @!attribute [rw] str_twitter
+# @!attribute [rw] strTwitter
 #   @return [String, nil]
 #
-# @!attribute [rw] str_website
+# @!attribute [rw] strWebsite
 #   @return [String, nil]
 #
-# @!attribute [rw] str_wikidata_id
+# @!attribute [rw] strWikidataID
 #   @return [String, nil]
 #
-# @!attribute [rw] str_wikipedia_id
+# @!attribute [rw] strWikipediaID
 #   @return [String, nil]
 V1SearchListMatch = Struct.new(
-  :id_album,
-  :id_artist,
-  :id_imvdb,
-  :id_label,
-  :id_lyric,
-  :id_track,
-  :int_born_year,
-  :int_cd,
-  :int_charted,
-  :int_died_year,
-  :int_duration,
-  :int_formed_year,
-  :int_loved,
-  :int_member,
-  :int_music_vid_comment,
-  :int_music_vid_dislike,
-  :int_music_vid_favorite,
-  :int_music_vid_like,
-  :int_music_vid_view,
-  :int_sale,
-  :int_score,
-  :int_score_vote,
-  :int_total_listener,
-  :int_total_play,
-  :int_track_number,
-  :int_year_released,
-  :str_album,
-  :str_album3_d_case,
-  :str_album3_d_face,
-  :str_album3_d_flat,
-  :str_album3_d_thumb,
-  :str_album_c_dart,
-  :str_album_spine,
-  :str_album_stripped,
-  :str_album_thumb,
-  :str_album_thumb_back,
-  :str_album_thumb_hq,
-  :str_all_music_id,
-  :str_amazon_id,
-  :str_artist,
-  :str_artist_alternate,
-  :str_artist_banner,
-  :str_artist_clearart,
-  :str_artist_cutout,
-  :str_artist_fanart,
-  :str_artist_fanart2,
-  :str_artist_fanart3,
-  :str_artist_fanart4,
-  :str_artist_logo,
-  :str_artist_stripped,
-  :str_artist_thumb,
-  :str_artist_wide_thumb,
-  :str_bbc_review_id,
-  :str_biography_cn,
-  :str_biography_de,
-  :str_biography_e,
-  :str_biography_en,
-  :str_biography_fr,
-  :str_biography_hu,
-  :str_biography_il,
-  :str_biography_it,
-  :str_biography_jp,
-  :str_biography_nl,
-  :str_biography_no,
-  :str_biography_pl,
-  :str_biography_pt,
-  :str_biography_ru,
-  :str_biography_se,
-  :str_country,
-  :str_country_code,
-  :str_description_en,
-  :str_disbanded,
-  :str_discogs_id,
-  :str_facebook,
-  :str_gender,
-  :str_genius_id,
-  :str_genre,
-  :str_itunes_id,
-  :str_label,
-  :str_last_fm_chart,
-  :str_location,
-  :str_locked,
-  :str_lyric_wiki_id,
-  :str_mood,
-  :str_music_brainz_album_id,
-  :str_music_brainz_artist_id,
-  :str_music_brainz_id,
-  :str_music_moz_id,
-  :str_music_vid,
-  :str_music_vid_company,
-  :str_music_vid_director,
-  :str_music_vid_screen1,
-  :str_music_vid_screen2,
-  :str_music_vid_screen3,
-  :str_rate_your_music_id,
-  :str_release_format,
-  :str_review,
-  :str_speed,
-  :str_style,
-  :str_theme,
-  :str_track,
-  :str_track_lyric,
-  :str_track_thumb,
-  :str_twitter,
-  :str_website,
-  :str_wikidata_id,
-  :str_wikipedia_id,
+  :idAlbum,
+  :idArtist,
+  :idIMVDB,
+  :idLabel,
+  :idLyric,
+  :idTrack,
+  :intBornYear,
+  :intCD,
+  :intCharted,
+  :intDiedYear,
+  :intDuration,
+  :intFormedYear,
+  :intLoved,
+  :intMembers,
+  :intMusicVidComments,
+  :intMusicVidDislikes,
+  :intMusicVidFavorites,
+  :intMusicVidLikes,
+  :intMusicVidViews,
+  :intSales,
+  :intScore,
+  :intScoreVotes,
+  :intTotalListeners,
+  :intTotalPlays,
+  :intTrackNumber,
+  :intYearReleased,
+  :strAlbum,
+  :strAlbum3DCase,
+  :strAlbum3DFace,
+  :strAlbum3DFlat,
+  :strAlbum3DThumb,
+  :strAlbumCDart,
+  :strAlbumSpine,
+  :strAlbumStripped,
+  :strAlbumThumb,
+  :strAlbumThumbBack,
+  :strAlbumThumbHQ,
+  :strAllMusicID,
+  :strAmazonID,
+  :strArtist,
+  :strArtistAlternate,
+  :strArtistBanner,
+  :strArtistClearart,
+  :strArtistCutout,
+  :strArtistFanart,
+  :strArtistFanart2,
+  :strArtistFanart3,
+  :strArtistFanart4,
+  :strArtistLogo,
+  :strArtistStripped,
+  :strArtistThumb,
+  :strArtistWideThumb,
+  :strBBCReviewID,
+  :strBiographyCN,
+  :strBiographyDE,
+  :strBiographyEN,
+  :strBiographyES,
+  :strBiographyFR,
+  :strBiographyHU,
+  :strBiographyIL,
+  :strBiographyIT,
+  :strBiographyJP,
+  :strBiographyNL,
+  :strBiographyNO,
+  :strBiographyPL,
+  :strBiographyPT,
+  :strBiographyRU,
+  :strBiographySE,
+  :strCountry,
+  :strCountryCode,
+  :strDescriptionEN,
+  :strDisbanded,
+  :strDiscogsID,
+  :strFacebook,
+  :strGender,
+  :strGeniusID,
+  :strGenre,
+  :strItunesID,
+  :strLabel,
+  :strLastFMChart,
+  :strLocation,
+  :strLocked,
+  :strLyricWikiID,
+  :strMood,
+  :strMusicBrainzAlbumID,
+  :strMusicBrainzArtistID,
+  :strMusicBrainzID,
+  :strMusicMozID,
+  :strMusicVid,
+  :strMusicVidCompany,
+  :strMusicVidDirector,
+  :strMusicVidScreen1,
+  :strMusicVidScreen2,
+  :strMusicVidScreen3,
+  :strRateYourMusicID,
+  :strReleaseFormat,
+  :strReview,
+  :strSpeed,
+  :strStyle,
+  :strTheme,
+  :strTrack,
+  :strTrackLyrics,
+  :strTrackThumb,
+  :strTwitter,
+  :strWebsite,
+  :strWikidataID,
+  :strWikipediaID,
   keyword_init: true
 )
 
 # V2List entity data model.
 #
-# @!attribute [rw] album
+# @!attribute [rw] albums
 #   @return [Array, nil]
 V2List = Struct.new(
-  :album,
+  :albums,
   keyword_init: true
 )
 
@@ -2138,18 +2138,18 @@ V2ListLoadMatch = Struct.new(
 
 # V2Lookup entity data model.
 #
-# @!attribute [rw] album
+# @!attribute [rw] albums
 #   @return [Array, nil]
 #
-# @!attribute [rw] artist
+# @!attribute [rw] artists
 #   @return [Array, nil]
 #
-# @!attribute [rw] track
+# @!attribute [rw] tracks
 #   @return [Array, nil]
 V2Lookup = Struct.new(
-  :album,
-  :artist,
-  :track,
+  :albums,
+  :artists,
+  :tracks,
   keyword_init: true
 )
 
@@ -2176,18 +2176,18 @@ V2LookupLoadMatch = Struct.new(
 
 # V2Search entity data model.
 #
-# @!attribute [rw] album
+# @!attribute [rw] albums
 #   @return [Array, nil]
 #
-# @!attribute [rw] artist
+# @!attribute [rw] artists
 #   @return [Array, nil]
 #
-# @!attribute [rw] track
+# @!attribute [rw] tracks
 #   @return [Array, nil]
 V2Search = Struct.new(
-  :album,
-  :artist,
-  :track,
+  :albums,
+  :artists,
+  :tracks,
   keyword_init: true
 )
 

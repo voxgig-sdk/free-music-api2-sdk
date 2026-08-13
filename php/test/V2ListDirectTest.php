@@ -73,16 +73,16 @@ function v2_list_direct_setup($mockres)
     $calls = new \ArrayObject();
 
     $env = Runner::env_override([
-        "FREEMUSICAPI__TEST_V__LIST_ENTID" => [],
-        "FREEMUSICAPI__TEST_LIVE" => "FALSE",
-        "FREEMUSICAPI__APIKEY" => "NONE",
+        "FREE_MUSIC_API2_TEST_V2_LIST_ENTID" => [],
+        "FREE_MUSIC_API2_TEST_LIVE" => "FALSE",
+        "FREE_MUSIC_API2_APIKEY" => "NONE",
     ]);
 
-    $live = $env["FREEMUSICAPI__TEST_LIVE"] === "TRUE";
+    $live = $env["FREE_MUSIC_API2_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [
-            "apikey" => $env["FREEMUSICAPI__APIKEY"],
+            "apikey" => $env["FREE_MUSIC_API2_APIKEY"],
         ];
         $client = new FreeMusicApi2SDK($merged_opts);
         return [

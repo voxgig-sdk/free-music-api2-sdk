@@ -43,7 +43,8 @@ func TestV2LookupDirect(t *testing.T) {
 		if setup.live {
 			// Live mode is lenient: synthetic IDs frequently 4xx. Skip
 			// rather than fail when the load endpoint isn't reachable with
-			// the IDs we can construct from setup.idmap.
+			// the IDs we can construct from setup.idmap — unless the model
+			// sets main.kit.test.live.strict.
 			if err != nil {
 				t.Skipf("load call failed (likely synthetic IDs against live API): %v", err)
 			}
@@ -108,21 +109,21 @@ func v2_lookupDirectSetup(mockres any) *v2_lookupDirectSetupResult {
 	calls := &[]map[string]any{}
 
 	env := envOverride(map[string]any{
-		"FREEMUSICAPI__TEST_V__LOOKUP_ENTID": map[string]any{},
-		"FREEMUSICAPI__TEST_LIVE":    "FALSE",
-		"FREEMUSICAPI__APIKEY":       "NONE",
+		"FREE_MUSIC_API2_TEST_V2_LOOKUP_ENTID": map[string]any{},
+		"FREE_MUSIC_API2_TEST_LIVE":    "FALSE",
+		"FREE_MUSIC_API2_APIKEY":       "NONE",
 	})
 
-	live := env["FREEMUSICAPI__TEST_LIVE"] == "TRUE"
+	live := env["FREE_MUSIC_API2_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
-			"apikey": env["FREEMUSICAPI__APIKEY"],
+			"apikey": env["FREE_MUSIC_API2_APIKEY"],
 		}
 		client := sdk.NewFreeMusicApi2SDK(mergedOpts)
 
 		idmap := map[string]any{}
-		if entidRaw, ok := env["FREEMUSICAPI__TEST_V__LOOKUP_ENTID"]; ok {
+		if entidRaw, ok := env["FREE_MUSIC_API2_TEST_V2_LOOKUP_ENTID"]; ok {
 			if entidStr, ok := entidRaw.(string); ok && strings.HasPrefix(entidStr, "{") {
 				json.Unmarshal([]byte(entidStr), &idmap)
 			} else if entidMap, ok := entidRaw.(map[string]any); ok {

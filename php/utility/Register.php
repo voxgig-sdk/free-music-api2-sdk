@@ -23,6 +23,7 @@ require_once __DIR__ . '/MakeUrl.php';
 require_once __DIR__ . '/Param.php';
 require_once __DIR__ . '/PrepareAuth.php';
 require_once __DIR__ . '/PrepareBody.php';
+require_once __DIR__ . '/Graphql.php';
 require_once __DIR__ . '/PrepareHeaders.php';
 require_once __DIR__ . '/PrepareMethod.php';
 require_once __DIR__ . '/PrepareParams.php';
@@ -59,6 +60,8 @@ FreeMusicApi2Utility::setRegistrar(function (FreeMusicApi2Utility $u): void {
     $u->prepare_params = [FreeMusicApi2PrepareParams::class, 'call'];
     $u->prepare_path = [FreeMusicApi2PreparePath::class, 'call'];
     $u->prepare_query = [FreeMusicApi2PrepareQuery::class, 'call'];
+    $u->graphql_body = [FreeMusicApi2Graphql::class, 'body'];
+    $u->graphql_errors = [FreeMusicApi2Graphql::class, 'errors'];
     $u->result_basic = [FreeMusicApi2ResultBasic::class, 'call'];
     $u->result_body = [FreeMusicApi2ResultBody::class, 'call'];
     $u->result_headers = [FreeMusicApi2ResultHeaders::class, 'call'];

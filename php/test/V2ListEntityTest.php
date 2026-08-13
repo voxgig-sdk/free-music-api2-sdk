@@ -33,7 +33,7 @@ class V2ListEntityTest extends TestCase
         // The basic flow consumes synthetic IDs from the fixture. In live mode
         // without an *_ENTID env override, those IDs hit the live API and 4xx.
         if (!empty($setup["synthetic_only"])) {
-            $this->markTestSkipped("live entity test uses synthetic IDs from fixture — set FREEMUSICAPI__TEST_V__LIST_ENTID JSON to run live");
+            $this->markTestSkipped("live entity test uses synthetic IDs from fixture — set FREE_MUSIC_API2_TEST_V2_LIST_ENTID JSON to run live");
             return;
         }
         $client = $setup["client"];
@@ -77,39 +77,39 @@ function v2_list_basic_setup($extra)
     // Detect ENTID env override before envOverride consumes it. When live
     // mode is on without a real override, the basic test runs against synthetic
     // IDs from the fixture and 4xx's. Surface this so the test can skip.
-    $entid_env_raw = getenv("FREEMUSICAPI__TEST_V__LIST_ENTID");
+    $entid_env_raw = getenv("FREE_MUSIC_API2_TEST_V2_LIST_ENTID");
     $idmap_overridden = $entid_env_raw !== false && str_starts_with(trim($entid_env_raw), "{");
 
     $env = Runner::env_override([
-        "FREEMUSICAPI__TEST_V__LIST_ENTID" => $idmap,
-        "FREEMUSICAPI__TEST_LIVE" => "FALSE",
-        "FREEMUSICAPI__TEST_EXPLAIN" => "FALSE",
-        "FREEMUSICAPI__APIKEY" => "NONE",
+        "FREE_MUSIC_API2_TEST_V2_LIST_ENTID" => $idmap,
+        "FREE_MUSIC_API2_TEST_LIVE" => "FALSE",
+        "FREE_MUSIC_API2_TEST_EXPLAIN" => "FALSE",
+        "FREE_MUSIC_API2_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
-        $env["FREEMUSICAPI__TEST_V__LIST_ENTID"]);
+        $env["FREE_MUSIC_API2_TEST_V2_LIST_ENTID"]);
     if ($idmap_resolved === null) {
         $idmap_resolved = Helpers::to_map($idmap);
     }
 
-    if ($env["FREEMUSICAPI__TEST_LIVE"] === "TRUE") {
+    if ($env["FREE_MUSIC_API2_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["FREEMUSICAPI__APIKEY"],
+                "apikey" => $env["FREE_MUSIC_API2_APIKEY"],
             ],
             $extra ?? [],
         ]);
         $client = new FreeMusicApi2SDK(Helpers::to_map($merged_opts));
     }
 
-    $live = $env["FREEMUSICAPI__TEST_LIVE"] === "TRUE";
+    $live = $env["FREE_MUSIC_API2_TEST_LIVE"] === "TRUE";
     return [
         "client" => $client,
         "data" => $entity_data,
         "idmap" => $idmap_resolved,
         "env" => $env,
-        "explain" => $env["FREEMUSICAPI__TEST_EXPLAIN"] === "TRUE",
+        "explain" => $env["FREE_MUSIC_API2_TEST_EXPLAIN"] === "TRUE",
         "live" => $live,
         "synthetic_only" => $live && !$idmap_overridden,
         "now" => (int)(microtime(true) * 1000),

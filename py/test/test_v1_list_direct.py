@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from freemusicapi2_sdk.utility.voxgig_struct import voxgig_struct as vs
 from freemusicapi2_sdk import FreeMusicApi2SDK
-from core import helpers
+from freemusicapi2_sdk.core import helpers
 from test import runner
 
 
@@ -58,16 +58,16 @@ def _v1_list_direct_setup(mockres):
     calls = []
 
     env = runner.env_override({
-        "FREEMUSICAPI__TEST_V__LIST_ENTID": {},
-        "FREEMUSICAPI__TEST_LIVE": "FALSE",
-        "FREEMUSICAPI__APIKEY": "NONE",
+        "FREE_MUSIC_API2_TEST_V1_LIST_ENTID": {},
+        "FREE_MUSIC_API2_TEST_LIVE": "FALSE",
+        "FREE_MUSIC_API2_APIKEY": "NONE",
     })
 
-    live = env.get("FREEMUSICAPI__TEST_LIVE") == "TRUE"
+    live = env.get("FREE_MUSIC_API2_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
-            "apikey": env.get("FREEMUSICAPI__APIKEY"),
+            "apikey": env.get("FREE_MUSIC_API2_APIKEY"),
         }
         client = FreeMusicApi2SDK(merged_opts)
         return {

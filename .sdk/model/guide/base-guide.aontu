@@ -8,63 +8,81 @@ guide: {
   entity: v1_list: {
     path: "/mostloved.php": {
       op: list: method: *GET
+      op: list: transform: res: *("`body.loved`")|top
     }
     path: "/mvid-mb.php": {
       op: list: method: *GET
+      op: list: transform: res: *("`body.mvids`")|top
     }
     path: "/mvid.php": {
       op: list: method: *GET
+      op: list: transform: res: *("`body.mvids`")|top
     }
     path: "/track-top10-mb.php": {
       op: list: method: *GET
+      op: list: transform: res: *("`body.track`")|top
     }
     path: "/track-top10.php": {
       op: list: method: *GET
+      op: list: transform: res: *("`body.track`")|top
     }
     path: "/trending.php": {
       op: list: method: *GET
+      op: list: transform: res: *("`body.trending`")|top
     }
   }
 
   entity: v1_lookup: {
     path: "/album-mb.php": {
       op: list: method: *GET
+      op: list: transform: res: *("`body.album`")|top
     }
     path: "/album.php": {
       op: list: method: *GET
+      op: list: transform: res: *("`body.album`")|top
     }
     path: "/artist-mb.php": {
       op: list: method: *GET
+      op: list: transform: res: *("`body.artists`")|top
     }
     path: "/artist-social.php": {
       op: list: method: *GET
+      op: list: transform: res: *("`body.artists`")|top
     }
     path: "/artist.php": {
       op: list: method: *GET
+      op: list: transform: res: *("`body.artists`")|top
     }
     path: "/track-mb.php": {
       op: list: method: *GET
+      op: list: transform: res: *("`body.track`")|top
     }
     path: "/track.php": {
       op: list: method: *GET
+      op: list: transform: res: *("`body.track`")|top
     }
   }
 
   entity: v1_search: {
     path: "/discography-mb.php": {
       op: list: method: *GET
+      op: list: transform: res: *("`body.album`")|top
     }
     path: "/discography.php": {
       op: list: method: *GET
+      op: list: transform: res: *("`body.album`")|top
     }
     path: "/search.php": {
       op: list: method: *GET
+      op: list: transform: res: *("`body.artists`")|top
     }
     path: "/searchalbum.php": {
       op: list: method: *GET
+      op: list: transform: res: *("`body.album`")|top
     }
     path: "/searchtrack.php": {
       op: list: method: *GET
+      op: list: transform: res: *("`body.track`")|top
     }
   }
 

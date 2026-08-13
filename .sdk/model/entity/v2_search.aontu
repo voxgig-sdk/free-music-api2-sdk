@@ -6,17 +6,17 @@ main: kit: entity: v2_search: {
 
   fields: [
     {
-      name: "album"
+      name: "albums"
       req: false
       type: "`$ARRAY`"
     }
     {
-      name: "artist"
+      name: "artists"
       req: false
       type: "`$ARRAY`"
     }
     {
-      name: "track"
+      name: "tracks"
       req: false
       type: "`$ARRAY`"
     }

@@ -14,12 +14,12 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from config import make_config
-from features import _make_feature
-from core.control import FreeMusicApi2Control
-from core.error import FreeMusicApi2Error
-from core.result import FreeMusicApi2Result
-from core.spec import FreeMusicApi2Spec
+from projectname_sdk.config import make_config
+from projectname_sdk.features import _make_feature
+from projectname_sdk.core.control import FreeMusicApi2Control
+from projectname_sdk.core.error import FreeMusicApi2Error
+from projectname_sdk.core.result import FreeMusicApi2Result
+from projectname_sdk.core.spec import FreeMusicApi2Spec
 
 
 # True when this SDK was generated with the named feature.

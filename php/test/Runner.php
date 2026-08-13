@@ -43,8 +43,8 @@ class FreeMusicApi2TestRunner
 
     public static function env_override(array $m): array
     {
-        $live = self::getenv('FREEMUSICAPI2_TEST_LIVE');
-        $override = self::getenv('FREEMUSICAPI2_TEST_OVERRIDE');
+        $live = self::getenv('FREE_MUSIC_API2_TEST_LIVE');
+        $override = self::getenv('FREE_MUSIC_API2_TEST_OVERRIDE');
 
         if ($live === 'TRUE' || $override === 'TRUE') {
             foreach (array_keys($m) as $key) {
@@ -63,9 +63,9 @@ class FreeMusicApi2TestRunner
             }
         }
 
-        $explain = self::getenv('FREEMUSICAPI2_TEST_EXPLAIN');
+        $explain = self::getenv('FREE_MUSIC_API2_TEST_EXPLAIN');
         if ($explain !== null && $explain !== '') {
-            $m['FREEMUSICAPI2_TEST_EXPLAIN'] = $explain;
+            $m['FREE_MUSIC_API2_TEST_EXPLAIN'] = $explain;
         }
 
         return $m;

@@ -26,8 +26,8 @@ import {
 describe('V2ListEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when FREEMUSICAPI2_TEST_LIVE=TRUE.
-  afterEach(liveDelay('FREEMUSICAPI2_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when FREE_MUSIC_API2_TEST_LIVE=TRUE.
+  afterEach(liveDelay('FREE_MUSIC_API2_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = FreeMusicApi2SDK.test()
@@ -38,7 +38,7 @@ describe('V2ListEntity', async () => {
 
   test('basic', async (t) => {
 
-    const live = 'TRUE' === process.env.FREE_MUSIC_API__TEST_LIVE
+    const live = 'TRUE' === process.env.FREE_MUSIC_API2_TEST_LIVE
     for (const op of ['load']) {
       if (maybeSkipControl(t, 'entityOp', 'v2_list.' + op, live)) return
     }
@@ -48,7 +48,7 @@ describe('V2ListEntity', async () => {
     // fixture (entity TestData.json). Those don't exist on the live API.
     // Skip live runs unless the user provided a real ENTID env override.
     if (setup.syntheticOnly) {
-      t.skip('live entity test uses synthetic IDs from fixture — set FREE_MUSIC_API__TEST_V__LIST_ENTID JSON to run live')
+      t.skip('live entity test uses synthetic IDs from fixture — set FREE_MUSIC_API2_TEST_V2_LIST_ENTID JSON to run live')
       return
     }
     const client = setup.client
@@ -104,24 +104,24 @@ function basicSetup(extra?: any) {
   // basic flow consumes synthetic IDs from the fixture file; without an
   // override those synthetic IDs reach the live API and 4xx. Surface this
   // to the test so it can skip rather than fail.
-  const idmapEnvVal = process.env['FREE_MUSIC_API__TEST_V__LIST_ENTID']
+  const idmapEnvVal = process.env['FREE_MUSIC_API2_TEST_V2_LIST_ENTID']
   const idmapOverridden = null != idmapEnvVal && idmapEnvVal.trim().startsWith('{')
 
   const env = envOverride({
-    'FREE_MUSIC_API__TEST_V__LIST_ENTID': idmap,
-    'FREE_MUSIC_API__TEST_LIVE': 'FALSE',
-    'FREE_MUSIC_API__TEST_EXPLAIN': 'FALSE',
-    'FREE_MUSIC_API__APIKEY': 'NONE',
+    'FREE_MUSIC_API2_TEST_V2_LIST_ENTID': idmap,
+    'FREE_MUSIC_API2_TEST_LIVE': 'FALSE',
+    'FREE_MUSIC_API2_TEST_EXPLAIN': 'FALSE',
+    'FREE_MUSIC_API2_APIKEY': 'NONE',
   })
 
-  idmap = env['FREE_MUSIC_API__TEST_V__LIST_ENTID']
+  idmap = env['FREE_MUSIC_API2_TEST_V2_LIST_ENTID']
 
-  const live = 'TRUE' === env.FREE_MUSIC_API__TEST_LIVE
+  const live = 'TRUE' === env.FREE_MUSIC_API2_TEST_LIVE
 
   if (live) {
     client = new FreeMusicApi2SDK(merge([
       {
-        apikey: env.FREE_MUSIC_API__APIKEY,
+        apikey: env.FREE_MUSIC_API2_APIKEY,
       },
       extra
     ]))
@@ -134,7 +134,7 @@ function basicSetup(extra?: any) {
     client,
     struct,
     data: entityData,
-    explain: 'TRUE' === env.FREE_MUSIC_API__TEST_EXPLAIN,
+    explain: 'TRUE' === env.FREE_MUSIC_API2_TEST_EXPLAIN,
     live,
     syntheticOnly: live && !idmapOverridden,
     now: Date.now(),

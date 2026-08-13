@@ -23,8 +23,8 @@ module FreeMusicApi2TestRunner
   end
 
   def self.env_override(m)
-    live = getenv("FREEMUSICAPI2_TEST_LIVE")
-    override = getenv("FREEMUSICAPI2_TEST_OVERRIDE")
+    live = getenv("FREE_MUSIC_API2_TEST_LIVE")
+    override = getenv("FREE_MUSIC_API2_TEST_OVERRIDE")
 
     if live == "TRUE" || override == "TRUE"
       m.each_key do |key|
@@ -44,8 +44,8 @@ module FreeMusicApi2TestRunner
       end
     end
 
-    explain = getenv("FREEMUSICAPI2_TEST_EXPLAIN")
-    m["FREEMUSICAPI2_TEST_EXPLAIN"] = explain if explain && !explain.empty?
+    explain = getenv("FREE_MUSIC_API2_TEST_EXPLAIN")
+    m["FREE_MUSIC_API2_TEST_EXPLAIN"] = explain if explain && !explain.empty?
 
     m
   end

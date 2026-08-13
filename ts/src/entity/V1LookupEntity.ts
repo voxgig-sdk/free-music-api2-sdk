@@ -37,7 +37,7 @@ class V1LookupEntity extends FreeMusicApi2EntityBase<V1Lookup> {
 
 
 
-  async list(this: any, reqmatch?: V1LookupListMatch, ctrl?: Control): Promise<V1Lookup[]> {
+  async list(this: any, reqmatch?: V1LookupListMatch, ctrl?: Control): Promise<V1LookupEntity[]> {
 
     const utility = this._utility
 

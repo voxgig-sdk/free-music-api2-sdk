@@ -37,7 +37,7 @@ class V1SearchEntity extends FreeMusicApi2EntityBase<V1Search> {
 
 
 
-  async list(this: any, reqmatch?: V1SearchListMatch, ctrl?: Control): Promise<V1Search[]> {
+  async list(this: any, reqmatch?: V1SearchListMatch, ctrl?: Control): Promise<V1SearchEntity[]> {
 
     const utility = this._utility
 

@@ -16,11 +16,11 @@
 import pytest
 
 from freemusicapi2_sdk import FreeMusicApi2SDK
-from core.error import FreeMusicApi2Error
-from core.result import FreeMusicApi2Result
-from core.response import FreeMusicApi2Response
-from core.spec import FreeMusicApi2Spec
-from feature.base_feature import FreeMusicApi2BaseFeature
+from freemusicapi2_sdk.core.error import FreeMusicApi2Error
+from freemusicapi2_sdk.core.result import FreeMusicApi2Result
+from freemusicapi2_sdk.core.response import FreeMusicApi2Response
+from freemusicapi2_sdk.core.spec import FreeMusicApi2Spec
+from freemusicapi2_sdk.feature.base_feature import FreeMusicApi2BaseFeature
 
 
 def _client():

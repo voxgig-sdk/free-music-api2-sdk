@@ -19,11 +19,15 @@ import {
 describe('V2SearchDirect', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when FREEMUSICAPI2_TEST_LIVE=TRUE.
-  afterEach(liveDelay('FREEMUSICAPI2_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when FREE_MUSIC_API2_TEST_LIVE=TRUE.
+  afterEach(liveDelay('FREE_MUSIC_API2_TEST_LIVE'))
 
   test('direct-exists', async () => {
     const sdk = new FreeMusicApi2SDK({
+      // Concrete base: a live construction must satisfy any server
+      // variables a templated base URL declares; overriding base with a
+      // literal (as the direct flow tests do) sidesteps the requirement.
+      base: 'http://localhost:8080',
       system: { fetch: async () => ({}) }
     })
     assert('function' === typeof sdk.direct)
@@ -77,19 +81,19 @@ function directSetup(mockres?: any) {
   const calls: any[] = []
 
   const env = envOverride({
-    'FREEMUSICAPI__TEST_V__SEARCH_ENTID': {},
-    'FREEMUSICAPI__TEST_LIVE': 'FALSE',
-    'FREEMUSICAPI__APIKEY': 'NONE',
+    'FREE_MUSIC_API2_TEST_V2_SEARCH_ENTID': {},
+    'FREE_MUSIC_API2_TEST_LIVE': 'FALSE',
+    'FREE_MUSIC_API2_APIKEY': 'NONE',
   })
 
-  const live = 'TRUE' === env.FREEMUSICAPI__TEST_LIVE
+  const live = 'TRUE' === env.FREE_MUSIC_API2_TEST_LIVE
 
   if (live) {
     const client = new FreeMusicApi2SDK({
-      apikey: env.FREEMUSICAPI__APIKEY,
+      apikey: env.FREE_MUSIC_API2_APIKEY,
     })
 
-    let idmap: any = env['FREEMUSICAPI__TEST_V__SEARCH_ENTID']
+    let idmap: any = env['FREE_MUSIC_API2_TEST_V2_SEARCH_ENTID']
     if ('string' === typeof idmap && idmap.startsWith('{')) {
       idmap = JSON.parse(idmap)
     }

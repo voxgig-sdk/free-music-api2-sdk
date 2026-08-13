@@ -6,92 +6,92 @@ main: kit: entity: v1_list: {
 
   fields: [
     {
-      name: "id_album"
+      name: "idAlbum"
       req: false
       type: "`$INTEGER`"
     }
     {
-      name: "id_artist"
+      name: "idArtist"
       req: false
       type: "`$INTEGER`"
     }
     {
-      name: "id_imvdb"
+      name: "idIMVDB"
       req: false
       type: "`$INTEGER`"
     }
     {
-      name: "id_lyric"
+      name: "idLyric"
       req: false
       type: "`$INTEGER`"
     }
     {
-      name: "id_track"
+      name: "idTrack"
       req: false
       type: "`$INTEGER`"
     }
     {
-      name: "int_cd"
+      name: "intCD"
       req: false
       type: "`$INTEGER`"
     }
     {
-      name: "int_duration"
+      name: "intDuration"
       req: false
       type: "`$INTEGER`"
     }
     {
-      name: "int_loved"
+      name: "intLoved"
       req: false
       type: "`$INTEGER`"
     }
     {
-      name: "int_music_vid_comment"
+      name: "intMusicVidComments"
       req: false
       type: "`$INTEGER`"
     }
     {
-      name: "int_music_vid_dislike"
+      name: "intMusicVidDislikes"
       req: false
       type: "`$INTEGER`"
     }
     {
-      name: "int_music_vid_favorite"
+      name: "intMusicVidFavorites"
       req: false
       type: "`$INTEGER`"
     }
     {
-      name: "int_music_vid_like"
+      name: "intMusicVidLikes"
       req: false
       type: "`$INTEGER`"
     }
     {
-      name: "int_music_vid_view"
+      name: "intMusicVidViews"
       req: false
       type: "`$INTEGER`"
     }
     {
-      name: "int_score"
+      name: "intScore"
       req: false
       type: "`$INTEGER`"
     }
     {
-      name: "int_score_vote"
+      name: "intScoreVotes"
       req: false
       type: "`$INTEGER`"
     }
     {
-      name: "int_total_listener"
+      name: "intTotalListeners"
       req: false
       type: "`$INTEGER`"
     }
     {
-      name: "int_total_play"
+      name: "intTotalPlays"
       req: false
       type: "`$INTEGER`"
     }
     {
-      name: "int_track_number"
+      name: "intTrackNumber"
       req: false
       type: "`$INTEGER`"
     }
@@ -101,107 +101,107 @@ main: kit: entity: v1_list: {
       type: "`$ARRAY`"
     }
     {
-      name: "str_album"
+      name: "strAlbum"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "str_artist"
+      name: "strArtist"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "str_artist_alternate"
+      name: "strArtistAlternate"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "str_description_en"
+      name: "strDescriptionEN"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "str_genre"
+      name: "strGenre"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "str_locked"
+      name: "strLocked"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "str_mood"
+      name: "strMood"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "str_music_brainz_album_id"
+      name: "strMusicBrainzAlbumID"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "str_music_brainz_artist_id"
+      name: "strMusicBrainzArtistID"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "str_music_brainz_id"
+      name: "strMusicBrainzID"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "str_music_vid"
+      name: "strMusicVid"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "str_music_vid_company"
+      name: "strMusicVidCompany"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "str_music_vid_director"
+      name: "strMusicVidDirector"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "str_music_vid_screen1"
+      name: "strMusicVidScreen1"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "str_music_vid_screen2"
+      name: "strMusicVidScreen2"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "str_music_vid_screen3"
+      name: "strMusicVidScreen3"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "str_style"
+      name: "strStyle"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "str_theme"
+      name: "strTheme"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "str_track"
+      name: "strTrack"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "str_track_lyric"
+      name: "strTrackLyrics"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "str_track_thumb"
+      name: "strTrackThumb"
       req: false
       type: "`$STRING`"
     }
@@ -260,7 +260,7 @@ main: kit: entity: v1_list: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.trending`"
           }
         }
         {
@@ -288,7 +288,7 @@ main: kit: entity: v1_list: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.loved`"
           }
         }
         {
@@ -316,7 +316,7 @@ main: kit: entity: v1_list: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.mvids`"
           }
         }
         {
@@ -344,7 +344,7 @@ main: kit: entity: v1_list: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.mvids`"
           }
         }
         {
@@ -372,7 +372,7 @@ main: kit: entity: v1_list: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.track`"
           }
         }
         {
@@ -400,7 +400,7 @@ main: kit: entity: v1_list: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.track`"
           }
         }
       ]
