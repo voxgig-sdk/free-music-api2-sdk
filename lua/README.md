@@ -66,7 +66,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local v2lookup, err = client:V2Lookup():load()
+local v2lookup, err = client:V2Lookup():load({ album_id = 1 })
 if err then error(err) end
 ```
 
@@ -124,7 +124,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:V2Lookup():load()
+local result, err = client:V2Lookup():load({ album_id = 1 })
 -- result is the returned data; err is set on failure
 ```
 
@@ -944,7 +944,7 @@ Create an instance: `local v2_lookup = client:V2Lookup(nil)`
 #### Example: Load
 
 ```lua
-local v2_lookup, err = client:V2Lookup():load()
+local v2_lookup, err = client:V2Lookup():load({ album_id = 1 })
 ```
 
 
@@ -969,7 +969,7 @@ Create an instance: `local v2_search = client:V2Search(nil)`
 #### Example: Load
 
 ```lua
-local v2_search, err = client:V2Search():load()
+local v2_search, err = client:V2Search():load({ album_name = "album_name" })
 ```
 
 
@@ -1050,7 +1050,7 @@ stores the returned data and match criteria internally.
 
 ```lua
 local v2lookup = client:V2Lookup()
-v2lookup:load()
+v2lookup:load({ album_id = 1 })
 
 -- v2lookup:data_get() now returns the v2lookup data from the last load
 -- v2lookup:match_get() returns the last match criteria

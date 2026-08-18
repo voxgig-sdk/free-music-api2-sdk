@@ -72,7 +72,7 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const v2lookup = await client.V2Lookup().load()
+  const v2lookup = await client.V2Lookup().load({ album_id: 1 })
   console.log(v2lookup)
 } catch (err) {
   console.error('load failed:', err)
@@ -139,7 +139,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = FreeMusicApi2SDK.test()
 
-const v2lookup = await client.V2Lookup().load()
+const v2lookup = await client.V2Lookup().load({ album_id: 1 })
 // v2lookup is the entity, populated with mock response data
 // — call v2lookup.data() for the record itself
 console.log(v2lookup)
@@ -160,7 +160,7 @@ Entity instances remember their last match and data:
 const entity = client.V2Lookup()
 
 // First call runs the operation and stores its result
-await entity.load()
+await entity.load({ album_id: 1 })
 
 // Subsequent calls reuse the stored state
 const data = entity.data()
@@ -1008,7 +1008,7 @@ Create an instance: `const v2_lookup = client.V2Lookup()`
 #### Example: Load
 
 ```ts
-const v2_lookup = await client.V2Lookup().load()
+const v2_lookup = await client.V2Lookup().load({ album_id: 1 })
 ```
 
 
@@ -1033,7 +1033,7 @@ Create an instance: `const v2_search = client.V2Search()`
 #### Example: Load
 
 ```ts
-const v2_search = await client.V2Search().load()
+const v2_search = await client.V2Search().load({ album_name: 'album_name' })
 ```
 
 
@@ -1107,7 +1107,7 @@ calls on the same instance can rely on this state.
 
 ```ts
 const v2lookup = client.V2Lookup()
-await v2lookup.load()
+await v2lookup.load({ album_id: 1 })
 
 // v2lookup.data() now returns the v2lookup data from the last `load`
 // v2lookup.match() returns the last match criteria

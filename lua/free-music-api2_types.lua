@@ -550,10 +550,7 @@
 ---@field tracks? table
 
 ---@class V2LookupLoadMatch
----@field album_id? number
----@field artist_id? number
----@field music_brainz_id? string
----@field track_id? number
+---@field album_id number
 
 ---@class V2Search
 ---@field albums? table
@@ -561,9 +558,7 @@
 ---@field tracks? table
 
 ---@class V2SearchLoadMatch
----@field album_name? string
----@field artist_name? string
----@field track_name? string
+---@field album_name string
 
 local M = {}
 

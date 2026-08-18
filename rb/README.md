@@ -67,7 +67,7 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  v2lookup = client.V2Lookup.load()
+  v2lookup = client.V2Lookup.load({ "album_id" => 1 })
 rescue => err
   warn "load failed: #{err}"
 end
@@ -137,7 +137,7 @@ client = FreeMusicApi2SDK.test
 
 # Entity ops return the ENTITY (raises on error);
 # call data_get for the mock record.
-v2lookup = client.V2Lookup.load()
+v2lookup = client.V2Lookup.load({ "album_id" => 1 })
 puts v2lookup
 ```
 
@@ -958,7 +958,7 @@ Create an instance: `v2_lookup = client.V2Lookup`
 
 ```ruby
 # load returns the ENTITY — call data_get for the V2Lookup record (raises on error).
-v2_lookup = client.V2Lookup.load()
+v2_lookup = client.V2Lookup.load({ "album_id" => 1 })
 ```
 
 
@@ -984,7 +984,7 @@ Create an instance: `v2_search = client.V2Search`
 
 ```ruby
 # load returns the ENTITY — call data_get for the V2Search record (raises on error).
-v2_search = client.V2Search.load()
+v2_search = client.V2Search.load({ "album_name" => "album_name" })
 ```
 
 
@@ -1065,7 +1065,7 @@ stores the returned data and match criteria internally.
 
 ```ruby
 v2lookup = client.V2Lookup
-v2lookup.load()
+v2lookup.load({ "album_id" => 1 })
 
 # v2lookup.data_get now returns the v2lookup data from the last load
 # v2lookup.match_get returns the last match criteria

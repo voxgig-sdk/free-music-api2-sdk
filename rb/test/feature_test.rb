@@ -15,7 +15,7 @@ require_relative "../FreeMusicApi2_sdk"
 module FreeMusicApi2FeatureHarness
   # True when this SDK was generated with the named feature.
   def self.has_feature?(name)
-    f = FreeMusicApi2Config.make_config["feature"]
+    f = FreeMusicApi2Config.shared_config["feature"]
     f.is_a?(Hash) && !f[name].nil?
   end
 

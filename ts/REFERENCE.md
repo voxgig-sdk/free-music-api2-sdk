@@ -645,7 +645,7 @@ const v2_lookup = client.V2Lookup()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.V2Lookup().load()
+const result = await client.V2Lookup().load({ album_id: 1 })
 ```
 
 ### Common Methods
@@ -697,7 +697,7 @@ const v2_search = client.V2Search()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.V2Search().load()
+const result = await client.V2Search().load({ album_name: 'album_name' })
 ```
 
 ### Common Methods

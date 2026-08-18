@@ -14,7 +14,7 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from freemusicapi2_sdk.config import make_config
+from freemusicapi2_sdk.config import shared_config
 from freemusicapi2_sdk.features import _make_feature
 from freemusicapi2_sdk.core.control import FreeMusicApi2Control
 from freemusicapi2_sdk.core.error import FreeMusicApi2Error
@@ -24,7 +24,7 @@ from freemusicapi2_sdk.core.spec import FreeMusicApi2Spec
 
 # True when this SDK was generated with the named feature.
 def has_feature(name):
-    feature = make_config().get("feature")
+    feature = shared_config().get("feature")
     return isinstance(feature, dict) and feature.get(name) is not None
 
 

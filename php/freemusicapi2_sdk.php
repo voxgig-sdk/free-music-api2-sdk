@@ -40,7 +40,7 @@ class FreeMusicApi2SDK
         $utility = new FreeMusicApi2Utility();
         $this->_utility = $utility;
 
-        $config = FreeMusicApi2Config::make_config();
+        $config = FreeMusicApi2Config::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,

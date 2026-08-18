@@ -28,7 +28,7 @@ class FreeMusicApi2SDK
     utility = FreeMusicApi2Utility.new
     @_utility = utility
 
-    config = FreeMusicApi2Config.make_config
+    config = FreeMusicApi2Config.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,

@@ -71,7 +71,7 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-v2lookup, err := client.V2Lookup(nil).Load(nil, nil)
+v2lookup, err := client.V2Lookup(nil).Load(map[string]any{"album_id": 1}, nil)
 if err != nil {
     // handle err
     return
@@ -141,7 +141,7 @@ Create a mock client for unit testing — no server required:
 client := sdk.Test()
 
 v2Lookup, err := client.V2Lookup(nil).Load(
-    nil, nil,
+    map[string]any{"album_id": 1}, nil,
 )
 if err != nil {
     panic(err)
@@ -980,7 +980,7 @@ Create an instance: `v2Lookup := client.V2Lookup(nil)`
 #### Example: Load
 
 ```go
-v2Lookup, err := client.V2Lookup(nil).Load(nil, nil)
+v2Lookup, err := client.V2Lookup(nil).Load(map[string]any{"album_id": 1}, nil)
 if err != nil {
     panic(err)
 }
@@ -1009,7 +1009,7 @@ Create an instance: `v2Search := client.V2Search(nil)`
 #### Example: Load
 
 ```go
-v2Search, err := client.V2Search(nil).Load(nil, nil)
+v2Search, err := client.V2Search(nil).Load(map[string]any{"album_name": "album_name"}, nil)
 if err != nil {
     panic(err)
 }
@@ -1091,7 +1091,7 @@ stores the returned data and match criteria internally.
 
 ```go
 v2lookup := client.V2Lookup(nil)
-v2lookup.Load(nil, nil)
+v2lookup.Load(map[string]any{"album_id": 1}, nil)
 
 // v2lookup.Data() now returns the v2lookup data from the last load
 // v2lookup.Match() returns the last match criteria

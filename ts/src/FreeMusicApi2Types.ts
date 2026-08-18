@@ -558,10 +558,7 @@ export interface V2Lookup {
 }
 
 export interface V2LookupLoadMatch {
-  album_id?: number
-  artist_id?: number
-  music_brainz_id?: string
-  track_id?: number
+  album_id: number
 }
 
 export interface V2Search {
@@ -571,8 +568,6 @@ export interface V2Search {
 }
 
 export interface V2SearchLoadMatch {
-  album_name?: string
-  artist_name?: string
-  track_name?: string
+  album_name: string
 }
 

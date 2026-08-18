@@ -568,11 +568,8 @@ class V2Lookup(TypedDict, total=False):
     tracks: list
 
 
-class V2LookupLoadMatch(TypedDict, total=False):
+class V2LookupLoadMatch(TypedDict):
     album_id: int
-    artist_id: int
-    music_brainz_id: str
-    track_id: int
 
 
 class V2Search(TypedDict, total=False):
@@ -581,7 +578,5 @@ class V2Search(TypedDict, total=False):
     tracks: list
 
 
-class V2SearchLoadMatch(TypedDict, total=False):
+class V2SearchLoadMatch(TypedDict):
     album_name: str
-    artist_name: str
-    track_name: str

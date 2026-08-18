@@ -40,7 +40,7 @@ class V1LookupEntityTest extends TestCase
         $this->assertCount(3, $seen);
 
         // Inbound: streaming active -> yields each item from the feature.
-        $cfg = FreeMusicApi2Config::make_config();
+        $cfg = FreeMusicApi2Config::shared_config();
         if (isset($cfg["feature"]) && is_array($cfg["feature"]) && isset($cfg["feature"]["streaming"])) {
             $sdk = FreeMusicApi2SDK::test($seed, ["feature" => ["streaming" => ["active" => true]]]);
             $got = [];

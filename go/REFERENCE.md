@@ -591,7 +591,7 @@ fmt.Println(v2Lookup.GetName()) // "v2_lookup"
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.V2Lookup(nil).Load(nil, nil)
+result, err := client.V2Lookup(nil).Load(map[string]any{"album_id": 1}, nil)
 if err != nil {
     panic(err)
 }
@@ -644,7 +644,7 @@ fmt.Println(v2Search.GetName()) // "v2_search"
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.V2Search(nil).Load(nil, nil)
+result, err := client.V2Search(nil).Load(map[string]any{"album_name": "album_name"}, nil)
 if err != nil {
     panic(err)
 }
