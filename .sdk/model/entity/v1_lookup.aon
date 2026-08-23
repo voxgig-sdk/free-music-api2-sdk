@@ -1,6 +1,6 @@
-# Entity: v1_search
+# Entity: v1_lookup
 
-main: kit: entity: v1_search: {
+main: kit: entity: v1_lookup: {
 
   alias: field: {}
 
@@ -8,541 +8,678 @@ main: kit: entity: v1_search: {
     {
       name: "idAlbum"
       req: false
+      short: "Album ID"
       type: "`$INTEGER`"
     }
     {
       name: "idArtist"
       req: false
+      short: "Artist ID"
       type: "`$INTEGER`"
     }
     {
       name: "idIMVDB"
       req: false
+      short: "IMVDB ID"
       type: "`$INTEGER`"
     }
     {
       name: "idLabel"
       req: false
+      short: "Label ID"
       type: "`$INTEGER`"
     }
     {
       name: "idLyric"
       req: false
+      short: "Lyrics ID"
       type: "`$INTEGER`"
     }
     {
       name: "idTrack"
       req: false
+      short: "Unique track ID"
       type: "`$INTEGER`"
     }
     {
       name: "intBornYear"
       req: false
+      short: "Birth year of the artist"
       type: "`$INTEGER`"
     }
     {
       name: "intCD"
       req: false
+      short: "CD number"
       type: "`$INTEGER`"
     }
     {
       name: "intCharted"
       req: false
+      short: "Chart position"
       type: "`$INTEGER`"
     }
     {
       name: "intDiedYear"
       req: false
+      short: "Year the artist died (if applicable)"
       type: "`$INTEGER`"
     }
     {
       name: "intDuration"
       req: false
+      short: "Track duration in milliseconds"
       type: "`$INTEGER`"
     }
     {
       name: "intFormedYear"
       req: false
+      short: "Year the artist/band was formed"
       type: "`$INTEGER`"
     }
     {
       name: "intLoved"
       req: false
+      short: "Number of loves/likes"
       type: "`$INTEGER`"
     }
     {
       name: "intMembers"
       req: false
+      short: "Number of band members"
       type: "`$INTEGER`"
     }
     {
       name: "intMusicVidComments"
       req: false
+      short: "Number of music video comments"
       type: "`$INTEGER`"
     }
     {
       name: "intMusicVidDislikes"
       req: false
+      short: "Number of music video dislikes"
       type: "`$INTEGER`"
     }
     {
       name: "intMusicVidFavorites"
       req: false
+      short: "Number of music video favorites"
       type: "`$INTEGER`"
     }
     {
       name: "intMusicVidLikes"
       req: false
+      short: "Number of music video likes"
       type: "`$INTEGER`"
     }
     {
       name: "intMusicVidViews"
       req: false
+      short: "Number of music video views"
       type: "`$INTEGER`"
     }
     {
       name: "intSales"
       req: false
+      short: "Number of sales"
       type: "`$INTEGER`"
     }
     {
       name: "intScore"
       req: false
+      short: "Track score"
       type: "`$INTEGER`"
     }
     {
       name: "intScoreVotes"
       req: false
+      short: "Number of score votes"
       type: "`$INTEGER`"
     }
     {
       name: "intTotalListeners"
       req: false
+      short: "Total number of listeners"
       type: "`$INTEGER`"
     }
     {
       name: "intTotalPlays"
       req: false
+      short: "Total number of plays"
       type: "`$INTEGER`"
     }
     {
       name: "intTrackNumber"
       req: false
+      short: "Track number on album"
       type: "`$INTEGER`"
     }
     {
       name: "intYearReleased"
       req: false
+      short: "Year the album was released"
       type: "`$INTEGER`"
     }
     {
       name: "strAlbum"
       req: false
+      short: "Album title"
       type: "`$STRING`"
     }
     {
       name: "strAlbum3DCase"
       req: false
+      short: "URL to 3D case image"
       type: "`$STRING`"
     }
     {
       name: "strAlbum3DFace"
       req: false
+      short: "URL to 3D face image"
       type: "`$STRING`"
     }
     {
       name: "strAlbum3DFlat"
       req: false
+      short: "URL to 3D flat image"
       type: "`$STRING`"
     }
     {
       name: "strAlbum3DThumb"
       req: false
+      short: "URL to 3D thumbnail"
       type: "`$STRING`"
     }
     {
       name: "strAlbumCDart"
       req: false
+      short: "URL to CD art"
       type: "`$STRING`"
     }
     {
       name: "strAlbumSpine"
       req: false
+      short: "URL to album spine image"
       type: "`$STRING`"
     }
     {
       name: "strAlbumStripped"
       req: false
+      short: "Album title without special characters"
       type: "`$STRING`"
     }
     {
       name: "strAlbumThumb"
       req: false
+      short: "URL to album thumbnail"
       type: "`$STRING`"
     }
     {
       name: "strAlbumThumbBack"
       req: false
+      short: "URL to back of album cover"
       type: "`$STRING`"
     }
     {
       name: "strAlbumThumbHQ"
       req: false
+      short: "URL to high quality album thumbnail"
       type: "`$STRING`"
     }
     {
       name: "strAllMusicID"
       req: false
+      short: "AllMusic ID"
       type: "`$STRING`"
     }
     {
       name: "strAmazonID"
       req: false
+      short: "Amazon ID"
+      type: "`$STRING`"
+    }
+    {
+      name: "strAppleMusic"
+      req: false
+      short: "Apple Music artist URL"
       type: "`$STRING`"
     }
     {
       name: "strArtist"
       req: false
+      short: "Artist name"
       type: "`$STRING`"
     }
     {
       name: "strArtistAlternate"
       req: false
+      short: "Alternate artist name"
       type: "`$STRING`"
     }
     {
       name: "strArtistBanner"
       req: false
+      short: "URL to artist banner"
       type: "`$STRING`"
     }
     {
       name: "strArtistClearart"
       req: false
+      short: "URL to artist clearart"
       type: "`$STRING`"
     }
     {
       name: "strArtistCutout"
       req: false
+      short: "URL to artist cutout image"
       type: "`$STRING`"
     }
     {
       name: "strArtistFanart"
       req: false
+      short: "URL to artist fanart"
       type: "`$STRING`"
     }
     {
       name: "strArtistFanart2"
       req: false
+      short: "URL to alternate artist fanart"
       type: "`$STRING`"
     }
     {
       name: "strArtistFanart3"
       req: false
+      short: "URL to third artist fanart"
       type: "`$STRING`"
     }
     {
       name: "strArtistFanart4"
       req: false
+      short: "URL to fourth artist fanart"
       type: "`$STRING`"
     }
     {
       name: "strArtistLogo"
       req: false
+      short: "URL to artist logo"
       type: "`$STRING`"
     }
     {
       name: "strArtistStripped"
       req: false
+      short: "Artist name without special characters"
       type: "`$STRING`"
     }
     {
       name: "strArtistThumb"
       req: false
+      short: "URL to artist thumbnail image"
       type: "`$STRING`"
     }
     {
       name: "strArtistWideThumb"
       req: false
+      short: "URL to artist wide thumbnail"
       type: "`$STRING`"
     }
     {
       name: "strBBCReviewID"
       req: false
+      short: "BBC Review ID"
       type: "`$STRING`"
     }
     {
       name: "strBiographyCN"
       req: false
+      short: "Artist biography in Chinese"
       type: "`$STRING`"
     }
     {
       name: "strBiographyDE"
       req: false
+      short: "Artist biography in German"
       type: "`$STRING`"
     }
     {
       name: "strBiographyEN"
       req: false
+      short: "Artist biography in English"
       type: "`$STRING`"
     }
     {
       name: "strBiographyES"
       req: false
+      short: "Artist biography in Spanish"
       type: "`$STRING`"
     }
     {
       name: "strBiographyFR"
       req: false
+      short: "Artist biography in French"
       type: "`$STRING`"
     }
     {
       name: "strBiographyHU"
       req: false
+      short: "Artist biography in Hungarian"
       type: "`$STRING`"
     }
     {
       name: "strBiographyIL"
       req: false
+      short: "Artist biography in Hebrew"
       type: "`$STRING`"
     }
     {
       name: "strBiographyIT"
       req: false
+      short: "Artist biography in Italian"
       type: "`$STRING`"
     }
     {
       name: "strBiographyJP"
       req: false
+      short: "Artist biography in Japanese"
       type: "`$STRING`"
     }
     {
       name: "strBiographyNL"
       req: false
+      short: "Artist biography in Dutch"
       type: "`$STRING`"
     }
     {
       name: "strBiographyNO"
       req: false
+      short: "Artist biography in Norwegian"
       type: "`$STRING`"
     }
     {
       name: "strBiographyPL"
       req: false
+      short: "Artist biography in Polish"
       type: "`$STRING`"
     }
     {
       name: "strBiographyPT"
       req: false
+      short: "Artist biography in Portuguese"
       type: "`$STRING`"
     }
     {
       name: "strBiographyRU"
       req: false
+      short: "Artist biography in Russian"
       type: "`$STRING`"
     }
     {
       name: "strBiographySE"
       req: false
+      short: "Artist biography in Swedish"
       type: "`$STRING`"
     }
     {
       name: "strCountry"
       req: false
+      short: "Country of origin"
       type: "`$STRING`"
     }
     {
       name: "strCountryCode"
       req: false
+      short: "Country code"
       type: "`$STRING`"
     }
     {
       name: "strDescriptionEN"
       req: false
+      short: "Track description in English"
       type: "`$STRING`"
     }
     {
       name: "strDisbanded"
       req: false
+      short: "Disbanded status"
       type: "`$STRING`"
     }
     {
       name: "strDiscogsID"
       req: false
+      short: "Discogs ID"
       type: "`$STRING`"
     }
     {
       name: "strFacebook"
       req: false
+      short: "Facebook page URL"
       type: "`$STRING`"
     }
     {
       name: "strGender"
       req: false
+      short: "Artist gender"
       type: "`$STRING`"
     }
     {
       name: "strGeniusID"
       req: false
+      short: "Genius ID"
       type: "`$STRING`"
     }
     {
       name: "strGenre"
       req: false
+      short: "Track genre"
+      type: "`$STRING`"
+    }
+    {
+      name: "strInstagram"
+      req: false
+      short: "Instagram profile URL"
       type: "`$STRING`"
     }
     {
       name: "strItunesID"
       req: false
+      short: "iTunes ID"
       type: "`$STRING`"
     }
     {
       name: "strLabel"
       req: false
+      short: "Record label"
       type: "`$STRING`"
     }
     {
       name: "strLastFMChart"
       req: false
+      short: "Last.fm chart URL"
       type: "`$STRING`"
     }
     {
       name: "strLocation"
       req: false
+      short: "Recording location"
       type: "`$STRING`"
     }
     {
       name: "strLocked"
       req: false
+      short: "Whether the record is locked"
       type: "`$STRING`"
     }
     {
       name: "strLyricWikiID"
       req: false
+      short: "LyricWiki ID"
       type: "`$STRING`"
     }
     {
       name: "strMood"
       req: false
+      short: "Track mood"
       type: "`$STRING`"
     }
     {
       name: "strMusicBrainzAlbumID"
       req: false
+      short: "MusicBrainz Album ID"
       type: "`$STRING`"
     }
     {
       name: "strMusicBrainzArtistID"
       req: false
+      short: "MusicBrainz Artist ID"
       type: "`$STRING`"
     }
     {
       name: "strMusicBrainzID"
       req: false
+      short: "MusicBrainz Recording ID"
       type: "`$STRING`"
     }
     {
       name: "strMusicMozID"
       req: false
+      short: "MusicMoz ID"
       type: "`$STRING`"
     }
     {
       name: "strMusicVid"
       req: false
+      short: "URL to music video"
       type: "`$STRING`"
     }
     {
       name: "strMusicVidCompany"
       req: false
+      short: "Music video production company"
       type: "`$STRING`"
     }
     {
       name: "strMusicVidDirector"
       req: false
+      short: "Music video director"
       type: "`$STRING`"
     }
     {
       name: "strMusicVidScreen1"
       req: false
+      short: "URL to music video screenshot 1"
       type: "`$STRING`"
     }
     {
       name: "strMusicVidScreen2"
       req: false
+      short: "URL to music video screenshot 2"
       type: "`$STRING`"
     }
     {
       name: "strMusicVidScreen3"
       req: false
+      short: "URL to music video screenshot 3"
       type: "`$STRING`"
     }
     {
       name: "strRateYourMusicID"
       req: false
+      short: "RateYourMusic ID"
       type: "`$STRING`"
     }
     {
       name: "strReleaseFormat"
       req: false
+      short: "Release format (CD, Vinyl, etc.)"
       type: "`$STRING`"
     }
     {
       name: "strReview"
       req: false
+      short: "Album review"
+      type: "`$STRING`"
+    }
+    {
+      name: "strSoundCloud"
+      req: false
+      short: "SoundCloud profile URL"
       type: "`$STRING`"
     }
     {
       name: "strSpeed"
       req: false
+      short: "Album speed"
+      type: "`$STRING`"
+    }
+    {
+      name: "strSpotify"
+      req: false
+      short: "Spotify artist URL"
       type: "`$STRING`"
     }
     {
       name: "strStyle"
       req: false
+      short: "Track style"
       type: "`$STRING`"
     }
     {
       name: "strTheme"
       req: false
+      short: "Track theme"
       type: "`$STRING`"
     }
     {
       name: "strTrack"
       req: false
+      short: "Track title"
       type: "`$STRING`"
     }
     {
       name: "strTrackLyrics"
       req: false
+      short: "Track lyrics"
       type: "`$STRING`"
     }
     {
       name: "strTrackThumb"
       req: false
+      short: "URL to track thumbnail"
       type: "`$STRING`"
     }
     {
       name: "strTwitter"
       req: false
+      short: "Twitter profile URL"
       type: "`$STRING`"
     }
     {
       name: "strWebsite"
       req: false
+      short: "Official website URL"
       type: "`$STRING`"
     }
     {
       name: "strWikidataID"
       req: false
+      short: "Wikidata ID"
       type: "`$STRING`"
     }
     {
       name: "strWikipediaID"
       req: false
+      short: "Wikipedia ID"
+      type: "`$STRING`"
+    }
+    {
+      name: "strYoutube"
+      req: false
+      short: "YouTube channel URL"
       type: "`$STRING`"
     }
   ]
 
-  name: "v1_search"
+  name: "v1_lookup"
   op: {
     list: {
       name: "list"
@@ -551,69 +688,32 @@ main: kit: entity: v1_search: {
           args: {
             query: [
               {
-                example: "Homework"
+                example: 32793500
                 kind: "query"
-                name: "a"
-                orig: "a"
+                name: "h"
+                orig: "h"
                 reqd: false
-                type: "`$STRING`"
+                type: "`$INTEGER`"
               }
               {
-                example: "daft_punk"
+                example: 2115888
                 kind: "query"
-                name: "s"
-                orig: "s"
-                reqd: true
-                type: "`$STRING`"
+                name: "m"
+                orig: "m"
+                reqd: false
+                type: "`$INTEGER`"
               }
             ]
           }
           method: "GET"
-          orig: "/searchalbum.php"
+          orig: "/track.php"
           parts: [
-            "searchalbum.php"
+            "track.php"
           ]
           select: {
             exist: [
-              "a"
-              "s"
-            ]
-          }
-          transform: {
-            req: "`reqdata`"
-            res: "`body.album`"
-          }
-        }
-        {
-          args: {
-            query: [
-              {
-                example: "coldplay"
-                kind: "query"
-                name: "s"
-                orig: "s"
-                reqd: true
-                type: "`$STRING`"
-              }
-              {
-                example: "yellow"
-                kind: "query"
-                name: "t"
-                orig: "t"
-                reqd: true
-                type: "`$STRING`"
-              }
-            ]
-          }
-          method: "GET"
-          orig: "/searchtrack.php"
-          parts: [
-            "searchtrack.php"
-          ]
-          select: {
-            exist: [
-              "s"
-              "t"
+              "h"
+              "m"
             ]
           }
           transform: {
@@ -625,22 +725,32 @@ main: kit: entity: v1_search: {
           args: {
             query: [
               {
+                example: 112024
                 kind: "query"
-                name: "s"
-                orig: "s"
-                reqd: true
-                type: "`$STRING`"
+                name: "i"
+                orig: "i"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                example: 2115888
+                kind: "query"
+                name: "m"
+                orig: "m"
+                reqd: false
+                type: "`$INTEGER`"
               }
             ]
           }
           method: "GET"
-          orig: "/discography-mb.php"
+          orig: "/album.php"
           parts: [
-            "discography-mb.php"
+            "album.php"
           ]
           select: {
             exist: [
-              "s"
+              "i"
+              "m"
             ]
           }
           transform: {
@@ -652,23 +762,23 @@ main: kit: entity: v1_search: {
           args: {
             query: [
               {
-                example: "coldplay"
+                example: "1dc4c347-a1db-32aa-b14f-bc9cc507b843"
                 kind: "query"
-                name: "s"
-                orig: "s"
+                name: "i"
+                orig: "i"
                 reqd: true
                 type: "`$STRING`"
               }
             ]
           }
           method: "GET"
-          orig: "/discography.php"
+          orig: "/album-mb.php"
           parts: [
-            "discography.php"
+            "album-mb.php"
           ]
           select: {
             exist: [
-              "s"
+              "i"
             ]
           }
           transform: {
@@ -680,28 +790,112 @@ main: kit: entity: v1_search: {
           args: {
             query: [
               {
-                example: "coldplay"
+                example: "cc197bad-dc9c-440d-a5b5-d52ba2e14234"
                 kind: "query"
-                name: "s"
-                orig: "s"
+                name: "i"
+                orig: "i"
                 reqd: true
                 type: "`$STRING`"
               }
             ]
           }
           method: "GET"
-          orig: "/search.php"
+          orig: "/artist-mb.php"
           parts: [
-            "search.php"
+            "artist-mb.php"
           ]
           select: {
             exist: [
-              "s"
+              "i"
             ]
           }
           transform: {
             req: "`reqdata`"
             res: "`body.artists`"
+          }
+        }
+        {
+          args: {
+            query: [
+              {
+                example: 112024
+                kind: "query"
+                name: "i"
+                orig: "i"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/artist-social.php"
+          parts: [
+            "artist-social.php"
+          ]
+          select: {
+            exist: [
+              "i"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body.artists`"
+          }
+        }
+        {
+          args: {
+            query: [
+              {
+                example: 112024
+                kind: "query"
+                name: "i"
+                orig: "i"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/artist.php"
+          parts: [
+            "artist.php"
+          ]
+          select: {
+            exist: [
+              "i"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body.artists`"
+          }
+        }
+        {
+          args: {
+            query: [
+              {
+                example: "50369905-68ca-48d2-912d-b37330ff7dc3"
+                kind: "query"
+                name: "i"
+                orig: "i"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/track-mb.php"
+          parts: [
+            "track-mb.php"
+          ]
+          select: {
+            exist: [
+              "i"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body.track`"
           }
         }
       ]

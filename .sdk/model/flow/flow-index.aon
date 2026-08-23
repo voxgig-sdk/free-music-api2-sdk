@@ -1,0 +1,8 @@
+# Flows
+
+@"BasicV1ListFlow.aon"
+@"BasicV1LookupFlow.aon"
+@"BasicV1SearchFlow.aon"
+@"BasicV2ListFlow.aon"
+@"BasicV2LookupFlow.aon"
+@"BasicV2SearchFlow.aon"

@@ -8,91 +8,109 @@ main: kit: entity: v1_list: {
     {
       name: "idAlbum"
       req: false
+      short: "Album ID"
       type: "`$INTEGER`"
     }
     {
       name: "idArtist"
       req: false
+      short: "Artist ID"
       type: "`$INTEGER`"
     }
     {
       name: "idIMVDB"
       req: false
+      short: "IMVDB ID"
       type: "`$INTEGER`"
     }
     {
       name: "idLyric"
       req: false
+      short: "Lyrics ID"
       type: "`$INTEGER`"
     }
     {
       name: "idTrack"
       req: false
+      short: "Track ID"
       type: "`$INTEGER`"
     }
     {
       name: "intCD"
       req: false
+      short: "CD number"
       type: "`$INTEGER`"
     }
     {
       name: "intDuration"
       req: false
+      short: "Track duration in milliseconds"
       type: "`$INTEGER`"
     }
     {
       name: "intLoved"
       req: false
+      short: "Number of loves/likes"
       type: "`$INTEGER`"
     }
     {
       name: "intMusicVidComments"
       req: false
+      short: "Number of music video comments"
       type: "`$INTEGER`"
     }
     {
       name: "intMusicVidDislikes"
       req: false
+      short: "Number of music video dislikes"
       type: "`$INTEGER`"
     }
     {
       name: "intMusicVidFavorites"
       req: false
+      short: "Number of music video favorites"
       type: "`$INTEGER`"
     }
     {
       name: "intMusicVidLikes"
       req: false
+      short: "Number of music video likes"
       type: "`$INTEGER`"
     }
     {
       name: "intMusicVidViews"
       req: false
+      short: "Number of music video views"
       type: "`$INTEGER`"
     }
     {
       name: "intScore"
       req: false
+      short: "Track score"
       type: "`$INTEGER`"
     }
     {
       name: "intScoreVotes"
       req: false
+      short: "Number of score votes"
       type: "`$INTEGER`"
     }
     {
       name: "intTotalListeners"
       req: false
+      short: "Total number of listeners"
       type: "`$INTEGER`"
     }
     {
       name: "intTotalPlays"
       req: false
+      short: "Total number of plays"
       type: "`$INTEGER`"
     }
     {
       name: "intTrackNumber"
       req: false
+      short: "Track number on album"
       type: "`$INTEGER`"
     }
     {
@@ -103,106 +121,127 @@ main: kit: entity: v1_list: {
     {
       name: "strAlbum"
       req: false
+      short: "Album title"
       type: "`$STRING`"
     }
     {
       name: "strArtist"
       req: false
+      short: "Artist name"
       type: "`$STRING`"
     }
     {
       name: "strArtistAlternate"
       req: false
+      short: "Alternate artist name"
       type: "`$STRING`"
     }
     {
       name: "strDescriptionEN"
       req: false
+      short: "Video description in English"
       type: "`$STRING`"
     }
     {
       name: "strGenre"
       req: false
+      short: "Track genre"
       type: "`$STRING`"
     }
     {
       name: "strLocked"
       req: false
+      short: "Whether the record is locked"
       type: "`$STRING`"
     }
     {
       name: "strMood"
       req: false
+      short: "Track mood"
       type: "`$STRING`"
     }
     {
       name: "strMusicBrainzAlbumID"
       req: false
+      short: "MusicBrainz Album ID"
       type: "`$STRING`"
     }
     {
       name: "strMusicBrainzArtistID"
       req: false
+      short: "MusicBrainz Artist ID"
       type: "`$STRING`"
     }
     {
       name: "strMusicBrainzID"
       req: false
+      short: "MusicBrainz Recording ID"
       type: "`$STRING`"
     }
     {
       name: "strMusicVid"
       req: false
+      short: "URL to music video"
       type: "`$STRING`"
     }
     {
       name: "strMusicVidCompany"
       req: false
+      short: "Music video production company"
       type: "`$STRING`"
     }
     {
       name: "strMusicVidDirector"
       req: false
+      short: "Music video director"
       type: "`$STRING`"
     }
     {
       name: "strMusicVidScreen1"
       req: false
+      short: "URL to music video screenshot 1"
       type: "`$STRING`"
     }
     {
       name: "strMusicVidScreen2"
       req: false
+      short: "URL to music video screenshot 2"
       type: "`$STRING`"
     }
     {
       name: "strMusicVidScreen3"
       req: false
+      short: "URL to music video screenshot 3"
       type: "`$STRING`"
     }
     {
       name: "strStyle"
       req: false
+      short: "Track style"
       type: "`$STRING`"
     }
     {
       name: "strTheme"
       req: false
+      short: "Track theme"
       type: "`$STRING`"
     }
     {
       name: "strTrack"
       req: false
+      short: "Track title"
       type: "`$STRING`"
     }
     {
       name: "strTrackLyrics"
       req: false
+      short: "Track lyrics"
       type: "`$STRING`"
     }
     {
       name: "strTrackThumb"
       req: false
+      short: "URL to track thumbnail"
       type: "`$STRING`"
     }
     {
