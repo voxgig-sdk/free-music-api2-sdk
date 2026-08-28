@@ -42,7 +42,7 @@ resolves to entities, not raw records. Iterate them directly, and call
 `.data()` on one for the record it holds:
 
 ```ts
-const v1lists = await client.V1List().list()
+const v1lists = await client.V1List().list({ country: "example", format: "example", type: "example" })
 
 for (const v1list of v1lists) {
   console.log(v1list)
@@ -697,7 +697,7 @@ Create an instance: `const v1_list = client.V1List()`
 #### Example: List
 
 ```ts
-const v1_lists = await client.V1List().list()
+const v1_lists = await client.V1List().list({ country: "example", format: "example", type: "example" })
 ```
 
 
@@ -960,7 +960,7 @@ Create an instance: `const v1_search = client.V1Search()`
 #### Example: List
 
 ```ts
-const v1_searchs = await client.V1Search().list()
+const v1_searchs = await client.V1Search().list({ s: "example" })
 ```
 
 
@@ -1035,6 +1035,29 @@ Create an instance: `const v2_search = client.V2Search()`
 ```ts
 const v2_search = await client.V2Search().load({ album_name: 'album_name' })
 ```
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Advanced

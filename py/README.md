@@ -46,7 +46,7 @@ error — iterate it directly.
 
 ```python
 try:
-    v1lists = client.V1List().list()
+    v1lists = client.V1List().list({"country": "example", "format": "example", "type": "example"})
     for v1list in v1lists:
         print(v1list)
 except Exception as err:
@@ -648,7 +648,7 @@ Create an instance: `v1_list = client.V1List()`
 #### Example: List
 
 ```python
-v1_lists = client.V1List().list()
+v1_lists = client.V1List().list({"country": "example", "format": "example", "type": "example"})
 ```
 
 
@@ -911,7 +911,7 @@ Create an instance: `v1_search = client.V1Search()`
 #### Example: List
 
 ```python
-v1_searchs = client.V1Search().list()
+v1_searchs = client.V1Search().list({"s": "example"})
 ```
 
 
@@ -986,6 +986,29 @@ Create an instance: `v2_search = client.V2Search()`
 ```python
 v2_search = client.V2Search().load({"album_name": "album_name"})
 ```
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Advanced
