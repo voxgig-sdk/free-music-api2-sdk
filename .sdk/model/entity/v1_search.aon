@@ -677,8 +677,10 @@ main: kit: entity: v1_search: {
           }
           method: "GET"
           orig: "/searchalbum.php"
-          parts: [
-            "searchalbum.php"
+          segments: [
+            {
+              lit: "searchalbum.php"
+            }
           ]
           select: {
             exist: [
@@ -714,8 +716,10 @@ main: kit: entity: v1_search: {
           }
           method: "GET"
           orig: "/searchtrack.php"
-          parts: [
-            "searchtrack.php"
+          segments: [
+            {
+              lit: "searchtrack.php"
+            }
           ]
           select: {
             exist: [
@@ -742,8 +746,10 @@ main: kit: entity: v1_search: {
           }
           method: "GET"
           orig: "/discography-mb.php"
-          parts: [
-            "discography-mb.php"
+          segments: [
+            {
+              lit: "discography-mb.php"
+            }
           ]
           select: {
             exist: [
@@ -770,8 +776,10 @@ main: kit: entity: v1_search: {
           }
           method: "GET"
           orig: "/discography.php"
-          parts: [
-            "discography.php"
+          segments: [
+            {
+              lit: "discography.php"
+            }
           ]
           select: {
             exist: [
@@ -798,8 +806,10 @@ main: kit: entity: v1_search: {
           }
           method: "GET"
           orig: "/search.php"
-          parts: [
-            "search.php"
+          segments: [
+            {
+              lit: "search.php"
+            }
           ]
           select: {
             exist: [

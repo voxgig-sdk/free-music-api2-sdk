@@ -60,15 +60,18 @@ def _v1_lookup_direct_setup(mockres):
     env = runner.env_override({
         "FREE_MUSIC_API2_TEST_V1_LOOKUP_ENTID": {},
         "FREE_MUSIC_API2_TEST_LIVE": "FALSE",
-        "FREE_MUSIC_API2_APIKEY": "NONE",
+        "FREE_MUSIC_API2_APIKEY": "",
     })
 
     live = env.get("FREE_MUSIC_API2_TEST_LIVE") == "TRUE"
 
     if live:
-        merged_opts = {
+        # sdk-test-control.json's test.client.options seeds the live
+        # client; the generated fields below overwrite anything they name.
+        merged_opts = dict(runner.live_client_options())
+        merged_opts.update({
             "apikey": env.get("FREE_MUSIC_API2_APIKEY"),
-        }
+        })
         client = FreeMusicApi2SDK(merged_opts)
         return {
             "client": client,

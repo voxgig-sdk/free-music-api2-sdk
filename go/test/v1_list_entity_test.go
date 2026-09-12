@@ -98,7 +98,7 @@ func TestV1ListEntity(t *testing.T) {
 		client := setup.client
 
 		// Bootstrap entity data from existing test data (no create step in flow).
-		v1ListRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath("existing.v1_list", setup.data)))
+		v1ListRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.v1_list")))
 		var v1ListRef01Data map[string]any
 		if len(v1ListRef01DataRaw) > 0 {
 			v1ListRef01Data = core.ToMapAny(v1ListRef01DataRaw[0][1])
@@ -147,7 +147,7 @@ func v1_listBasicSetup(extra map[string]any) *entityTestSetup {
 	client := sdk.TestSDK(options, extra)
 
 	// Generate idmap via transform, matching TS pattern.
-	idmap := vs.Transform(
+	idmap, _ := vs.Transform(
 		[]any{"v1_list01", "v1_list02", "v1_list03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
@@ -167,7 +167,7 @@ func v1_listBasicSetup(extra map[string]any) *entityTestSetup {
 		"FREE_MUSIC_API2_TEST_V1_LIST_ENTID": idmap,
 		"FREE_MUSIC_API2_TEST_LIVE":      "FALSE",
 		"FREE_MUSIC_API2_TEST_EXPLAIN":   "FALSE",
-		"FREE_MUSIC_API2_APIKEY":         "NONE",
+		"FREE_MUSIC_API2_APIKEY":         "",
 	})
 
 	idmapResolved := core.ToMapAny(env["FREE_MUSIC_API2_TEST_V1_LIST_ENTID"])
@@ -176,11 +176,23 @@ func v1_listBasicSetup(extra map[string]any) *entityTestSetup {
 	}
 
 	if env["FREE_MUSIC_API2_TEST_LIVE"] == "TRUE" {
+		// An empty map, not a nil one: Merge returns nil when its last entry
+		// is nil, and BasicSetup is normally called with no extras - so a
+		// bare nil silently discarded the apikey and server values below.
+		extraOpts := extra
+		if extraOpts == nil {
+			extraOpts = map[string]any{}
+		}
+
 		mergedOpts := vs.Merge([]any{
+			// liveClientOptions() FIRST, so the generated fields below win:
+			// sdk-test-control.json's test.client.options adds to the live
+			// client, it does not redirect it.
+			liveClientOptions(),
 			map[string]any{
 				"apikey": env["FREE_MUSIC_API2_APIKEY"],
 			},
-			extra,
+			extraOpts,
 		})
 		client = sdk.NewFreeMusicApi2SDK(core.ToMapAny(mergedOpts))
 	}

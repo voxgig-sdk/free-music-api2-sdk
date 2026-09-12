@@ -287,8 +287,10 @@ main: kit: entity: v1_list: {
           }
           method: "GET"
           orig: "/trending.php"
-          parts: [
-            "trending.php"
+          segments: [
+            {
+              lit: "trending.php"
+            }
           ]
           select: {
             exist: [
@@ -317,8 +319,10 @@ main: kit: entity: v1_list: {
           }
           method: "GET"
           orig: "/mostloved.php"
-          parts: [
-            "mostloved.php"
+          segments: [
+            {
+              lit: "mostloved.php"
+            }
           ]
           select: {
             exist: [
@@ -345,8 +349,10 @@ main: kit: entity: v1_list: {
           }
           method: "GET"
           orig: "/mvid-mb.php"
-          parts: [
-            "mvid-mb.php"
+          segments: [
+            {
+              lit: "mvid-mb.php"
+            }
           ]
           select: {
             exist: [
@@ -373,8 +379,10 @@ main: kit: entity: v1_list: {
           }
           method: "GET"
           orig: "/mvid.php"
-          parts: [
-            "mvid.php"
+          segments: [
+            {
+              lit: "mvid.php"
+            }
           ]
           select: {
             exist: [
@@ -401,8 +409,10 @@ main: kit: entity: v1_list: {
           }
           method: "GET"
           orig: "/track-top10-mb.php"
-          parts: [
-            "track-top10-mb.php"
+          segments: [
+            {
+              lit: "track-top10-mb.php"
+            }
           ]
           select: {
             exist: [
@@ -429,8 +439,10 @@ main: kit: entity: v1_list: {
           }
           method: "GET"
           orig: "/track-top10.php"
-          parts: [
-            "track-top10.php"
+          segments: [
+            {
+              lit: "track-top10.php"
+            }
           ]
           select: {
             exist: [

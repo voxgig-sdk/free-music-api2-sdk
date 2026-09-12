@@ -32,16 +32,22 @@ main: kit: entity: v2_list: {
           }
           method: "GET"
           orig: "/list/discography/{artistId}"
-          parts: [
-            "list"
-            "discography"
-            "{artist_id}"
-          ]
           rename: {
             param: {
               artistId: "artist_id"
             }
           }
+          segments: [
+            {
+              lit: "list"
+            }
+            {
+              lit: "discography"
+            }
+            {
+              var: "artist_id"
+            }
+          ]
           select: {
             exist: [
               "artist_id"

@@ -707,8 +707,10 @@ main: kit: entity: v1_lookup: {
           }
           method: "GET"
           orig: "/track.php"
-          parts: [
-            "track.php"
+          segments: [
+            {
+              lit: "track.php"
+            }
           ]
           select: {
             exist: [
@@ -744,8 +746,10 @@ main: kit: entity: v1_lookup: {
           }
           method: "GET"
           orig: "/album.php"
-          parts: [
-            "album.php"
+          segments: [
+            {
+              lit: "album.php"
+            }
           ]
           select: {
             exist: [
@@ -773,8 +777,10 @@ main: kit: entity: v1_lookup: {
           }
           method: "GET"
           orig: "/album-mb.php"
-          parts: [
-            "album-mb.php"
+          segments: [
+            {
+              lit: "album-mb.php"
+            }
           ]
           select: {
             exist: [
@@ -801,8 +807,10 @@ main: kit: entity: v1_lookup: {
           }
           method: "GET"
           orig: "/artist-mb.php"
-          parts: [
-            "artist-mb.php"
+          segments: [
+            {
+              lit: "artist-mb.php"
+            }
           ]
           select: {
             exist: [
@@ -829,8 +837,10 @@ main: kit: entity: v1_lookup: {
           }
           method: "GET"
           orig: "/artist-social.php"
-          parts: [
-            "artist-social.php"
+          segments: [
+            {
+              lit: "artist-social.php"
+            }
           ]
           select: {
             exist: [
@@ -857,8 +867,10 @@ main: kit: entity: v1_lookup: {
           }
           method: "GET"
           orig: "/artist.php"
-          parts: [
-            "artist.php"
+          segments: [
+            {
+              lit: "artist.php"
+            }
           ]
           select: {
             exist: [
@@ -885,8 +897,10 @@ main: kit: entity: v1_lookup: {
           }
           method: "GET"
           orig: "/track-mb.php"
-          parts: [
-            "track-mb.php"
+          segments: [
+            {
+              lit: "track-mb.php"
+            }
           ]
           select: {
             exist: [

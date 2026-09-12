@@ -10,6 +10,17 @@ const FEATURE_CLASS: Record<string, typeof BaseFeature> = {
 }
 
 
+// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
+// the model's active plugin groups. A feature that takes a `plugins` option
+// (secrets over sekreto) reads its own entry; a feature with no plugins has
+// none. Named imports above make each definition statically reachable, so
+// an SDK carries exactly the plugin modules its model selects — the same
+// leanness the old side-effect registry imports bought, without a registry.
+const FEATURE_PLUGINS: Record<string, any[]> = {
+  
+}
+
+
 class Config {
 
   makeFeature(this: any, fn: string) {
@@ -327,8 +338,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/trending.php",
-              "parts": [
-                "trending.php"
+              "segments": [
+                {
+                  "lit": "trending.php"
+                }
               ],
               "select": {
                 "exist": [
@@ -340,7 +353,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.trending`"
-              }
+              },
+              "parts": [
+                "trending.php"
+              ]
             },
             {
               "args": {
@@ -358,8 +374,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/mostloved.php",
-              "parts": [
-                "mostloved.php"
+              "segments": [
+                {
+                  "lit": "mostloved.php"
+                }
               ],
               "select": {
                 "exist": [
@@ -369,7 +387,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.loved`"
-              }
+              },
+              "parts": [
+                "mostloved.php"
+              ]
             },
             {
               "args": {
@@ -387,8 +408,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/mvid-mb.php",
-              "parts": [
-                "mvid-mb.php"
+              "segments": [
+                {
+                  "lit": "mvid-mb.php"
+                }
               ],
               "select": {
                 "exist": [
@@ -398,7 +421,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.mvids`"
-              }
+              },
+              "parts": [
+                "mvid-mb.php"
+              ]
             },
             {
               "args": {
@@ -416,8 +442,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/mvid.php",
-              "parts": [
-                "mvid.php"
+              "segments": [
+                {
+                  "lit": "mvid.php"
+                }
               ],
               "select": {
                 "exist": [
@@ -427,7 +455,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.mvids`"
-              }
+              },
+              "parts": [
+                "mvid.php"
+              ]
             },
             {
               "args": {
@@ -445,8 +476,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/track-top10-mb.php",
-              "parts": [
-                "track-top10-mb.php"
+              "segments": [
+                {
+                  "lit": "track-top10-mb.php"
+                }
               ],
               "select": {
                 "exist": [
@@ -456,7 +489,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.track`"
-              }
+              },
+              "parts": [
+                "track-top10-mb.php"
+              ]
             },
             {
               "args": {
@@ -474,8 +510,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/track-top10.php",
-              "parts": [
-                "track-top10.php"
+              "segments": [
+                {
+                  "lit": "track-top10.php"
+                }
               ],
               "select": {
                 "exist": [
@@ -485,7 +523,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.track`"
-              }
+              },
+              "parts": [
+                "track-top10.php"
+              ]
             }
           ]
         }
@@ -1085,8 +1126,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/track.php",
-              "parts": [
-                "track.php"
+              "segments": [
+                {
+                  "lit": "track.php"
+                }
               ],
               "select": {
                 "exist": [
@@ -1097,7 +1140,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.track`"
-              }
+              },
+              "parts": [
+                "track.php"
+              ]
             },
             {
               "args": {
@@ -1121,8 +1167,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/album.php",
-              "parts": [
-                "album.php"
+              "segments": [
+                {
+                  "lit": "album.php"
+                }
               ],
               "select": {
                 "exist": [
@@ -1133,7 +1181,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.album`"
-              }
+              },
+              "parts": [
+                "album.php"
+              ]
             },
             {
               "args": {
@@ -1151,8 +1202,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/album-mb.php",
-              "parts": [
-                "album-mb.php"
+              "segments": [
+                {
+                  "lit": "album-mb.php"
+                }
               ],
               "select": {
                 "exist": [
@@ -1162,7 +1215,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.album`"
-              }
+              },
+              "parts": [
+                "album-mb.php"
+              ]
             },
             {
               "args": {
@@ -1180,8 +1236,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/artist-mb.php",
-              "parts": [
-                "artist-mb.php"
+              "segments": [
+                {
+                  "lit": "artist-mb.php"
+                }
               ],
               "select": {
                 "exist": [
@@ -1191,7 +1249,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.artists`"
-              }
+              },
+              "parts": [
+                "artist-mb.php"
+              ]
             },
             {
               "args": {
@@ -1209,8 +1270,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/artist-social.php",
-              "parts": [
-                "artist-social.php"
+              "segments": [
+                {
+                  "lit": "artist-social.php"
+                }
               ],
               "select": {
                 "exist": [
@@ -1220,7 +1283,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.artists`"
-              }
+              },
+              "parts": [
+                "artist-social.php"
+              ]
             },
             {
               "args": {
@@ -1238,8 +1304,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/artist.php",
-              "parts": [
-                "artist.php"
+              "segments": [
+                {
+                  "lit": "artist.php"
+                }
               ],
               "select": {
                 "exist": [
@@ -1249,7 +1317,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.artists`"
-              }
+              },
+              "parts": [
+                "artist.php"
+              ]
             },
             {
               "args": {
@@ -1267,8 +1338,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/track-mb.php",
-              "parts": [
-                "track-mb.php"
+              "segments": [
+                {
+                  "lit": "track-mb.php"
+                }
               ],
               "select": {
                 "exist": [
@@ -1278,7 +1351,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.track`"
-              }
+              },
+              "parts": [
+                "track-mb.php"
+              ]
             }
           ]
         }
@@ -1854,8 +1930,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/searchalbum.php",
-              "parts": [
-                "searchalbum.php"
+              "segments": [
+                {
+                  "lit": "searchalbum.php"
+                }
               ],
               "select": {
                 "exist": [
@@ -1866,7 +1944,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.album`"
-              }
+              },
+              "parts": [
+                "searchalbum.php"
+              ]
             },
             {
               "args": {
@@ -1892,8 +1973,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/searchtrack.php",
-              "parts": [
-                "searchtrack.php"
+              "segments": [
+                {
+                  "lit": "searchtrack.php"
+                }
               ],
               "select": {
                 "exist": [
@@ -1904,7 +1987,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.track`"
-              }
+              },
+              "parts": [
+                "searchtrack.php"
+              ]
             },
             {
               "args": {
@@ -1921,8 +2007,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/discography-mb.php",
-              "parts": [
-                "discography-mb.php"
+              "segments": [
+                {
+                  "lit": "discography-mb.php"
+                }
               ],
               "select": {
                 "exist": [
@@ -1932,7 +2020,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.album`"
-              }
+              },
+              "parts": [
+                "discography-mb.php"
+              ]
             },
             {
               "args": {
@@ -1950,8 +2041,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/discography.php",
-              "parts": [
-                "discography.php"
+              "segments": [
+                {
+                  "lit": "discography.php"
+                }
               ],
               "select": {
                 "exist": [
@@ -1961,7 +2054,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.album`"
-              }
+              },
+              "parts": [
+                "discography.php"
+              ]
             },
             {
               "args": {
@@ -1979,8 +2075,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/search.php",
-              "parts": [
-                "search.php"
+              "segments": [
+                {
+                  "lit": "search.php"
+                }
               ],
               "select": {
                 "exist": [
@@ -1990,7 +2088,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.artists`"
-              }
+              },
+              "parts": [
+                "search.php"
+              ]
             }
           ]
         }
@@ -2028,16 +2129,22 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/list/discography/{artistId}",
-              "parts": [
-                "list",
-                "discography",
-                "{artist_id}"
-              ],
               "rename": {
                 "param": {
                   "artistId": "artist_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "list"
+                },
+                {
+                  "lit": "discography"
+                },
+                {
+                  "var": "artist_id"
+                }
+              ],
               "select": {
                 "exist": [
                   "artist_id"
@@ -2046,7 +2153,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "list",
+                "discography",
+                "{artist_id}"
+              ]
             }
           ]
         }
@@ -2096,16 +2208,22 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/lookup/album/{albumId}",
-              "parts": [
-                "lookup",
-                "album",
-                "{album_id}"
-              ],
               "rename": {
                 "param": {
                   "albumId": "album_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "lookup"
+                },
+                {
+                  "lit": "album"
+                },
+                {
+                  "var": "album_id"
+                }
+              ],
               "select": {
                 "exist": [
                   "album_id"
@@ -2114,7 +2232,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "lookup",
+                "album",
+                "{album_id}"
+              ]
             },
             {
               "args": {
@@ -2132,16 +2255,22 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/lookup/artist/{artistId}",
-              "parts": [
-                "lookup",
-                "artist",
-                "{artist_id}"
-              ],
               "rename": {
                 "param": {
                   "artistId": "artist_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "lookup"
+                },
+                {
+                  "lit": "artist"
+                },
+                {
+                  "var": "artist_id"
+                }
+              ],
               "select": {
                 "exist": [
                   "artist_id"
@@ -2150,7 +2279,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "lookup",
+                "artist",
+                "{artist_id}"
+              ]
             },
             {
               "args": {
@@ -2168,16 +2302,22 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/lookup/album_mb/{musicBrainzId}",
-              "parts": [
-                "lookup",
-                "album_mb",
-                "{music_brainz_id}"
-              ],
               "rename": {
                 "param": {
                   "musicBrainzId": "music_brainz_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "lookup"
+                },
+                {
+                  "lit": "album_mb"
+                },
+                {
+                  "var": "music_brainz_id"
+                }
+              ],
               "select": {
                 "exist": [
                   "music_brainz_id"
@@ -2186,7 +2326,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "lookup",
+                "album_mb",
+                "{music_brainz_id}"
+              ]
             },
             {
               "args": {
@@ -2204,16 +2349,22 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/lookup/artist_mb/{musicBrainzId}",
-              "parts": [
-                "lookup",
-                "artist_mb",
-                "{music_brainz_id}"
-              ],
               "rename": {
                 "param": {
                   "musicBrainzId": "music_brainz_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "lookup"
+                },
+                {
+                  "lit": "artist_mb"
+                },
+                {
+                  "var": "music_brainz_id"
+                }
+              ],
               "select": {
                 "exist": [
                   "music_brainz_id"
@@ -2222,7 +2373,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "lookup",
+                "artist_mb",
+                "{music_brainz_id}"
+              ]
             },
             {
               "args": {
@@ -2240,16 +2396,22 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/lookup/track_mb/{musicBrainzId}",
-              "parts": [
-                "lookup",
-                "track_mb",
-                "{music_brainz_id}"
-              ],
               "rename": {
                 "param": {
                   "musicBrainzId": "music_brainz_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "lookup"
+                },
+                {
+                  "lit": "track_mb"
+                },
+                {
+                  "var": "music_brainz_id"
+                }
+              ],
               "select": {
                 "exist": [
                   "music_brainz_id"
@@ -2258,7 +2420,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "lookup",
+                "track_mb",
+                "{music_brainz_id}"
+              ]
             },
             {
               "args": {
@@ -2276,16 +2443,22 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/lookup/track/{trackId}",
-              "parts": [
-                "lookup",
-                "track",
-                "{track_id}"
-              ],
               "rename": {
                 "param": {
                   "trackId": "track_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "lookup"
+                },
+                {
+                  "lit": "track"
+                },
+                {
+                  "var": "track_id"
+                }
+              ],
               "select": {
                 "exist": [
                   "track_id"
@@ -2294,7 +2467,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "lookup",
+                "track",
+                "{track_id}"
+              ]
             }
           ]
         }
@@ -2359,16 +2537,22 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/search/album/{albumName}",
-              "parts": [
-                "search",
-                "album",
-                "{album_name}"
-              ],
               "rename": {
                 "param": {
                   "albumName": "album_name"
                 }
               },
+              "segments": [
+                {
+                  "lit": "search"
+                },
+                {
+                  "lit": "album"
+                },
+                {
+                  "var": "album_name"
+                }
+              ],
               "select": {
                 "exist": [
                   "album_name"
@@ -2377,7 +2561,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "search",
+                "album",
+                "{album_name}"
+              ]
             },
             {
               "args": {
@@ -2395,16 +2584,22 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/search/artist/{artistName}",
-              "parts": [
-                "search",
-                "artist",
-                "{artist_name}"
-              ],
               "rename": {
                 "param": {
                   "artistName": "artist_name"
                 }
               },
+              "segments": [
+                {
+                  "lit": "search"
+                },
+                {
+                  "lit": "artist"
+                },
+                {
+                  "var": "artist_name"
+                }
+              ],
               "select": {
                 "exist": [
                   "artist_name"
@@ -2413,7 +2608,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "search",
+                "artist",
+                "{artist_name}"
+              ]
             },
             {
               "args": {
@@ -2431,16 +2631,22 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/search/track/{trackName}",
-              "parts": [
-                "search",
-                "track",
-                "{track_name}"
-              ],
               "rename": {
                 "param": {
                   "trackName": "track_name"
                 }
               },
+              "segments": [
+                {
+                  "lit": "search"
+                },
+                {
+                  "lit": "track"
+                },
+                {
+                  "var": "track_name"
+                }
+              ],
               "select": {
                 "exist": [
                   "track_name"
@@ -2449,7 +2655,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "search",
+                "track",
+                "{track_name}"
+              ]
             }
           ]
         }
@@ -2475,6 +2686,7 @@ class Config {
 const config = new Config()
 
 export {
-  config
+  config,
+  FEATURE_PLUGINS,
 }
 

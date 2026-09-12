@@ -50,7 +50,7 @@ func TestV2ListEntity(t *testing.T) {
 		client := setup.client
 
 		// Bootstrap entity data from existing test data (no create step in flow).
-		v2ListRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath("existing.v2_list", setup.data)))
+		v2ListRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.v2_list")))
 		var v2ListRef01Data map[string]any
 		if len(v2ListRef01DataRaw) > 0 {
 			v2ListRef01Data = core.ToMapAny(v2ListRef01DataRaw[0][1])
@@ -97,7 +97,7 @@ func v2_listBasicSetup(extra map[string]any) *entityTestSetup {
 	client := sdk.TestSDK(options, extra)
 
 	// Generate idmap via transform, matching TS pattern.
-	idmap := vs.Transform(
+	idmap, _ := vs.Transform(
 		[]any{"v2_list01", "v2_list02", "v2_list03", "discography01", "discography02", "discography03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
@@ -117,7 +117,7 @@ func v2_listBasicSetup(extra map[string]any) *entityTestSetup {
 		"FREE_MUSIC_API2_TEST_V2_LIST_ENTID": idmap,
 		"FREE_MUSIC_API2_TEST_LIVE":      "FALSE",
 		"FREE_MUSIC_API2_TEST_EXPLAIN":   "FALSE",
-		"FREE_MUSIC_API2_APIKEY":         "NONE",
+		"FREE_MUSIC_API2_APIKEY":         "",
 	})
 
 	idmapResolved := core.ToMapAny(env["FREE_MUSIC_API2_TEST_V2_LIST_ENTID"])
@@ -126,11 +126,23 @@ func v2_listBasicSetup(extra map[string]any) *entityTestSetup {
 	}
 
 	if env["FREE_MUSIC_API2_TEST_LIVE"] == "TRUE" {
+		// An empty map, not a nil one: Merge returns nil when its last entry
+		// is nil, and BasicSetup is normally called with no extras - so a
+		// bare nil silently discarded the apikey and server values below.
+		extraOpts := extra
+		if extraOpts == nil {
+			extraOpts = map[string]any{}
+		}
+
 		mergedOpts := vs.Merge([]any{
+			// liveClientOptions() FIRST, so the generated fields below win:
+			// sdk-test-control.json's test.client.options adds to the live
+			// client, it does not redirect it.
+			liveClientOptions(),
 			map[string]any{
 				"apikey": env["FREE_MUSIC_API2_APIKEY"],
 			},
-			extra,
+			extraOpts,
 		})
 		client = sdk.NewFreeMusicApi2SDK(core.ToMapAny(mergedOpts))
 	}

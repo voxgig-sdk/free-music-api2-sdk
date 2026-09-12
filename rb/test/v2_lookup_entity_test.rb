@@ -81,7 +81,7 @@ def v2_lookup_basic_setup(extra)
     "FREE_MUSIC_API2_TEST_V2_LOOKUP_ENTID" => idmap,
     "FREE_MUSIC_API2_TEST_LIVE" => "FALSE",
     "FREE_MUSIC_API2_TEST_EXPLAIN" => "FALSE",
-    "FREE_MUSIC_API2_APIKEY" => "NONE",
+    "FREE_MUSIC_API2_APIKEY" => "",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -92,6 +92,9 @@ def v2_lookup_basic_setup(extra)
 
   if env["FREE_MUSIC_API2_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
+      # FIRST, so the generated fields below win: sdk-test-control.json's
+      # test.client.options adds to the live client, it does not redirect it.
+      Runner.live_client_options,
       {
         "apikey" => env["FREE_MUSIC_API2_APIKEY"],
       },

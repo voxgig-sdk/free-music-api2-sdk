@@ -50,7 +50,7 @@ func TestV2LookupEntity(t *testing.T) {
 		client := setup.client
 
 		// Bootstrap entity data from existing test data (no create step in flow).
-		v2LookupRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath("existing.v2_lookup", setup.data)))
+		v2LookupRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.v2_lookup")))
 		var v2LookupRef01Data map[string]any
 		if len(v2LookupRef01DataRaw) > 0 {
 			v2LookupRef01Data = core.ToMapAny(v2LookupRef01DataRaw[0][1])
@@ -97,7 +97,7 @@ func v2_lookupBasicSetup(extra map[string]any) *entityTestSetup {
 	client := sdk.TestSDK(options, extra)
 
 	// Generate idmap via transform, matching TS pattern.
-	idmap := vs.Transform(
+	idmap, _ := vs.Transform(
 		[]any{"v2_lookup01", "v2_lookup02", "v2_lookup03", "album01", "album02", "album03", "album_mb01", "album_mb02", "album_mb03", "artist01", "artist02", "artist03", "artist_mb01", "artist_mb02", "artist_mb03", "track01", "track02", "track03", "track_mb01", "track_mb02", "track_mb03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
@@ -117,7 +117,7 @@ func v2_lookupBasicSetup(extra map[string]any) *entityTestSetup {
 		"FREE_MUSIC_API2_TEST_V2_LOOKUP_ENTID": idmap,
 		"FREE_MUSIC_API2_TEST_LIVE":      "FALSE",
 		"FREE_MUSIC_API2_TEST_EXPLAIN":   "FALSE",
-		"FREE_MUSIC_API2_APIKEY":         "NONE",
+		"FREE_MUSIC_API2_APIKEY":         "",
 	})
 
 	idmapResolved := core.ToMapAny(env["FREE_MUSIC_API2_TEST_V2_LOOKUP_ENTID"])
@@ -126,11 +126,23 @@ func v2_lookupBasicSetup(extra map[string]any) *entityTestSetup {
 	}
 
 	if env["FREE_MUSIC_API2_TEST_LIVE"] == "TRUE" {
+		// An empty map, not a nil one: Merge returns nil when its last entry
+		// is nil, and BasicSetup is normally called with no extras - so a
+		// bare nil silently discarded the apikey and server values below.
+		extraOpts := extra
+		if extraOpts == nil {
+			extraOpts = map[string]any{}
+		}
+
 		mergedOpts := vs.Merge([]any{
+			// liveClientOptions() FIRST, so the generated fields below win:
+			// sdk-test-control.json's test.client.options adds to the live
+			// client, it does not redirect it.
+			liveClientOptions(),
 			map[string]any{
 				"apikey": env["FREE_MUSIC_API2_APIKEY"],
 			},
-			extra,
+			extraOpts,
 		})
 		client = sdk.NewFreeMusicApi2SDK(core.ToMapAny(mergedOpts))
 	}

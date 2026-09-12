@@ -42,16 +42,22 @@ main: kit: entity: v2_search: {
           }
           method: "GET"
           orig: "/search/album/{albumName}"
-          parts: [
-            "search"
-            "album"
-            "{album_name}"
-          ]
           rename: {
             param: {
               albumName: "album_name"
             }
           }
+          segments: [
+            {
+              lit: "search"
+            }
+            {
+              lit: "album"
+            }
+            {
+              var: "album_name"
+            }
+          ]
           select: {
             exist: [
               "album_name"
@@ -77,16 +83,22 @@ main: kit: entity: v2_search: {
           }
           method: "GET"
           orig: "/search/artist/{artistName}"
-          parts: [
-            "search"
-            "artist"
-            "{artist_name}"
-          ]
           rename: {
             param: {
               artistName: "artist_name"
             }
           }
+          segments: [
+            {
+              lit: "search"
+            }
+            {
+              lit: "artist"
+            }
+            {
+              var: "artist_name"
+            }
+          ]
           select: {
             exist: [
               "artist_name"
@@ -112,16 +124,22 @@ main: kit: entity: v2_search: {
           }
           method: "GET"
           orig: "/search/track/{trackName}"
-          parts: [
-            "search"
-            "track"
-            "{track_name}"
-          ]
           rename: {
             param: {
               trackName: "track_name"
             }
           }
+          segments: [
+            {
+              lit: "search"
+            }
+            {
+              lit: "track"
+            }
+            {
+              var: "track_name"
+            }
+          ]
           select: {
             exist: [
               "track_name"

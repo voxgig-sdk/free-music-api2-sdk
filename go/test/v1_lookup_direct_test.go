@@ -94,14 +94,22 @@ func v1_lookupDirectSetup(mockres any) *v1_lookupDirectSetupResult {
 	env := envOverride(map[string]any{
 		"FREE_MUSIC_API2_TEST_V1_LOOKUP_ENTID": map[string]any{},
 		"FREE_MUSIC_API2_TEST_LIVE":    "FALSE",
-		"FREE_MUSIC_API2_APIKEY":       "NONE",
+		"FREE_MUSIC_API2_APIKEY":       "",
 	})
 
 	live := env["FREE_MUSIC_API2_TEST_LIVE"] == "TRUE"
 
 	if live {
-		mergedOpts := map[string]any{
+		// sdk-test-control.json's test.client.options seeds the live
+		// client; the generated fields below overwrite anything they name.
+		mergedOpts := map[string]any{}
+		for k, v := range liveClientOptions() {
+			mergedOpts[k] = v
+		}
+		for k, v := range map[string]any{
 			"apikey": env["FREE_MUSIC_API2_APIKEY"],
+		} {
+			mergedOpts[k] = v
 		}
 		client := sdk.NewFreeMusicApi2SDK(mergedOpts)
 

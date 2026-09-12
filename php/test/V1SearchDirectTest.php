@@ -68,15 +68,17 @@ function v1_search_direct_setup($mockres)
     $env = Runner::env_override([
         "FREE_MUSIC_API2_TEST_V1_SEARCH_ENTID" => [],
         "FREE_MUSIC_API2_TEST_LIVE" => "FALSE",
-        "FREE_MUSIC_API2_APIKEY" => "NONE",
+        "FREE_MUSIC_API2_APIKEY" => "",
     ]);
 
     $live = $env["FREE_MUSIC_API2_TEST_LIVE"] === "TRUE";
 
     if ($live) {
-        $merged_opts = [
+        // Merged so the generated fields win: sdk-test-control.json's
+        // test.client.options adds to the live client, it does not redirect it.
+        $merged_opts = array_merge(Runner::live_client_options(), [
             "apikey" => $env["FREE_MUSIC_API2_APIKEY"],
-        ];
+        ]);
         $client = new FreeMusicApi2SDK($merged_opts);
         return [
             "client" => $client,
