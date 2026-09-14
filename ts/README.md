@@ -28,7 +28,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { FreeMusicApi2SDK } from '@voxgig-sdk/free-music-api2'
+import { FreeMusicApi2SDK } from '@voxgig-sdk/free-music-api2-sdk'
 
 const client = new FreeMusicApi2SDK({
   apikey: process.env.FREE_MUSIC_API2_APIKEY,
@@ -1119,7 +1119,7 @@ free-music-api2/
 Import the SDK from the package root:
 
 ```ts
-import { FreeMusicApi2SDK } from '@voxgig-sdk/free-music-api2'
+import { FreeMusicApi2SDK } from '@voxgig-sdk/free-music-api2-sdk'
 ```
 
 ### Entity state
