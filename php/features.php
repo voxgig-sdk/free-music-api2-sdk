@@ -4,7 +4,10 @@ declare(strict_types=1);
 // FreeMusicApi2 SDK feature factory
 
 require_once __DIR__ . '/feature/BaseFeature.php';
+require_once __DIR__ . '/feature/RatelimitFeature.php';
+require_once __DIR__ . '/feature/RetryFeature.php';
 require_once __DIR__ . '/feature/TestFeature.php';
+require_once __DIR__ . '/feature/TimeoutFeature.php';
 
 
 class FreeMusicApi2Features
@@ -14,8 +17,14 @@ class FreeMusicApi2Features
         switch ($name) {
             case "base":
                 return new FreeMusicApi2BaseFeature();
+            case "ratelimit":
+                return new FreeMusicApi2RatelimitFeature();
+            case "retry":
+                return new FreeMusicApi2RetryFeature();
             case "test":
                 return new FreeMusicApi2TestFeature();
+            case "timeout":
+                return new FreeMusicApi2TimeoutFeature();
             default:
                 return new FreeMusicApi2BaseFeature();
         }
@@ -31,7 +40,10 @@ class FreeMusicApi2Features
     {
         switch ($name) {
             case "base":
+            case "ratelimit":
+            case "retry":
             case "test":
+            case "timeout":
                 return true;
             default:
                 return false;

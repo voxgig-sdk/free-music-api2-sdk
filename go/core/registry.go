@@ -4,7 +4,13 @@ var UtilityRegistrar func(u *Utility)
 
 var NewBaseFeatureFunc func() Feature
 
+var NewRatelimitFeatureFunc func() Feature
+
+var NewRetryFeatureFunc func() Feature
+
 var NewTestFeatureFunc func() Feature
+
+var NewTimeoutFeatureFunc func() Feature
 
 var NewV1ListEntityFunc func(client *FreeMusicApi2SDK, entopts map[string]any) FreeMusicApi2Entity
 

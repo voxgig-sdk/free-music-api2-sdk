@@ -37,9 +37,10 @@ $client = new FreeMusicApi2SDK([
 
 ```php
 try {
-    // list() returns an array of V1List records — iterate directly.
+    // list() returns entity instances; data_get() reads each record.
     $v1lists = $client->V1List()->list();
-    foreach ($v1lists as $item) {
+    foreach ($v1lists as $record) {
+        $item = $record->data_get();
         echo $item["idAlbum"] . "\n";
     }
 } catch (\Throwable $err) {
@@ -55,7 +56,7 @@ V2List is nested under artist, so provide the `artist_id`.
 try {
     // load() returns the ENTITY — call data_get() for the V2List record (throws on error).
     $v2list = $client->V2List()->load(["artist_id" => 1]);
-    print_r($v2list);
+    print_r($v2list->data_get());
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -144,7 +145,7 @@ $client = FreeMusicApi2SDK::test();
 // Entity ops return the ENTITY (throws on error);
 // call data_get() for the mock record.
 $v2lookup = $client->V2Lookup()->load(["album_id" => 1]);
-print_r($v2lookup);
+print_r($v2lookup->data_get());
 ```
 
 ### Use a custom fetch function
@@ -999,7 +1000,7 @@ $v2_search = $client->V2Search()->load(["album_name" => "album_name"]);
 
 ## Features
 
-This SDK ships 1 optional features. Each is **inactive until you
+This SDK ships 4 optional features. Each is **inactive until you
 switch it on**, so an SDK you have not configured behaves exactly as if none of
 them existed — no retries, no cache, no logging, no measurable overhead.
 
@@ -1008,7 +1009,50 @@ above:
 
 | Feature | What it does |
 |---|---|
+| [`ratelimit`](#ratelimit) | Client-side rate limiting via a token bucket |
+| [`retry`](#retry) | Automatic retry of transient failures with exponential backoff |
 | [`test`](#test) | In-memory mock transport for testing without a live server |
+| [`timeout`](#timeout) | Per-request timeout with transport abort |
+
+> **Order matters for `ratelimit`, `retry`, `timeout`.** These wrap the
+> transport, so each one wraps whatever is already installed: the order you
+> activate them in IS the nesting order. Activating them as an ordered list
+> rather than a map is what fixes that order.
+
+### ratelimit
+
+Client-side rate limiting via a token bucket.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+| `burst` | `5` |
+| `rate` | `5` |
+
+Set `feature.ratelimit.active` to enable it, then override any of the options above.
+
+`ratelimit` wraps the transport, so its position among the other
+transport features decides what it sees. A feature activated later wraps one
+activated earlier.
+
+### retry
+
+Automatic retry of transient failures with exponential backoff.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+| `factor` | `2` |
+| `maxDelay` | `2000` |
+| `minDelay` | `50` |
+| `retries` | `2` |
+| `statuses` | `[408, 425, 429, 500, 502, 503, 504]` |
+
+Set `feature.retry.active` to enable it, then override any of the options above.
+
+`retry` wraps the transport, so its position among the other
+transport features decides what it sees. A feature activated later wraps one
+activated earlier.
 
 ### test
 
@@ -1019,6 +1063,21 @@ In-memory mock transport for testing without a live server.
 | `active` | `false` |
 
 Set `feature.test.active` to enable it, then override any of the options above.
+
+### timeout
+
+Per-request timeout with transport abort.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+| `ms` | `30000` |
+
+Set `feature.timeout.active` to enable it, then override any of the options above.
+
+`timeout` wraps the transport, so its position among the other
+transport features decides what it sees. A feature activated later wraps one
+activated earlier.
 
 
 ## Advanced
@@ -1059,7 +1118,10 @@ with hook methods named after pipeline stages (e.g. `PrePoint`,
 
 The SDK ships with built-in features:
 
+- **RatelimitFeature**: Client-side rate limiting via a token bucket
+- **RetryFeature**: Automatic retry of transient failures with exponential backoff
 - **TestFeature**: In-memory mock transport for testing without a live server
+- **TimeoutFeature**: Per-request timeout with transport abort
 
 Features are initialized in order. Hooks fire in the order features
 were added, so later features can override earlier ones.

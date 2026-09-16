@@ -2,24 +2,24 @@
   "existing": {
     "v1_list": {
       "V1_LIST00": {
-        "idAlbum": "s19a",
-        "idArtist": "s19b",
-        "idIMVDB": "s19c",
-        "idLyric": "s19d",
-        "idTrack": "s19e",
-        "intCD": "s19f",
-        "intDuration": "s1a0",
-        "intLoved": "s1a1",
-        "intMusicVidComments": "s1a2",
-        "intMusicVidDislikes": "s1a3",
-        "intMusicVidFavorites": "s1a4",
-        "intMusicVidLikes": "s1a5",
-        "intMusicVidViews": "s1a6",
-        "intScore": "s1a7",
-        "intScoreVotes": "s1a8",
-        "intTotalListeners": "s1a9",
-        "intTotalPlays": "s1aa",
-        "intTrackNumber": "s1ab",
+        "idAlbum": 410,
+        "idArtist": 411,
+        "idIMVDB": 412,
+        "idLyric": 413,
+        "idTrack": 414,
+        "intCD": 415,
+        "intDuration": 416,
+        "intLoved": 417,
+        "intMusicVidComments": 418,
+        "intMusicVidDislikes": 419,
+        "intMusicVidFavorites": 420,
+        "intMusicVidLikes": 421,
+        "intMusicVidViews": 422,
+        "intScore": 423,
+        "intScoreVotes": 424,
+        "intTotalListeners": 425,
+        "intTotalPlays": 426,
+        "intTrackNumber": 427,
         "loved": [],
         "strAlbum": "s1ad",
         "strArtist": "s1ae",
@@ -45,24 +45,24 @@
         "trending": []
       },
       "V1_LIST01": {
-        "idAlbum": "s334",
-        "idArtist": "s335",
-        "idIMVDB": "s336",
-        "idLyric": "s337",
-        "idTrack": "s338",
-        "intCD": "s339",
-        "intDuration": "s33a",
-        "intLoved": "s33b",
-        "intMusicVidComments": "s33c",
-        "intMusicVidDislikes": "s33d",
-        "intMusicVidFavorites": "s33e",
-        "intMusicVidLikes": "s33f",
-        "intMusicVidViews": "s340",
-        "intScore": "s341",
-        "intScoreVotes": "s342",
-        "intTotalListeners": "s343",
-        "intTotalPlays": "s344",
-        "intTrackNumber": "s345",
+        "idAlbum": 820,
+        "idArtist": 821,
+        "idIMVDB": 822,
+        "idLyric": 823,
+        "idTrack": 824,
+        "intCD": 825,
+        "intDuration": 826,
+        "intLoved": 827,
+        "intMusicVidComments": 828,
+        "intMusicVidDislikes": 829,
+        "intMusicVidFavorites": 830,
+        "intMusicVidLikes": 831,
+        "intMusicVidViews": 832,
+        "intScore": 833,
+        "intScoreVotes": 834,
+        "intTotalListeners": 835,
+        "intTotalPlays": 836,
+        "intTrackNumber": 837,
         "loved": [],
         "strAlbum": "s347",
         "strArtist": "s348",
@@ -88,24 +88,24 @@
         "trending": []
       },
       "V1_LIST02": {
-        "idAlbum": "s4ce",
-        "idArtist": "s4cf",
-        "idIMVDB": "s4d0",
-        "idLyric": "s4d1",
-        "idTrack": "s4d2",
-        "intCD": "s4d3",
-        "intDuration": "s4d4",
-        "intLoved": "s4d5",
-        "intMusicVidComments": "s4d6",
-        "intMusicVidDislikes": "s4d7",
-        "intMusicVidFavorites": "s4d8",
-        "intMusicVidLikes": "s4d9",
-        "intMusicVidViews": "s4da",
-        "intScore": "s4db",
-        "intScoreVotes": "s4dc",
-        "intTotalListeners": "s4dd",
-        "intTotalPlays": "s4de",
-        "intTrackNumber": "s4df",
+        "idAlbum": 1230,
+        "idArtist": 1231,
+        "idIMVDB": 1232,
+        "idLyric": 1233,
+        "idTrack": 1234,
+        "intCD": 1235,
+        "intDuration": 1236,
+        "intLoved": 1237,
+        "intMusicVidComments": 1238,
+        "intMusicVidDislikes": 1239,
+        "intMusicVidFavorites": 1240,
+        "intMusicVidLikes": 1241,
+        "intMusicVidViews": 1242,
+        "intScore": 1243,
+        "intScoreVotes": 1244,
+        "intTotalListeners": 1245,
+        "intTotalPlays": 1246,
+        "intTrackNumber": 1247,
         "loved": [],
         "strAlbum": "s4e1",
         "strArtist": "s4e2",
@@ -135,24 +135,24 @@
   "new": {
     "v1_list": {
       "v1_list_ref01": {
-        "idAlbum": "s668",
-        "idArtist": "s669",
-        "idIMVDB": "s66a",
-        "idLyric": "s66b",
-        "idTrack": "s66c",
-        "intCD": "s66d",
-        "intDuration": "s66e",
-        "intLoved": "s66f",
-        "intMusicVidComments": "s670",
-        "intMusicVidDislikes": "s671",
-        "intMusicVidFavorites": "s672",
-        "intMusicVidLikes": "s673",
-        "intMusicVidViews": "s674",
-        "intScore": "s675",
-        "intScoreVotes": "s676",
-        "intTotalListeners": "s677",
-        "intTotalPlays": "s678",
-        "intTrackNumber": "s679",
+        "idAlbum": 1640,
+        "idArtist": 1641,
+        "idIMVDB": 1642,
+        "idLyric": 1643,
+        "idTrack": 1644,
+        "intCD": 1645,
+        "intDuration": 1646,
+        "intLoved": 1647,
+        "intMusicVidComments": 1648,
+        "intMusicVidDislikes": 1649,
+        "intMusicVidFavorites": 1650,
+        "intMusicVidLikes": 1651,
+        "intMusicVidViews": 1652,
+        "intScore": 1653,
+        "intScoreVotes": 1654,
+        "intTotalListeners": 1655,
+        "intTotalPlays": 1656,
+        "intTrackNumber": 1657,
         "loved": [],
         "strAlbum": "s67b",
         "strArtist": "s67c",
@@ -176,6 +176,721 @@
         "strTrackLyrics": "s68e",
         "strTrackThumb": "s68f",
         "trending": []
+      }
+    }
+  },
+  "requests": {
+    "GET /trending.php": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getTrending",
+        "parameters": [
+          {
+            "description": "Country code",
+            "example": "us",
+            "in": "query",
+            "name": "country",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Chart type",
+            "example": "itunes",
+            "in": "query",
+            "name": "type",
+            "required": true,
+            "schema": {
+              "enum": [
+                "itunes"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Format type (albums or singles)",
+            "example": "albums",
+            "in": "query",
+            "name": "format",
+            "required": true,
+            "schema": {
+              "enum": [
+                "albums",
+                "singles"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "trending": {
+                      "items": {
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "429": {
+            "description": "Rate limit exceeded"
+          }
+        },
+        "securitySchemes": {
+          "ApiKeyAuth": {
+            "description": "API key for v2 endpoints (Premium users only)",
+            "in": "header",
+            "name": "X-API-KEY",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    },
+    "GET /mostloved.php": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getMostLoved",
+        "parameters": [
+          {
+            "description": "Format type (track or album)",
+            "example": "track",
+            "in": "query",
+            "name": "format",
+            "required": true,
+            "schema": {
+              "enum": [
+                "track",
+                "album"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "loved": {
+                      "items": {
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "429": {
+            "description": "Rate limit exceeded"
+          }
+        },
+        "securitySchemes": {
+          "ApiKeyAuth": {
+            "description": "API key for v2 endpoints (Premium users only)",
+            "in": "header",
+            "name": "X-API-KEY",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    },
+    "GET /mvid-mb.php": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "listMusicVideosMusicBrainz",
+        "parameters": [
+          {
+            "description": "MusicBrainz Artist ID",
+            "example": "cc197bad-dc9c-440d-a5b5-d52ba2e14234",
+            "in": "query",
+            "name": "i",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "mvids": {
+                      "items": {
+                        "properties": {
+                          "idAlbum": {
+                            "description": "Album ID",
+                            "type": "integer"
+                          },
+                          "idArtist": {
+                            "description": "Artist ID",
+                            "type": "integer"
+                          },
+                          "idTrack": {
+                            "description": "Track ID",
+                            "type": "integer"
+                          },
+                          "strDescriptionEN": {
+                            "description": "Video description in English",
+                            "type": "string"
+                          },
+                          "strMusicVid": {
+                            "description": "URL to music video",
+                            "type": "string"
+                          },
+                          "strTrack": {
+                            "description": "Track title",
+                            "type": "string"
+                          },
+                          "strTrackThumb": {
+                            "description": "URL to track thumbnail",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "429": {
+            "description": "Rate limit exceeded"
+          }
+        },
+        "securitySchemes": {
+          "ApiKeyAuth": {
+            "description": "API key for v2 endpoints (Premium users only)",
+            "in": "header",
+            "name": "X-API-KEY",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    },
+    "GET /mvid.php": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "listMusicVideos",
+        "parameters": [
+          {
+            "description": "Artist ID",
+            "example": 112024,
+            "in": "query",
+            "name": "i",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "mvids": {
+                      "items": {
+                        "properties": {
+                          "idAlbum": {
+                            "description": "Album ID",
+                            "type": "integer"
+                          },
+                          "idArtist": {
+                            "description": "Artist ID",
+                            "type": "integer"
+                          },
+                          "idTrack": {
+                            "description": "Track ID",
+                            "type": "integer"
+                          },
+                          "strDescriptionEN": {
+                            "description": "Video description in English",
+                            "type": "string"
+                          },
+                          "strMusicVid": {
+                            "description": "URL to music video",
+                            "type": "string"
+                          },
+                          "strTrack": {
+                            "description": "Track title",
+                            "type": "string"
+                          },
+                          "strTrackThumb": {
+                            "description": "URL to track thumbnail",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "429": {
+            "description": "Rate limit exceeded"
+          }
+        },
+        "securitySchemes": {
+          "ApiKeyAuth": {
+            "description": "API key for v2 endpoints (Premium users only)",
+            "in": "header",
+            "name": "X-API-KEY",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    },
+    "GET /track-top10-mb.php": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getTop10TracksMusicBrainz",
+        "parameters": [
+          {
+            "description": "MusicBrainz Artist ID",
+            "example": "cc197bad-dc9c-440d-a5b5-d52ba2e14234",
+            "in": "query",
+            "name": "s",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "track": {
+                      "items": {
+                        "properties": {
+                          "idAlbum": {
+                            "description": "Album ID",
+                            "type": "integer"
+                          },
+                          "idArtist": {
+                            "description": "Artist ID",
+                            "type": "integer"
+                          },
+                          "idIMVDB": {
+                            "description": "IMVDB ID",
+                            "type": "integer"
+                          },
+                          "idLyric": {
+                            "description": "Lyrics ID",
+                            "type": "integer"
+                          },
+                          "idTrack": {
+                            "description": "Unique track ID",
+                            "type": "integer"
+                          },
+                          "intCD": {
+                            "description": "CD number",
+                            "type": "integer"
+                          },
+                          "intDuration": {
+                            "description": "Track duration in milliseconds",
+                            "type": "integer"
+                          },
+                          "intLoved": {
+                            "description": "Number of loves/likes",
+                            "type": "integer"
+                          },
+                          "intMusicVidComments": {
+                            "description": "Number of music video comments",
+                            "type": "integer"
+                          },
+                          "intMusicVidDislikes": {
+                            "description": "Number of music video dislikes",
+                            "type": "integer"
+                          },
+                          "intMusicVidFavorites": {
+                            "description": "Number of music video favorites",
+                            "type": "integer"
+                          },
+                          "intMusicVidLikes": {
+                            "description": "Number of music video likes",
+                            "type": "integer"
+                          },
+                          "intMusicVidViews": {
+                            "description": "Number of music video views",
+                            "type": "integer"
+                          },
+                          "intScore": {
+                            "description": "Track score",
+                            "type": "integer"
+                          },
+                          "intScoreVotes": {
+                            "description": "Number of score votes",
+                            "type": "integer"
+                          },
+                          "intTotalListeners": {
+                            "description": "Total number of listeners",
+                            "type": "integer"
+                          },
+                          "intTotalPlays": {
+                            "description": "Total number of plays",
+                            "type": "integer"
+                          },
+                          "intTrackNumber": {
+                            "description": "Track number on album",
+                            "type": "integer"
+                          },
+                          "strAlbum": {
+                            "description": "Album title",
+                            "type": "string"
+                          },
+                          "strArtist": {
+                            "description": "Artist name",
+                            "type": "string"
+                          },
+                          "strArtistAlternate": {
+                            "description": "Alternate artist name",
+                            "type": "string"
+                          },
+                          "strDescriptionEN": {
+                            "description": "Track description in English",
+                            "type": "string"
+                          },
+                          "strGenre": {
+                            "description": "Track genre",
+                            "type": "string"
+                          },
+                          "strLocked": {
+                            "description": "Whether the record is locked",
+                            "type": "string"
+                          },
+                          "strMood": {
+                            "description": "Track mood",
+                            "type": "string"
+                          },
+                          "strMusicBrainzAlbumID": {
+                            "description": "MusicBrainz Album ID",
+                            "type": "string"
+                          },
+                          "strMusicBrainzArtistID": {
+                            "description": "MusicBrainz Artist ID",
+                            "type": "string"
+                          },
+                          "strMusicBrainzID": {
+                            "description": "MusicBrainz Recording ID",
+                            "type": "string"
+                          },
+                          "strMusicVid": {
+                            "description": "URL to music video",
+                            "type": "string"
+                          },
+                          "strMusicVidCompany": {
+                            "description": "Music video production company",
+                            "type": "string"
+                          },
+                          "strMusicVidDirector": {
+                            "description": "Music video director",
+                            "type": "string"
+                          },
+                          "strMusicVidScreen1": {
+                            "description": "URL to music video screenshot 1",
+                            "type": "string"
+                          },
+                          "strMusicVidScreen2": {
+                            "description": "URL to music video screenshot 2",
+                            "type": "string"
+                          },
+                          "strMusicVidScreen3": {
+                            "description": "URL to music video screenshot 3",
+                            "type": "string"
+                          },
+                          "strStyle": {
+                            "description": "Track style",
+                            "type": "string"
+                          },
+                          "strTheme": {
+                            "description": "Track theme",
+                            "type": "string"
+                          },
+                          "strTrack": {
+                            "description": "Track title",
+                            "type": "string"
+                          },
+                          "strTrackLyrics": {
+                            "description": "Track lyrics",
+                            "type": "string"
+                          },
+                          "strTrackThumb": {
+                            "description": "URL to track thumbnail",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "429": {
+            "description": "Rate limit exceeded"
+          }
+        },
+        "securitySchemes": {
+          "ApiKeyAuth": {
+            "description": "API key for v2 endpoints (Premium users only)",
+            "in": "header",
+            "name": "X-API-KEY",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    },
+    "GET /track-top10.php": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getTop10Tracks",
+        "parameters": [
+          {
+            "description": "Artist name",
+            "example": "coldplay",
+            "in": "query",
+            "name": "s",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "track": {
+                      "items": {
+                        "properties": {
+                          "idAlbum": {
+                            "description": "Album ID",
+                            "type": "integer"
+                          },
+                          "idArtist": {
+                            "description": "Artist ID",
+                            "type": "integer"
+                          },
+                          "idIMVDB": {
+                            "description": "IMVDB ID",
+                            "type": "integer"
+                          },
+                          "idLyric": {
+                            "description": "Lyrics ID",
+                            "type": "integer"
+                          },
+                          "idTrack": {
+                            "description": "Unique track ID",
+                            "type": "integer"
+                          },
+                          "intCD": {
+                            "description": "CD number",
+                            "type": "integer"
+                          },
+                          "intDuration": {
+                            "description": "Track duration in milliseconds",
+                            "type": "integer"
+                          },
+                          "intLoved": {
+                            "description": "Number of loves/likes",
+                            "type": "integer"
+                          },
+                          "intMusicVidComments": {
+                            "description": "Number of music video comments",
+                            "type": "integer"
+                          },
+                          "intMusicVidDislikes": {
+                            "description": "Number of music video dislikes",
+                            "type": "integer"
+                          },
+                          "intMusicVidFavorites": {
+                            "description": "Number of music video favorites",
+                            "type": "integer"
+                          },
+                          "intMusicVidLikes": {
+                            "description": "Number of music video likes",
+                            "type": "integer"
+                          },
+                          "intMusicVidViews": {
+                            "description": "Number of music video views",
+                            "type": "integer"
+                          },
+                          "intScore": {
+                            "description": "Track score",
+                            "type": "integer"
+                          },
+                          "intScoreVotes": {
+                            "description": "Number of score votes",
+                            "type": "integer"
+                          },
+                          "intTotalListeners": {
+                            "description": "Total number of listeners",
+                            "type": "integer"
+                          },
+                          "intTotalPlays": {
+                            "description": "Total number of plays",
+                            "type": "integer"
+                          },
+                          "intTrackNumber": {
+                            "description": "Track number on album",
+                            "type": "integer"
+                          },
+                          "strAlbum": {
+                            "description": "Album title",
+                            "type": "string"
+                          },
+                          "strArtist": {
+                            "description": "Artist name",
+                            "type": "string"
+                          },
+                          "strArtistAlternate": {
+                            "description": "Alternate artist name",
+                            "type": "string"
+                          },
+                          "strDescriptionEN": {
+                            "description": "Track description in English",
+                            "type": "string"
+                          },
+                          "strGenre": {
+                            "description": "Track genre",
+                            "type": "string"
+                          },
+                          "strLocked": {
+                            "description": "Whether the record is locked",
+                            "type": "string"
+                          },
+                          "strMood": {
+                            "description": "Track mood",
+                            "type": "string"
+                          },
+                          "strMusicBrainzAlbumID": {
+                            "description": "MusicBrainz Album ID",
+                            "type": "string"
+                          },
+                          "strMusicBrainzArtistID": {
+                            "description": "MusicBrainz Artist ID",
+                            "type": "string"
+                          },
+                          "strMusicBrainzID": {
+                            "description": "MusicBrainz Recording ID",
+                            "type": "string"
+                          },
+                          "strMusicVid": {
+                            "description": "URL to music video",
+                            "type": "string"
+                          },
+                          "strMusicVidCompany": {
+                            "description": "Music video production company",
+                            "type": "string"
+                          },
+                          "strMusicVidDirector": {
+                            "description": "Music video director",
+                            "type": "string"
+                          },
+                          "strMusicVidScreen1": {
+                            "description": "URL to music video screenshot 1",
+                            "type": "string"
+                          },
+                          "strMusicVidScreen2": {
+                            "description": "URL to music video screenshot 2",
+                            "type": "string"
+                          },
+                          "strMusicVidScreen3": {
+                            "description": "URL to music video screenshot 3",
+                            "type": "string"
+                          },
+                          "strStyle": {
+                            "description": "Track style",
+                            "type": "string"
+                          },
+                          "strTheme": {
+                            "description": "Track theme",
+                            "type": "string"
+                          },
+                          "strTrack": {
+                            "description": "Track title",
+                            "type": "string"
+                          },
+                          "strTrackLyrics": {
+                            "description": "Track lyrics",
+                            "type": "string"
+                          },
+                          "strTrackThumb": {
+                            "description": "URL to track thumbnail",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "429": {
+            "description": "Rate limit exceeded"
+          }
+        },
+        "securitySchemes": {
+          "ApiKeyAuth": {
+            "description": "API key for v2 endpoints (Premium users only)",
+            "in": "header",
+            "name": "X-API-KEY",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "unspecified"
       }
     }
   }
