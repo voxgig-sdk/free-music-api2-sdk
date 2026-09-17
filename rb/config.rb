@@ -89,6 +89,7 @@ module FreeMusicApi2Config
         "base" => "https://www.theaudiodb.com/api/v1/json/123",
         "auth" => {
           "prefix" => "",
+          "name" => "X-API-KEY",
         },
         "headers" => {
           "content-type" => "application/json",
