@@ -62,7 +62,7 @@ def v2_lookup_basic_setup(extra)
 
   # Generate idmap via transform.
   idmap = Vs.transform(
-    ["v2_lookup01", "v2_lookup02", "v2_lookup03", "album01", "album02", "album03", "album_mb01", "album_mb02", "album_mb03", "artist01", "artist02", "artist03", "artist_mb01", "artist_mb02", "artist_mb03", "track01", "track02", "track03", "track_mb01", "track_mb02", "track_mb03"],
+    ["v2_lookup01", "v2_lookup02", "v2_lookup03"],
     {
       "`$PACK`" => ["", {
         "`$KEY`" => "`$COPY`",

@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.V1SearchEntity = void 0;
 const FreeMusicApi2EntityBase_1 = require("../FreeMusicApi2EntityBase");
-// TODO: needs Entity superclass
 class V1SearchEntity extends FreeMusicApi2EntityBase_1.FreeMusicApi2EntityBase {
     constructor(client, entopts) {
         super(client, entopts);

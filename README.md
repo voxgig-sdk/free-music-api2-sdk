@@ -14,7 +14,7 @@ Metadata kindly supplied by [www.freepublicapis.com](https://www.freepublicapis.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI with an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
 
-> **Features:** `ratelimit`, `retry`, `test`, `timeout` — opt-in,
+> **Features:** `undefined`, `undefined`, `undefined`, `undefined` — opt-in,
 > inactive until switched on, and configured per client. See the Features
 > section of any SDK README below for what each one does.
 
@@ -130,12 +130,6 @@ const v1lists = await client.V1List().list({ country: "example", format: "exampl
 for (const v1list of v1lists) {
   console.log(v1list)
 }
-
-// Load a specific v2list (returns a V2List)
-const v2list = await client.V2List().load({
-  artist_id: 1,
-})
-console.log(v2list)
 ```
 
 See the [TypeScript README](ts/README.md) for the full guide.
@@ -234,15 +228,6 @@ if err != nil {
     panic(err)
 }
 fmt.Println(v1Lists)
-
-// Load a specific v2list
-v2List, err := client.V2List(nil).Load(
-    map[string]any{"artist_id": 1}, nil,
-)
-if err != nil {
-    panic(err)
-}
-fmt.Println(v2List)
 ```
 
 ### Ruby

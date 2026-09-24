@@ -70,7 +70,7 @@ function v2_list_basic_setup($extra)
 
     // Generate idmap.
     $idmap = [];
-    foreach (["v2_list01", "v2_list02", "v2_list03", "discography01", "discography02", "discography03"] as $k) {
+    foreach (["v2_list01", "v2_list02", "v2_list03"] as $k) {
         $idmap[$k] = strtoupper($k);
     }
 

@@ -62,7 +62,7 @@ def v2_search_basic_setup(extra)
 
   # Generate idmap via transform.
   idmap = Vs.transform(
-    ["v2_search01", "v2_search02", "v2_search03", "album01", "album02", "album03", "artist01", "artist02", "artist03", "track01", "track02", "track03"],
+    ["v2_search01", "v2_search02", "v2_search03"],
     {
       "`$PACK`" => ["", {
         "`$KEY`" => "`$COPY`",

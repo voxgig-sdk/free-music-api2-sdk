@@ -1,0 +1,73 @@
+# Entity: v2_list
+
+main: kit: entity: v2_list: {
+
+  alias: field: {}
+
+  fields: {
+    albums: {
+      h: "Albums"
+      n: "albums"
+      r: false
+      t: "`$ARRAY`"
+    }
+  }
+
+  name: "v2_list"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /list/discography/{artistId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: 111239
+                k: "param"
+                n: "artist_id"
+                or: "artist_id"
+                r: true
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/list/discography/{artistId}"
+          q: {
+            exist: [
+              "artist_id"
+            ]
+          }
+          r: {
+            param: {
+              artistId: "artist_id"
+            }
+          }
+          s: [
+            {
+              lit: "list"
+            }
+            {
+              lit: "discography"
+            }
+            {
+              var: "artist_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

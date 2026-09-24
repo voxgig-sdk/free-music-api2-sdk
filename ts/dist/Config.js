@@ -11,19 +11,12 @@ const FEATURE_CLASS = {
     test: TestFeature_1.TestFeature,
     timeout: TimeoutFeature_1.TimeoutFeature,
 };
-// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
-// the model's active plugin groups. A feature that takes a `plugins` option
-// (secrets over sekreto) reads its own entry; a feature with no plugins has
-// none. Named imports above make each definition statically reachable, so
-// an SDK carries exactly the plugin modules its model selects — the same
-// leanness the old side-effect registry imports bought, without a registry.
 const FEATURE_PLUGINS = {};
 exports.FEATURE_PLUGINS = FEATURE_PLUGINS;
 class Config {
     makeFeature(fn) {
         const fc = FEATURE_CLASS[fn];
         const fi = new fc();
-        // TODO: errors etc
         return fi;
     }
     // False for a feature added at runtime via options.extend (station's
@@ -123,205 +116,246 @@ class Config {
             "fields": [
                 {
                     "name": "idAlbum",
-                    "short": "Album ID",
-                    "type": "`$INTEGER`"
+                    "title": "Id Album",
+                    "type": "`$INTEGER`",
+                    "short": "Album ID"
                 },
                 {
                     "name": "idArtist",
-                    "short": "Artist ID",
-                    "type": "`$INTEGER`"
+                    "title": "Id Artist",
+                    "type": "`$INTEGER`",
+                    "short": "Artist ID"
                 },
                 {
                     "name": "idIMVDB",
-                    "short": "IMVDB ID",
-                    "type": "`$INTEGER`"
+                    "title": "Id Imvdb",
+                    "type": "`$INTEGER`",
+                    "short": "IMVDB ID"
                 },
                 {
                     "name": "idLyric",
-                    "short": "Lyrics ID",
-                    "type": "`$INTEGER`"
+                    "title": "Id Lyric",
+                    "type": "`$INTEGER`",
+                    "short": "Lyrics ID"
                 },
                 {
                     "name": "idTrack",
-                    "short": "Track ID",
-                    "type": "`$INTEGER`"
+                    "title": "Id Track",
+                    "type": "`$INTEGER`",
+                    "short": "Track ID"
                 },
                 {
                     "name": "intCD",
-                    "short": "CD number",
-                    "type": "`$INTEGER`"
+                    "title": "Int Cd",
+                    "type": "`$INTEGER`",
+                    "short": "CD number"
                 },
                 {
                     "name": "intDuration",
-                    "short": "Track duration in milliseconds",
-                    "type": "`$INTEGER`"
+                    "title": "Int Duration",
+                    "type": "`$INTEGER`",
+                    "short": "Track duration in milliseconds"
                 },
                 {
                     "name": "intLoved",
-                    "short": "Number of loves/likes",
-                    "type": "`$INTEGER`"
+                    "title": "Int Loved",
+                    "type": "`$INTEGER`",
+                    "short": "Number of loves/likes"
                 },
                 {
                     "name": "intMusicVidComments",
-                    "short": "Number of music video comments",
-                    "type": "`$INTEGER`"
+                    "title": "Int Music Vid Comments",
+                    "type": "`$INTEGER`",
+                    "short": "Number of music video comments"
                 },
                 {
                     "name": "intMusicVidDislikes",
-                    "short": "Number of music video dislikes",
-                    "type": "`$INTEGER`"
+                    "title": "Int Music Vid Dislikes",
+                    "type": "`$INTEGER`",
+                    "short": "Number of music video dislikes"
                 },
                 {
                     "name": "intMusicVidFavorites",
-                    "short": "Number of music video favorites",
-                    "type": "`$INTEGER`"
+                    "title": "Int Music Vid Favorites",
+                    "type": "`$INTEGER`",
+                    "short": "Number of music video favorites"
                 },
                 {
                     "name": "intMusicVidLikes",
-                    "short": "Number of music video likes",
-                    "type": "`$INTEGER`"
+                    "title": "Int Music Vid Likes",
+                    "type": "`$INTEGER`",
+                    "short": "Number of music video likes"
                 },
                 {
                     "name": "intMusicVidViews",
-                    "short": "Number of music video views",
-                    "type": "`$INTEGER`"
+                    "title": "Int Music Vid Views",
+                    "type": "`$INTEGER`",
+                    "short": "Number of music video views"
                 },
                 {
                     "name": "intScore",
-                    "short": "Track score",
-                    "type": "`$INTEGER`"
+                    "title": "Int Score",
+                    "type": "`$INTEGER`",
+                    "short": "Track score"
                 },
                 {
                     "name": "intScoreVotes",
-                    "short": "Number of score votes",
-                    "type": "`$INTEGER`"
+                    "title": "Int Score Votes",
+                    "type": "`$INTEGER`",
+                    "short": "Number of score votes"
                 },
                 {
                     "name": "intTotalListeners",
-                    "short": "Total number of listeners",
-                    "type": "`$INTEGER`"
+                    "title": "Int Total Listeners",
+                    "type": "`$INTEGER`",
+                    "short": "Total number of listeners"
                 },
                 {
                     "name": "intTotalPlays",
-                    "short": "Total number of plays",
-                    "type": "`$INTEGER`"
+                    "title": "Int Total Plays",
+                    "type": "`$INTEGER`",
+                    "short": "Total number of plays"
                 },
                 {
                     "name": "intTrackNumber",
-                    "short": "Track number on album",
-                    "type": "`$INTEGER`"
+                    "title": "Int Track Number",
+                    "type": "`$INTEGER`",
+                    "short": "Track number on album"
                 },
                 {
                     "name": "loved",
+                    "title": "Loved",
                     "type": "`$ARRAY`"
                 },
                 {
                     "name": "strAlbum",
-                    "short": "Album title",
-                    "type": "`$STRING`"
+                    "title": "Str Album",
+                    "type": "`$STRING`",
+                    "short": "Album title"
                 },
                 {
                     "name": "strArtist",
-                    "short": "Artist name",
-                    "type": "`$STRING`"
+                    "title": "Str Artist",
+                    "type": "`$STRING`",
+                    "short": "Artist name"
                 },
                 {
                     "name": "strArtistAlternate",
-                    "short": "Alternate artist name",
-                    "type": "`$STRING`"
+                    "title": "Str Artist Alternate",
+                    "type": "`$STRING`",
+                    "short": "Alternate artist name"
                 },
                 {
                     "name": "strDescriptionEN",
-                    "short": "Video description in English",
-                    "type": "`$STRING`"
+                    "title": "Str Description En",
+                    "type": "`$STRING`",
+                    "short": "Video description in English"
                 },
                 {
                     "name": "strGenre",
-                    "short": "Track genre",
-                    "type": "`$STRING`"
+                    "title": "Str Genre",
+                    "type": "`$STRING`",
+                    "short": "Track genre"
                 },
                 {
                     "name": "strLocked",
-                    "short": "Whether the record is locked",
-                    "type": "`$STRING`"
+                    "title": "Str Locked",
+                    "type": "`$STRING`",
+                    "short": "Whether the record is locked"
                 },
                 {
                     "name": "strMood",
-                    "short": "Track mood",
-                    "type": "`$STRING`"
+                    "title": "Str Mood",
+                    "type": "`$STRING`",
+                    "short": "Track mood"
                 },
                 {
                     "name": "strMusicBrainzAlbumID",
-                    "short": "MusicBrainz Album ID",
-                    "type": "`$STRING`"
+                    "title": "Str Music Brainz Album Id",
+                    "type": "`$STRING`",
+                    "short": "MusicBrainz Album ID"
                 },
                 {
                     "name": "strMusicBrainzArtistID",
-                    "short": "MusicBrainz Artist ID",
-                    "type": "`$STRING`"
+                    "title": "Str Music Brainz Artist Id",
+                    "type": "`$STRING`",
+                    "short": "MusicBrainz Artist ID"
                 },
                 {
                     "name": "strMusicBrainzID",
-                    "short": "MusicBrainz Recording ID",
-                    "type": "`$STRING`"
+                    "title": "Str Music Brainz Id",
+                    "type": "`$STRING`",
+                    "short": "MusicBrainz Recording ID"
                 },
                 {
                     "name": "strMusicVid",
-                    "short": "URL to music video",
-                    "type": "`$STRING`"
+                    "title": "Str Music Vid",
+                    "type": "`$STRING`",
+                    "short": "URL to music video"
                 },
                 {
                     "name": "strMusicVidCompany",
-                    "short": "Music video production company",
-                    "type": "`$STRING`"
+                    "title": "Str Music Vid Company",
+                    "type": "`$STRING`",
+                    "short": "Music video production company"
                 },
                 {
                     "name": "strMusicVidDirector",
-                    "short": "Music video director",
-                    "type": "`$STRING`"
+                    "title": "Str Music Vid Director",
+                    "type": "`$STRING`",
+                    "short": "Music video director"
                 },
                 {
                     "name": "strMusicVidScreen1",
-                    "short": "URL to music video screenshot 1",
-                    "type": "`$STRING`"
+                    "title": "Str Music Vid Screen1",
+                    "type": "`$STRING`",
+                    "short": "URL to music video screenshot 1"
                 },
                 {
                     "name": "strMusicVidScreen2",
-                    "short": "URL to music video screenshot 2",
-                    "type": "`$STRING`"
+                    "title": "Str Music Vid Screen2",
+                    "type": "`$STRING`",
+                    "short": "URL to music video screenshot 2"
                 },
                 {
                     "name": "strMusicVidScreen3",
-                    "short": "URL to music video screenshot 3",
-                    "type": "`$STRING`"
+                    "title": "Str Music Vid Screen3",
+                    "type": "`$STRING`",
+                    "short": "URL to music video screenshot 3"
                 },
                 {
                     "name": "strStyle",
-                    "short": "Track style",
-                    "type": "`$STRING`"
+                    "title": "Str Style",
+                    "type": "`$STRING`",
+                    "short": "Track style"
                 },
                 {
                     "name": "strTheme",
-                    "short": "Track theme",
-                    "type": "`$STRING`"
+                    "title": "Str Theme",
+                    "type": "`$STRING`",
+                    "short": "Track theme"
                 },
                 {
                     "name": "strTrack",
-                    "short": "Track title",
-                    "type": "`$STRING`"
+                    "title": "Str Track",
+                    "type": "`$STRING`",
+                    "short": "Track title"
                 },
                 {
                     "name": "strTrackLyrics",
-                    "short": "Track lyrics",
-                    "type": "`$STRING`"
+                    "title": "Str Track Lyrics",
+                    "type": "`$STRING`",
+                    "short": "Track lyrics"
                 },
                 {
                     "name": "strTrackThumb",
-                    "short": "URL to track thumbnail",
-                    "type": "`$STRING`"
+                    "title": "Str Track Thumb",
+                    "type": "`$STRING`",
+                    "short": "URL to track thumbnail"
                 },
                 {
                     "name": "trending",
+                    "title": "Trending",
                     "type": "`$ARRAY`"
                 }
             ],
@@ -332,34 +366,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "args": {
-                                "query": [
-                                    {
-                                        "example": "us",
-                                        "kind": "query",
-                                        "name": "country",
-                                        "orig": "country",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "example": "albums",
-                                        "kind": "query",
-                                        "name": "format",
-                                        "orig": "format",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "example": "itunes",
-                                        "kind": "query",
-                                        "name": "type",
-                                        "orig": "type",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/trending.php",
@@ -368,34 +374,51 @@ class Config {
                                     "lit": "trending.php"
                                 }
                             ],
+                            "parts": [
+                                "trending.php"
+                            ],
+                            "rename": {},
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body.trending`"
+                            },
+                            "args": {
+                                "query": [
+                                    {
+                                        "name": "country",
+                                        "orig": "country",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "reqd": true,
+                                        "example": "us"
+                                    },
+                                    {
+                                        "name": "format",
+                                        "orig": "format",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "reqd": true,
+                                        "example": "albums"
+                                    },
+                                    {
+                                        "name": "type",
+                                        "orig": "type",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "reqd": true,
+                                        "example": "itunes"
+                                    }
+                                ]
+                            },
                             "select": {
                                 "exist": [
                                     "country",
                                     "format",
                                     "type"
                                 ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body.trending`"
-                            },
-                            "parts": [
-                                "trending.php"
-                            ]
+                            }
                         },
                         {
-                            "args": {
-                                "query": [
-                                    {
-                                        "example": "track",
-                                        "kind": "query",
-                                        "name": "format",
-                                        "orig": "format",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/mostloved.php",
@@ -404,32 +427,33 @@ class Config {
                                     "lit": "mostloved.php"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "format"
-                                ]
-                            },
+                            "parts": [
+                                "mostloved.php"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body.loved`"
                             },
-                            "parts": [
-                                "mostloved.php"
-                            ]
-                        },
-                        {
                             "args": {
                                 "query": [
                                     {
-                                        "example": "cc197bad-dc9c-440d-a5b5-d52ba2e14234",
+                                        "name": "format",
+                                        "orig": "format",
+                                        "type": "`$STRING`",
                                         "kind": "query",
-                                        "name": "i",
-                                        "orig": "i",
                                         "reqd": true,
-                                        "type": "`$STRING`"
+                                        "example": "track"
                                     }
                                 ]
                             },
+                            "select": {
+                                "exist": [
+                                    "format"
+                                ]
+                            }
+                        },
+                        {
                             "kind": "http",
                             "method": "GET",
                             "orig": "/mvid-mb.php",
@@ -438,32 +462,33 @@ class Config {
                                     "lit": "mvid-mb.php"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "i"
-                                ]
-                            },
+                            "parts": [
+                                "mvid-mb.php"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body.mvids`"
                             },
-                            "parts": [
-                                "mvid-mb.php"
-                            ]
-                        },
-                        {
                             "args": {
                                 "query": [
                                     {
-                                        "example": 112024,
-                                        "kind": "query",
                                         "name": "i",
                                         "orig": "i",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
                                         "reqd": true,
-                                        "type": "`$INTEGER`"
+                                        "example": "cc197bad-dc9c-440d-a5b5-d52ba2e14234"
                                     }
                                 ]
                             },
+                            "select": {
+                                "exist": [
+                                    "i"
+                                ]
+                            }
+                        },
+                        {
                             "kind": "http",
                             "method": "GET",
                             "orig": "/mvid.php",
@@ -472,32 +497,33 @@ class Config {
                                     "lit": "mvid.php"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "i"
-                                ]
-                            },
+                            "parts": [
+                                "mvid.php"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body.mvids`"
                             },
-                            "parts": [
-                                "mvid.php"
-                            ]
-                        },
-                        {
                             "args": {
                                 "query": [
                                     {
-                                        "example": "cc197bad-dc9c-440d-a5b5-d52ba2e14234",
+                                        "name": "i",
+                                        "orig": "i",
+                                        "type": "`$INTEGER`",
                                         "kind": "query",
-                                        "name": "s",
-                                        "orig": "s",
                                         "reqd": true,
-                                        "type": "`$STRING`"
+                                        "example": 112024
                                     }
                                 ]
                             },
+                            "select": {
+                                "exist": [
+                                    "i"
+                                ]
+                            }
+                        },
+                        {
                             "kind": "http",
                             "method": "GET",
                             "orig": "/track-top10-mb.php",
@@ -506,32 +532,33 @@ class Config {
                                     "lit": "track-top10-mb.php"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "s"
-                                ]
-                            },
+                            "parts": [
+                                "track-top10-mb.php"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body.track`"
                             },
-                            "parts": [
-                                "track-top10-mb.php"
-                            ]
-                        },
-                        {
                             "args": {
                                 "query": [
                                     {
-                                        "example": "coldplay",
-                                        "kind": "query",
                                         "name": "s",
                                         "orig": "s",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
                                         "reqd": true,
-                                        "type": "`$STRING`"
+                                        "example": "cc197bad-dc9c-440d-a5b5-d52ba2e14234"
                                     }
                                 ]
                             },
+                            "select": {
+                                "exist": [
+                                    "s"
+                                ]
+                            }
+                        },
+                        {
                             "kind": "http",
                             "method": "GET",
                             "orig": "/track-top10.php",
@@ -540,18 +567,31 @@ class Config {
                                     "lit": "track-top10.php"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "s"
-                                ]
-                            },
+                            "parts": [
+                                "track-top10.php"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body.track`"
                             },
-                            "parts": [
-                                "track-top10.php"
-                            ]
+                            "args": {
+                                "query": [
+                                    {
+                                        "name": "s",
+                                        "orig": "s",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "reqd": true,
+                                        "example": "coldplay"
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "s"
+                                ]
+                            }
                         }
                     ]
                 }
@@ -564,563 +604,675 @@ class Config {
             "fields": [
                 {
                     "name": "idAlbum",
-                    "short": "Album ID",
-                    "type": "`$INTEGER`"
+                    "title": "Id Album",
+                    "type": "`$INTEGER`",
+                    "short": "Album ID"
                 },
                 {
                     "name": "idArtist",
-                    "short": "Artist ID",
-                    "type": "`$INTEGER`"
+                    "title": "Id Artist",
+                    "type": "`$INTEGER`",
+                    "short": "Artist ID"
                 },
                 {
                     "name": "idIMVDB",
-                    "short": "IMVDB ID",
-                    "type": "`$INTEGER`"
+                    "title": "Id Imvdb",
+                    "type": "`$INTEGER`",
+                    "short": "IMVDB ID"
                 },
                 {
                     "name": "idLabel",
-                    "short": "Label ID",
-                    "type": "`$INTEGER`"
+                    "title": "Id Label",
+                    "type": "`$INTEGER`",
+                    "short": "Label ID"
                 },
                 {
                     "name": "idLyric",
-                    "short": "Lyrics ID",
-                    "type": "`$INTEGER`"
+                    "title": "Id Lyric",
+                    "type": "`$INTEGER`",
+                    "short": "Lyrics ID"
                 },
                 {
                     "name": "idTrack",
-                    "short": "Unique track ID",
-                    "type": "`$INTEGER`"
+                    "title": "Id Track",
+                    "type": "`$INTEGER`",
+                    "short": "Unique track ID"
                 },
                 {
                     "name": "intBornYear",
-                    "short": "Birth year of the artist",
-                    "type": "`$INTEGER`"
+                    "title": "Int Born Year",
+                    "type": "`$INTEGER`",
+                    "short": "Birth year of the artist"
                 },
                 {
                     "name": "intCD",
-                    "short": "CD number",
-                    "type": "`$INTEGER`"
+                    "title": "Int Cd",
+                    "type": "`$INTEGER`",
+                    "short": "CD number"
                 },
                 {
                     "name": "intCharted",
-                    "short": "Chart position",
-                    "type": "`$INTEGER`"
+                    "title": "Int Charted",
+                    "type": "`$INTEGER`",
+                    "short": "Chart position"
                 },
                 {
                     "name": "intDiedYear",
-                    "short": "Year the artist died (if applicable)",
-                    "type": "`$INTEGER`"
+                    "title": "Int Died Year",
+                    "type": "`$INTEGER`",
+                    "short": "Year the artist died (if applicable)"
                 },
                 {
                     "name": "intDuration",
-                    "short": "Track duration in milliseconds",
-                    "type": "`$INTEGER`"
+                    "title": "Int Duration",
+                    "type": "`$INTEGER`",
+                    "short": "Track duration in milliseconds"
                 },
                 {
                     "name": "intFormedYear",
-                    "short": "Year the artist/band was formed",
-                    "type": "`$INTEGER`"
+                    "title": "Int Formed Year",
+                    "type": "`$INTEGER`",
+                    "short": "Year the artist/band was formed"
                 },
                 {
                     "name": "intLoved",
-                    "short": "Number of loves/likes",
-                    "type": "`$INTEGER`"
+                    "title": "Int Loved",
+                    "type": "`$INTEGER`",
+                    "short": "Number of loves/likes"
                 },
                 {
                     "name": "intMembers",
-                    "short": "Number of band members",
-                    "type": "`$INTEGER`"
+                    "title": "Int Members",
+                    "type": "`$INTEGER`",
+                    "short": "Number of band members"
                 },
                 {
                     "name": "intMusicVidComments",
-                    "short": "Number of music video comments",
-                    "type": "`$INTEGER`"
+                    "title": "Int Music Vid Comments",
+                    "type": "`$INTEGER`",
+                    "short": "Number of music video comments"
                 },
                 {
                     "name": "intMusicVidDislikes",
-                    "short": "Number of music video dislikes",
-                    "type": "`$INTEGER`"
+                    "title": "Int Music Vid Dislikes",
+                    "type": "`$INTEGER`",
+                    "short": "Number of music video dislikes"
                 },
                 {
                     "name": "intMusicVidFavorites",
-                    "short": "Number of music video favorites",
-                    "type": "`$INTEGER`"
+                    "title": "Int Music Vid Favorites",
+                    "type": "`$INTEGER`",
+                    "short": "Number of music video favorites"
                 },
                 {
                     "name": "intMusicVidLikes",
-                    "short": "Number of music video likes",
-                    "type": "`$INTEGER`"
+                    "title": "Int Music Vid Likes",
+                    "type": "`$INTEGER`",
+                    "short": "Number of music video likes"
                 },
                 {
                     "name": "intMusicVidViews",
-                    "short": "Number of music video views",
-                    "type": "`$INTEGER`"
+                    "title": "Int Music Vid Views",
+                    "type": "`$INTEGER`",
+                    "short": "Number of music video views"
                 },
                 {
                     "name": "intSales",
-                    "short": "Number of sales",
-                    "type": "`$INTEGER`"
+                    "title": "Int Sales",
+                    "type": "`$INTEGER`",
+                    "short": "Number of sales"
                 },
                 {
                     "name": "intScore",
-                    "short": "Track score",
-                    "type": "`$INTEGER`"
+                    "title": "Int Score",
+                    "type": "`$INTEGER`",
+                    "short": "Track score"
                 },
                 {
                     "name": "intScoreVotes",
-                    "short": "Number of score votes",
-                    "type": "`$INTEGER`"
+                    "title": "Int Score Votes",
+                    "type": "`$INTEGER`",
+                    "short": "Number of score votes"
                 },
                 {
                     "name": "intTotalListeners",
-                    "short": "Total number of listeners",
-                    "type": "`$INTEGER`"
+                    "title": "Int Total Listeners",
+                    "type": "`$INTEGER`",
+                    "short": "Total number of listeners"
                 },
                 {
                     "name": "intTotalPlays",
-                    "short": "Total number of plays",
-                    "type": "`$INTEGER`"
+                    "title": "Int Total Plays",
+                    "type": "`$INTEGER`",
+                    "short": "Total number of plays"
                 },
                 {
                     "name": "intTrackNumber",
-                    "short": "Track number on album",
-                    "type": "`$INTEGER`"
+                    "title": "Int Track Number",
+                    "type": "`$INTEGER`",
+                    "short": "Track number on album"
                 },
                 {
                     "name": "intYearReleased",
-                    "short": "Year the album was released",
-                    "type": "`$INTEGER`"
+                    "title": "Int Year Released",
+                    "type": "`$INTEGER`",
+                    "short": "Year the album was released"
                 },
                 {
                     "name": "strAlbum",
-                    "short": "Album title",
-                    "type": "`$STRING`"
+                    "title": "Str Album",
+                    "type": "`$STRING`",
+                    "short": "Album title"
                 },
                 {
                     "name": "strAlbum3DCase",
-                    "short": "URL to 3D case image",
-                    "type": "`$STRING`"
+                    "title": "Str Album3 D Case",
+                    "type": "`$STRING`",
+                    "short": "URL to 3D case image"
                 },
                 {
                     "name": "strAlbum3DFace",
-                    "short": "URL to 3D face image",
-                    "type": "`$STRING`"
+                    "title": "Str Album3 D Face",
+                    "type": "`$STRING`",
+                    "short": "URL to 3D face image"
                 },
                 {
                     "name": "strAlbum3DFlat",
-                    "short": "URL to 3D flat image",
-                    "type": "`$STRING`"
+                    "title": "Str Album3 D Flat",
+                    "type": "`$STRING`",
+                    "short": "URL to 3D flat image"
                 },
                 {
                     "name": "strAlbum3DThumb",
-                    "short": "URL to 3D thumbnail",
-                    "type": "`$STRING`"
+                    "title": "Str Album3 D Thumb",
+                    "type": "`$STRING`",
+                    "short": "URL to 3D thumbnail"
                 },
                 {
                     "name": "strAlbumCDart",
-                    "short": "URL to CD art",
-                    "type": "`$STRING`"
+                    "title": "Str Album C Dart",
+                    "type": "`$STRING`",
+                    "short": "URL to CD art"
                 },
                 {
                     "name": "strAlbumSpine",
-                    "short": "URL to album spine image",
-                    "type": "`$STRING`"
+                    "title": "Str Album Spine",
+                    "type": "`$STRING`",
+                    "short": "URL to album spine image"
                 },
                 {
                     "name": "strAlbumStripped",
-                    "short": "Album title without special characters",
-                    "type": "`$STRING`"
+                    "title": "Str Album Stripped",
+                    "type": "`$STRING`",
+                    "short": "Album title without special characters"
                 },
                 {
                     "name": "strAlbumThumb",
-                    "short": "URL to album thumbnail",
-                    "type": "`$STRING`"
+                    "title": "Str Album Thumb",
+                    "type": "`$STRING`",
+                    "short": "URL to album thumbnail"
                 },
                 {
                     "name": "strAlbumThumbBack",
-                    "short": "URL to back of album cover",
-                    "type": "`$STRING`"
+                    "title": "Str Album Thumb Back",
+                    "type": "`$STRING`",
+                    "short": "URL to back of album cover"
                 },
                 {
                     "name": "strAlbumThumbHQ",
-                    "short": "URL to high quality album thumbnail",
-                    "type": "`$STRING`"
+                    "title": "Str Album Thumb Hq",
+                    "type": "`$STRING`",
+                    "short": "URL to high quality album thumbnail"
                 },
                 {
                     "name": "strAllMusicID",
-                    "short": "AllMusic ID",
-                    "type": "`$STRING`"
+                    "title": "Str All Music Id",
+                    "type": "`$STRING`",
+                    "short": "AllMusic ID"
                 },
                 {
                     "name": "strAmazonID",
-                    "short": "Amazon ID",
-                    "type": "`$STRING`"
+                    "title": "Str Amazon Id",
+                    "type": "`$STRING`",
+                    "short": "Amazon ID"
                 },
                 {
                     "name": "strAppleMusic",
-                    "short": "Apple Music artist URL",
-                    "type": "`$STRING`"
+                    "title": "Str Apple Music",
+                    "type": "`$STRING`",
+                    "short": "Apple Music artist URL"
                 },
                 {
                     "name": "strArtist",
-                    "short": "Artist name",
-                    "type": "`$STRING`"
+                    "title": "Str Artist",
+                    "type": "`$STRING`",
+                    "short": "Artist name"
                 },
                 {
                     "name": "strArtistAlternate",
-                    "short": "Alternate artist name",
-                    "type": "`$STRING`"
+                    "title": "Str Artist Alternate",
+                    "type": "`$STRING`",
+                    "short": "Alternate artist name"
                 },
                 {
                     "name": "strArtistBanner",
-                    "short": "URL to artist banner",
-                    "type": "`$STRING`"
+                    "title": "Str Artist Banner",
+                    "type": "`$STRING`",
+                    "short": "URL to artist banner"
                 },
                 {
                     "name": "strArtistClearart",
-                    "short": "URL to artist clearart",
-                    "type": "`$STRING`"
+                    "title": "Str Artist Clearart",
+                    "type": "`$STRING`",
+                    "short": "URL to artist clearart"
                 },
                 {
                     "name": "strArtistCutout",
-                    "short": "URL to artist cutout image",
-                    "type": "`$STRING`"
+                    "title": "Str Artist Cutout",
+                    "type": "`$STRING`",
+                    "short": "URL to artist cutout image"
                 },
                 {
                     "name": "strArtistFanart",
-                    "short": "URL to artist fanart",
-                    "type": "`$STRING`"
+                    "title": "Str Artist Fanart",
+                    "type": "`$STRING`",
+                    "short": "URL to artist fanart"
                 },
                 {
                     "name": "strArtistFanart2",
-                    "short": "URL to alternate artist fanart",
-                    "type": "`$STRING`"
+                    "title": "Str Artist Fanart2",
+                    "type": "`$STRING`",
+                    "short": "URL to alternate artist fanart"
                 },
                 {
                     "name": "strArtistFanart3",
-                    "short": "URL to third artist fanart",
-                    "type": "`$STRING`"
+                    "title": "Str Artist Fanart3",
+                    "type": "`$STRING`",
+                    "short": "URL to third artist fanart"
                 },
                 {
                     "name": "strArtistFanart4",
-                    "short": "URL to fourth artist fanart",
-                    "type": "`$STRING`"
+                    "title": "Str Artist Fanart4",
+                    "type": "`$STRING`",
+                    "short": "URL to fourth artist fanart"
                 },
                 {
                     "name": "strArtistLogo",
-                    "short": "URL to artist logo",
-                    "type": "`$STRING`"
+                    "title": "Str Artist Logo",
+                    "type": "`$STRING`",
+                    "short": "URL to artist logo"
                 },
                 {
                     "name": "strArtistStripped",
-                    "short": "Artist name without special characters",
-                    "type": "`$STRING`"
+                    "title": "Str Artist Stripped",
+                    "type": "`$STRING`",
+                    "short": "Artist name without special characters"
                 },
                 {
                     "name": "strArtistThumb",
-                    "short": "URL to artist thumbnail image",
-                    "type": "`$STRING`"
+                    "title": "Str Artist Thumb",
+                    "type": "`$STRING`",
+                    "short": "URL to artist thumbnail image"
                 },
                 {
                     "name": "strArtistWideThumb",
-                    "short": "URL to artist wide thumbnail",
-                    "type": "`$STRING`"
+                    "title": "Str Artist Wide Thumb",
+                    "type": "`$STRING`",
+                    "short": "URL to artist wide thumbnail"
                 },
                 {
                     "name": "strBBCReviewID",
-                    "short": "BBC Review ID",
-                    "type": "`$STRING`"
+                    "title": "Str Bbc Review Id",
+                    "type": "`$STRING`",
+                    "short": "BBC Review ID"
                 },
                 {
                     "name": "strBiographyCN",
-                    "short": "Artist biography in Chinese",
-                    "type": "`$STRING`"
+                    "title": "Str Biography Cn",
+                    "type": "`$STRING`",
+                    "short": "Artist biography in Chinese"
                 },
                 {
                     "name": "strBiographyDE",
-                    "short": "Artist biography in German",
-                    "type": "`$STRING`"
+                    "title": "Str Biography De",
+                    "type": "`$STRING`",
+                    "short": "Artist biography in German"
                 },
                 {
                     "name": "strBiographyEN",
-                    "short": "Artist biography in English",
-                    "type": "`$STRING`"
+                    "title": "Str Biography En",
+                    "type": "`$STRING`",
+                    "short": "Artist biography in English"
                 },
                 {
                     "name": "strBiographyES",
-                    "short": "Artist biography in Spanish",
-                    "type": "`$STRING`"
+                    "title": "Str Biography Es",
+                    "type": "`$STRING`",
+                    "short": "Artist biography in Spanish"
                 },
                 {
                     "name": "strBiographyFR",
-                    "short": "Artist biography in French",
-                    "type": "`$STRING`"
+                    "title": "Str Biography Fr",
+                    "type": "`$STRING`",
+                    "short": "Artist biography in French"
                 },
                 {
                     "name": "strBiographyHU",
-                    "short": "Artist biography in Hungarian",
-                    "type": "`$STRING`"
+                    "title": "Str Biography Hu",
+                    "type": "`$STRING`",
+                    "short": "Artist biography in Hungarian"
                 },
                 {
                     "name": "strBiographyIL",
-                    "short": "Artist biography in Hebrew",
-                    "type": "`$STRING`"
+                    "title": "Str Biography Il",
+                    "type": "`$STRING`",
+                    "short": "Artist biography in Hebrew"
                 },
                 {
                     "name": "strBiographyIT",
-                    "short": "Artist biography in Italian",
-                    "type": "`$STRING`"
+                    "title": "Str Biography It",
+                    "type": "`$STRING`",
+                    "short": "Artist biography in Italian"
                 },
                 {
                     "name": "strBiographyJP",
-                    "short": "Artist biography in Japanese",
-                    "type": "`$STRING`"
+                    "title": "Str Biography Jp",
+                    "type": "`$STRING`",
+                    "short": "Artist biography in Japanese"
                 },
                 {
                     "name": "strBiographyNL",
-                    "short": "Artist biography in Dutch",
-                    "type": "`$STRING`"
+                    "title": "Str Biography Nl",
+                    "type": "`$STRING`",
+                    "short": "Artist biography in Dutch"
                 },
                 {
                     "name": "strBiographyNO",
-                    "short": "Artist biography in Norwegian",
-                    "type": "`$STRING`"
+                    "title": "Str Biography No",
+                    "type": "`$STRING`",
+                    "short": "Artist biography in Norwegian"
                 },
                 {
                     "name": "strBiographyPL",
-                    "short": "Artist biography in Polish",
-                    "type": "`$STRING`"
+                    "title": "Str Biography Pl",
+                    "type": "`$STRING`",
+                    "short": "Artist biography in Polish"
                 },
                 {
                     "name": "strBiographyPT",
-                    "short": "Artist biography in Portuguese",
-                    "type": "`$STRING`"
+                    "title": "Str Biography Pt",
+                    "type": "`$STRING`",
+                    "short": "Artist biography in Portuguese"
                 },
                 {
                     "name": "strBiographyRU",
-                    "short": "Artist biography in Russian",
-                    "type": "`$STRING`"
+                    "title": "Str Biography Ru",
+                    "type": "`$STRING`",
+                    "short": "Artist biography in Russian"
                 },
                 {
                     "name": "strBiographySE",
-                    "short": "Artist biography in Swedish",
-                    "type": "`$STRING`"
+                    "title": "Str Biography Se",
+                    "type": "`$STRING`",
+                    "short": "Artist biography in Swedish"
                 },
                 {
                     "name": "strCountry",
-                    "short": "Country of origin",
-                    "type": "`$STRING`"
+                    "title": "Str Country",
+                    "type": "`$STRING`",
+                    "short": "Country of origin"
                 },
                 {
                     "name": "strCountryCode",
-                    "short": "Country code",
-                    "type": "`$STRING`"
+                    "title": "Str Country Code",
+                    "type": "`$STRING`",
+                    "short": "Country code"
                 },
                 {
                     "name": "strDescriptionEN",
-                    "short": "Track description in English",
-                    "type": "`$STRING`"
+                    "title": "Str Description En",
+                    "type": "`$STRING`",
+                    "short": "Track description in English"
                 },
                 {
                     "name": "strDisbanded",
-                    "short": "Disbanded status",
-                    "type": "`$STRING`"
+                    "title": "Str Disbanded",
+                    "type": "`$STRING`",
+                    "short": "Disbanded status"
                 },
                 {
                     "name": "strDiscogsID",
-                    "short": "Discogs ID",
-                    "type": "`$STRING`"
+                    "title": "Str Discogs Id",
+                    "type": "`$STRING`",
+                    "short": "Discogs ID"
                 },
                 {
                     "name": "strFacebook",
-                    "short": "Facebook page URL",
-                    "type": "`$STRING`"
+                    "title": "Str Facebook",
+                    "type": "`$STRING`",
+                    "short": "Facebook page URL"
                 },
                 {
                     "name": "strGender",
-                    "short": "Artist gender",
-                    "type": "`$STRING`"
+                    "title": "Str Gender",
+                    "type": "`$STRING`",
+                    "short": "Artist gender"
                 },
                 {
                     "name": "strGeniusID",
-                    "short": "Genius ID",
-                    "type": "`$STRING`"
+                    "title": "Str Genius Id",
+                    "type": "`$STRING`",
+                    "short": "Genius ID"
                 },
                 {
                     "name": "strGenre",
-                    "short": "Track genre",
-                    "type": "`$STRING`"
+                    "title": "Str Genre",
+                    "type": "`$STRING`",
+                    "short": "Track genre"
                 },
                 {
                     "name": "strInstagram",
-                    "short": "Instagram profile URL",
-                    "type": "`$STRING`"
+                    "title": "Str Instagram",
+                    "type": "`$STRING`",
+                    "short": "Instagram profile URL"
                 },
                 {
                     "name": "strItunesID",
-                    "short": "iTunes ID",
-                    "type": "`$STRING`"
+                    "title": "Str Itunes Id",
+                    "type": "`$STRING`",
+                    "short": "iTunes ID"
                 },
                 {
                     "name": "strLabel",
-                    "short": "Record label",
-                    "type": "`$STRING`"
+                    "title": "Str Label",
+                    "type": "`$STRING`",
+                    "short": "Record label"
                 },
                 {
                     "name": "strLastFMChart",
-                    "short": "Last.fm chart URL",
-                    "type": "`$STRING`"
+                    "title": "Str Last Fm Chart",
+                    "type": "`$STRING`",
+                    "short": "Last.fm chart URL"
                 },
                 {
                     "name": "strLocation",
-                    "short": "Recording location",
-                    "type": "`$STRING`"
+                    "title": "Str Location",
+                    "type": "`$STRING`",
+                    "short": "Recording location"
                 },
                 {
                     "name": "strLocked",
-                    "short": "Whether the record is locked",
-                    "type": "`$STRING`"
+                    "title": "Str Locked",
+                    "type": "`$STRING`",
+                    "short": "Whether the record is locked"
                 },
                 {
                     "name": "strLyricWikiID",
-                    "short": "LyricWiki ID",
-                    "type": "`$STRING`"
+                    "title": "Str Lyric Wiki Id",
+                    "type": "`$STRING`",
+                    "short": "LyricWiki ID"
                 },
                 {
                     "name": "strMood",
-                    "short": "Track mood",
-                    "type": "`$STRING`"
+                    "title": "Str Mood",
+                    "type": "`$STRING`",
+                    "short": "Track mood"
                 },
                 {
                     "name": "strMusicBrainzAlbumID",
-                    "short": "MusicBrainz Album ID",
-                    "type": "`$STRING`"
+                    "title": "Str Music Brainz Album Id",
+                    "type": "`$STRING`",
+                    "short": "MusicBrainz Album ID"
                 },
                 {
                     "name": "strMusicBrainzArtistID",
-                    "short": "MusicBrainz Artist ID",
-                    "type": "`$STRING`"
+                    "title": "Str Music Brainz Artist Id",
+                    "type": "`$STRING`",
+                    "short": "MusicBrainz Artist ID"
                 },
                 {
                     "name": "strMusicBrainzID",
-                    "short": "MusicBrainz Recording ID",
-                    "type": "`$STRING`"
+                    "title": "Str Music Brainz Id",
+                    "type": "`$STRING`",
+                    "short": "MusicBrainz Recording ID"
                 },
                 {
                     "name": "strMusicMozID",
-                    "short": "MusicMoz ID",
-                    "type": "`$STRING`"
+                    "title": "Str Music Moz Id",
+                    "type": "`$STRING`",
+                    "short": "MusicMoz ID"
                 },
                 {
                     "name": "strMusicVid",
-                    "short": "URL to music video",
-                    "type": "`$STRING`"
+                    "title": "Str Music Vid",
+                    "type": "`$STRING`",
+                    "short": "URL to music video"
                 },
                 {
                     "name": "strMusicVidCompany",
-                    "short": "Music video production company",
-                    "type": "`$STRING`"
+                    "title": "Str Music Vid Company",
+                    "type": "`$STRING`",
+                    "short": "Music video production company"
                 },
                 {
                     "name": "strMusicVidDirector",
-                    "short": "Music video director",
-                    "type": "`$STRING`"
+                    "title": "Str Music Vid Director",
+                    "type": "`$STRING`",
+                    "short": "Music video director"
                 },
                 {
                     "name": "strMusicVidScreen1",
-                    "short": "URL to music video screenshot 1",
-                    "type": "`$STRING`"
+                    "title": "Str Music Vid Screen1",
+                    "type": "`$STRING`",
+                    "short": "URL to music video screenshot 1"
                 },
                 {
                     "name": "strMusicVidScreen2",
-                    "short": "URL to music video screenshot 2",
-                    "type": "`$STRING`"
+                    "title": "Str Music Vid Screen2",
+                    "type": "`$STRING`",
+                    "short": "URL to music video screenshot 2"
                 },
                 {
                     "name": "strMusicVidScreen3",
-                    "short": "URL to music video screenshot 3",
-                    "type": "`$STRING`"
+                    "title": "Str Music Vid Screen3",
+                    "type": "`$STRING`",
+                    "short": "URL to music video screenshot 3"
                 },
                 {
                     "name": "strRateYourMusicID",
-                    "short": "RateYourMusic ID",
-                    "type": "`$STRING`"
+                    "title": "Str Rate Your Music Id",
+                    "type": "`$STRING`",
+                    "short": "RateYourMusic ID"
                 },
                 {
                     "name": "strReleaseFormat",
-                    "short": "Release format (CD, Vinyl, etc.)",
-                    "type": "`$STRING`"
+                    "title": "Str Release Format",
+                    "type": "`$STRING`",
+                    "short": "Release format (CD, Vinyl, etc.)"
                 },
                 {
                     "name": "strReview",
-                    "short": "Album review",
-                    "type": "`$STRING`"
+                    "title": "Str Review",
+                    "type": "`$STRING`",
+                    "short": "Album review"
                 },
                 {
                     "name": "strSoundCloud",
-                    "short": "SoundCloud profile URL",
-                    "type": "`$STRING`"
+                    "title": "Str Sound Cloud",
+                    "type": "`$STRING`",
+                    "short": "SoundCloud profile URL"
                 },
                 {
                     "name": "strSpeed",
-                    "short": "Album speed",
-                    "type": "`$STRING`"
+                    "title": "Str Speed",
+                    "type": "`$STRING`",
+                    "short": "Album speed"
                 },
                 {
                     "name": "strSpotify",
-                    "short": "Spotify artist URL",
-                    "type": "`$STRING`"
+                    "title": "Str Spotify",
+                    "type": "`$STRING`",
+                    "short": "Spotify artist URL"
                 },
                 {
                     "name": "strStyle",
-                    "short": "Track style",
-                    "type": "`$STRING`"
+                    "title": "Str Style",
+                    "type": "`$STRING`",
+                    "short": "Track style"
                 },
                 {
                     "name": "strTheme",
-                    "short": "Track theme",
-                    "type": "`$STRING`"
+                    "title": "Str Theme",
+                    "type": "`$STRING`",
+                    "short": "Track theme"
                 },
                 {
                     "name": "strTrack",
-                    "short": "Track title",
-                    "type": "`$STRING`"
+                    "title": "Str Track",
+                    "type": "`$STRING`",
+                    "short": "Track title"
                 },
                 {
                     "name": "strTrackLyrics",
-                    "short": "Track lyrics",
-                    "type": "`$STRING`"
+                    "title": "Str Track Lyrics",
+                    "type": "`$STRING`",
+                    "short": "Track lyrics"
                 },
                 {
                     "name": "strTrackThumb",
-                    "short": "URL to track thumbnail",
-                    "type": "`$STRING`"
+                    "title": "Str Track Thumb",
+                    "type": "`$STRING`",
+                    "short": "URL to track thumbnail"
                 },
                 {
                     "name": "strTwitter",
-                    "short": "Twitter profile URL",
-                    "type": "`$STRING`"
+                    "title": "Str Twitter",
+                    "type": "`$STRING`",
+                    "short": "Twitter profile URL"
                 },
                 {
                     "name": "strWebsite",
-                    "short": "Official website URL",
-                    "type": "`$STRING`"
+                    "title": "Str Website",
+                    "type": "`$STRING`",
+                    "short": "Official website URL"
                 },
                 {
                     "name": "strWikidataID",
-                    "short": "Wikidata ID",
-                    "type": "`$STRING`"
+                    "title": "Str Wikidata Id",
+                    "type": "`$STRING`",
+                    "short": "Wikidata ID"
                 },
                 {
                     "name": "strWikipediaID",
-                    "short": "Wikipedia ID",
-                    "type": "`$STRING`"
+                    "title": "Str Wikipedia Id",
+                    "type": "`$STRING`",
+                    "short": "Wikipedia ID"
                 },
                 {
                     "name": "strYoutube",
-                    "short": "YouTube channel URL",
-                    "type": "`$STRING`"
+                    "title": "Str Youtube",
+                    "type": "`$STRING`",
+                    "short": "YouTube channel URL"
                 }
             ],
             "name": "v1_lookup",
@@ -1130,24 +1282,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "args": {
-                                "query": [
-                                    {
-                                        "example": 32793500,
-                                        "kind": "query",
-                                        "name": "h",
-                                        "orig": "h",
-                                        "type": "`$INTEGER`"
-                                    },
-                                    {
-                                        "example": 2115888,
-                                        "kind": "query",
-                                        "name": "m",
-                                        "orig": "m",
-                                        "type": "`$INTEGER`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/track.php",
@@ -1156,39 +1290,40 @@ class Config {
                                     "lit": "track.php"
                                 }
                             ],
+                            "parts": [
+                                "track.php"
+                            ],
+                            "rename": {},
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body.track`"
+                            },
+                            "args": {
+                                "query": [
+                                    {
+                                        "name": "h",
+                                        "orig": "h",
+                                        "type": "`$INTEGER`",
+                                        "kind": "query",
+                                        "example": 32793500
+                                    },
+                                    {
+                                        "name": "m",
+                                        "orig": "m",
+                                        "type": "`$INTEGER`",
+                                        "kind": "query",
+                                        "example": 2115888
+                                    }
+                                ]
+                            },
                             "select": {
                                 "exist": [
                                     "h",
                                     "m"
                                 ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body.track`"
-                            },
-                            "parts": [
-                                "track.php"
-                            ]
+                            }
                         },
                         {
-                            "args": {
-                                "query": [
-                                    {
-                                        "example": 112024,
-                                        "kind": "query",
-                                        "name": "i",
-                                        "orig": "i",
-                                        "type": "`$INTEGER`"
-                                    },
-                                    {
-                                        "example": 2115888,
-                                        "kind": "query",
-                                        "name": "m",
-                                        "orig": "m",
-                                        "type": "`$INTEGER`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/album.php",
@@ -1197,33 +1332,40 @@ class Config {
                                     "lit": "album.php"
                                 }
                             ],
+                            "parts": [
+                                "album.php"
+                            ],
+                            "rename": {},
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body.album`"
+                            },
+                            "args": {
+                                "query": [
+                                    {
+                                        "name": "i",
+                                        "orig": "i",
+                                        "type": "`$INTEGER`",
+                                        "kind": "query",
+                                        "example": 112024
+                                    },
+                                    {
+                                        "name": "m",
+                                        "orig": "m",
+                                        "type": "`$INTEGER`",
+                                        "kind": "query",
+                                        "example": 2115888
+                                    }
+                                ]
+                            },
                             "select": {
                                 "exist": [
                                     "i",
                                     "m"
                                 ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body.album`"
-                            },
-                            "parts": [
-                                "album.php"
-                            ]
+                            }
                         },
                         {
-                            "args": {
-                                "query": [
-                                    {
-                                        "example": "1dc4c347-a1db-32aa-b14f-bc9cc507b843",
-                                        "kind": "query",
-                                        "name": "i",
-                                        "orig": "i",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/album-mb.php",
@@ -1232,32 +1374,33 @@ class Config {
                                     "lit": "album-mb.php"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "i"
-                                ]
-                            },
+                            "parts": [
+                                "album-mb.php"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body.album`"
                             },
-                            "parts": [
-                                "album-mb.php"
-                            ]
-                        },
-                        {
                             "args": {
                                 "query": [
                                     {
-                                        "example": "cc197bad-dc9c-440d-a5b5-d52ba2e14234",
-                                        "kind": "query",
                                         "name": "i",
                                         "orig": "i",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
                                         "reqd": true,
-                                        "type": "`$STRING`"
+                                        "example": "1dc4c347-a1db-32aa-b14f-bc9cc507b843"
                                     }
                                 ]
                             },
+                            "select": {
+                                "exist": [
+                                    "i"
+                                ]
+                            }
+                        },
+                        {
                             "kind": "http",
                             "method": "GET",
                             "orig": "/artist-mb.php",
@@ -1266,32 +1409,33 @@ class Config {
                                     "lit": "artist-mb.php"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "i"
-                                ]
-                            },
+                            "parts": [
+                                "artist-mb.php"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body.artists`"
                             },
-                            "parts": [
-                                "artist-mb.php"
-                            ]
-                        },
-                        {
                             "args": {
                                 "query": [
                                     {
-                                        "example": 112024,
-                                        "kind": "query",
                                         "name": "i",
                                         "orig": "i",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
                                         "reqd": true,
-                                        "type": "`$INTEGER`"
+                                        "example": "cc197bad-dc9c-440d-a5b5-d52ba2e14234"
                                     }
                                 ]
                             },
+                            "select": {
+                                "exist": [
+                                    "i"
+                                ]
+                            }
+                        },
+                        {
                             "kind": "http",
                             "method": "GET",
                             "orig": "/artist-social.php",
@@ -1300,32 +1444,33 @@ class Config {
                                     "lit": "artist-social.php"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "i"
-                                ]
-                            },
+                            "parts": [
+                                "artist-social.php"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body.artists`"
                             },
-                            "parts": [
-                                "artist-social.php"
-                            ]
-                        },
-                        {
                             "args": {
                                 "query": [
                                     {
-                                        "example": 112024,
-                                        "kind": "query",
                                         "name": "i",
                                         "orig": "i",
+                                        "type": "`$INTEGER`",
+                                        "kind": "query",
                                         "reqd": true,
-                                        "type": "`$INTEGER`"
+                                        "example": 112024
                                     }
                                 ]
                             },
+                            "select": {
+                                "exist": [
+                                    "i"
+                                ]
+                            }
+                        },
+                        {
                             "kind": "http",
                             "method": "GET",
                             "orig": "/artist.php",
@@ -1334,32 +1479,33 @@ class Config {
                                     "lit": "artist.php"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "i"
-                                ]
-                            },
+                            "parts": [
+                                "artist.php"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body.artists`"
                             },
-                            "parts": [
-                                "artist.php"
-                            ]
-                        },
-                        {
                             "args": {
                                 "query": [
                                     {
-                                        "example": "50369905-68ca-48d2-912d-b37330ff7dc3",
-                                        "kind": "query",
                                         "name": "i",
                                         "orig": "i",
+                                        "type": "`$INTEGER`",
+                                        "kind": "query",
                                         "reqd": true,
-                                        "type": "`$STRING`"
+                                        "example": 112024
                                     }
                                 ]
                             },
+                            "select": {
+                                "exist": [
+                                    "i"
+                                ]
+                            }
+                        },
+                        {
                             "kind": "http",
                             "method": "GET",
                             "orig": "/track-mb.php",
@@ -1368,18 +1514,31 @@ class Config {
                                     "lit": "track-mb.php"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "i"
-                                ]
-                            },
+                            "parts": [
+                                "track-mb.php"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body.track`"
                             },
-                            "parts": [
-                                "track-mb.php"
-                            ]
+                            "args": {
+                                "query": [
+                                    {
+                                        "name": "i",
+                                        "orig": "i",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "reqd": true,
+                                        "example": "50369905-68ca-48d2-912d-b37330ff7dc3"
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "i"
+                                ]
+                            }
                         }
                     ]
                 }
@@ -1392,538 +1551,645 @@ class Config {
             "fields": [
                 {
                     "name": "idAlbum",
-                    "short": "Unique album ID",
-                    "type": "`$INTEGER`"
+                    "title": "Id Album",
+                    "type": "`$INTEGER`",
+                    "short": "Unique album ID"
                 },
                 {
                     "name": "idArtist",
-                    "short": "Artist ID",
-                    "type": "`$INTEGER`"
+                    "title": "Id Artist",
+                    "type": "`$INTEGER`",
+                    "short": "Artist ID"
                 },
                 {
                     "name": "idIMVDB",
-                    "short": "IMVDB ID",
-                    "type": "`$INTEGER`"
+                    "title": "Id Imvdb",
+                    "type": "`$INTEGER`",
+                    "short": "IMVDB ID"
                 },
                 {
                     "name": "idLabel",
-                    "short": "Label ID",
-                    "type": "`$INTEGER`"
+                    "title": "Id Label",
+                    "type": "`$INTEGER`",
+                    "short": "Label ID"
                 },
                 {
                     "name": "idLyric",
-                    "short": "Lyrics ID",
-                    "type": "`$INTEGER`"
+                    "title": "Id Lyric",
+                    "type": "`$INTEGER`",
+                    "short": "Lyrics ID"
                 },
                 {
                     "name": "idTrack",
-                    "short": "Unique track ID",
-                    "type": "`$INTEGER`"
+                    "title": "Id Track",
+                    "type": "`$INTEGER`",
+                    "short": "Unique track ID"
                 },
                 {
                     "name": "intBornYear",
-                    "short": "Birth year of the artist",
-                    "type": "`$INTEGER`"
+                    "title": "Int Born Year",
+                    "type": "`$INTEGER`",
+                    "short": "Birth year of the artist"
                 },
                 {
                     "name": "intCD",
-                    "short": "CD number",
-                    "type": "`$INTEGER`"
+                    "title": "Int Cd",
+                    "type": "`$INTEGER`",
+                    "short": "CD number"
                 },
                 {
                     "name": "intCharted",
-                    "short": "Chart position",
-                    "type": "`$INTEGER`"
+                    "title": "Int Charted",
+                    "type": "`$INTEGER`",
+                    "short": "Chart position"
                 },
                 {
                     "name": "intDiedYear",
-                    "short": "Year the artist died (if applicable)",
-                    "type": "`$INTEGER`"
+                    "title": "Int Died Year",
+                    "type": "`$INTEGER`",
+                    "short": "Year the artist died (if applicable)"
                 },
                 {
                     "name": "intDuration",
-                    "short": "Track duration in milliseconds",
-                    "type": "`$INTEGER`"
+                    "title": "Int Duration",
+                    "type": "`$INTEGER`",
+                    "short": "Track duration in milliseconds"
                 },
                 {
                     "name": "intFormedYear",
-                    "short": "Year the artist/band was formed",
-                    "type": "`$INTEGER`"
+                    "title": "Int Formed Year",
+                    "type": "`$INTEGER`",
+                    "short": "Year the artist/band was formed"
                 },
                 {
                     "name": "intLoved",
-                    "short": "Number of loves/likes",
-                    "type": "`$INTEGER`"
+                    "title": "Int Loved",
+                    "type": "`$INTEGER`",
+                    "short": "Number of loves/likes"
                 },
                 {
                     "name": "intMembers",
-                    "short": "Number of band members",
-                    "type": "`$INTEGER`"
+                    "title": "Int Members",
+                    "type": "`$INTEGER`",
+                    "short": "Number of band members"
                 },
                 {
                     "name": "intMusicVidComments",
-                    "short": "Number of music video comments",
-                    "type": "`$INTEGER`"
+                    "title": "Int Music Vid Comments",
+                    "type": "`$INTEGER`",
+                    "short": "Number of music video comments"
                 },
                 {
                     "name": "intMusicVidDislikes",
-                    "short": "Number of music video dislikes",
-                    "type": "`$INTEGER`"
+                    "title": "Int Music Vid Dislikes",
+                    "type": "`$INTEGER`",
+                    "short": "Number of music video dislikes"
                 },
                 {
                     "name": "intMusicVidFavorites",
-                    "short": "Number of music video favorites",
-                    "type": "`$INTEGER`"
+                    "title": "Int Music Vid Favorites",
+                    "type": "`$INTEGER`",
+                    "short": "Number of music video favorites"
                 },
                 {
                     "name": "intMusicVidLikes",
-                    "short": "Number of music video likes",
-                    "type": "`$INTEGER`"
+                    "title": "Int Music Vid Likes",
+                    "type": "`$INTEGER`",
+                    "short": "Number of music video likes"
                 },
                 {
                     "name": "intMusicVidViews",
-                    "short": "Number of music video views",
-                    "type": "`$INTEGER`"
+                    "title": "Int Music Vid Views",
+                    "type": "`$INTEGER`",
+                    "short": "Number of music video views"
                 },
                 {
                     "name": "intSales",
-                    "short": "Number of sales",
-                    "type": "`$INTEGER`"
+                    "title": "Int Sales",
+                    "type": "`$INTEGER`",
+                    "short": "Number of sales"
                 },
                 {
                     "name": "intScore",
-                    "short": "Album score",
-                    "type": "`$INTEGER`"
+                    "title": "Int Score",
+                    "type": "`$INTEGER`",
+                    "short": "Album score"
                 },
                 {
                     "name": "intScoreVotes",
-                    "short": "Number of score votes",
-                    "type": "`$INTEGER`"
+                    "title": "Int Score Votes",
+                    "type": "`$INTEGER`",
+                    "short": "Number of score votes"
                 },
                 {
                     "name": "intTotalListeners",
-                    "short": "Total number of listeners",
-                    "type": "`$INTEGER`"
+                    "title": "Int Total Listeners",
+                    "type": "`$INTEGER`",
+                    "short": "Total number of listeners"
                 },
                 {
                     "name": "intTotalPlays",
-                    "short": "Total number of plays",
-                    "type": "`$INTEGER`"
+                    "title": "Int Total Plays",
+                    "type": "`$INTEGER`",
+                    "short": "Total number of plays"
                 },
                 {
                     "name": "intTrackNumber",
-                    "short": "Track number on album",
-                    "type": "`$INTEGER`"
+                    "title": "Int Track Number",
+                    "type": "`$INTEGER`",
+                    "short": "Track number on album"
                 },
                 {
                     "name": "intYearReleased",
-                    "short": "Year the album was released",
-                    "type": "`$INTEGER`"
+                    "title": "Int Year Released",
+                    "type": "`$INTEGER`",
+                    "short": "Year the album was released"
                 },
                 {
                     "name": "strAlbum",
-                    "short": "Album title",
-                    "type": "`$STRING`"
+                    "title": "Str Album",
+                    "type": "`$STRING`",
+                    "short": "Album title"
                 },
                 {
                     "name": "strAlbum3DCase",
-                    "short": "URL to 3D case image",
-                    "type": "`$STRING`"
+                    "title": "Str Album3 D Case",
+                    "type": "`$STRING`",
+                    "short": "URL to 3D case image"
                 },
                 {
                     "name": "strAlbum3DFace",
-                    "short": "URL to 3D face image",
-                    "type": "`$STRING`"
+                    "title": "Str Album3 D Face",
+                    "type": "`$STRING`",
+                    "short": "URL to 3D face image"
                 },
                 {
                     "name": "strAlbum3DFlat",
-                    "short": "URL to 3D flat image",
-                    "type": "`$STRING`"
+                    "title": "Str Album3 D Flat",
+                    "type": "`$STRING`",
+                    "short": "URL to 3D flat image"
                 },
                 {
                     "name": "strAlbum3DThumb",
-                    "short": "URL to 3D thumbnail",
-                    "type": "`$STRING`"
+                    "title": "Str Album3 D Thumb",
+                    "type": "`$STRING`",
+                    "short": "URL to 3D thumbnail"
                 },
                 {
                     "name": "strAlbumCDart",
-                    "short": "URL to CD art",
-                    "type": "`$STRING`"
+                    "title": "Str Album C Dart",
+                    "type": "`$STRING`",
+                    "short": "URL to CD art"
                 },
                 {
                     "name": "strAlbumSpine",
-                    "short": "URL to album spine image",
-                    "type": "`$STRING`"
+                    "title": "Str Album Spine",
+                    "type": "`$STRING`",
+                    "short": "URL to album spine image"
                 },
                 {
                     "name": "strAlbumStripped",
-                    "short": "Album title without special characters",
-                    "type": "`$STRING`"
+                    "title": "Str Album Stripped",
+                    "type": "`$STRING`",
+                    "short": "Album title without special characters"
                 },
                 {
                     "name": "strAlbumThumb",
-                    "short": "URL to album thumbnail",
-                    "type": "`$STRING`"
+                    "title": "Str Album Thumb",
+                    "type": "`$STRING`",
+                    "short": "URL to album thumbnail"
                 },
                 {
                     "name": "strAlbumThumbBack",
-                    "short": "URL to back of album cover",
-                    "type": "`$STRING`"
+                    "title": "Str Album Thumb Back",
+                    "type": "`$STRING`",
+                    "short": "URL to back of album cover"
                 },
                 {
                     "name": "strAlbumThumbHQ",
-                    "short": "URL to high quality album thumbnail",
-                    "type": "`$STRING`"
+                    "title": "Str Album Thumb Hq",
+                    "type": "`$STRING`",
+                    "short": "URL to high quality album thumbnail"
                 },
                 {
                     "name": "strAllMusicID",
-                    "short": "AllMusic ID",
-                    "type": "`$STRING`"
+                    "title": "Str All Music Id",
+                    "type": "`$STRING`",
+                    "short": "AllMusic ID"
                 },
                 {
                     "name": "strAmazonID",
-                    "short": "Amazon ID",
-                    "type": "`$STRING`"
+                    "title": "Str Amazon Id",
+                    "type": "`$STRING`",
+                    "short": "Amazon ID"
                 },
                 {
                     "name": "strArtist",
-                    "short": "Artist name",
-                    "type": "`$STRING`"
+                    "title": "Str Artist",
+                    "type": "`$STRING`",
+                    "short": "Artist name"
                 },
                 {
                     "name": "strArtistAlternate",
-                    "short": "Alternate artist name",
-                    "type": "`$STRING`"
+                    "title": "Str Artist Alternate",
+                    "type": "`$STRING`",
+                    "short": "Alternate artist name"
                 },
                 {
                     "name": "strArtistBanner",
-                    "short": "URL to artist banner",
-                    "type": "`$STRING`"
+                    "title": "Str Artist Banner",
+                    "type": "`$STRING`",
+                    "short": "URL to artist banner"
                 },
                 {
                     "name": "strArtistClearart",
-                    "short": "URL to artist clearart",
-                    "type": "`$STRING`"
+                    "title": "Str Artist Clearart",
+                    "type": "`$STRING`",
+                    "short": "URL to artist clearart"
                 },
                 {
                     "name": "strArtistCutout",
-                    "short": "URL to artist cutout image",
-                    "type": "`$STRING`"
+                    "title": "Str Artist Cutout",
+                    "type": "`$STRING`",
+                    "short": "URL to artist cutout image"
                 },
                 {
                     "name": "strArtistFanart",
-                    "short": "URL to artist fanart",
-                    "type": "`$STRING`"
+                    "title": "Str Artist Fanart",
+                    "type": "`$STRING`",
+                    "short": "URL to artist fanart"
                 },
                 {
                     "name": "strArtistFanart2",
-                    "short": "URL to alternate artist fanart",
-                    "type": "`$STRING`"
+                    "title": "Str Artist Fanart2",
+                    "type": "`$STRING`",
+                    "short": "URL to alternate artist fanart"
                 },
                 {
                     "name": "strArtistFanart3",
-                    "short": "URL to third artist fanart",
-                    "type": "`$STRING`"
+                    "title": "Str Artist Fanart3",
+                    "type": "`$STRING`",
+                    "short": "URL to third artist fanart"
                 },
                 {
                     "name": "strArtistFanart4",
-                    "short": "URL to fourth artist fanart",
-                    "type": "`$STRING`"
+                    "title": "Str Artist Fanart4",
+                    "type": "`$STRING`",
+                    "short": "URL to fourth artist fanart"
                 },
                 {
                     "name": "strArtistLogo",
-                    "short": "URL to artist logo",
-                    "type": "`$STRING`"
+                    "title": "Str Artist Logo",
+                    "type": "`$STRING`",
+                    "short": "URL to artist logo"
                 },
                 {
                     "name": "strArtistStripped",
-                    "short": "Artist name without special characters",
-                    "type": "`$STRING`"
+                    "title": "Str Artist Stripped",
+                    "type": "`$STRING`",
+                    "short": "Artist name without special characters"
                 },
                 {
                     "name": "strArtistThumb",
-                    "short": "URL to artist thumbnail image",
-                    "type": "`$STRING`"
+                    "title": "Str Artist Thumb",
+                    "type": "`$STRING`",
+                    "short": "URL to artist thumbnail image"
                 },
                 {
                     "name": "strArtistWideThumb",
-                    "short": "URL to artist wide thumbnail",
-                    "type": "`$STRING`"
+                    "title": "Str Artist Wide Thumb",
+                    "type": "`$STRING`",
+                    "short": "URL to artist wide thumbnail"
                 },
                 {
                     "name": "strBBCReviewID",
-                    "short": "BBC Review ID",
-                    "type": "`$STRING`"
+                    "title": "Str Bbc Review Id",
+                    "type": "`$STRING`",
+                    "short": "BBC Review ID"
                 },
                 {
                     "name": "strBiographyCN",
-                    "short": "Artist biography in Chinese",
-                    "type": "`$STRING`"
+                    "title": "Str Biography Cn",
+                    "type": "`$STRING`",
+                    "short": "Artist biography in Chinese"
                 },
                 {
                     "name": "strBiographyDE",
-                    "short": "Artist biography in German",
-                    "type": "`$STRING`"
+                    "title": "Str Biography De",
+                    "type": "`$STRING`",
+                    "short": "Artist biography in German"
                 },
                 {
                     "name": "strBiographyEN",
-                    "short": "Artist biography in English",
-                    "type": "`$STRING`"
+                    "title": "Str Biography En",
+                    "type": "`$STRING`",
+                    "short": "Artist biography in English"
                 },
                 {
                     "name": "strBiographyES",
-                    "short": "Artist biography in Spanish",
-                    "type": "`$STRING`"
+                    "title": "Str Biography Es",
+                    "type": "`$STRING`",
+                    "short": "Artist biography in Spanish"
                 },
                 {
                     "name": "strBiographyFR",
-                    "short": "Artist biography in French",
-                    "type": "`$STRING`"
+                    "title": "Str Biography Fr",
+                    "type": "`$STRING`",
+                    "short": "Artist biography in French"
                 },
                 {
                     "name": "strBiographyHU",
-                    "short": "Artist biography in Hungarian",
-                    "type": "`$STRING`"
+                    "title": "Str Biography Hu",
+                    "type": "`$STRING`",
+                    "short": "Artist biography in Hungarian"
                 },
                 {
                     "name": "strBiographyIL",
-                    "short": "Artist biography in Hebrew",
-                    "type": "`$STRING`"
+                    "title": "Str Biography Il",
+                    "type": "`$STRING`",
+                    "short": "Artist biography in Hebrew"
                 },
                 {
                     "name": "strBiographyIT",
-                    "short": "Artist biography in Italian",
-                    "type": "`$STRING`"
+                    "title": "Str Biography It",
+                    "type": "`$STRING`",
+                    "short": "Artist biography in Italian"
                 },
                 {
                     "name": "strBiographyJP",
-                    "short": "Artist biography in Japanese",
-                    "type": "`$STRING`"
+                    "title": "Str Biography Jp",
+                    "type": "`$STRING`",
+                    "short": "Artist biography in Japanese"
                 },
                 {
                     "name": "strBiographyNL",
-                    "short": "Artist biography in Dutch",
-                    "type": "`$STRING`"
+                    "title": "Str Biography Nl",
+                    "type": "`$STRING`",
+                    "short": "Artist biography in Dutch"
                 },
                 {
                     "name": "strBiographyNO",
-                    "short": "Artist biography in Norwegian",
-                    "type": "`$STRING`"
+                    "title": "Str Biography No",
+                    "type": "`$STRING`",
+                    "short": "Artist biography in Norwegian"
                 },
                 {
                     "name": "strBiographyPL",
-                    "short": "Artist biography in Polish",
-                    "type": "`$STRING`"
+                    "title": "Str Biography Pl",
+                    "type": "`$STRING`",
+                    "short": "Artist biography in Polish"
                 },
                 {
                     "name": "strBiographyPT",
-                    "short": "Artist biography in Portuguese",
-                    "type": "`$STRING`"
+                    "title": "Str Biography Pt",
+                    "type": "`$STRING`",
+                    "short": "Artist biography in Portuguese"
                 },
                 {
                     "name": "strBiographyRU",
-                    "short": "Artist biography in Russian",
-                    "type": "`$STRING`"
+                    "title": "Str Biography Ru",
+                    "type": "`$STRING`",
+                    "short": "Artist biography in Russian"
                 },
                 {
                     "name": "strBiographySE",
-                    "short": "Artist biography in Swedish",
-                    "type": "`$STRING`"
+                    "title": "Str Biography Se",
+                    "type": "`$STRING`",
+                    "short": "Artist biography in Swedish"
                 },
                 {
                     "name": "strCountry",
-                    "short": "Country of origin",
-                    "type": "`$STRING`"
+                    "title": "Str Country",
+                    "type": "`$STRING`",
+                    "short": "Country of origin"
                 },
                 {
                     "name": "strCountryCode",
-                    "short": "Country code",
-                    "type": "`$STRING`"
+                    "title": "Str Country Code",
+                    "type": "`$STRING`",
+                    "short": "Country code"
                 },
                 {
                     "name": "strDescriptionEN",
-                    "short": "Album description in English",
-                    "type": "`$STRING`"
+                    "title": "Str Description En",
+                    "type": "`$STRING`",
+                    "short": "Album description in English"
                 },
                 {
                     "name": "strDisbanded",
-                    "short": "Disbanded status",
-                    "type": "`$STRING`"
+                    "title": "Str Disbanded",
+                    "type": "`$STRING`",
+                    "short": "Disbanded status"
                 },
                 {
                     "name": "strDiscogsID",
-                    "short": "Discogs ID",
-                    "type": "`$STRING`"
+                    "title": "Str Discogs Id",
+                    "type": "`$STRING`",
+                    "short": "Discogs ID"
                 },
                 {
                     "name": "strFacebook",
-                    "short": "Facebook page URL",
-                    "type": "`$STRING`"
+                    "title": "Str Facebook",
+                    "type": "`$STRING`",
+                    "short": "Facebook page URL"
                 },
                 {
                     "name": "strGender",
-                    "short": "Artist gender",
-                    "type": "`$STRING`"
+                    "title": "Str Gender",
+                    "type": "`$STRING`",
+                    "short": "Artist gender"
                 },
                 {
                     "name": "strGeniusID",
-                    "short": "Genius ID",
-                    "type": "`$STRING`"
+                    "title": "Str Genius Id",
+                    "type": "`$STRING`",
+                    "short": "Genius ID"
                 },
                 {
                     "name": "strGenre",
-                    "short": "Album genre",
-                    "type": "`$STRING`"
+                    "title": "Str Genre",
+                    "type": "`$STRING`",
+                    "short": "Album genre"
                 },
                 {
                     "name": "strItunesID",
-                    "short": "iTunes ID",
-                    "type": "`$STRING`"
+                    "title": "Str Itunes Id",
+                    "type": "`$STRING`",
+                    "short": "iTunes ID"
                 },
                 {
                     "name": "strLabel",
-                    "short": "Record label",
-                    "type": "`$STRING`"
+                    "title": "Str Label",
+                    "type": "`$STRING`",
+                    "short": "Record label"
                 },
                 {
                     "name": "strLastFMChart",
-                    "short": "Last.fm chart URL",
-                    "type": "`$STRING`"
+                    "title": "Str Last Fm Chart",
+                    "type": "`$STRING`",
+                    "short": "Last.fm chart URL"
                 },
                 {
                     "name": "strLocation",
-                    "short": "Recording location",
-                    "type": "`$STRING`"
+                    "title": "Str Location",
+                    "type": "`$STRING`",
+                    "short": "Recording location"
                 },
                 {
                     "name": "strLocked",
-                    "short": "Whether the record is locked",
-                    "type": "`$STRING`"
+                    "title": "Str Locked",
+                    "type": "`$STRING`",
+                    "short": "Whether the record is locked"
                 },
                 {
                     "name": "strLyricWikiID",
-                    "short": "LyricWiki ID",
-                    "type": "`$STRING`"
+                    "title": "Str Lyric Wiki Id",
+                    "type": "`$STRING`",
+                    "short": "LyricWiki ID"
                 },
                 {
                     "name": "strMood",
-                    "short": "Album mood",
-                    "type": "`$STRING`"
+                    "title": "Str Mood",
+                    "type": "`$STRING`",
+                    "short": "Album mood"
                 },
                 {
                     "name": "strMusicBrainzAlbumID",
-                    "short": "MusicBrainz Album ID",
-                    "type": "`$STRING`"
+                    "title": "Str Music Brainz Album Id",
+                    "type": "`$STRING`",
+                    "short": "MusicBrainz Album ID"
                 },
                 {
                     "name": "strMusicBrainzArtistID",
-                    "short": "MusicBrainz Artist ID",
-                    "type": "`$STRING`"
+                    "title": "Str Music Brainz Artist Id",
+                    "type": "`$STRING`",
+                    "short": "MusicBrainz Artist ID"
                 },
                 {
                     "name": "strMusicBrainzID",
-                    "short": "MusicBrainz Release Group ID",
-                    "type": "`$STRING`"
+                    "title": "Str Music Brainz Id",
+                    "type": "`$STRING`",
+                    "short": "MusicBrainz Release Group ID"
                 },
                 {
                     "name": "strMusicMozID",
-                    "short": "MusicMoz ID",
-                    "type": "`$STRING`"
+                    "title": "Str Music Moz Id",
+                    "type": "`$STRING`",
+                    "short": "MusicMoz ID"
                 },
                 {
                     "name": "strMusicVid",
-                    "short": "URL to music video",
-                    "type": "`$STRING`"
+                    "title": "Str Music Vid",
+                    "type": "`$STRING`",
+                    "short": "URL to music video"
                 },
                 {
                     "name": "strMusicVidCompany",
-                    "short": "Music video production company",
-                    "type": "`$STRING`"
+                    "title": "Str Music Vid Company",
+                    "type": "`$STRING`",
+                    "short": "Music video production company"
                 },
                 {
                     "name": "strMusicVidDirector",
-                    "short": "Music video director",
-                    "type": "`$STRING`"
+                    "title": "Str Music Vid Director",
+                    "type": "`$STRING`",
+                    "short": "Music video director"
                 },
                 {
                     "name": "strMusicVidScreen1",
-                    "short": "URL to music video screenshot 1",
-                    "type": "`$STRING`"
+                    "title": "Str Music Vid Screen1",
+                    "type": "`$STRING`",
+                    "short": "URL to music video screenshot 1"
                 },
                 {
                     "name": "strMusicVidScreen2",
-                    "short": "URL to music video screenshot 2",
-                    "type": "`$STRING`"
+                    "title": "Str Music Vid Screen2",
+                    "type": "`$STRING`",
+                    "short": "URL to music video screenshot 2"
                 },
                 {
                     "name": "strMusicVidScreen3",
-                    "short": "URL to music video screenshot 3",
-                    "type": "`$STRING`"
+                    "title": "Str Music Vid Screen3",
+                    "type": "`$STRING`",
+                    "short": "URL to music video screenshot 3"
                 },
                 {
                     "name": "strRateYourMusicID",
-                    "short": "RateYourMusic ID",
-                    "type": "`$STRING`"
+                    "title": "Str Rate Your Music Id",
+                    "type": "`$STRING`",
+                    "short": "RateYourMusic ID"
                 },
                 {
                     "name": "strReleaseFormat",
-                    "short": "Release format (CD, Vinyl, etc.)",
-                    "type": "`$STRING`"
+                    "title": "Str Release Format",
+                    "type": "`$STRING`",
+                    "short": "Release format (CD, Vinyl, etc.)"
                 },
                 {
                     "name": "strReview",
-                    "short": "Album review",
-                    "type": "`$STRING`"
+                    "title": "Str Review",
+                    "type": "`$STRING`",
+                    "short": "Album review"
                 },
                 {
                     "name": "strSpeed",
-                    "short": "Album speed",
-                    "type": "`$STRING`"
+                    "title": "Str Speed",
+                    "type": "`$STRING`",
+                    "short": "Album speed"
                 },
                 {
                     "name": "strStyle",
-                    "short": "Album style",
-                    "type": "`$STRING`"
+                    "title": "Str Style",
+                    "type": "`$STRING`",
+                    "short": "Album style"
                 },
                 {
                     "name": "strTheme",
-                    "short": "Album theme",
-                    "type": "`$STRING`"
+                    "title": "Str Theme",
+                    "type": "`$STRING`",
+                    "short": "Album theme"
                 },
                 {
                     "name": "strTrack",
-                    "short": "Track title",
-                    "type": "`$STRING`"
+                    "title": "Str Track",
+                    "type": "`$STRING`",
+                    "short": "Track title"
                 },
                 {
                     "name": "strTrackLyrics",
-                    "short": "Track lyrics",
-                    "type": "`$STRING`"
+                    "title": "Str Track Lyrics",
+                    "type": "`$STRING`",
+                    "short": "Track lyrics"
                 },
                 {
                     "name": "strTrackThumb",
-                    "short": "URL to track thumbnail",
-                    "type": "`$STRING`"
+                    "title": "Str Track Thumb",
+                    "type": "`$STRING`",
+                    "short": "URL to track thumbnail"
                 },
                 {
                     "name": "strTwitter",
-                    "short": "Twitter profile URL",
-                    "type": "`$STRING`"
+                    "title": "Str Twitter",
+                    "type": "`$STRING`",
+                    "short": "Twitter profile URL"
                 },
                 {
                     "name": "strWebsite",
-                    "short": "Official website URL",
-                    "type": "`$STRING`"
+                    "title": "Str Website",
+                    "type": "`$STRING`",
+                    "short": "Official website URL"
                 },
                 {
                     "name": "strWikidataID",
-                    "short": "Wikidata ID",
-                    "type": "`$STRING`"
+                    "title": "Str Wikidata Id",
+                    "type": "`$STRING`",
+                    "short": "Wikidata ID"
                 },
                 {
                     "name": "strWikipediaID",
-                    "short": "Wikipedia ID",
-                    "type": "`$STRING`"
+                    "title": "Str Wikipedia Id",
+                    "type": "`$STRING`",
+                    "short": "Wikipedia ID"
                 }
             ],
             "name": "v1_search",
@@ -1933,25 +2199,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "args": {
-                                "query": [
-                                    {
-                                        "example": "Homework",
-                                        "kind": "query",
-                                        "name": "a",
-                                        "orig": "a",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "example": "daft_punk",
-                                        "kind": "query",
-                                        "name": "s",
-                                        "orig": "s",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/searchalbum.php",
@@ -1960,41 +2207,41 @@ class Config {
                                     "lit": "searchalbum.php"
                                 }
                             ],
+                            "parts": [
+                                "searchalbum.php"
+                            ],
+                            "rename": {},
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body.album`"
+                            },
+                            "args": {
+                                "query": [
+                                    {
+                                        "name": "a",
+                                        "orig": "a",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "example": "Homework"
+                                    },
+                                    {
+                                        "name": "s",
+                                        "orig": "s",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "reqd": true,
+                                        "example": "daft_punk"
+                                    }
+                                ]
+                            },
                             "select": {
                                 "exist": [
                                     "a",
                                     "s"
                                 ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body.album`"
-                            },
-                            "parts": [
-                                "searchalbum.php"
-                            ]
+                            }
                         },
                         {
-                            "args": {
-                                "query": [
-                                    {
-                                        "example": "coldplay",
-                                        "kind": "query",
-                                        "name": "s",
-                                        "orig": "s",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "example": "yellow",
-                                        "kind": "query",
-                                        "name": "t",
-                                        "orig": "t",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/searchtrack.php",
@@ -2003,32 +2250,42 @@ class Config {
                                     "lit": "searchtrack.php"
                                 }
                             ],
+                            "parts": [
+                                "searchtrack.php"
+                            ],
+                            "rename": {},
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body.track`"
+                            },
+                            "args": {
+                                "query": [
+                                    {
+                                        "name": "s",
+                                        "orig": "s",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "reqd": true,
+                                        "example": "coldplay"
+                                    },
+                                    {
+                                        "name": "t",
+                                        "orig": "t",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "reqd": true,
+                                        "example": "yellow"
+                                    }
+                                ]
+                            },
                             "select": {
                                 "exist": [
                                     "s",
                                     "t"
                                 ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body.track`"
-                            },
-                            "parts": [
-                                "searchtrack.php"
-                            ]
+                            }
                         },
                         {
-                            "args": {
-                                "query": [
-                                    {
-                                        "kind": "query",
-                                        "name": "s",
-                                        "orig": "s",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/discography-mb.php",
@@ -2037,32 +2294,32 @@ class Config {
                                     "lit": "discography-mb.php"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "s"
-                                ]
-                            },
+                            "parts": [
+                                "discography-mb.php"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body.album`"
                             },
-                            "parts": [
-                                "discography-mb.php"
-                            ]
-                        },
-                        {
                             "args": {
                                 "query": [
                                     {
-                                        "example": "coldplay",
-                                        "kind": "query",
                                         "name": "s",
                                         "orig": "s",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "reqd": true
                                     }
                                 ]
                             },
+                            "select": {
+                                "exist": [
+                                    "s"
+                                ]
+                            }
+                        },
+                        {
                             "kind": "http",
                             "method": "GET",
                             "orig": "/discography.php",
@@ -2071,32 +2328,33 @@ class Config {
                                     "lit": "discography.php"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "s"
-                                ]
-                            },
+                            "parts": [
+                                "discography.php"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body.album`"
                             },
-                            "parts": [
-                                "discography.php"
-                            ]
-                        },
-                        {
                             "args": {
                                 "query": [
                                     {
-                                        "example": "coldplay",
-                                        "kind": "query",
                                         "name": "s",
                                         "orig": "s",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
                                         "reqd": true,
-                                        "type": "`$STRING`"
+                                        "example": "coldplay"
                                     }
                                 ]
                             },
+                            "select": {
+                                "exist": [
+                                    "s"
+                                ]
+                            }
+                        },
+                        {
                             "kind": "http",
                             "method": "GET",
                             "orig": "/search.php",
@@ -2105,18 +2363,31 @@ class Config {
                                     "lit": "search.php"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "s"
-                                ]
-                            },
+                            "parts": [
+                                "search.php"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body.artists`"
                             },
-                            "parts": [
-                                "search.php"
-                            ]
+                            "args": {
+                                "query": [
+                                    {
+                                        "name": "s",
+                                        "orig": "s",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "reqd": true,
+                                        "example": "coldplay"
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "s"
+                                ]
+                            }
                         }
                     ]
                 }
@@ -2129,6 +2400,7 @@ class Config {
             "fields": [
                 {
                     "name": "albums",
+                    "title": "Albums",
                     "type": "`$ARRAY`"
                 }
             ],
@@ -2139,26 +2411,9 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "example": 111239,
-                                        "kind": "param",
-                                        "name": "artist_id",
-                                        "orig": "artist_id",
-                                        "reqd": true,
-                                        "type": "`$INTEGER`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/list/discography/{artistId}",
-                            "rename": {
-                                "param": {
-                                    "artistId": "artist_id"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "list"
@@ -2170,44 +2425,60 @@ class Config {
                                     "var": "artist_id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "artist_id"
-                                ]
+                            "parts": [
+                                "list",
+                                "discography",
+                                "{artist_id}"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "artistId": "artist_id"
+                                }
                             },
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "list",
-                                "discography",
-                                "{artist_id}"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "artist_id",
+                                        "orig": "artist_id",
+                                        "type": "`$INTEGER`",
+                                        "kind": "param",
+                                        "reqd": true,
+                                        "example": 111239
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "artist_id"
+                                ]
+                            }
                         }
                     ]
                 }
             },
             "relations": {
-                "ancestors": [
-                    [
-                        "discography"
-                    ]
-                ]
+                "ancestors": []
             }
         },
         "v2_lookup": {
             "fields": [
                 {
                     "name": "albums",
+                    "title": "Albums",
                     "type": "`$ARRAY`"
                 },
                 {
                     "name": "artists",
+                    "title": "Artists",
                     "type": "`$ARRAY`"
                 },
                 {
                     "name": "tracks",
+                    "title": "Tracks",
                     "type": "`$ARRAY`"
                 }
             ],
@@ -2218,26 +2489,9 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "example": 2109615,
-                                        "kind": "param",
-                                        "name": "album_id",
-                                        "orig": "album_id",
-                                        "reqd": true,
-                                        "type": "`$INTEGER`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/lookup/album/{albumId}",
-                            "rename": {
-                                "param": {
-                                    "albumId": "album_id"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "lookup"
@@ -2249,42 +2503,42 @@ class Config {
                                     "var": "album_id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "album_id"
-                                ]
+                            "parts": [
+                                "lookup",
+                                "album",
+                                "{album_id}"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "albumId": "album_id"
+                                }
                             },
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "lookup",
-                                "album",
-                                "{album_id}"
-                            ]
-                        },
-                        {
                             "args": {
                                 "params": [
                                     {
-                                        "example": 111239,
+                                        "name": "album_id",
+                                        "orig": "album_id",
+                                        "type": "`$INTEGER`",
                                         "kind": "param",
-                                        "name": "artist_id",
-                                        "orig": "artist_id",
                                         "reqd": true,
-                                        "type": "`$INTEGER`"
+                                        "example": 2109615
                                     }
                                 ]
                             },
+                            "select": {
+                                "exist": [
+                                    "album_id"
+                                ]
+                            }
+                        },
+                        {
                             "kind": "http",
                             "method": "GET",
                             "orig": "/lookup/artist/{artistId}",
-                            "rename": {
-                                "param": {
-                                    "artistId": "artist_id"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "lookup"
@@ -2296,42 +2550,42 @@ class Config {
                                     "var": "artist_id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "artist_id"
-                                ]
+                            "parts": [
+                                "lookup",
+                                "artist",
+                                "{artist_id}"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "artistId": "artist_id"
+                                }
                             },
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "lookup",
-                                "artist",
-                                "{artist_id}"
-                            ]
-                        },
-                        {
                             "args": {
                                 "params": [
                                     {
-                                        "example": "1dc4c347-a1db-32aa-b14f-bc9cc507b843",
+                                        "name": "artist_id",
+                                        "orig": "artist_id",
+                                        "type": "`$INTEGER`",
                                         "kind": "param",
-                                        "name": "music_brainz_id",
-                                        "orig": "music_brainz_id",
                                         "reqd": true,
-                                        "type": "`$STRING`"
+                                        "example": 111239
                                     }
                                 ]
                             },
+                            "select": {
+                                "exist": [
+                                    "artist_id"
+                                ]
+                            }
+                        },
+                        {
                             "kind": "http",
                             "method": "GET",
                             "orig": "/lookup/album_mb/{musicBrainzId}",
-                            "rename": {
-                                "param": {
-                                    "musicBrainzId": "music_brainz_id"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "lookup"
@@ -2343,42 +2597,42 @@ class Config {
                                     "var": "music_brainz_id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "music_brainz_id"
-                                ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body`"
-                            },
                             "parts": [
                                 "lookup",
                                 "album_mb",
                                 "{music_brainz_id}"
-                            ]
-                        },
-                        {
-                            "args": {
-                                "params": [
-                                    {
-                                        "example": "cc197bad-dc9c-440d-a5b5-d52ba2e14234",
-                                        "kind": "param",
-                                        "name": "music_brainz_id",
-                                        "orig": "music_brainz_id",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
-                            "kind": "http",
-                            "method": "GET",
-                            "orig": "/lookup/artist_mb/{musicBrainzId}",
+                            ],
                             "rename": {
                                 "param": {
                                     "musicBrainzId": "music_brainz_id"
                                 }
                             },
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body`"
+                            },
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "music_brainz_id",
+                                        "orig": "music_brainz_id",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true,
+                                        "example": "1dc4c347-a1db-32aa-b14f-bc9cc507b843"
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "music_brainz_id"
+                                ]
+                            }
+                        },
+                        {
+                            "kind": "http",
+                            "method": "GET",
+                            "orig": "/lookup/artist_mb/{musicBrainzId}",
                             "segments": [
                                 {
                                     "lit": "lookup"
@@ -2390,42 +2644,42 @@ class Config {
                                     "var": "music_brainz_id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "music_brainz_id"
-                                ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body`"
-                            },
                             "parts": [
                                 "lookup",
                                 "artist_mb",
                                 "{music_brainz_id}"
-                            ]
-                        },
-                        {
-                            "args": {
-                                "params": [
-                                    {
-                                        "example": "50369905-68ca-48d2-912d-b37330ff7dc3",
-                                        "kind": "param",
-                                        "name": "music_brainz_id",
-                                        "orig": "music_brainz_id",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
-                            "kind": "http",
-                            "method": "GET",
-                            "orig": "/lookup/track_mb/{musicBrainzId}",
+                            ],
                             "rename": {
                                 "param": {
                                     "musicBrainzId": "music_brainz_id"
                                 }
                             },
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body`"
+                            },
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "music_brainz_id",
+                                        "orig": "music_brainz_id",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true,
+                                        "example": "cc197bad-dc9c-440d-a5b5-d52ba2e14234"
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "music_brainz_id"
+                                ]
+                            }
+                        },
+                        {
+                            "kind": "http",
+                            "method": "GET",
+                            "orig": "/lookup/track_mb/{musicBrainzId}",
                             "segments": [
                                 {
                                     "lit": "lookup"
@@ -2437,42 +2691,42 @@ class Config {
                                     "var": "music_brainz_id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "music_brainz_id"
-                                ]
+                            "parts": [
+                                "lookup",
+                                "track_mb",
+                                "{music_brainz_id}"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "musicBrainzId": "music_brainz_id"
+                                }
                             },
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "lookup",
-                                "track_mb",
-                                "{music_brainz_id}"
-                            ]
-                        },
-                        {
                             "args": {
                                 "params": [
                                     {
-                                        "example": 32724183,
+                                        "name": "music_brainz_id",
+                                        "orig": "music_brainz_id",
+                                        "type": "`$STRING`",
                                         "kind": "param",
-                                        "name": "track_id",
-                                        "orig": "track_id",
                                         "reqd": true,
-                                        "type": "`$INTEGER`"
+                                        "example": "50369905-68ca-48d2-912d-b37330ff7dc3"
                                     }
                                 ]
                             },
+                            "select": {
+                                "exist": [
+                                    "music_brainz_id"
+                                ]
+                            }
+                        },
+                        {
                             "kind": "http",
                             "method": "GET",
                             "orig": "/lookup/track/{trackId}",
-                            "rename": {
-                                "param": {
-                                    "trackId": "track_id"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "lookup"
@@ -2484,59 +2738,60 @@ class Config {
                                     "var": "track_id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "track_id"
-                                ]
+                            "parts": [
+                                "lookup",
+                                "track",
+                                "{track_id}"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "trackId": "track_id"
+                                }
                             },
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "lookup",
-                                "track",
-                                "{track_id}"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "track_id",
+                                        "orig": "track_id",
+                                        "type": "`$INTEGER`",
+                                        "kind": "param",
+                                        "reqd": true,
+                                        "example": 32724183
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "track_id"
+                                ]
+                            }
                         }
                     ]
                 }
             },
             "relations": {
-                "ancestors": [
-                    [
-                        "album"
-                    ],
-                    [
-                        "album_mb"
-                    ],
-                    [
-                        "artist"
-                    ],
-                    [
-                        "artist_mb"
-                    ],
-                    [
-                        "track"
-                    ],
-                    [
-                        "track_mb"
-                    ]
-                ]
+                "ancestors": []
             }
         },
         "v2_search": {
             "fields": [
                 {
                     "name": "albums",
+                    "title": "Albums",
                     "type": "`$ARRAY`"
                 },
                 {
                     "name": "artists",
+                    "title": "Artists",
                     "type": "`$ARRAY`"
                 },
                 {
                     "name": "tracks",
+                    "title": "Tracks",
                     "type": "`$ARRAY`"
                 }
             ],
@@ -2547,26 +2802,9 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "example": "parachutes",
-                                        "kind": "param",
-                                        "name": "album_name",
-                                        "orig": "album_name",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/search/album/{albumName}",
-                            "rename": {
-                                "param": {
-                                    "albumName": "album_name"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "search"
@@ -2578,42 +2816,42 @@ class Config {
                                     "var": "album_name"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "album_name"
-                                ]
+                            "parts": [
+                                "search",
+                                "album",
+                                "{album_name}"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "albumName": "album_name"
+                                }
                             },
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "search",
-                                "album",
-                                "{album_name}"
-                            ]
-                        },
-                        {
                             "args": {
                                 "params": [
                                     {
-                                        "example": "coldplay",
+                                        "name": "album_name",
+                                        "orig": "album_name",
+                                        "type": "`$STRING`",
                                         "kind": "param",
-                                        "name": "artist_name",
-                                        "orig": "artist_name",
                                         "reqd": true,
-                                        "type": "`$STRING`"
+                                        "example": "parachutes"
                                     }
                                 ]
                             },
+                            "select": {
+                                "exist": [
+                                    "album_name"
+                                ]
+                            }
+                        },
+                        {
                             "kind": "http",
                             "method": "GET",
                             "orig": "/search/artist/{artistName}",
-                            "rename": {
-                                "param": {
-                                    "artistName": "artist_name"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "search"
@@ -2625,42 +2863,42 @@ class Config {
                                     "var": "artist_name"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "artist_name"
-                                ]
+                            "parts": [
+                                "search",
+                                "artist",
+                                "{artist_name}"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "artistName": "artist_name"
+                                }
                             },
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "search",
-                                "artist",
-                                "{artist_name}"
-                            ]
-                        },
-                        {
                             "args": {
                                 "params": [
                                     {
-                                        "example": "yellow",
+                                        "name": "artist_name",
+                                        "orig": "artist_name",
+                                        "type": "`$STRING`",
                                         "kind": "param",
-                                        "name": "track_name",
-                                        "orig": "track_name",
                                         "reqd": true,
-                                        "type": "`$STRING`"
+                                        "example": "coldplay"
                                     }
                                 ]
                             },
+                            "select": {
+                                "exist": [
+                                    "artist_name"
+                                ]
+                            }
+                        },
+                        {
                             "kind": "http",
                             "method": "GET",
                             "orig": "/search/track/{trackName}",
-                            "rename": {
-                                "param": {
-                                    "trackName": "track_name"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "search"
@@ -2672,36 +2910,43 @@ class Config {
                                     "var": "track_name"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "track_name"
-                                ]
+                            "parts": [
+                                "search",
+                                "track",
+                                "{track_name}"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "trackName": "track_name"
+                                }
                             },
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "search",
-                                "track",
-                                "{track_name}"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "track_name",
+                                        "orig": "track_name",
+                                        "type": "`$STRING`",
+                                        "kind": "param",
+                                        "reqd": true,
+                                        "example": "yellow"
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "track_name"
+                                ]
+                            }
                         }
                     ]
                 }
             },
             "relations": {
-                "ancestors": [
-                    [
-                        "album"
-                    ],
-                    [
-                        "artist"
-                    ],
-                    [
-                        "track"
-                    ]
-                ]
+                "ancestors": []
             }
         }
     };

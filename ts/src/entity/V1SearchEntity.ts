@@ -19,7 +19,6 @@ import type {
   V1SearchListMatch,
 } from '../FreeMusicApi2Types'
 
-// TODO: needs Entity superclass
 class V1SearchEntity extends FreeMusicApi2EntityBase<V1Search> {
 
   constructor(client: FreeMusicApi2SDK, entopts: any) {

@@ -46,20 +46,6 @@ rescue => err
 end
 ```
 
-### 3. Load a v2list
-
-V2List is nested under artist, so provide the `artist_id`.
-
-```ruby
-begin
-  # load returns the ENTITY — call data_get for the V2List record (raises on error).
-  v2list = client.V2List.load({ "artist_id" => 1 })
-  puts v2list
-rescue => err
-  warn "load failed: #{err}"
-end
-```
-
 
 ## Error handling
 

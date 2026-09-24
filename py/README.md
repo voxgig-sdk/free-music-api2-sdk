@@ -53,19 +53,6 @@ except Exception as err:
     print(f"list failed: {err}")
 ```
 
-### 3. Load a v2list
-
-V2List is nested under artist, so provide the `artist_id`.
-`load()` returns the ENTITY — call data_get() for the record — and raises on error.
-
-```python
-try:
-    v2list = client.V2List().load({"artist_id": 1})
-    print(v2list)
-except Exception as err:
-    print(f"load failed: {err}")
-```
-
 
 ## Error handling
 

@@ -49,22 +49,6 @@ for (const v1list of v1lists) {
 }
 ```
 
-### 3. Load a v2list
-
-V2List is nested under artist, so provide the `artist_id`.
-`load()` returns the entity directly and throws on failure:
-
-```ts
-try {
-  const v2list = await client.V2List().load({
-    artist_id: 1,
-  })
-  console.log(v2list)
-} catch (err) {
-  console.error('load failed:', err)
-}
-```
-
 
 ## Error handling
 

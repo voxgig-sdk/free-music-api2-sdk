@@ -1,0 +1,177 @@
+# Entity: v2_search
+
+main: kit: entity: v2_search: {
+
+  alias: field: {}
+
+  fields: {
+    albums: {
+      h: "Albums"
+      n: "albums"
+      r: false
+      t: "`$ARRAY`"
+    }
+    artists: {
+      h: "Artists"
+      n: "artists"
+      r: false
+      t: "`$ARRAY`"
+    }
+    tracks: {
+      h: "Tracks"
+      n: "tracks"
+      r: false
+      t: "`$ARRAY`"
+    }
+  }
+
+  name: "v2_search"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /search/album/{albumName}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: "parachutes"
+                k: "param"
+                n: "album_name"
+                or: "album_name"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/search/album/{albumName}"
+          q: {
+            exist: [
+              "album_name"
+            ]
+          }
+          r: {
+            param: {
+              albumName: "album_name"
+            }
+          }
+          s: [
+            {
+              lit: "search"
+            }
+            {
+              lit: "album"
+            }
+            {
+              var: "album_name"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /search/artist/{artistName}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: "coldplay"
+                k: "param"
+                n: "artist_name"
+                or: "artist_name"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/search/artist/{artistName}"
+          q: {
+            exist: [
+              "artist_name"
+            ]
+          }
+          r: {
+            param: {
+              artistName: "artist_name"
+            }
+          }
+          s: [
+            {
+              lit: "search"
+            }
+            {
+              lit: "artist"
+            }
+            {
+              var: "artist_name"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /search/track/{trackName}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: "yellow"
+                k: "param"
+                n: "track_name"
+                or: "track_name"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/search/track/{trackName}"
+          q: {
+            exist: [
+              "track_name"
+            ]
+          }
+          r: {
+            param: {
+              trackName: "track_name"
+            }
+          }
+          s: [
+            {
+              lit: "search"
+            }
+            {
+              lit: "track"
+            }
+            {
+              var: "track_name"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

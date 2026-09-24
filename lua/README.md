@@ -45,18 +45,8 @@ local v1lists, err = client:V1List():list()
 if err then error(err) end
 
 for _, item in ipairs(v1lists) do
-  print(item["strAlbum"])
+  print(item)
 end
-```
-
-### 3. Load a v2list
-
-V2List is nested under artist, so provide the `artist_id`.
-
-```lua
-local v2list, err = client:V2List():load({ artist_id = 1 })
-if err then error(err) end
-print(v2list)
 ```
 
 

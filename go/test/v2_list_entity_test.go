@@ -98,7 +98,7 @@ func v2_listBasicSetup(extra map[string]any) *entityTestSetup {
 
 	// Generate idmap via transform, matching TS pattern.
 	idmap, _ := vs.Transform(
-		[]any{"v2_list01", "v2_list02", "v2_list03", "discography01", "discography02", "discography03"},
+		[]any{"v2_list01", "v2_list02", "v2_list03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
 				"`$KEY`": "`$COPY`",

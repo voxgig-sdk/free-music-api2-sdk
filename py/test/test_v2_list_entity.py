@@ -70,7 +70,7 @@ def _v2_list_basic_setup(extra):
 
     # Generate idmap via transform.
     idmap = vs.transform(
-        ["v2_list01", "v2_list02", "v2_list03", "discography01", "discography02", "discography03"],
+        ["v2_list01", "v2_list02", "v2_list03"],
         {
             "`$PACK`": ["", {
                 "`$KEY`": "`$COPY`",

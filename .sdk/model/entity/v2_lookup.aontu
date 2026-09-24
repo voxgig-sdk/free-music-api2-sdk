@@ -1,0 +1,315 @@
+# Entity: v2_lookup
+
+main: kit: entity: v2_lookup: {
+
+  alias: field: {}
+
+  fields: {
+    albums: {
+      h: "Albums"
+      n: "albums"
+      r: false
+      t: "`$ARRAY`"
+    }
+    artists: {
+      h: "Artists"
+      n: "artists"
+      r: false
+      t: "`$ARRAY`"
+    }
+    tracks: {
+      h: "Tracks"
+      n: "tracks"
+      r: false
+      t: "`$ARRAY`"
+    }
+  }
+
+  name: "v2_lookup"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /lookup/album/{albumId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: 2109615
+                k: "param"
+                n: "album_id"
+                or: "album_id"
+                r: true
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/lookup/album/{albumId}"
+          q: {
+            exist: [
+              "album_id"
+            ]
+          }
+          r: {
+            param: {
+              albumId: "album_id"
+            }
+          }
+          s: [
+            {
+              lit: "lookup"
+            }
+            {
+              lit: "album"
+            }
+            {
+              var: "album_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /lookup/artist/{artistId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: 111239
+                k: "param"
+                n: "artist_id"
+                or: "artist_id"
+                r: true
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/lookup/artist/{artistId}"
+          q: {
+            exist: [
+              "artist_id"
+            ]
+          }
+          r: {
+            param: {
+              artistId: "artist_id"
+            }
+          }
+          s: [
+            {
+              lit: "lookup"
+            }
+            {
+              lit: "artist"
+            }
+            {
+              var: "artist_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /lookup/album_mb/{musicBrainzId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: "1dc4c347-a1db-32aa-b14f-bc9cc507b843"
+                k: "param"
+                n: "music_brainz_id"
+                or: "music_brainz_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/lookup/album_mb/{musicBrainzId}"
+          q: {
+            exist: [
+              "music_brainz_id"
+            ]
+          }
+          r: {
+            param: {
+              musicBrainzId: "music_brainz_id"
+            }
+          }
+          s: [
+            {
+              lit: "lookup"
+            }
+            {
+              lit: "album_mb"
+            }
+            {
+              var: "music_brainz_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /lookup/artist_mb/{musicBrainzId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: "cc197bad-dc9c-440d-a5b5-d52ba2e14234"
+                k: "param"
+                n: "music_brainz_id"
+                or: "music_brainz_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/lookup/artist_mb/{musicBrainzId}"
+          q: {
+            exist: [
+              "music_brainz_id"
+            ]
+          }
+          r: {
+            param: {
+              musicBrainzId: "music_brainz_id"
+            }
+          }
+          s: [
+            {
+              lit: "lookup"
+            }
+            {
+              lit: "artist_mb"
+            }
+            {
+              var: "music_brainz_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /lookup/track_mb/{musicBrainzId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: "50369905-68ca-48d2-912d-b37330ff7dc3"
+                k: "param"
+                n: "music_brainz_id"
+                or: "music_brainz_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/lookup/track_mb/{musicBrainzId}"
+          q: {
+            exist: [
+              "music_brainz_id"
+            ]
+          }
+          r: {
+            param: {
+              musicBrainzId: "music_brainz_id"
+            }
+          }
+          s: [
+            {
+              lit: "lookup"
+            }
+            {
+              lit: "track_mb"
+            }
+            {
+              var: "music_brainz_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /lookup/track/{trackId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: 32724183
+                k: "param"
+                n: "track_id"
+                or: "track_id"
+                r: true
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/lookup/track/{trackId}"
+          q: {
+            exist: [
+              "track_id"
+            ]
+          }
+          r: {
+            param: {
+              trackId: "track_id"
+            }
+          }
+          s: [
+            {
+              lit: "lookup"
+            }
+            {
+              lit: "track"
+            }
+            {
+              var: "track_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

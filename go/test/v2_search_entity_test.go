@@ -98,7 +98,7 @@ func v2_searchBasicSetup(extra map[string]any) *entityTestSetup {
 
 	// Generate idmap via transform, matching TS pattern.
 	idmap, _ := vs.Transform(
-		[]any{"v2_search01", "v2_search02", "v2_search03", "album01", "album02", "album03", "artist01", "artist02", "artist03", "track01", "track02", "track03"},
+		[]any{"v2_search01", "v2_search02", "v2_search03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
 				"`$KEY`": "`$COPY`",

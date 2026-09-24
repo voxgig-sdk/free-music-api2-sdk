@@ -100,205 +100,246 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "idAlbum",
-						"short": "Album ID",
+						"title": "Id Album",
 						"type": "`$INTEGER`",
+						"short": "Album ID",
 					},
 					map[string]any{
 						"name": "idArtist",
-						"short": "Artist ID",
+						"title": "Id Artist",
 						"type": "`$INTEGER`",
+						"short": "Artist ID",
 					},
 					map[string]any{
 						"name": "idIMVDB",
-						"short": "IMVDB ID",
+						"title": "Id Imvdb",
 						"type": "`$INTEGER`",
+						"short": "IMVDB ID",
 					},
 					map[string]any{
 						"name": "idLyric",
-						"short": "Lyrics ID",
+						"title": "Id Lyric",
 						"type": "`$INTEGER`",
+						"short": "Lyrics ID",
 					},
 					map[string]any{
 						"name": "idTrack",
-						"short": "Track ID",
+						"title": "Id Track",
 						"type": "`$INTEGER`",
+						"short": "Track ID",
 					},
 					map[string]any{
 						"name": "intCD",
-						"short": "CD number",
+						"title": "Int Cd",
 						"type": "`$INTEGER`",
+						"short": "CD number",
 					},
 					map[string]any{
 						"name": "intDuration",
-						"short": "Track duration in milliseconds",
+						"title": "Int Duration",
 						"type": "`$INTEGER`",
+						"short": "Track duration in milliseconds",
 					},
 					map[string]any{
 						"name": "intLoved",
-						"short": "Number of loves/likes",
+						"title": "Int Loved",
 						"type": "`$INTEGER`",
+						"short": "Number of loves/likes",
 					},
 					map[string]any{
 						"name": "intMusicVidComments",
-						"short": "Number of music video comments",
+						"title": "Int Music Vid Comments",
 						"type": "`$INTEGER`",
+						"short": "Number of music video comments",
 					},
 					map[string]any{
 						"name": "intMusicVidDislikes",
-						"short": "Number of music video dislikes",
+						"title": "Int Music Vid Dislikes",
 						"type": "`$INTEGER`",
+						"short": "Number of music video dislikes",
 					},
 					map[string]any{
 						"name": "intMusicVidFavorites",
-						"short": "Number of music video favorites",
+						"title": "Int Music Vid Favorites",
 						"type": "`$INTEGER`",
+						"short": "Number of music video favorites",
 					},
 					map[string]any{
 						"name": "intMusicVidLikes",
-						"short": "Number of music video likes",
+						"title": "Int Music Vid Likes",
 						"type": "`$INTEGER`",
+						"short": "Number of music video likes",
 					},
 					map[string]any{
 						"name": "intMusicVidViews",
-						"short": "Number of music video views",
+						"title": "Int Music Vid Views",
 						"type": "`$INTEGER`",
+						"short": "Number of music video views",
 					},
 					map[string]any{
 						"name": "intScore",
-						"short": "Track score",
+						"title": "Int Score",
 						"type": "`$INTEGER`",
+						"short": "Track score",
 					},
 					map[string]any{
 						"name": "intScoreVotes",
-						"short": "Number of score votes",
+						"title": "Int Score Votes",
 						"type": "`$INTEGER`",
+						"short": "Number of score votes",
 					},
 					map[string]any{
 						"name": "intTotalListeners",
-						"short": "Total number of listeners",
+						"title": "Int Total Listeners",
 						"type": "`$INTEGER`",
+						"short": "Total number of listeners",
 					},
 					map[string]any{
 						"name": "intTotalPlays",
-						"short": "Total number of plays",
+						"title": "Int Total Plays",
 						"type": "`$INTEGER`",
+						"short": "Total number of plays",
 					},
 					map[string]any{
 						"name": "intTrackNumber",
-						"short": "Track number on album",
+						"title": "Int Track Number",
 						"type": "`$INTEGER`",
+						"short": "Track number on album",
 					},
 					map[string]any{
 						"name": "loved",
+						"title": "Loved",
 						"type": "`$ARRAY`",
 					},
 					map[string]any{
 						"name": "strAlbum",
-						"short": "Album title",
+						"title": "Str Album",
 						"type": "`$STRING`",
+						"short": "Album title",
 					},
 					map[string]any{
 						"name": "strArtist",
-						"short": "Artist name",
+						"title": "Str Artist",
 						"type": "`$STRING`",
+						"short": "Artist name",
 					},
 					map[string]any{
 						"name": "strArtistAlternate",
-						"short": "Alternate artist name",
+						"title": "Str Artist Alternate",
 						"type": "`$STRING`",
+						"short": "Alternate artist name",
 					},
 					map[string]any{
 						"name": "strDescriptionEN",
-						"short": "Video description in English",
+						"title": "Str Description En",
 						"type": "`$STRING`",
+						"short": "Video description in English",
 					},
 					map[string]any{
 						"name": "strGenre",
-						"short": "Track genre",
+						"title": "Str Genre",
 						"type": "`$STRING`",
+						"short": "Track genre",
 					},
 					map[string]any{
 						"name": "strLocked",
-						"short": "Whether the record is locked",
+						"title": "Str Locked",
 						"type": "`$STRING`",
+						"short": "Whether the record is locked",
 					},
 					map[string]any{
 						"name": "strMood",
-						"short": "Track mood",
+						"title": "Str Mood",
 						"type": "`$STRING`",
+						"short": "Track mood",
 					},
 					map[string]any{
 						"name": "strMusicBrainzAlbumID",
-						"short": "MusicBrainz Album ID",
+						"title": "Str Music Brainz Album Id",
 						"type": "`$STRING`",
+						"short": "MusicBrainz Album ID",
 					},
 					map[string]any{
 						"name": "strMusicBrainzArtistID",
-						"short": "MusicBrainz Artist ID",
+						"title": "Str Music Brainz Artist Id",
 						"type": "`$STRING`",
+						"short": "MusicBrainz Artist ID",
 					},
 					map[string]any{
 						"name": "strMusicBrainzID",
-						"short": "MusicBrainz Recording ID",
+						"title": "Str Music Brainz Id",
 						"type": "`$STRING`",
+						"short": "MusicBrainz Recording ID",
 					},
 					map[string]any{
 						"name": "strMusicVid",
-						"short": "URL to music video",
+						"title": "Str Music Vid",
 						"type": "`$STRING`",
+						"short": "URL to music video",
 					},
 					map[string]any{
 						"name": "strMusicVidCompany",
-						"short": "Music video production company",
+						"title": "Str Music Vid Company",
 						"type": "`$STRING`",
+						"short": "Music video production company",
 					},
 					map[string]any{
 						"name": "strMusicVidDirector",
-						"short": "Music video director",
+						"title": "Str Music Vid Director",
 						"type": "`$STRING`",
+						"short": "Music video director",
 					},
 					map[string]any{
 						"name": "strMusicVidScreen1",
-						"short": "URL to music video screenshot 1",
+						"title": "Str Music Vid Screen1",
 						"type": "`$STRING`",
+						"short": "URL to music video screenshot 1",
 					},
 					map[string]any{
 						"name": "strMusicVidScreen2",
-						"short": "URL to music video screenshot 2",
+						"title": "Str Music Vid Screen2",
 						"type": "`$STRING`",
+						"short": "URL to music video screenshot 2",
 					},
 					map[string]any{
 						"name": "strMusicVidScreen3",
-						"short": "URL to music video screenshot 3",
+						"title": "Str Music Vid Screen3",
 						"type": "`$STRING`",
+						"short": "URL to music video screenshot 3",
 					},
 					map[string]any{
 						"name": "strStyle",
-						"short": "Track style",
+						"title": "Str Style",
 						"type": "`$STRING`",
+						"short": "Track style",
 					},
 					map[string]any{
 						"name": "strTheme",
-						"short": "Track theme",
+						"title": "Str Theme",
 						"type": "`$STRING`",
+						"short": "Track theme",
 					},
 					map[string]any{
 						"name": "strTrack",
-						"short": "Track title",
+						"title": "Str Track",
 						"type": "`$STRING`",
+						"short": "Track title",
 					},
 					map[string]any{
 						"name": "strTrackLyrics",
-						"short": "Track lyrics",
+						"title": "Str Track Lyrics",
 						"type": "`$STRING`",
+						"short": "Track lyrics",
 					},
 					map[string]any{
 						"name": "strTrackThumb",
-						"short": "URL to track thumbnail",
+						"title": "Str Track Thumb",
 						"type": "`$STRING`",
+						"short": "URL to track thumbnail",
 					},
 					map[string]any{
 						"name": "trending",
+						"title": "Trending",
 						"type": "`$ARRAY`",
 					},
 				},
@@ -309,40 +350,48 @@ func MakeConfig() map[string]any {
 						"name": "list",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"example": "us",
-											"kind": "query",
-											"name": "country",
-											"orig": "country",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"example": "albums",
-											"kind": "query",
-											"name": "format",
-											"orig": "format",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"example": "itunes",
-											"kind": "query",
-											"name": "type",
-											"orig": "type",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/trending.php",
 								"segments": []any{
 									map[string]any{
 										"lit": "trending.php",
+									},
+								},
+								"parts": []any{
+									"trending.php",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.trending`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "country",
+											"orig": "country",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+											"example": "us",
+										},
+										map[string]any{
+											"name": "format",
+											"orig": "format",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+											"example": "albums",
+										},
+										map[string]any{
+											"name": "type",
+											"orig": "type",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+											"example": "itunes",
+										},
 									},
 								},
 								"select": map[string]any{
@@ -352,27 +401,8 @@ func MakeConfig() map[string]any {
 										"type",
 									},
 								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.trending`",
-								},
-								"parts": []any{
-									"trending.php",
-								},
 							},
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"example": "track",
-											"kind": "query",
-											"name": "format",
-											"orig": "format",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/mostloved.php",
@@ -381,32 +411,33 @@ func MakeConfig() map[string]any {
 										"lit": "mostloved.php",
 									},
 								},
+								"parts": []any{
+									"mostloved.php",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.loved`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "format",
+											"orig": "format",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+											"example": "track",
+										},
+									},
+								},
 								"select": map[string]any{
 									"exist": []any{
 										"format",
 									},
 								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.loved`",
-								},
-								"parts": []any{
-									"mostloved.php",
-								},
 							},
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"example": "cc197bad-dc9c-440d-a5b5-d52ba2e14234",
-											"kind": "query",
-											"name": "i",
-											"orig": "i",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/mvid-mb.php",
@@ -415,32 +446,33 @@ func MakeConfig() map[string]any {
 										"lit": "mvid-mb.php",
 									},
 								},
+								"parts": []any{
+									"mvid-mb.php",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.mvids`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "i",
+											"orig": "i",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+											"example": "cc197bad-dc9c-440d-a5b5-d52ba2e14234",
+										},
+									},
+								},
 								"select": map[string]any{
 									"exist": []any{
 										"i",
 									},
 								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.mvids`",
-								},
-								"parts": []any{
-									"mvid-mb.php",
-								},
 							},
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"example": 112024,
-											"kind": "query",
-											"name": "i",
-											"orig": "i",
-											"reqd": true,
-											"type": "`$INTEGER`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/mvid.php",
@@ -449,32 +481,33 @@ func MakeConfig() map[string]any {
 										"lit": "mvid.php",
 									},
 								},
+								"parts": []any{
+									"mvid.php",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.mvids`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "i",
+											"orig": "i",
+											"type": "`$INTEGER`",
+											"kind": "query",
+											"reqd": true,
+											"example": 112024,
+										},
+									},
+								},
 								"select": map[string]any{
 									"exist": []any{
 										"i",
 									},
 								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.mvids`",
-								},
-								"parts": []any{
-									"mvid.php",
-								},
 							},
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"example": "cc197bad-dc9c-440d-a5b5-d52ba2e14234",
-											"kind": "query",
-											"name": "s",
-											"orig": "s",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/track-top10-mb.php",
@@ -483,32 +516,33 @@ func MakeConfig() map[string]any {
 										"lit": "track-top10-mb.php",
 									},
 								},
+								"parts": []any{
+									"track-top10-mb.php",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.track`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "s",
+											"orig": "s",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+											"example": "cc197bad-dc9c-440d-a5b5-d52ba2e14234",
+										},
+									},
+								},
 								"select": map[string]any{
 									"exist": []any{
 										"s",
 									},
 								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.track`",
-								},
-								"parts": []any{
-									"track-top10-mb.php",
-								},
 							},
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"example": "coldplay",
-											"kind": "query",
-											"name": "s",
-											"orig": "s",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/track-top10.php",
@@ -517,17 +551,30 @@ func MakeConfig() map[string]any {
 										"lit": "track-top10.php",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"s",
-									},
+								"parts": []any{
+									"track-top10.php",
 								},
+								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body.track`",
 								},
-								"parts": []any{
-									"track-top10.php",
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "s",
+											"orig": "s",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+											"example": "coldplay",
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"s",
+									},
 								},
 							},
 						},
@@ -541,563 +588,675 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "idAlbum",
-						"short": "Album ID",
+						"title": "Id Album",
 						"type": "`$INTEGER`",
+						"short": "Album ID",
 					},
 					map[string]any{
 						"name": "idArtist",
-						"short": "Artist ID",
+						"title": "Id Artist",
 						"type": "`$INTEGER`",
+						"short": "Artist ID",
 					},
 					map[string]any{
 						"name": "idIMVDB",
-						"short": "IMVDB ID",
+						"title": "Id Imvdb",
 						"type": "`$INTEGER`",
+						"short": "IMVDB ID",
 					},
 					map[string]any{
 						"name": "idLabel",
-						"short": "Label ID",
+						"title": "Id Label",
 						"type": "`$INTEGER`",
+						"short": "Label ID",
 					},
 					map[string]any{
 						"name": "idLyric",
-						"short": "Lyrics ID",
+						"title": "Id Lyric",
 						"type": "`$INTEGER`",
+						"short": "Lyrics ID",
 					},
 					map[string]any{
 						"name": "idTrack",
-						"short": "Unique track ID",
+						"title": "Id Track",
 						"type": "`$INTEGER`",
+						"short": "Unique track ID",
 					},
 					map[string]any{
 						"name": "intBornYear",
-						"short": "Birth year of the artist",
+						"title": "Int Born Year",
 						"type": "`$INTEGER`",
+						"short": "Birth year of the artist",
 					},
 					map[string]any{
 						"name": "intCD",
-						"short": "CD number",
+						"title": "Int Cd",
 						"type": "`$INTEGER`",
+						"short": "CD number",
 					},
 					map[string]any{
 						"name": "intCharted",
-						"short": "Chart position",
+						"title": "Int Charted",
 						"type": "`$INTEGER`",
+						"short": "Chart position",
 					},
 					map[string]any{
 						"name": "intDiedYear",
-						"short": "Year the artist died (if applicable)",
+						"title": "Int Died Year",
 						"type": "`$INTEGER`",
+						"short": "Year the artist died (if applicable)",
 					},
 					map[string]any{
 						"name": "intDuration",
-						"short": "Track duration in milliseconds",
+						"title": "Int Duration",
 						"type": "`$INTEGER`",
+						"short": "Track duration in milliseconds",
 					},
 					map[string]any{
 						"name": "intFormedYear",
-						"short": "Year the artist/band was formed",
+						"title": "Int Formed Year",
 						"type": "`$INTEGER`",
+						"short": "Year the artist/band was formed",
 					},
 					map[string]any{
 						"name": "intLoved",
-						"short": "Number of loves/likes",
+						"title": "Int Loved",
 						"type": "`$INTEGER`",
+						"short": "Number of loves/likes",
 					},
 					map[string]any{
 						"name": "intMembers",
-						"short": "Number of band members",
+						"title": "Int Members",
 						"type": "`$INTEGER`",
+						"short": "Number of band members",
 					},
 					map[string]any{
 						"name": "intMusicVidComments",
-						"short": "Number of music video comments",
+						"title": "Int Music Vid Comments",
 						"type": "`$INTEGER`",
+						"short": "Number of music video comments",
 					},
 					map[string]any{
 						"name": "intMusicVidDislikes",
-						"short": "Number of music video dislikes",
+						"title": "Int Music Vid Dislikes",
 						"type": "`$INTEGER`",
+						"short": "Number of music video dislikes",
 					},
 					map[string]any{
 						"name": "intMusicVidFavorites",
-						"short": "Number of music video favorites",
+						"title": "Int Music Vid Favorites",
 						"type": "`$INTEGER`",
+						"short": "Number of music video favorites",
 					},
 					map[string]any{
 						"name": "intMusicVidLikes",
-						"short": "Number of music video likes",
+						"title": "Int Music Vid Likes",
 						"type": "`$INTEGER`",
+						"short": "Number of music video likes",
 					},
 					map[string]any{
 						"name": "intMusicVidViews",
-						"short": "Number of music video views",
+						"title": "Int Music Vid Views",
 						"type": "`$INTEGER`",
+						"short": "Number of music video views",
 					},
 					map[string]any{
 						"name": "intSales",
-						"short": "Number of sales",
+						"title": "Int Sales",
 						"type": "`$INTEGER`",
+						"short": "Number of sales",
 					},
 					map[string]any{
 						"name": "intScore",
-						"short": "Track score",
+						"title": "Int Score",
 						"type": "`$INTEGER`",
+						"short": "Track score",
 					},
 					map[string]any{
 						"name": "intScoreVotes",
-						"short": "Number of score votes",
+						"title": "Int Score Votes",
 						"type": "`$INTEGER`",
+						"short": "Number of score votes",
 					},
 					map[string]any{
 						"name": "intTotalListeners",
-						"short": "Total number of listeners",
+						"title": "Int Total Listeners",
 						"type": "`$INTEGER`",
+						"short": "Total number of listeners",
 					},
 					map[string]any{
 						"name": "intTotalPlays",
-						"short": "Total number of plays",
+						"title": "Int Total Plays",
 						"type": "`$INTEGER`",
+						"short": "Total number of plays",
 					},
 					map[string]any{
 						"name": "intTrackNumber",
-						"short": "Track number on album",
+						"title": "Int Track Number",
 						"type": "`$INTEGER`",
+						"short": "Track number on album",
 					},
 					map[string]any{
 						"name": "intYearReleased",
-						"short": "Year the album was released",
+						"title": "Int Year Released",
 						"type": "`$INTEGER`",
+						"short": "Year the album was released",
 					},
 					map[string]any{
 						"name": "strAlbum",
-						"short": "Album title",
+						"title": "Str Album",
 						"type": "`$STRING`",
+						"short": "Album title",
 					},
 					map[string]any{
 						"name": "strAlbum3DCase",
-						"short": "URL to 3D case image",
+						"title": "Str Album3 D Case",
 						"type": "`$STRING`",
+						"short": "URL to 3D case image",
 					},
 					map[string]any{
 						"name": "strAlbum3DFace",
-						"short": "URL to 3D face image",
+						"title": "Str Album3 D Face",
 						"type": "`$STRING`",
+						"short": "URL to 3D face image",
 					},
 					map[string]any{
 						"name": "strAlbum3DFlat",
-						"short": "URL to 3D flat image",
+						"title": "Str Album3 D Flat",
 						"type": "`$STRING`",
+						"short": "URL to 3D flat image",
 					},
 					map[string]any{
 						"name": "strAlbum3DThumb",
-						"short": "URL to 3D thumbnail",
+						"title": "Str Album3 D Thumb",
 						"type": "`$STRING`",
+						"short": "URL to 3D thumbnail",
 					},
 					map[string]any{
 						"name": "strAlbumCDart",
-						"short": "URL to CD art",
+						"title": "Str Album C Dart",
 						"type": "`$STRING`",
+						"short": "URL to CD art",
 					},
 					map[string]any{
 						"name": "strAlbumSpine",
-						"short": "URL to album spine image",
+						"title": "Str Album Spine",
 						"type": "`$STRING`",
+						"short": "URL to album spine image",
 					},
 					map[string]any{
 						"name": "strAlbumStripped",
-						"short": "Album title without special characters",
+						"title": "Str Album Stripped",
 						"type": "`$STRING`",
+						"short": "Album title without special characters",
 					},
 					map[string]any{
 						"name": "strAlbumThumb",
-						"short": "URL to album thumbnail",
+						"title": "Str Album Thumb",
 						"type": "`$STRING`",
+						"short": "URL to album thumbnail",
 					},
 					map[string]any{
 						"name": "strAlbumThumbBack",
-						"short": "URL to back of album cover",
+						"title": "Str Album Thumb Back",
 						"type": "`$STRING`",
+						"short": "URL to back of album cover",
 					},
 					map[string]any{
 						"name": "strAlbumThumbHQ",
-						"short": "URL to high quality album thumbnail",
+						"title": "Str Album Thumb Hq",
 						"type": "`$STRING`",
+						"short": "URL to high quality album thumbnail",
 					},
 					map[string]any{
 						"name": "strAllMusicID",
-						"short": "AllMusic ID",
+						"title": "Str All Music Id",
 						"type": "`$STRING`",
+						"short": "AllMusic ID",
 					},
 					map[string]any{
 						"name": "strAmazonID",
-						"short": "Amazon ID",
+						"title": "Str Amazon Id",
 						"type": "`$STRING`",
+						"short": "Amazon ID",
 					},
 					map[string]any{
 						"name": "strAppleMusic",
-						"short": "Apple Music artist URL",
+						"title": "Str Apple Music",
 						"type": "`$STRING`",
+						"short": "Apple Music artist URL",
 					},
 					map[string]any{
 						"name": "strArtist",
-						"short": "Artist name",
+						"title": "Str Artist",
 						"type": "`$STRING`",
+						"short": "Artist name",
 					},
 					map[string]any{
 						"name": "strArtistAlternate",
-						"short": "Alternate artist name",
+						"title": "Str Artist Alternate",
 						"type": "`$STRING`",
+						"short": "Alternate artist name",
 					},
 					map[string]any{
 						"name": "strArtistBanner",
-						"short": "URL to artist banner",
+						"title": "Str Artist Banner",
 						"type": "`$STRING`",
+						"short": "URL to artist banner",
 					},
 					map[string]any{
 						"name": "strArtistClearart",
-						"short": "URL to artist clearart",
+						"title": "Str Artist Clearart",
 						"type": "`$STRING`",
+						"short": "URL to artist clearart",
 					},
 					map[string]any{
 						"name": "strArtistCutout",
-						"short": "URL to artist cutout image",
+						"title": "Str Artist Cutout",
 						"type": "`$STRING`",
+						"short": "URL to artist cutout image",
 					},
 					map[string]any{
 						"name": "strArtistFanart",
-						"short": "URL to artist fanart",
+						"title": "Str Artist Fanart",
 						"type": "`$STRING`",
+						"short": "URL to artist fanart",
 					},
 					map[string]any{
 						"name": "strArtistFanart2",
-						"short": "URL to alternate artist fanart",
+						"title": "Str Artist Fanart2",
 						"type": "`$STRING`",
+						"short": "URL to alternate artist fanart",
 					},
 					map[string]any{
 						"name": "strArtistFanart3",
-						"short": "URL to third artist fanart",
+						"title": "Str Artist Fanart3",
 						"type": "`$STRING`",
+						"short": "URL to third artist fanart",
 					},
 					map[string]any{
 						"name": "strArtistFanart4",
-						"short": "URL to fourth artist fanart",
+						"title": "Str Artist Fanart4",
 						"type": "`$STRING`",
+						"short": "URL to fourth artist fanart",
 					},
 					map[string]any{
 						"name": "strArtistLogo",
-						"short": "URL to artist logo",
+						"title": "Str Artist Logo",
 						"type": "`$STRING`",
+						"short": "URL to artist logo",
 					},
 					map[string]any{
 						"name": "strArtistStripped",
-						"short": "Artist name without special characters",
+						"title": "Str Artist Stripped",
 						"type": "`$STRING`",
+						"short": "Artist name without special characters",
 					},
 					map[string]any{
 						"name": "strArtistThumb",
-						"short": "URL to artist thumbnail image",
+						"title": "Str Artist Thumb",
 						"type": "`$STRING`",
+						"short": "URL to artist thumbnail image",
 					},
 					map[string]any{
 						"name": "strArtistWideThumb",
-						"short": "URL to artist wide thumbnail",
+						"title": "Str Artist Wide Thumb",
 						"type": "`$STRING`",
+						"short": "URL to artist wide thumbnail",
 					},
 					map[string]any{
 						"name": "strBBCReviewID",
-						"short": "BBC Review ID",
+						"title": "Str Bbc Review Id",
 						"type": "`$STRING`",
+						"short": "BBC Review ID",
 					},
 					map[string]any{
 						"name": "strBiographyCN",
-						"short": "Artist biography in Chinese",
+						"title": "Str Biography Cn",
 						"type": "`$STRING`",
+						"short": "Artist biography in Chinese",
 					},
 					map[string]any{
 						"name": "strBiographyDE",
-						"short": "Artist biography in German",
+						"title": "Str Biography De",
 						"type": "`$STRING`",
+						"short": "Artist biography in German",
 					},
 					map[string]any{
 						"name": "strBiographyEN",
-						"short": "Artist biography in English",
+						"title": "Str Biography En",
 						"type": "`$STRING`",
+						"short": "Artist biography in English",
 					},
 					map[string]any{
 						"name": "strBiographyES",
-						"short": "Artist biography in Spanish",
+						"title": "Str Biography Es",
 						"type": "`$STRING`",
+						"short": "Artist biography in Spanish",
 					},
 					map[string]any{
 						"name": "strBiographyFR",
-						"short": "Artist biography in French",
+						"title": "Str Biography Fr",
 						"type": "`$STRING`",
+						"short": "Artist biography in French",
 					},
 					map[string]any{
 						"name": "strBiographyHU",
-						"short": "Artist biography in Hungarian",
+						"title": "Str Biography Hu",
 						"type": "`$STRING`",
+						"short": "Artist biography in Hungarian",
 					},
 					map[string]any{
 						"name": "strBiographyIL",
-						"short": "Artist biography in Hebrew",
+						"title": "Str Biography Il",
 						"type": "`$STRING`",
+						"short": "Artist biography in Hebrew",
 					},
 					map[string]any{
 						"name": "strBiographyIT",
-						"short": "Artist biography in Italian",
+						"title": "Str Biography It",
 						"type": "`$STRING`",
+						"short": "Artist biography in Italian",
 					},
 					map[string]any{
 						"name": "strBiographyJP",
-						"short": "Artist biography in Japanese",
+						"title": "Str Biography Jp",
 						"type": "`$STRING`",
+						"short": "Artist biography in Japanese",
 					},
 					map[string]any{
 						"name": "strBiographyNL",
-						"short": "Artist biography in Dutch",
+						"title": "Str Biography Nl",
 						"type": "`$STRING`",
+						"short": "Artist biography in Dutch",
 					},
 					map[string]any{
 						"name": "strBiographyNO",
-						"short": "Artist biography in Norwegian",
+						"title": "Str Biography No",
 						"type": "`$STRING`",
+						"short": "Artist biography in Norwegian",
 					},
 					map[string]any{
 						"name": "strBiographyPL",
-						"short": "Artist biography in Polish",
+						"title": "Str Biography Pl",
 						"type": "`$STRING`",
+						"short": "Artist biography in Polish",
 					},
 					map[string]any{
 						"name": "strBiographyPT",
-						"short": "Artist biography in Portuguese",
+						"title": "Str Biography Pt",
 						"type": "`$STRING`",
+						"short": "Artist biography in Portuguese",
 					},
 					map[string]any{
 						"name": "strBiographyRU",
-						"short": "Artist biography in Russian",
+						"title": "Str Biography Ru",
 						"type": "`$STRING`",
+						"short": "Artist biography in Russian",
 					},
 					map[string]any{
 						"name": "strBiographySE",
-						"short": "Artist biography in Swedish",
+						"title": "Str Biography Se",
 						"type": "`$STRING`",
+						"short": "Artist biography in Swedish",
 					},
 					map[string]any{
 						"name": "strCountry",
-						"short": "Country of origin",
+						"title": "Str Country",
 						"type": "`$STRING`",
+						"short": "Country of origin",
 					},
 					map[string]any{
 						"name": "strCountryCode",
-						"short": "Country code",
+						"title": "Str Country Code",
 						"type": "`$STRING`",
+						"short": "Country code",
 					},
 					map[string]any{
 						"name": "strDescriptionEN",
-						"short": "Track description in English",
+						"title": "Str Description En",
 						"type": "`$STRING`",
+						"short": "Track description in English",
 					},
 					map[string]any{
 						"name": "strDisbanded",
-						"short": "Disbanded status",
+						"title": "Str Disbanded",
 						"type": "`$STRING`",
+						"short": "Disbanded status",
 					},
 					map[string]any{
 						"name": "strDiscogsID",
-						"short": "Discogs ID",
+						"title": "Str Discogs Id",
 						"type": "`$STRING`",
+						"short": "Discogs ID",
 					},
 					map[string]any{
 						"name": "strFacebook",
-						"short": "Facebook page URL",
+						"title": "Str Facebook",
 						"type": "`$STRING`",
+						"short": "Facebook page URL",
 					},
 					map[string]any{
 						"name": "strGender",
-						"short": "Artist gender",
+						"title": "Str Gender",
 						"type": "`$STRING`",
+						"short": "Artist gender",
 					},
 					map[string]any{
 						"name": "strGeniusID",
-						"short": "Genius ID",
+						"title": "Str Genius Id",
 						"type": "`$STRING`",
+						"short": "Genius ID",
 					},
 					map[string]any{
 						"name": "strGenre",
-						"short": "Track genre",
+						"title": "Str Genre",
 						"type": "`$STRING`",
+						"short": "Track genre",
 					},
 					map[string]any{
 						"name": "strInstagram",
-						"short": "Instagram profile URL",
+						"title": "Str Instagram",
 						"type": "`$STRING`",
+						"short": "Instagram profile URL",
 					},
 					map[string]any{
 						"name": "strItunesID",
-						"short": "iTunes ID",
+						"title": "Str Itunes Id",
 						"type": "`$STRING`",
+						"short": "iTunes ID",
 					},
 					map[string]any{
 						"name": "strLabel",
-						"short": "Record label",
+						"title": "Str Label",
 						"type": "`$STRING`",
+						"short": "Record label",
 					},
 					map[string]any{
 						"name": "strLastFMChart",
-						"short": "Last.fm chart URL",
+						"title": "Str Last Fm Chart",
 						"type": "`$STRING`",
+						"short": "Last.fm chart URL",
 					},
 					map[string]any{
 						"name": "strLocation",
-						"short": "Recording location",
+						"title": "Str Location",
 						"type": "`$STRING`",
+						"short": "Recording location",
 					},
 					map[string]any{
 						"name": "strLocked",
-						"short": "Whether the record is locked",
+						"title": "Str Locked",
 						"type": "`$STRING`",
+						"short": "Whether the record is locked",
 					},
 					map[string]any{
 						"name": "strLyricWikiID",
-						"short": "LyricWiki ID",
+						"title": "Str Lyric Wiki Id",
 						"type": "`$STRING`",
+						"short": "LyricWiki ID",
 					},
 					map[string]any{
 						"name": "strMood",
-						"short": "Track mood",
+						"title": "Str Mood",
 						"type": "`$STRING`",
+						"short": "Track mood",
 					},
 					map[string]any{
 						"name": "strMusicBrainzAlbumID",
-						"short": "MusicBrainz Album ID",
+						"title": "Str Music Brainz Album Id",
 						"type": "`$STRING`",
+						"short": "MusicBrainz Album ID",
 					},
 					map[string]any{
 						"name": "strMusicBrainzArtistID",
-						"short": "MusicBrainz Artist ID",
+						"title": "Str Music Brainz Artist Id",
 						"type": "`$STRING`",
+						"short": "MusicBrainz Artist ID",
 					},
 					map[string]any{
 						"name": "strMusicBrainzID",
-						"short": "MusicBrainz Recording ID",
+						"title": "Str Music Brainz Id",
 						"type": "`$STRING`",
+						"short": "MusicBrainz Recording ID",
 					},
 					map[string]any{
 						"name": "strMusicMozID",
-						"short": "MusicMoz ID",
+						"title": "Str Music Moz Id",
 						"type": "`$STRING`",
+						"short": "MusicMoz ID",
 					},
 					map[string]any{
 						"name": "strMusicVid",
-						"short": "URL to music video",
+						"title": "Str Music Vid",
 						"type": "`$STRING`",
+						"short": "URL to music video",
 					},
 					map[string]any{
 						"name": "strMusicVidCompany",
-						"short": "Music video production company",
+						"title": "Str Music Vid Company",
 						"type": "`$STRING`",
+						"short": "Music video production company",
 					},
 					map[string]any{
 						"name": "strMusicVidDirector",
-						"short": "Music video director",
+						"title": "Str Music Vid Director",
 						"type": "`$STRING`",
+						"short": "Music video director",
 					},
 					map[string]any{
 						"name": "strMusicVidScreen1",
-						"short": "URL to music video screenshot 1",
+						"title": "Str Music Vid Screen1",
 						"type": "`$STRING`",
+						"short": "URL to music video screenshot 1",
 					},
 					map[string]any{
 						"name": "strMusicVidScreen2",
-						"short": "URL to music video screenshot 2",
+						"title": "Str Music Vid Screen2",
 						"type": "`$STRING`",
+						"short": "URL to music video screenshot 2",
 					},
 					map[string]any{
 						"name": "strMusicVidScreen3",
-						"short": "URL to music video screenshot 3",
+						"title": "Str Music Vid Screen3",
 						"type": "`$STRING`",
+						"short": "URL to music video screenshot 3",
 					},
 					map[string]any{
 						"name": "strRateYourMusicID",
-						"short": "RateYourMusic ID",
+						"title": "Str Rate Your Music Id",
 						"type": "`$STRING`",
+						"short": "RateYourMusic ID",
 					},
 					map[string]any{
 						"name": "strReleaseFormat",
-						"short": "Release format (CD, Vinyl, etc.)",
+						"title": "Str Release Format",
 						"type": "`$STRING`",
+						"short": "Release format (CD, Vinyl, etc.)",
 					},
 					map[string]any{
 						"name": "strReview",
-						"short": "Album review",
+						"title": "Str Review",
 						"type": "`$STRING`",
+						"short": "Album review",
 					},
 					map[string]any{
 						"name": "strSoundCloud",
-						"short": "SoundCloud profile URL",
+						"title": "Str Sound Cloud",
 						"type": "`$STRING`",
+						"short": "SoundCloud profile URL",
 					},
 					map[string]any{
 						"name": "strSpeed",
-						"short": "Album speed",
+						"title": "Str Speed",
 						"type": "`$STRING`",
+						"short": "Album speed",
 					},
 					map[string]any{
 						"name": "strSpotify",
-						"short": "Spotify artist URL",
+						"title": "Str Spotify",
 						"type": "`$STRING`",
+						"short": "Spotify artist URL",
 					},
 					map[string]any{
 						"name": "strStyle",
-						"short": "Track style",
+						"title": "Str Style",
 						"type": "`$STRING`",
+						"short": "Track style",
 					},
 					map[string]any{
 						"name": "strTheme",
-						"short": "Track theme",
+						"title": "Str Theme",
 						"type": "`$STRING`",
+						"short": "Track theme",
 					},
 					map[string]any{
 						"name": "strTrack",
-						"short": "Track title",
+						"title": "Str Track",
 						"type": "`$STRING`",
+						"short": "Track title",
 					},
 					map[string]any{
 						"name": "strTrackLyrics",
-						"short": "Track lyrics",
+						"title": "Str Track Lyrics",
 						"type": "`$STRING`",
+						"short": "Track lyrics",
 					},
 					map[string]any{
 						"name": "strTrackThumb",
-						"short": "URL to track thumbnail",
+						"title": "Str Track Thumb",
 						"type": "`$STRING`",
+						"short": "URL to track thumbnail",
 					},
 					map[string]any{
 						"name": "strTwitter",
-						"short": "Twitter profile URL",
+						"title": "Str Twitter",
 						"type": "`$STRING`",
+						"short": "Twitter profile URL",
 					},
 					map[string]any{
 						"name": "strWebsite",
-						"short": "Official website URL",
+						"title": "Str Website",
 						"type": "`$STRING`",
+						"short": "Official website URL",
 					},
 					map[string]any{
 						"name": "strWikidataID",
-						"short": "Wikidata ID",
+						"title": "Str Wikidata Id",
 						"type": "`$STRING`",
+						"short": "Wikidata ID",
 					},
 					map[string]any{
 						"name": "strWikipediaID",
-						"short": "Wikipedia ID",
+						"title": "Str Wikipedia Id",
 						"type": "`$STRING`",
+						"short": "Wikipedia ID",
 					},
 					map[string]any{
 						"name": "strYoutube",
-						"short": "YouTube channel URL",
+						"title": "Str Youtube",
 						"type": "`$STRING`",
+						"short": "YouTube channel URL",
 					},
 				},
 				"name": "v1_lookup",
@@ -1107,24 +1266,6 @@ func MakeConfig() map[string]any {
 						"name": "list",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"example": 32793500,
-											"kind": "query",
-											"name": "h",
-											"orig": "h",
-											"type": "`$INTEGER`",
-										},
-										map[string]any{
-											"example": 2115888,
-											"kind": "query",
-											"name": "m",
-											"orig": "m",
-											"type": "`$INTEGER`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/track.php",
@@ -1133,39 +1274,40 @@ func MakeConfig() map[string]any {
 										"lit": "track.php",
 									},
 								},
+								"parts": []any{
+									"track.php",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.track`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "h",
+											"orig": "h",
+											"type": "`$INTEGER`",
+											"kind": "query",
+											"example": 32793500,
+										},
+										map[string]any{
+											"name": "m",
+											"orig": "m",
+											"type": "`$INTEGER`",
+											"kind": "query",
+											"example": 2115888,
+										},
+									},
+								},
 								"select": map[string]any{
 									"exist": []any{
 										"h",
 										"m",
 									},
 								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.track`",
-								},
-								"parts": []any{
-									"track.php",
-								},
 							},
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"example": 112024,
-											"kind": "query",
-											"name": "i",
-											"orig": "i",
-											"type": "`$INTEGER`",
-										},
-										map[string]any{
-											"example": 2115888,
-											"kind": "query",
-											"name": "m",
-											"orig": "m",
-											"type": "`$INTEGER`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/album.php",
@@ -1174,33 +1316,40 @@ func MakeConfig() map[string]any {
 										"lit": "album.php",
 									},
 								},
+								"parts": []any{
+									"album.php",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.album`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "i",
+											"orig": "i",
+											"type": "`$INTEGER`",
+											"kind": "query",
+											"example": 112024,
+										},
+										map[string]any{
+											"name": "m",
+											"orig": "m",
+											"type": "`$INTEGER`",
+											"kind": "query",
+											"example": 2115888,
+										},
+									},
+								},
 								"select": map[string]any{
 									"exist": []any{
 										"i",
 										"m",
 									},
 								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.album`",
-								},
-								"parts": []any{
-									"album.php",
-								},
 							},
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"example": "1dc4c347-a1db-32aa-b14f-bc9cc507b843",
-											"kind": "query",
-											"name": "i",
-											"orig": "i",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/album-mb.php",
@@ -1209,32 +1358,33 @@ func MakeConfig() map[string]any {
 										"lit": "album-mb.php",
 									},
 								},
+								"parts": []any{
+									"album-mb.php",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.album`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "i",
+											"orig": "i",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+											"example": "1dc4c347-a1db-32aa-b14f-bc9cc507b843",
+										},
+									},
+								},
 								"select": map[string]any{
 									"exist": []any{
 										"i",
 									},
 								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.album`",
-								},
-								"parts": []any{
-									"album-mb.php",
-								},
 							},
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"example": "cc197bad-dc9c-440d-a5b5-d52ba2e14234",
-											"kind": "query",
-											"name": "i",
-											"orig": "i",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/artist-mb.php",
@@ -1243,32 +1393,33 @@ func MakeConfig() map[string]any {
 										"lit": "artist-mb.php",
 									},
 								},
+								"parts": []any{
+									"artist-mb.php",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.artists`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "i",
+											"orig": "i",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+											"example": "cc197bad-dc9c-440d-a5b5-d52ba2e14234",
+										},
+									},
+								},
 								"select": map[string]any{
 									"exist": []any{
 										"i",
 									},
 								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.artists`",
-								},
-								"parts": []any{
-									"artist-mb.php",
-								},
 							},
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"example": 112024,
-											"kind": "query",
-											"name": "i",
-											"orig": "i",
-											"reqd": true,
-											"type": "`$INTEGER`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/artist-social.php",
@@ -1277,32 +1428,33 @@ func MakeConfig() map[string]any {
 										"lit": "artist-social.php",
 									},
 								},
+								"parts": []any{
+									"artist-social.php",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.artists`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "i",
+											"orig": "i",
+											"type": "`$INTEGER`",
+											"kind": "query",
+											"reqd": true,
+											"example": 112024,
+										},
+									},
+								},
 								"select": map[string]any{
 									"exist": []any{
 										"i",
 									},
 								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.artists`",
-								},
-								"parts": []any{
-									"artist-social.php",
-								},
 							},
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"example": 112024,
-											"kind": "query",
-											"name": "i",
-											"orig": "i",
-											"reqd": true,
-											"type": "`$INTEGER`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/artist.php",
@@ -1311,32 +1463,33 @@ func MakeConfig() map[string]any {
 										"lit": "artist.php",
 									},
 								},
+								"parts": []any{
+									"artist.php",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.artists`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "i",
+											"orig": "i",
+											"type": "`$INTEGER`",
+											"kind": "query",
+											"reqd": true,
+											"example": 112024,
+										},
+									},
+								},
 								"select": map[string]any{
 									"exist": []any{
 										"i",
 									},
 								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.artists`",
-								},
-								"parts": []any{
-									"artist.php",
-								},
 							},
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"example": "50369905-68ca-48d2-912d-b37330ff7dc3",
-											"kind": "query",
-											"name": "i",
-											"orig": "i",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/track-mb.php",
@@ -1345,17 +1498,30 @@ func MakeConfig() map[string]any {
 										"lit": "track-mb.php",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"i",
-									},
+								"parts": []any{
+									"track-mb.php",
 								},
+								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body.track`",
 								},
-								"parts": []any{
-									"track-mb.php",
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "i",
+											"orig": "i",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+											"example": "50369905-68ca-48d2-912d-b37330ff7dc3",
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"i",
+									},
 								},
 							},
 						},
@@ -1369,538 +1535,645 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "idAlbum",
-						"short": "Unique album ID",
+						"title": "Id Album",
 						"type": "`$INTEGER`",
+						"short": "Unique album ID",
 					},
 					map[string]any{
 						"name": "idArtist",
-						"short": "Artist ID",
+						"title": "Id Artist",
 						"type": "`$INTEGER`",
+						"short": "Artist ID",
 					},
 					map[string]any{
 						"name": "idIMVDB",
-						"short": "IMVDB ID",
+						"title": "Id Imvdb",
 						"type": "`$INTEGER`",
+						"short": "IMVDB ID",
 					},
 					map[string]any{
 						"name": "idLabel",
-						"short": "Label ID",
+						"title": "Id Label",
 						"type": "`$INTEGER`",
+						"short": "Label ID",
 					},
 					map[string]any{
 						"name": "idLyric",
-						"short": "Lyrics ID",
+						"title": "Id Lyric",
 						"type": "`$INTEGER`",
+						"short": "Lyrics ID",
 					},
 					map[string]any{
 						"name": "idTrack",
-						"short": "Unique track ID",
+						"title": "Id Track",
 						"type": "`$INTEGER`",
+						"short": "Unique track ID",
 					},
 					map[string]any{
 						"name": "intBornYear",
-						"short": "Birth year of the artist",
+						"title": "Int Born Year",
 						"type": "`$INTEGER`",
+						"short": "Birth year of the artist",
 					},
 					map[string]any{
 						"name": "intCD",
-						"short": "CD number",
+						"title": "Int Cd",
 						"type": "`$INTEGER`",
+						"short": "CD number",
 					},
 					map[string]any{
 						"name": "intCharted",
-						"short": "Chart position",
+						"title": "Int Charted",
 						"type": "`$INTEGER`",
+						"short": "Chart position",
 					},
 					map[string]any{
 						"name": "intDiedYear",
-						"short": "Year the artist died (if applicable)",
+						"title": "Int Died Year",
 						"type": "`$INTEGER`",
+						"short": "Year the artist died (if applicable)",
 					},
 					map[string]any{
 						"name": "intDuration",
-						"short": "Track duration in milliseconds",
+						"title": "Int Duration",
 						"type": "`$INTEGER`",
+						"short": "Track duration in milliseconds",
 					},
 					map[string]any{
 						"name": "intFormedYear",
-						"short": "Year the artist/band was formed",
+						"title": "Int Formed Year",
 						"type": "`$INTEGER`",
+						"short": "Year the artist/band was formed",
 					},
 					map[string]any{
 						"name": "intLoved",
-						"short": "Number of loves/likes",
+						"title": "Int Loved",
 						"type": "`$INTEGER`",
+						"short": "Number of loves/likes",
 					},
 					map[string]any{
 						"name": "intMembers",
-						"short": "Number of band members",
+						"title": "Int Members",
 						"type": "`$INTEGER`",
+						"short": "Number of band members",
 					},
 					map[string]any{
 						"name": "intMusicVidComments",
-						"short": "Number of music video comments",
+						"title": "Int Music Vid Comments",
 						"type": "`$INTEGER`",
+						"short": "Number of music video comments",
 					},
 					map[string]any{
 						"name": "intMusicVidDislikes",
-						"short": "Number of music video dislikes",
+						"title": "Int Music Vid Dislikes",
 						"type": "`$INTEGER`",
+						"short": "Number of music video dislikes",
 					},
 					map[string]any{
 						"name": "intMusicVidFavorites",
-						"short": "Number of music video favorites",
+						"title": "Int Music Vid Favorites",
 						"type": "`$INTEGER`",
+						"short": "Number of music video favorites",
 					},
 					map[string]any{
 						"name": "intMusicVidLikes",
-						"short": "Number of music video likes",
+						"title": "Int Music Vid Likes",
 						"type": "`$INTEGER`",
+						"short": "Number of music video likes",
 					},
 					map[string]any{
 						"name": "intMusicVidViews",
-						"short": "Number of music video views",
+						"title": "Int Music Vid Views",
 						"type": "`$INTEGER`",
+						"short": "Number of music video views",
 					},
 					map[string]any{
 						"name": "intSales",
-						"short": "Number of sales",
+						"title": "Int Sales",
 						"type": "`$INTEGER`",
+						"short": "Number of sales",
 					},
 					map[string]any{
 						"name": "intScore",
-						"short": "Album score",
+						"title": "Int Score",
 						"type": "`$INTEGER`",
+						"short": "Album score",
 					},
 					map[string]any{
 						"name": "intScoreVotes",
-						"short": "Number of score votes",
+						"title": "Int Score Votes",
 						"type": "`$INTEGER`",
+						"short": "Number of score votes",
 					},
 					map[string]any{
 						"name": "intTotalListeners",
-						"short": "Total number of listeners",
+						"title": "Int Total Listeners",
 						"type": "`$INTEGER`",
+						"short": "Total number of listeners",
 					},
 					map[string]any{
 						"name": "intTotalPlays",
-						"short": "Total number of plays",
+						"title": "Int Total Plays",
 						"type": "`$INTEGER`",
+						"short": "Total number of plays",
 					},
 					map[string]any{
 						"name": "intTrackNumber",
-						"short": "Track number on album",
+						"title": "Int Track Number",
 						"type": "`$INTEGER`",
+						"short": "Track number on album",
 					},
 					map[string]any{
 						"name": "intYearReleased",
-						"short": "Year the album was released",
+						"title": "Int Year Released",
 						"type": "`$INTEGER`",
+						"short": "Year the album was released",
 					},
 					map[string]any{
 						"name": "strAlbum",
-						"short": "Album title",
+						"title": "Str Album",
 						"type": "`$STRING`",
+						"short": "Album title",
 					},
 					map[string]any{
 						"name": "strAlbum3DCase",
-						"short": "URL to 3D case image",
+						"title": "Str Album3 D Case",
 						"type": "`$STRING`",
+						"short": "URL to 3D case image",
 					},
 					map[string]any{
 						"name": "strAlbum3DFace",
-						"short": "URL to 3D face image",
+						"title": "Str Album3 D Face",
 						"type": "`$STRING`",
+						"short": "URL to 3D face image",
 					},
 					map[string]any{
 						"name": "strAlbum3DFlat",
-						"short": "URL to 3D flat image",
+						"title": "Str Album3 D Flat",
 						"type": "`$STRING`",
+						"short": "URL to 3D flat image",
 					},
 					map[string]any{
 						"name": "strAlbum3DThumb",
-						"short": "URL to 3D thumbnail",
+						"title": "Str Album3 D Thumb",
 						"type": "`$STRING`",
+						"short": "URL to 3D thumbnail",
 					},
 					map[string]any{
 						"name": "strAlbumCDart",
-						"short": "URL to CD art",
+						"title": "Str Album C Dart",
 						"type": "`$STRING`",
+						"short": "URL to CD art",
 					},
 					map[string]any{
 						"name": "strAlbumSpine",
-						"short": "URL to album spine image",
+						"title": "Str Album Spine",
 						"type": "`$STRING`",
+						"short": "URL to album spine image",
 					},
 					map[string]any{
 						"name": "strAlbumStripped",
-						"short": "Album title without special characters",
+						"title": "Str Album Stripped",
 						"type": "`$STRING`",
+						"short": "Album title without special characters",
 					},
 					map[string]any{
 						"name": "strAlbumThumb",
-						"short": "URL to album thumbnail",
+						"title": "Str Album Thumb",
 						"type": "`$STRING`",
+						"short": "URL to album thumbnail",
 					},
 					map[string]any{
 						"name": "strAlbumThumbBack",
-						"short": "URL to back of album cover",
+						"title": "Str Album Thumb Back",
 						"type": "`$STRING`",
+						"short": "URL to back of album cover",
 					},
 					map[string]any{
 						"name": "strAlbumThumbHQ",
-						"short": "URL to high quality album thumbnail",
+						"title": "Str Album Thumb Hq",
 						"type": "`$STRING`",
+						"short": "URL to high quality album thumbnail",
 					},
 					map[string]any{
 						"name": "strAllMusicID",
-						"short": "AllMusic ID",
+						"title": "Str All Music Id",
 						"type": "`$STRING`",
+						"short": "AllMusic ID",
 					},
 					map[string]any{
 						"name": "strAmazonID",
-						"short": "Amazon ID",
+						"title": "Str Amazon Id",
 						"type": "`$STRING`",
+						"short": "Amazon ID",
 					},
 					map[string]any{
 						"name": "strArtist",
-						"short": "Artist name",
+						"title": "Str Artist",
 						"type": "`$STRING`",
+						"short": "Artist name",
 					},
 					map[string]any{
 						"name": "strArtistAlternate",
-						"short": "Alternate artist name",
+						"title": "Str Artist Alternate",
 						"type": "`$STRING`",
+						"short": "Alternate artist name",
 					},
 					map[string]any{
 						"name": "strArtistBanner",
-						"short": "URL to artist banner",
+						"title": "Str Artist Banner",
 						"type": "`$STRING`",
+						"short": "URL to artist banner",
 					},
 					map[string]any{
 						"name": "strArtistClearart",
-						"short": "URL to artist clearart",
+						"title": "Str Artist Clearart",
 						"type": "`$STRING`",
+						"short": "URL to artist clearart",
 					},
 					map[string]any{
 						"name": "strArtistCutout",
-						"short": "URL to artist cutout image",
+						"title": "Str Artist Cutout",
 						"type": "`$STRING`",
+						"short": "URL to artist cutout image",
 					},
 					map[string]any{
 						"name": "strArtistFanart",
-						"short": "URL to artist fanart",
+						"title": "Str Artist Fanart",
 						"type": "`$STRING`",
+						"short": "URL to artist fanart",
 					},
 					map[string]any{
 						"name": "strArtistFanart2",
-						"short": "URL to alternate artist fanart",
+						"title": "Str Artist Fanart2",
 						"type": "`$STRING`",
+						"short": "URL to alternate artist fanart",
 					},
 					map[string]any{
 						"name": "strArtistFanart3",
-						"short": "URL to third artist fanart",
+						"title": "Str Artist Fanart3",
 						"type": "`$STRING`",
+						"short": "URL to third artist fanart",
 					},
 					map[string]any{
 						"name": "strArtistFanart4",
-						"short": "URL to fourth artist fanart",
+						"title": "Str Artist Fanart4",
 						"type": "`$STRING`",
+						"short": "URL to fourth artist fanart",
 					},
 					map[string]any{
 						"name": "strArtistLogo",
-						"short": "URL to artist logo",
+						"title": "Str Artist Logo",
 						"type": "`$STRING`",
+						"short": "URL to artist logo",
 					},
 					map[string]any{
 						"name": "strArtistStripped",
-						"short": "Artist name without special characters",
+						"title": "Str Artist Stripped",
 						"type": "`$STRING`",
+						"short": "Artist name without special characters",
 					},
 					map[string]any{
 						"name": "strArtistThumb",
-						"short": "URL to artist thumbnail image",
+						"title": "Str Artist Thumb",
 						"type": "`$STRING`",
+						"short": "URL to artist thumbnail image",
 					},
 					map[string]any{
 						"name": "strArtistWideThumb",
-						"short": "URL to artist wide thumbnail",
+						"title": "Str Artist Wide Thumb",
 						"type": "`$STRING`",
+						"short": "URL to artist wide thumbnail",
 					},
 					map[string]any{
 						"name": "strBBCReviewID",
-						"short": "BBC Review ID",
+						"title": "Str Bbc Review Id",
 						"type": "`$STRING`",
+						"short": "BBC Review ID",
 					},
 					map[string]any{
 						"name": "strBiographyCN",
-						"short": "Artist biography in Chinese",
+						"title": "Str Biography Cn",
 						"type": "`$STRING`",
+						"short": "Artist biography in Chinese",
 					},
 					map[string]any{
 						"name": "strBiographyDE",
-						"short": "Artist biography in German",
+						"title": "Str Biography De",
 						"type": "`$STRING`",
+						"short": "Artist biography in German",
 					},
 					map[string]any{
 						"name": "strBiographyEN",
-						"short": "Artist biography in English",
+						"title": "Str Biography En",
 						"type": "`$STRING`",
+						"short": "Artist biography in English",
 					},
 					map[string]any{
 						"name": "strBiographyES",
-						"short": "Artist biography in Spanish",
+						"title": "Str Biography Es",
 						"type": "`$STRING`",
+						"short": "Artist biography in Spanish",
 					},
 					map[string]any{
 						"name": "strBiographyFR",
-						"short": "Artist biography in French",
+						"title": "Str Biography Fr",
 						"type": "`$STRING`",
+						"short": "Artist biography in French",
 					},
 					map[string]any{
 						"name": "strBiographyHU",
-						"short": "Artist biography in Hungarian",
+						"title": "Str Biography Hu",
 						"type": "`$STRING`",
+						"short": "Artist biography in Hungarian",
 					},
 					map[string]any{
 						"name": "strBiographyIL",
-						"short": "Artist biography in Hebrew",
+						"title": "Str Biography Il",
 						"type": "`$STRING`",
+						"short": "Artist biography in Hebrew",
 					},
 					map[string]any{
 						"name": "strBiographyIT",
-						"short": "Artist biography in Italian",
+						"title": "Str Biography It",
 						"type": "`$STRING`",
+						"short": "Artist biography in Italian",
 					},
 					map[string]any{
 						"name": "strBiographyJP",
-						"short": "Artist biography in Japanese",
+						"title": "Str Biography Jp",
 						"type": "`$STRING`",
+						"short": "Artist biography in Japanese",
 					},
 					map[string]any{
 						"name": "strBiographyNL",
-						"short": "Artist biography in Dutch",
+						"title": "Str Biography Nl",
 						"type": "`$STRING`",
+						"short": "Artist biography in Dutch",
 					},
 					map[string]any{
 						"name": "strBiographyNO",
-						"short": "Artist biography in Norwegian",
+						"title": "Str Biography No",
 						"type": "`$STRING`",
+						"short": "Artist biography in Norwegian",
 					},
 					map[string]any{
 						"name": "strBiographyPL",
-						"short": "Artist biography in Polish",
+						"title": "Str Biography Pl",
 						"type": "`$STRING`",
+						"short": "Artist biography in Polish",
 					},
 					map[string]any{
 						"name": "strBiographyPT",
-						"short": "Artist biography in Portuguese",
+						"title": "Str Biography Pt",
 						"type": "`$STRING`",
+						"short": "Artist biography in Portuguese",
 					},
 					map[string]any{
 						"name": "strBiographyRU",
-						"short": "Artist biography in Russian",
+						"title": "Str Biography Ru",
 						"type": "`$STRING`",
+						"short": "Artist biography in Russian",
 					},
 					map[string]any{
 						"name": "strBiographySE",
-						"short": "Artist biography in Swedish",
+						"title": "Str Biography Se",
 						"type": "`$STRING`",
+						"short": "Artist biography in Swedish",
 					},
 					map[string]any{
 						"name": "strCountry",
-						"short": "Country of origin",
+						"title": "Str Country",
 						"type": "`$STRING`",
+						"short": "Country of origin",
 					},
 					map[string]any{
 						"name": "strCountryCode",
-						"short": "Country code",
+						"title": "Str Country Code",
 						"type": "`$STRING`",
+						"short": "Country code",
 					},
 					map[string]any{
 						"name": "strDescriptionEN",
-						"short": "Album description in English",
+						"title": "Str Description En",
 						"type": "`$STRING`",
+						"short": "Album description in English",
 					},
 					map[string]any{
 						"name": "strDisbanded",
-						"short": "Disbanded status",
+						"title": "Str Disbanded",
 						"type": "`$STRING`",
+						"short": "Disbanded status",
 					},
 					map[string]any{
 						"name": "strDiscogsID",
-						"short": "Discogs ID",
+						"title": "Str Discogs Id",
 						"type": "`$STRING`",
+						"short": "Discogs ID",
 					},
 					map[string]any{
 						"name": "strFacebook",
-						"short": "Facebook page URL",
+						"title": "Str Facebook",
 						"type": "`$STRING`",
+						"short": "Facebook page URL",
 					},
 					map[string]any{
 						"name": "strGender",
-						"short": "Artist gender",
+						"title": "Str Gender",
 						"type": "`$STRING`",
+						"short": "Artist gender",
 					},
 					map[string]any{
 						"name": "strGeniusID",
-						"short": "Genius ID",
+						"title": "Str Genius Id",
 						"type": "`$STRING`",
+						"short": "Genius ID",
 					},
 					map[string]any{
 						"name": "strGenre",
-						"short": "Album genre",
+						"title": "Str Genre",
 						"type": "`$STRING`",
+						"short": "Album genre",
 					},
 					map[string]any{
 						"name": "strItunesID",
-						"short": "iTunes ID",
+						"title": "Str Itunes Id",
 						"type": "`$STRING`",
+						"short": "iTunes ID",
 					},
 					map[string]any{
 						"name": "strLabel",
-						"short": "Record label",
+						"title": "Str Label",
 						"type": "`$STRING`",
+						"short": "Record label",
 					},
 					map[string]any{
 						"name": "strLastFMChart",
-						"short": "Last.fm chart URL",
+						"title": "Str Last Fm Chart",
 						"type": "`$STRING`",
+						"short": "Last.fm chart URL",
 					},
 					map[string]any{
 						"name": "strLocation",
-						"short": "Recording location",
+						"title": "Str Location",
 						"type": "`$STRING`",
+						"short": "Recording location",
 					},
 					map[string]any{
 						"name": "strLocked",
-						"short": "Whether the record is locked",
+						"title": "Str Locked",
 						"type": "`$STRING`",
+						"short": "Whether the record is locked",
 					},
 					map[string]any{
 						"name": "strLyricWikiID",
-						"short": "LyricWiki ID",
+						"title": "Str Lyric Wiki Id",
 						"type": "`$STRING`",
+						"short": "LyricWiki ID",
 					},
 					map[string]any{
 						"name": "strMood",
-						"short": "Album mood",
+						"title": "Str Mood",
 						"type": "`$STRING`",
+						"short": "Album mood",
 					},
 					map[string]any{
 						"name": "strMusicBrainzAlbumID",
-						"short": "MusicBrainz Album ID",
+						"title": "Str Music Brainz Album Id",
 						"type": "`$STRING`",
+						"short": "MusicBrainz Album ID",
 					},
 					map[string]any{
 						"name": "strMusicBrainzArtistID",
-						"short": "MusicBrainz Artist ID",
+						"title": "Str Music Brainz Artist Id",
 						"type": "`$STRING`",
+						"short": "MusicBrainz Artist ID",
 					},
 					map[string]any{
 						"name": "strMusicBrainzID",
-						"short": "MusicBrainz Release Group ID",
+						"title": "Str Music Brainz Id",
 						"type": "`$STRING`",
+						"short": "MusicBrainz Release Group ID",
 					},
 					map[string]any{
 						"name": "strMusicMozID",
-						"short": "MusicMoz ID",
+						"title": "Str Music Moz Id",
 						"type": "`$STRING`",
+						"short": "MusicMoz ID",
 					},
 					map[string]any{
 						"name": "strMusicVid",
-						"short": "URL to music video",
+						"title": "Str Music Vid",
 						"type": "`$STRING`",
+						"short": "URL to music video",
 					},
 					map[string]any{
 						"name": "strMusicVidCompany",
-						"short": "Music video production company",
+						"title": "Str Music Vid Company",
 						"type": "`$STRING`",
+						"short": "Music video production company",
 					},
 					map[string]any{
 						"name": "strMusicVidDirector",
-						"short": "Music video director",
+						"title": "Str Music Vid Director",
 						"type": "`$STRING`",
+						"short": "Music video director",
 					},
 					map[string]any{
 						"name": "strMusicVidScreen1",
-						"short": "URL to music video screenshot 1",
+						"title": "Str Music Vid Screen1",
 						"type": "`$STRING`",
+						"short": "URL to music video screenshot 1",
 					},
 					map[string]any{
 						"name": "strMusicVidScreen2",
-						"short": "URL to music video screenshot 2",
+						"title": "Str Music Vid Screen2",
 						"type": "`$STRING`",
+						"short": "URL to music video screenshot 2",
 					},
 					map[string]any{
 						"name": "strMusicVidScreen3",
-						"short": "URL to music video screenshot 3",
+						"title": "Str Music Vid Screen3",
 						"type": "`$STRING`",
+						"short": "URL to music video screenshot 3",
 					},
 					map[string]any{
 						"name": "strRateYourMusicID",
-						"short": "RateYourMusic ID",
+						"title": "Str Rate Your Music Id",
 						"type": "`$STRING`",
+						"short": "RateYourMusic ID",
 					},
 					map[string]any{
 						"name": "strReleaseFormat",
-						"short": "Release format (CD, Vinyl, etc.)",
+						"title": "Str Release Format",
 						"type": "`$STRING`",
+						"short": "Release format (CD, Vinyl, etc.)",
 					},
 					map[string]any{
 						"name": "strReview",
-						"short": "Album review",
+						"title": "Str Review",
 						"type": "`$STRING`",
+						"short": "Album review",
 					},
 					map[string]any{
 						"name": "strSpeed",
-						"short": "Album speed",
+						"title": "Str Speed",
 						"type": "`$STRING`",
+						"short": "Album speed",
 					},
 					map[string]any{
 						"name": "strStyle",
-						"short": "Album style",
+						"title": "Str Style",
 						"type": "`$STRING`",
+						"short": "Album style",
 					},
 					map[string]any{
 						"name": "strTheme",
-						"short": "Album theme",
+						"title": "Str Theme",
 						"type": "`$STRING`",
+						"short": "Album theme",
 					},
 					map[string]any{
 						"name": "strTrack",
-						"short": "Track title",
+						"title": "Str Track",
 						"type": "`$STRING`",
+						"short": "Track title",
 					},
 					map[string]any{
 						"name": "strTrackLyrics",
-						"short": "Track lyrics",
+						"title": "Str Track Lyrics",
 						"type": "`$STRING`",
+						"short": "Track lyrics",
 					},
 					map[string]any{
 						"name": "strTrackThumb",
-						"short": "URL to track thumbnail",
+						"title": "Str Track Thumb",
 						"type": "`$STRING`",
+						"short": "URL to track thumbnail",
 					},
 					map[string]any{
 						"name": "strTwitter",
-						"short": "Twitter profile URL",
+						"title": "Str Twitter",
 						"type": "`$STRING`",
+						"short": "Twitter profile URL",
 					},
 					map[string]any{
 						"name": "strWebsite",
-						"short": "Official website URL",
+						"title": "Str Website",
 						"type": "`$STRING`",
+						"short": "Official website URL",
 					},
 					map[string]any{
 						"name": "strWikidataID",
-						"short": "Wikidata ID",
+						"title": "Str Wikidata Id",
 						"type": "`$STRING`",
+						"short": "Wikidata ID",
 					},
 					map[string]any{
 						"name": "strWikipediaID",
-						"short": "Wikipedia ID",
+						"title": "Str Wikipedia Id",
 						"type": "`$STRING`",
+						"short": "Wikipedia ID",
 					},
 				},
 				"name": "v1_search",
@@ -1910,25 +2183,6 @@ func MakeConfig() map[string]any {
 						"name": "list",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"example": "Homework",
-											"kind": "query",
-											"name": "a",
-											"orig": "a",
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"example": "daft_punk",
-											"kind": "query",
-											"name": "s",
-											"orig": "s",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/searchalbum.php",
@@ -1937,41 +2191,41 @@ func MakeConfig() map[string]any {
 										"lit": "searchalbum.php",
 									},
 								},
+								"parts": []any{
+									"searchalbum.php",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.album`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "a",
+											"orig": "a",
+											"type": "`$STRING`",
+											"kind": "query",
+											"example": "Homework",
+										},
+										map[string]any{
+											"name": "s",
+											"orig": "s",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+											"example": "daft_punk",
+										},
+									},
+								},
 								"select": map[string]any{
 									"exist": []any{
 										"a",
 										"s",
 									},
 								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.album`",
-								},
-								"parts": []any{
-									"searchalbum.php",
-								},
 							},
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"example": "coldplay",
-											"kind": "query",
-											"name": "s",
-											"orig": "s",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"example": "yellow",
-											"kind": "query",
-											"name": "t",
-											"orig": "t",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/searchtrack.php",
@@ -1980,32 +2234,42 @@ func MakeConfig() map[string]any {
 										"lit": "searchtrack.php",
 									},
 								},
+								"parts": []any{
+									"searchtrack.php",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.track`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "s",
+											"orig": "s",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+											"example": "coldplay",
+										},
+										map[string]any{
+											"name": "t",
+											"orig": "t",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+											"example": "yellow",
+										},
+									},
+								},
 								"select": map[string]any{
 									"exist": []any{
 										"s",
 										"t",
 									},
 								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.track`",
-								},
-								"parts": []any{
-									"searchtrack.php",
-								},
 							},
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"kind": "query",
-											"name": "s",
-											"orig": "s",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/discography-mb.php",
@@ -2014,32 +2278,32 @@ func MakeConfig() map[string]any {
 										"lit": "discography-mb.php",
 									},
 								},
+								"parts": []any{
+									"discography-mb.php",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.album`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "s",
+											"orig": "s",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+										},
+									},
+								},
 								"select": map[string]any{
 									"exist": []any{
 										"s",
 									},
 								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.album`",
-								},
-								"parts": []any{
-									"discography-mb.php",
-								},
 							},
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"example": "coldplay",
-											"kind": "query",
-											"name": "s",
-											"orig": "s",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/discography.php",
@@ -2048,32 +2312,33 @@ func MakeConfig() map[string]any {
 										"lit": "discography.php",
 									},
 								},
+								"parts": []any{
+									"discography.php",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.album`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "s",
+											"orig": "s",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+											"example": "coldplay",
+										},
+									},
+								},
 								"select": map[string]any{
 									"exist": []any{
 										"s",
 									},
 								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.album`",
-								},
-								"parts": []any{
-									"discography.php",
-								},
 							},
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"example": "coldplay",
-											"kind": "query",
-											"name": "s",
-											"orig": "s",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/search.php",
@@ -2082,17 +2347,30 @@ func MakeConfig() map[string]any {
 										"lit": "search.php",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"s",
-									},
+								"parts": []any{
+									"search.php",
 								},
+								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body.artists`",
 								},
-								"parts": []any{
-									"search.php",
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "s",
+											"orig": "s",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+											"example": "coldplay",
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"s",
+									},
 								},
 							},
 						},
@@ -2106,6 +2384,7 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "albums",
+						"title": "Albums",
 						"type": "`$ARRAY`",
 					},
 				},
@@ -2116,26 +2395,9 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"example": 111239,
-											"kind": "param",
-											"name": "artist_id",
-											"orig": "artist_id",
-											"reqd": true,
-											"type": "`$INTEGER`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/list/discography/{artistId}",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"artistId": "artist_id",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "list",
@@ -2147,44 +2409,60 @@ func MakeConfig() map[string]any {
 										"var": "artist_id",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"artist_id",
+								"parts": []any{
+									"list",
+									"discography",
+									"{artist_id}",
+								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"artistId": "artist_id",
 									},
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"list",
-									"discography",
-									"{artist_id}",
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "artist_id",
+											"orig": "artist_id",
+											"type": "`$INTEGER`",
+											"kind": "param",
+											"reqd": true,
+											"example": 111239,
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"artist_id",
+									},
 								},
 							},
 						},
 					},
 				},
 				"relations": map[string]any{
-					"ancestors": []any{
-						[]any{
-							"discography",
-						},
-					},
+					"ancestors": []any{},
 				},
 			},
 			"v2_lookup": map[string]any{
 				"fields": []any{
 					map[string]any{
 						"name": "albums",
+						"title": "Albums",
 						"type": "`$ARRAY`",
 					},
 					map[string]any{
 						"name": "artists",
+						"title": "Artists",
 						"type": "`$ARRAY`",
 					},
 					map[string]any{
 						"name": "tracks",
+						"title": "Tracks",
 						"type": "`$ARRAY`",
 					},
 				},
@@ -2195,26 +2473,9 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"example": 2109615,
-											"kind": "param",
-											"name": "album_id",
-											"orig": "album_id",
-											"reqd": true,
-											"type": "`$INTEGER`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/lookup/album/{albumId}",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"albumId": "album_id",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "lookup",
@@ -2226,42 +2487,42 @@ func MakeConfig() map[string]any {
 										"var": "album_id",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"album_id",
+								"parts": []any{
+									"lookup",
+									"album",
+									"{album_id}",
+								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"albumId": "album_id",
 									},
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"lookup",
-									"album",
-									"{album_id}",
-								},
-							},
-							map[string]any{
 								"args": map[string]any{
 									"params": []any{
 										map[string]any{
-											"example": 111239,
-											"kind": "param",
-											"name": "artist_id",
-											"orig": "artist_id",
-											"reqd": true,
+											"name": "album_id",
+											"orig": "album_id",
 											"type": "`$INTEGER`",
+											"kind": "param",
+											"reqd": true,
+											"example": 2109615,
 										},
 									},
 								},
+								"select": map[string]any{
+									"exist": []any{
+										"album_id",
+									},
+								},
+							},
+							map[string]any{
 								"kind": "http",
 								"method": "GET",
 								"orig": "/lookup/artist/{artistId}",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"artistId": "artist_id",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "lookup",
@@ -2273,42 +2534,42 @@ func MakeConfig() map[string]any {
 										"var": "artist_id",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"artist_id",
+								"parts": []any{
+									"lookup",
+									"artist",
+									"{artist_id}",
+								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"artistId": "artist_id",
 									},
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"lookup",
-									"artist",
-									"{artist_id}",
-								},
-							},
-							map[string]any{
 								"args": map[string]any{
 									"params": []any{
 										map[string]any{
-											"example": "1dc4c347-a1db-32aa-b14f-bc9cc507b843",
+											"name": "artist_id",
+											"orig": "artist_id",
+											"type": "`$INTEGER`",
 											"kind": "param",
-											"name": "music_brainz_id",
-											"orig": "music_brainz_id",
 											"reqd": true,
-											"type": "`$STRING`",
+											"example": 111239,
 										},
 									},
 								},
+								"select": map[string]any{
+									"exist": []any{
+										"artist_id",
+									},
+								},
+							},
+							map[string]any{
 								"kind": "http",
 								"method": "GET",
 								"orig": "/lookup/album_mb/{musicBrainzId}",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"musicBrainzId": "music_brainz_id",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "lookup",
@@ -2320,42 +2581,42 @@ func MakeConfig() map[string]any {
 										"var": "music_brainz_id",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"music_brainz_id",
+								"parts": []any{
+									"lookup",
+									"album_mb",
+									"{music_brainz_id}",
+								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"musicBrainzId": "music_brainz_id",
 									},
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"lookup",
-									"album_mb",
-									"{music_brainz_id}",
-								},
-							},
-							map[string]any{
 								"args": map[string]any{
 									"params": []any{
 										map[string]any{
-											"example": "cc197bad-dc9c-440d-a5b5-d52ba2e14234",
-											"kind": "param",
 											"name": "music_brainz_id",
 											"orig": "music_brainz_id",
-											"reqd": true,
 											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+											"example": "1dc4c347-a1db-32aa-b14f-bc9cc507b843",
 										},
 									},
 								},
+								"select": map[string]any{
+									"exist": []any{
+										"music_brainz_id",
+									},
+								},
+							},
+							map[string]any{
 								"kind": "http",
 								"method": "GET",
 								"orig": "/lookup/artist_mb/{musicBrainzId}",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"musicBrainzId": "music_brainz_id",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "lookup",
@@ -2367,42 +2628,42 @@ func MakeConfig() map[string]any {
 										"var": "music_brainz_id",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"music_brainz_id",
+								"parts": []any{
+									"lookup",
+									"artist_mb",
+									"{music_brainz_id}",
+								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"musicBrainzId": "music_brainz_id",
 									},
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"lookup",
-									"artist_mb",
-									"{music_brainz_id}",
-								},
-							},
-							map[string]any{
 								"args": map[string]any{
 									"params": []any{
 										map[string]any{
-											"example": "50369905-68ca-48d2-912d-b37330ff7dc3",
-											"kind": "param",
 											"name": "music_brainz_id",
 											"orig": "music_brainz_id",
-											"reqd": true,
 											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+											"example": "cc197bad-dc9c-440d-a5b5-d52ba2e14234",
 										},
 									},
 								},
+								"select": map[string]any{
+									"exist": []any{
+										"music_brainz_id",
+									},
+								},
+							},
+							map[string]any{
 								"kind": "http",
 								"method": "GET",
 								"orig": "/lookup/track_mb/{musicBrainzId}",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"musicBrainzId": "music_brainz_id",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "lookup",
@@ -2414,42 +2675,42 @@ func MakeConfig() map[string]any {
 										"var": "music_brainz_id",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"music_brainz_id",
+								"parts": []any{
+									"lookup",
+									"track_mb",
+									"{music_brainz_id}",
+								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"musicBrainzId": "music_brainz_id",
 									},
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"lookup",
-									"track_mb",
-									"{music_brainz_id}",
-								},
-							},
-							map[string]any{
 								"args": map[string]any{
 									"params": []any{
 										map[string]any{
-											"example": 32724183,
+											"name": "music_brainz_id",
+											"orig": "music_brainz_id",
+											"type": "`$STRING`",
 											"kind": "param",
-											"name": "track_id",
-											"orig": "track_id",
 											"reqd": true,
-											"type": "`$INTEGER`",
+											"example": "50369905-68ca-48d2-912d-b37330ff7dc3",
 										},
 									},
 								},
+								"select": map[string]any{
+									"exist": []any{
+										"music_brainz_id",
+									},
+								},
+							},
+							map[string]any{
 								"kind": "http",
 								"method": "GET",
 								"orig": "/lookup/track/{trackId}",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"trackId": "track_id",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "lookup",
@@ -2461,59 +2722,60 @@ func MakeConfig() map[string]any {
 										"var": "track_id",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"track_id",
+								"parts": []any{
+									"lookup",
+									"track",
+									"{track_id}",
+								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"trackId": "track_id",
 									},
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"lookup",
-									"track",
-									"{track_id}",
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "track_id",
+											"orig": "track_id",
+											"type": "`$INTEGER`",
+											"kind": "param",
+											"reqd": true,
+											"example": 32724183,
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"track_id",
+									},
 								},
 							},
 						},
 					},
 				},
 				"relations": map[string]any{
-					"ancestors": []any{
-						[]any{
-							"album",
-						},
-						[]any{
-							"album_mb",
-						},
-						[]any{
-							"artist",
-						},
-						[]any{
-							"artist_mb",
-						},
-						[]any{
-							"track",
-						},
-						[]any{
-							"track_mb",
-						},
-					},
+					"ancestors": []any{},
 				},
 			},
 			"v2_search": map[string]any{
 				"fields": []any{
 					map[string]any{
 						"name": "albums",
+						"title": "Albums",
 						"type": "`$ARRAY`",
 					},
 					map[string]any{
 						"name": "artists",
+						"title": "Artists",
 						"type": "`$ARRAY`",
 					},
 					map[string]any{
 						"name": "tracks",
+						"title": "Tracks",
 						"type": "`$ARRAY`",
 					},
 				},
@@ -2524,26 +2786,9 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"example": "parachutes",
-											"kind": "param",
-											"name": "album_name",
-											"orig": "album_name",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/search/album/{albumName}",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"albumName": "album_name",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "search",
@@ -2555,42 +2800,42 @@ func MakeConfig() map[string]any {
 										"var": "album_name",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"album_name",
+								"parts": []any{
+									"search",
+									"album",
+									"{album_name}",
+								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"albumName": "album_name",
 									},
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"search",
-									"album",
-									"{album_name}",
-								},
-							},
-							map[string]any{
 								"args": map[string]any{
 									"params": []any{
 										map[string]any{
-											"example": "coldplay",
-											"kind": "param",
-											"name": "artist_name",
-											"orig": "artist_name",
-											"reqd": true,
+											"name": "album_name",
+											"orig": "album_name",
 											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+											"example": "parachutes",
 										},
 									},
 								},
+								"select": map[string]any{
+									"exist": []any{
+										"album_name",
+									},
+								},
+							},
+							map[string]any{
 								"kind": "http",
 								"method": "GET",
 								"orig": "/search/artist/{artistName}",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"artistName": "artist_name",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "search",
@@ -2602,42 +2847,42 @@ func MakeConfig() map[string]any {
 										"var": "artist_name",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"artist_name",
+								"parts": []any{
+									"search",
+									"artist",
+									"{artist_name}",
+								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"artistName": "artist_name",
 									},
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"search",
-									"artist",
-									"{artist_name}",
-								},
-							},
-							map[string]any{
 								"args": map[string]any{
 									"params": []any{
 										map[string]any{
-											"example": "yellow",
-											"kind": "param",
-											"name": "track_name",
-											"orig": "track_name",
-											"reqd": true,
+											"name": "artist_name",
+											"orig": "artist_name",
 											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+											"example": "coldplay",
 										},
 									},
 								},
+								"select": map[string]any{
+									"exist": []any{
+										"artist_name",
+									},
+								},
+							},
+							map[string]any{
 								"kind": "http",
 								"method": "GET",
 								"orig": "/search/track/{trackName}",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"trackName": "track_name",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "search",
@@ -2649,36 +2894,43 @@ func MakeConfig() map[string]any {
 										"var": "track_name",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"track_name",
+								"parts": []any{
+									"search",
+									"track",
+									"{track_name}",
+								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"trackName": "track_name",
 									},
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"search",
-									"track",
-									"{track_name}",
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "track_name",
+											"orig": "track_name",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+											"example": "yellow",
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"track_name",
+									},
 								},
 							},
 						},
 					},
 				},
 				"relations": map[string]any{
-					"ancestors": []any{
-						[]any{
-							"album",
-						},
-						[]any{
-							"artist",
-						},
-						[]any{
-							"track",
-						},
-					},
+					"ancestors": []any{},
 				},
 			},
 		},
