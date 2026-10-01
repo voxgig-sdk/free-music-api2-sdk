@@ -33,6 +33,8 @@ require_relative 'transform_response'
 
 FreeMusicApi2Utility.registrar = ->(u) {
   u.clean = FreeMusicApi2Utilities::Clean
+  u.clean_add = FreeMusicApi2Utilities::CleanAdd
+  u.clean_explain = FreeMusicApi2Utilities::CleanExplain
   u.done = FreeMusicApi2Utilities::Done
   u.make_error = FreeMusicApi2Utilities::MakeError
   u.feature_add = FreeMusicApi2Utilities::FeatureAdd

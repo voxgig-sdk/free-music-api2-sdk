@@ -37,6 +37,8 @@ require_once __DIR__ . '/TransformResponse.php';
 
 FreeMusicApi2Utility::setRegistrar(function (FreeMusicApi2Utility $u): void {
     $u->clean = [FreeMusicApi2Clean::class, 'call'];
+    $u->clean_add = [FreeMusicApi2Clean::class, 'add'];
+    $u->clean_explain = [FreeMusicApi2Done::class, 'clean_explain'];
     $u->done = [FreeMusicApi2Done::class, 'call'];
     $u->make_error = [FreeMusicApi2MakeError::class, 'call'];
     $u->feature_add = [FreeMusicApi2FeatureAdd::class, 'call'];

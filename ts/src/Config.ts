@@ -2479,7 +2479,7 @@ class Config {
                 "params": [
                   {
                     "name": "artist_id",
-                    "orig": "artist_id",
+                    "orig": "artistId",
                     "type": "`$INTEGER`",
                     "kind": "param",
                     "reqd": true,
@@ -2557,7 +2557,7 @@ class Config {
                 "params": [
                   {
                     "name": "album_id",
-                    "orig": "album_id",
+                    "orig": "albumId",
                     "type": "`$INTEGER`",
                     "kind": "param",
                     "reqd": true,
@@ -2604,7 +2604,7 @@ class Config {
                 "params": [
                   {
                     "name": "artist_id",
-                    "orig": "artist_id",
+                    "orig": "artistId",
                     "type": "`$INTEGER`",
                     "kind": "param",
                     "reqd": true,
@@ -2651,7 +2651,7 @@ class Config {
                 "params": [
                   {
                     "name": "music_brainz_id",
-                    "orig": "music_brainz_id",
+                    "orig": "musicBrainzId",
                     "type": "`$STRING`",
                     "kind": "param",
                     "reqd": true,
@@ -2698,7 +2698,7 @@ class Config {
                 "params": [
                   {
                     "name": "music_brainz_id",
-                    "orig": "music_brainz_id",
+                    "orig": "musicBrainzId",
                     "type": "`$STRING`",
                     "kind": "param",
                     "reqd": true,
@@ -2745,7 +2745,7 @@ class Config {
                 "params": [
                   {
                     "name": "music_brainz_id",
-                    "orig": "music_brainz_id",
+                    "orig": "musicBrainzId",
                     "type": "`$STRING`",
                     "kind": "param",
                     "reqd": true,
@@ -2792,7 +2792,7 @@ class Config {
                 "params": [
                   {
                     "name": "track_id",
-                    "orig": "track_id",
+                    "orig": "trackId",
                     "type": "`$INTEGER`",
                     "kind": "param",
                     "reqd": true,
@@ -2870,7 +2870,7 @@ class Config {
                 "params": [
                   {
                     "name": "album_name",
-                    "orig": "album_name",
+                    "orig": "albumName",
                     "type": "`$STRING`",
                     "kind": "param",
                     "reqd": true,
@@ -2917,7 +2917,7 @@ class Config {
                 "params": [
                   {
                     "name": "artist_name",
-                    "orig": "artist_name",
+                    "orig": "artistName",
                     "type": "`$STRING`",
                     "kind": "param",
                     "reqd": true,
@@ -2964,7 +2964,7 @@ class Config {
                 "params": [
                   {
                     "name": "track_name",
-                    "orig": "track_name",
+                    "orig": "trackName",
                     "type": "`$STRING`",
                     "kind": "param",
                     "reqd": true,

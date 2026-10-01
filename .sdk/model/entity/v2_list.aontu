@@ -30,7 +30,7 @@ main: kit: entity: v2_list: {
                 ex: 111239
                 k: "param"
                 n: "artist_id"
-                or: "artist_id"
+                or: "artistId"
                 r: true
                 t: "`$INTEGER`"
               }

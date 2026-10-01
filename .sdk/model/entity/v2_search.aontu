@@ -42,7 +42,7 @@ main: kit: entity: v2_search: {
                 ex: "parachutes"
                 k: "param"
                 n: "album_name"
-                or: "album_name"
+                or: "albumName"
                 r: true
                 t: "`$STRING`"
               }
@@ -88,7 +88,7 @@ main: kit: entity: v2_search: {
                 ex: "coldplay"
                 k: "param"
                 n: "artist_name"
-                or: "artist_name"
+                or: "artistName"
                 r: true
                 t: "`$STRING`"
               }
@@ -134,7 +134,7 @@ main: kit: entity: v2_search: {
                 ex: "yellow"
                 k: "param"
                 n: "track_name"
-                or: "track_name"
+                or: "trackName"
                 r: true
                 t: "`$STRING`"
               }

@@ -42,7 +42,7 @@ main: kit: entity: v2_lookup: {
                 ex: 2109615
                 k: "param"
                 n: "album_id"
-                or: "album_id"
+                or: "albumId"
                 r: true
                 t: "`$INTEGER`"
               }
@@ -88,7 +88,7 @@ main: kit: entity: v2_lookup: {
                 ex: 111239
                 k: "param"
                 n: "artist_id"
-                or: "artist_id"
+                or: "artistId"
                 r: true
                 t: "`$INTEGER`"
               }
@@ -134,7 +134,7 @@ main: kit: entity: v2_lookup: {
                 ex: "1dc4c347-a1db-32aa-b14f-bc9cc507b843"
                 k: "param"
                 n: "music_brainz_id"
-                or: "music_brainz_id"
+                or: "musicBrainzId"
                 r: true
                 t: "`$STRING`"
               }
@@ -180,7 +180,7 @@ main: kit: entity: v2_lookup: {
                 ex: "cc197bad-dc9c-440d-a5b5-d52ba2e14234"
                 k: "param"
                 n: "music_brainz_id"
-                or: "music_brainz_id"
+                or: "musicBrainzId"
                 r: true
                 t: "`$STRING`"
               }
@@ -226,7 +226,7 @@ main: kit: entity: v2_lookup: {
                 ex: "50369905-68ca-48d2-912d-b37330ff7dc3"
                 k: "param"
                 n: "music_brainz_id"
-                or: "music_brainz_id"
+                or: "musicBrainzId"
                 r: true
                 t: "`$STRING`"
               }
@@ -272,7 +272,7 @@ main: kit: entity: v2_lookup: {
                 ex: 32724183
                 k: "param"
                 n: "track_id"
-                or: "track_id"
+                or: "trackId"
                 r: true
                 t: "`$INTEGER`"
               }

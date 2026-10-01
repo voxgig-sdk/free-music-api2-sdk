@@ -3024,7 +3024,7 @@
                         "ex": 111239,
                         "k": "param",
                         "n": "artist_id",
-                        "or": "artist_id",
+                        "or": "artistId",
                         "r": true,
                         "t": "`$INTEGER`"
                       }
@@ -3114,7 +3114,7 @@
                         "ex": 2109615,
                         "k": "param",
                         "n": "album_id",
-                        "or": "album_id",
+                        "or": "albumId",
                         "r": true,
                         "t": "`$INTEGER`"
                       }
@@ -3163,7 +3163,7 @@
                         "ex": 111239,
                         "k": "param",
                         "n": "artist_id",
-                        "or": "artist_id",
+                        "or": "artistId",
                         "r": true,
                         "t": "`$INTEGER`"
                       }
@@ -3212,7 +3212,7 @@
                         "ex": "1dc4c347-a1db-32aa-b14f-bc9cc507b843",
                         "k": "param",
                         "n": "music_brainz_id",
-                        "or": "music_brainz_id",
+                        "or": "musicBrainzId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -3261,7 +3261,7 @@
                         "ex": "cc197bad-dc9c-440d-a5b5-d52ba2e14234",
                         "k": "param",
                         "n": "music_brainz_id",
-                        "or": "music_brainz_id",
+                        "or": "musicBrainzId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -3310,7 +3310,7 @@
                         "ex": "50369905-68ca-48d2-912d-b37330ff7dc3",
                         "k": "param",
                         "n": "music_brainz_id",
-                        "or": "music_brainz_id",
+                        "or": "musicBrainzId",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -3359,7 +3359,7 @@
                         "ex": 32724183,
                         "k": "param",
                         "n": "track_id",
-                        "or": "track_id",
+                        "or": "trackId",
                         "r": true,
                         "t": "`$INTEGER`"
                       }
@@ -3449,7 +3449,7 @@
                         "ex": "parachutes",
                         "k": "param",
                         "n": "album_name",
-                        "or": "album_name",
+                        "or": "albumName",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -3498,7 +3498,7 @@
                         "ex": "coldplay",
                         "k": "param",
                         "n": "artist_name",
-                        "or": "artist_name",
+                        "or": "artistName",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -3547,7 +3547,7 @@
                         "ex": "yellow",
                         "k": "param",
                         "n": "track_name",
-                        "or": "track_name",
+                        "or": "trackName",
                         "r": true,
                         "t": "`$STRING`"
                       }
@@ -4230,7 +4230,12 @@
         },
         "base": "http://localhost:8000",
         "clean": {
-          "keys": "key,token,id"
+          "active": true,
+          "hint": "0",
+          "keys": "key,secret,token,password,passwd,authorization,cookie,credential,signature",
+          "mask": "[redacted]",
+          "min": "4",
+          "values": ""
         },
         "entity": {
           "`$CHILD`": {
