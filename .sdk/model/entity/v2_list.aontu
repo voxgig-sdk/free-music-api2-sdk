@@ -48,6 +48,10 @@ main: kit: entity: v2_list: {
               artistId: "artist_id"
             }
           }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "list"

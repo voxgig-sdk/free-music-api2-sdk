@@ -15,7 +15,7 @@ keeps the cognitive load low.
 
 ## Install
 This package is not yet published to PyPI. Install it from the GitHub
-release tag (`py/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/free-music-api2-sdk/releases)) or
+release tag (`py/vX.Y.Z`, see [Tags](https://github.com/voxgig-sdk/free-music-api2-sdk/tags)) or
 from a source checkout:
 
 ```bash
@@ -26,7 +26,7 @@ pip install -e .
 ## Tutorial: your first API call
 
 This tutorial walks through creating a client, listing entities, and
-loading a specific record.
+loading a specific record. The client sends the API key in the `X-API-KEY` header.
 
 ### 1. Create a client
 
@@ -41,14 +41,14 @@ client = FreeMusicApi2SDK({
 
 ### 2. List v1list records
 
-`list()` returns a `list` of records (each a `dict`) and raises on
-error — iterate it directly.
+`list()` returns a `list` of entities, one per record, and raises on
+error; an entity's `data_get()` reads its record (a `dict`).
 
 ```python
 try:
     v1lists = client.V1List().list({"country": "example", "format": "example", "type": "example"})
     for v1list in v1lists:
-        print(v1list)
+        print(v1list.data_get())
 except Exception as err:
     print(f"list failed: {err}")
 ```
@@ -61,7 +61,7 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 ```python
 try:
     v2lookup = client.V2Lookup().load({"album_id": 1})
-    print(v2lookup)
+    print(v2lookup.data_get())
 except Exception as err:
     print(f"load failed: {err}")
 ```
@@ -127,10 +127,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = FreeMusicApi2SDK.test()
 
-# Entity ops return the ENTITY and raises on error;
-# call data_get() for the record.
+# Entity ops return the entity, and list one per record; they raise on error.
 v2lookup = client.V2Lookup().load({"album_id": 1})
-# v2lookup contains the mock response record
+# data_get() on an entity reads its mock response record
 ```
 
 ### Use a custom fetch function
@@ -221,8 +220,8 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
-| `list` | `(reqmatch, ctrl) -> list` | List entities matching the criteria. Raises on error. |
+| `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria, and return it. Raises on error. |
+| `list` | `(reqmatch, ctrl) -> list` | List entities matching the criteria, one per record. Raises on error. |
 | `data_get` | `() -> dict` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> dict` | Get entity match criteria. |
@@ -232,9 +231,9 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the ENTITY (call data_get() for the record) (a `dict` for single-entity
-ops, a `list` for `list`) and raise on error. Wrap calls in
-`try`/`except` to handle failures.
+Entity operations return the entity, and `list` a `list` of entities, one
+per record; an entity's `data_get()` reads its record (a `dict`). They raise
+on error, so wrap calls in `try`/`except` to handle failures.
 
 The `direct()` escape hatch never raises — it returns a result `dict`
 you branch on via `result["ok"]`:
@@ -304,7 +303,7 @@ API path: `/trending.php`
 
 | Field | Description |
 | --- | --- |
-| `idAlbum` | Album ID |
+| `idAlbum` | Unique album ID |
 | `idArtist` | Artist ID |
 | `idIMVDB` | IMVDB ID |
 | `idLabel` | Label ID |
@@ -324,7 +323,7 @@ API path: `/trending.php`
 | `intMusicVidLikes` | Number of music video likes |
 | `intMusicVidViews` | Number of music video views |
 | `intSales` | Number of sales |
-| `intScore` | Track score |
+| `intScore` | Album score |
 | `intScoreVotes` | Number of score votes |
 | `intTotalListeners` | Total number of listeners |
 | `intTotalPlays` | Total number of plays |
@@ -375,13 +374,13 @@ API path: `/trending.php`
 | `strBiographySE` | Artist biography in Swedish |
 | `strCountry` | Country of origin |
 | `strCountryCode` | Country code |
-| `strDescriptionEN` | Track description in English |
+| `strDescriptionEN` | Album description in English |
 | `strDisbanded` | Disbanded status |
 | `strDiscogsID` | Discogs ID |
 | `strFacebook` | Facebook page URL |
 | `strGender` | Artist gender |
 | `strGeniusID` | Genius ID |
-| `strGenre` | Track genre |
+| `strGenre` | Album genre |
 | `strInstagram` | Instagram profile URL |
 | `strItunesID` | iTunes ID |
 | `strLabel` | Record label |
@@ -389,10 +388,10 @@ API path: `/trending.php`
 | `strLocation` | Recording location |
 | `strLocked` | Whether the record is locked |
 | `strLyricWikiID` | LyricWiki ID |
-| `strMood` | Track mood |
+| `strMood` | Album mood |
 | `strMusicBrainzAlbumID` | MusicBrainz Album ID |
 | `strMusicBrainzArtistID` | MusicBrainz Artist ID |
-| `strMusicBrainzID` | MusicBrainz Recording ID |
+| `strMusicBrainzID` | MusicBrainz Release Group ID |
 | `strMusicMozID` | MusicMoz ID |
 | `strMusicVid` | URL to music video |
 | `strMusicVidCompany` | Music video production company |
@@ -406,8 +405,8 @@ API path: `/trending.php`
 | `strSoundCloud` | SoundCloud profile URL |
 | `strSpeed` | Album speed |
 | `strSpotify` | Spotify artist URL |
-| `strStyle` | Track style |
-| `strTheme` | Track theme |
+| `strStyle` | Album style |
+| `strTheme` | Album theme |
 | `strTrack` | Track title |
 | `strTrackLyrics` | Track lyrics |
 | `strTrackThumb` | URL to track thumbnail |
@@ -419,13 +418,13 @@ API path: `/trending.php`
 
 Operations: List.
 
-API path: `/track.php`
+API path: `/album-mb.php`
 
 #### V1Search
 
 | Field | Description |
 | --- | --- |
-| `idAlbum` | Unique album ID |
+| `idAlbum` | Album ID |
 | `idArtist` | Artist ID |
 | `idIMVDB` | IMVDB ID |
 | `idLabel` | Label ID |
@@ -445,7 +444,7 @@ API path: `/track.php`
 | `intMusicVidLikes` | Number of music video likes |
 | `intMusicVidViews` | Number of music video views |
 | `intSales` | Number of sales |
-| `intScore` | Album score |
+| `intScore` | Track score |
 | `intScoreVotes` | Number of score votes |
 | `intTotalListeners` | Total number of listeners |
 | `intTotalPlays` | Total number of plays |
@@ -495,23 +494,23 @@ API path: `/track.php`
 | `strBiographySE` | Artist biography in Swedish |
 | `strCountry` | Country of origin |
 | `strCountryCode` | Country code |
-| `strDescriptionEN` | Album description in English |
+| `strDescriptionEN` | Track description in English |
 | `strDisbanded` | Disbanded status |
 | `strDiscogsID` | Discogs ID |
 | `strFacebook` | Facebook page URL |
 | `strGender` | Artist gender |
 | `strGeniusID` | Genius ID |
-| `strGenre` | Album genre |
+| `strGenre` | Track genre |
 | `strItunesID` | iTunes ID |
 | `strLabel` | Record label |
 | `strLastFMChart` | Last.fm chart URL |
 | `strLocation` | Recording location |
 | `strLocked` | Whether the record is locked |
 | `strLyricWikiID` | LyricWiki ID |
-| `strMood` | Album mood |
+| `strMood` | Track mood |
 | `strMusicBrainzAlbumID` | MusicBrainz Album ID |
 | `strMusicBrainzArtistID` | MusicBrainz Artist ID |
-| `strMusicBrainzID` | MusicBrainz Release Group ID |
+| `strMusicBrainzID` | MusicBrainz Recording ID |
 | `strMusicMozID` | MusicMoz ID |
 | `strMusicVid` | URL to music video |
 | `strMusicVidCompany` | Music video production company |
@@ -523,8 +522,8 @@ API path: `/track.php`
 | `strReleaseFormat` | Release format (CD, Vinyl, etc.) |
 | `strReview` | Album review |
 | `strSpeed` | Album speed |
-| `strStyle` | Album style |
-| `strTheme` | Album theme |
+| `strStyle` | Track style |
+| `strTheme` | Track theme |
 | `strTrack` | Track title |
 | `strTrackLyrics` | Track lyrics |
 | `strTrackThumb` | URL to track thumbnail |
@@ -535,7 +534,7 @@ API path: `/track.php`
 
 Operations: List.
 
-API path: `/searchalbum.php`
+API path: `/searchtrack.php`
 
 #### V2List
 
@@ -653,7 +652,7 @@ Create an instance: `v1_lookup = client.V1Lookup()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `idAlbum` | `int` | Album ID |
+| `idAlbum` | `int` | Unique album ID |
 | `idArtist` | `int` | Artist ID |
 | `idIMVDB` | `int` | IMVDB ID |
 | `idLabel` | `int` | Label ID |
@@ -673,7 +672,7 @@ Create an instance: `v1_lookup = client.V1Lookup()`
 | `intMusicVidLikes` | `int` | Number of music video likes |
 | `intMusicVidViews` | `int` | Number of music video views |
 | `intSales` | `int` | Number of sales |
-| `intScore` | `int` | Track score |
+| `intScore` | `int` | Album score |
 | `intScoreVotes` | `int` | Number of score votes |
 | `intTotalListeners` | `int` | Total number of listeners |
 | `intTotalPlays` | `int` | Total number of plays |
@@ -724,13 +723,13 @@ Create an instance: `v1_lookup = client.V1Lookup()`
 | `strBiographySE` | `str` | Artist biography in Swedish |
 | `strCountry` | `str` | Country of origin |
 | `strCountryCode` | `str` | Country code |
-| `strDescriptionEN` | `str` | Track description in English |
+| `strDescriptionEN` | `str` | Album description in English |
 | `strDisbanded` | `str` | Disbanded status |
 | `strDiscogsID` | `str` | Discogs ID |
 | `strFacebook` | `str` | Facebook page URL |
 | `strGender` | `str` | Artist gender |
 | `strGeniusID` | `str` | Genius ID |
-| `strGenre` | `str` | Track genre |
+| `strGenre` | `str` | Album genre |
 | `strInstagram` | `str` | Instagram profile URL |
 | `strItunesID` | `str` | iTunes ID |
 | `strLabel` | `str` | Record label |
@@ -738,10 +737,10 @@ Create an instance: `v1_lookup = client.V1Lookup()`
 | `strLocation` | `str` | Recording location |
 | `strLocked` | `str` | Whether the record is locked |
 | `strLyricWikiID` | `str` | LyricWiki ID |
-| `strMood` | `str` | Track mood |
+| `strMood` | `str` | Album mood |
 | `strMusicBrainzAlbumID` | `str` | MusicBrainz Album ID |
 | `strMusicBrainzArtistID` | `str` | MusicBrainz Artist ID |
-| `strMusicBrainzID` | `str` | MusicBrainz Recording ID |
+| `strMusicBrainzID` | `str` | MusicBrainz Release Group ID |
 | `strMusicMozID` | `str` | MusicMoz ID |
 | `strMusicVid` | `str` | URL to music video |
 | `strMusicVidCompany` | `str` | Music video production company |
@@ -755,8 +754,8 @@ Create an instance: `v1_lookup = client.V1Lookup()`
 | `strSoundCloud` | `str` | SoundCloud profile URL |
 | `strSpeed` | `str` | Album speed |
 | `strSpotify` | `str` | Spotify artist URL |
-| `strStyle` | `str` | Track style |
-| `strTheme` | `str` | Track theme |
+| `strStyle` | `str` | Album style |
+| `strTheme` | `str` | Album theme |
 | `strTrack` | `str` | Track title |
 | `strTrackLyrics` | `str` | Track lyrics |
 | `strTrackThumb` | `str` | URL to track thumbnail |
@@ -769,7 +768,7 @@ Create an instance: `v1_lookup = client.V1Lookup()`
 #### Example: List
 
 ```python
-v1_lookups = client.V1Lookup().list()
+v1_lookups = client.V1Lookup().list({"i": "example"})
 ```
 
 
@@ -787,7 +786,7 @@ Create an instance: `v1_search = client.V1Search()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `idAlbum` | `int` | Unique album ID |
+| `idAlbum` | `int` | Album ID |
 | `idArtist` | `int` | Artist ID |
 | `idIMVDB` | `int` | IMVDB ID |
 | `idLabel` | `int` | Label ID |
@@ -807,7 +806,7 @@ Create an instance: `v1_search = client.V1Search()`
 | `intMusicVidLikes` | `int` | Number of music video likes |
 | `intMusicVidViews` | `int` | Number of music video views |
 | `intSales` | `int` | Number of sales |
-| `intScore` | `int` | Album score |
+| `intScore` | `int` | Track score |
 | `intScoreVotes` | `int` | Number of score votes |
 | `intTotalListeners` | `int` | Total number of listeners |
 | `intTotalPlays` | `int` | Total number of plays |
@@ -857,23 +856,23 @@ Create an instance: `v1_search = client.V1Search()`
 | `strBiographySE` | `str` | Artist biography in Swedish |
 | `strCountry` | `str` | Country of origin |
 | `strCountryCode` | `str` | Country code |
-| `strDescriptionEN` | `str` | Album description in English |
+| `strDescriptionEN` | `str` | Track description in English |
 | `strDisbanded` | `str` | Disbanded status |
 | `strDiscogsID` | `str` | Discogs ID |
 | `strFacebook` | `str` | Facebook page URL |
 | `strGender` | `str` | Artist gender |
 | `strGeniusID` | `str` | Genius ID |
-| `strGenre` | `str` | Album genre |
+| `strGenre` | `str` | Track genre |
 | `strItunesID` | `str` | iTunes ID |
 | `strLabel` | `str` | Record label |
 | `strLastFMChart` | `str` | Last.fm chart URL |
 | `strLocation` | `str` | Recording location |
 | `strLocked` | `str` | Whether the record is locked |
 | `strLyricWikiID` | `str` | LyricWiki ID |
-| `strMood` | `str` | Album mood |
+| `strMood` | `str` | Track mood |
 | `strMusicBrainzAlbumID` | `str` | MusicBrainz Album ID |
 | `strMusicBrainzArtistID` | `str` | MusicBrainz Artist ID |
-| `strMusicBrainzID` | `str` | MusicBrainz Release Group ID |
+| `strMusicBrainzID` | `str` | MusicBrainz Recording ID |
 | `strMusicMozID` | `str` | MusicMoz ID |
 | `strMusicVid` | `str` | URL to music video |
 | `strMusicVidCompany` | `str` | Music video production company |
@@ -885,8 +884,8 @@ Create an instance: `v1_search = client.V1Search()`
 | `strReleaseFormat` | `str` | Release format (CD, Vinyl, etc.) |
 | `strReview` | `str` | Album review |
 | `strSpeed` | `str` | Album speed |
-| `strStyle` | `str` | Album style |
-| `strTheme` | `str` | Album theme |
+| `strStyle` | `str` | Track style |
+| `strTheme` | `str` | Track theme |
 | `strTrack` | `str` | Track title |
 | `strTrackLyrics` | `str` | Track lyrics |
 | `strTrackThumb` | `str` | URL to track thumbnail |

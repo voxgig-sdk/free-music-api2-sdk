@@ -1,0 +1,82 @@
+{
+  point: "warning"
+  note: "Points GET /mvid-mb.php and GET /mvid.php on entity=v1_list op=list have the same selector (exist: i), so only GET /mvid-mb.php is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "v1_list"
+  op: "list"
+  points: [
+    "GET /mvid-mb.php"
+    "GET /mvid.php"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points GET /track-top10-mb.php and GET /track-top10.php on entity=v1_list op=list have the same selector (exist: s), so only GET /track-top10-mb.php is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "v1_list"
+  op: "list"
+  points: [
+    "GET /track-top10-mb.php"
+    "GET /track-top10.php"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points GET /album-mb.php, GET /artist-mb.php, GET /artist-social.php, GET /artist.php and GET /track-mb.php on entity=v1_lookup op=list have the same selector (exist: i), so only GET /album-mb.php is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "v1_lookup"
+  op: "list"
+  points: [
+    "GET /album-mb.php"
+    "GET /artist-mb.php"
+    "GET /artist-social.php"
+    "GET /artist.php"
+    "GET /track-mb.php"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points GET /album.php and GET /track.php on entity=v1_lookup op=list have the same selector (exist: none), so only GET /album.php is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "v1_lookup"
+  op: "list"
+  points: [
+    "GET /album.php"
+    "GET /track.php"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points GET /discography-mb.php, GET /discography.php, GET /search.php and GET /searchalbum.php on entity=v1_search op=list have the same selector (exist: s), so only GET /discography-mb.php is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "v1_search"
+  op: "list"
+  points: [
+    "GET /discography-mb.php"
+    "GET /discography.php"
+    "GET /search.php"
+    "GET /searchalbum.php"
+  ]
+
+}
+
+
+{
+  point: "warning"
+  note: "Points GET /lookup/album_mb/{musicBrainzId}, GET /lookup/artist_mb/{musicBrainzId} and GET /lookup/track_mb/{musicBrainzId} on entity=v2_lookup op=load have the same selector (exist: music_brainz_id), so only GET /lookup/album_mb/{musicBrainzId} is ever chosen. An action or another entity in guide.aontu tells them apart."
+  entity: "v2_lookup"
+  op: "load"
+  points: [
+    "GET /lookup/album_mb/{musicBrainzId}"
+    "GET /lookup/artist_mb/{musicBrainzId}"
+    "GET /lookup/track_mb/{musicBrainzId}"
+  ]
+
+}

@@ -71,6 +71,7 @@ func MakeConfig() map[string]any {
 				},
 				"optspec": map[string]any{
 					"clearTimer": "`$FUNCTION`",
+					"now": "`$FUNCTION`",
 					"setTimer": "`$FUNCTION`",
 				},
 				"strict": false,
@@ -401,6 +402,10 @@ func MakeConfig() map[string]any {
 										"type",
 									},
 								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 							map[string]any{
 								"kind": "http",
@@ -435,6 +440,10 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"format",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 							map[string]any{
@@ -471,6 +480,10 @@ func MakeConfig() map[string]any {
 										"i",
 									},
 								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 							map[string]any{
 								"kind": "http",
@@ -505,6 +518,10 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"i",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 							map[string]any{
@@ -541,6 +558,10 @@ func MakeConfig() map[string]any {
 										"s",
 									},
 								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 							map[string]any{
 								"kind": "http",
@@ -576,6 +597,10 @@ func MakeConfig() map[string]any {
 										"s",
 									},
 								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 						},
 					},
@@ -590,7 +615,7 @@ func MakeConfig() map[string]any {
 						"name": "idAlbum",
 						"title": "Id Album",
 						"type": "`$INTEGER`",
-						"short": "Album ID",
+						"short": "Unique album ID",
 					},
 					map[string]any{
 						"name": "idArtist",
@@ -710,7 +735,7 @@ func MakeConfig() map[string]any {
 						"name": "intScore",
 						"title": "Int Score",
 						"type": "`$INTEGER`",
-						"short": "Track score",
+						"short": "Album score",
 					},
 					map[string]any{
 						"name": "intScoreVotes",
@@ -1016,7 +1041,7 @@ func MakeConfig() map[string]any {
 						"name": "strDescriptionEN",
 						"title": "Str Description En",
 						"type": "`$STRING`",
-						"short": "Track description in English",
+						"short": "Album description in English",
 					},
 					map[string]any{
 						"name": "strDisbanded",
@@ -1052,7 +1077,7 @@ func MakeConfig() map[string]any {
 						"name": "strGenre",
 						"title": "Str Genre",
 						"type": "`$STRING`",
-						"short": "Track genre",
+						"short": "Album genre",
 					},
 					map[string]any{
 						"name": "strInstagram",
@@ -1100,7 +1125,7 @@ func MakeConfig() map[string]any {
 						"name": "strMood",
 						"title": "Str Mood",
 						"type": "`$STRING`",
-						"short": "Track mood",
+						"short": "Album mood",
 					},
 					map[string]any{
 						"name": "strMusicBrainzAlbumID",
@@ -1118,7 +1143,7 @@ func MakeConfig() map[string]any {
 						"name": "strMusicBrainzID",
 						"title": "Str Music Brainz Id",
 						"type": "`$STRING`",
-						"short": "MusicBrainz Recording ID",
+						"short": "MusicBrainz Release Group ID",
 					},
 					map[string]any{
 						"name": "strMusicMozID",
@@ -1202,13 +1227,13 @@ func MakeConfig() map[string]any {
 						"name": "strStyle",
 						"title": "Str Style",
 						"type": "`$STRING`",
-						"short": "Track style",
+						"short": "Album style",
 					},
 					map[string]any{
 						"name": "strTheme",
 						"title": "Str Theme",
 						"type": "`$STRING`",
-						"short": "Track theme",
+						"short": "Album theme",
 					},
 					map[string]any{
 						"name": "strTrack",
@@ -1268,14 +1293,170 @@ func MakeConfig() map[string]any {
 							map[string]any{
 								"kind": "http",
 								"method": "GET",
-								"orig": "/track.php",
+								"orig": "/album-mb.php",
 								"segments": []any{
 									map[string]any{
-										"lit": "track.php",
+										"lit": "album-mb.php",
 									},
 								},
 								"parts": []any{
-									"track.php",
+									"album-mb.php",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.album`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "i",
+											"orig": "i",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+											"example": "1dc4c347-a1db-32aa-b14f-bc9cc507b843",
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"i",
+									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
+							},
+							map[string]any{
+								"kind": "http",
+								"method": "GET",
+								"orig": "/artist-mb.php",
+								"segments": []any{
+									map[string]any{
+										"lit": "artist-mb.php",
+									},
+								},
+								"parts": []any{
+									"artist-mb.php",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.artists`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "i",
+											"orig": "i",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+											"example": "cc197bad-dc9c-440d-a5b5-d52ba2e14234",
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"i",
+									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
+							},
+							map[string]any{
+								"kind": "http",
+								"method": "GET",
+								"orig": "/artist-social.php",
+								"segments": []any{
+									map[string]any{
+										"lit": "artist-social.php",
+									},
+								},
+								"parts": []any{
+									"artist-social.php",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.artists`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "i",
+											"orig": "i",
+											"type": "`$INTEGER`",
+											"kind": "query",
+											"reqd": true,
+											"example": 112024,
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"i",
+									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
+							},
+							map[string]any{
+								"kind": "http",
+								"method": "GET",
+								"orig": "/artist.php",
+								"segments": []any{
+									map[string]any{
+										"lit": "artist.php",
+									},
+								},
+								"parts": []any{
+									"artist.php",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.artists`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "i",
+											"orig": "i",
+											"type": "`$INTEGER`",
+											"kind": "query",
+											"reqd": true,
+											"example": 112024,
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"i",
+									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
+							},
+							map[string]any{
+								"kind": "http",
+								"method": "GET",
+								"orig": "/track-mb.php",
+								"segments": []any{
+									map[string]any{
+										"lit": "track-mb.php",
+									},
+								},
+								"parts": []any{
+									"track-mb.php",
 								},
 								"rename": map[string]any{},
 								"transform": map[string]any{
@@ -1285,26 +1466,23 @@ func MakeConfig() map[string]any {
 								"args": map[string]any{
 									"query": []any{
 										map[string]any{
-											"name": "h",
-											"orig": "h",
-											"type": "`$INTEGER`",
+											"name": "i",
+											"orig": "i",
+											"type": "`$STRING`",
 											"kind": "query",
-											"example": 32793500,
-										},
-										map[string]any{
-											"name": "m",
-											"orig": "m",
-											"type": "`$INTEGER`",
-											"kind": "query",
-											"example": 2115888,
+											"reqd": true,
+											"example": "50369905-68ca-48d2-912d-b37330ff7dc3",
 										},
 									},
 								},
 								"select": map[string]any{
 									"exist": []any{
-										"h",
-										"m",
+										"i",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 							map[string]any{
@@ -1342,164 +1520,23 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"i",
-										"m",
-									},
+								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 							map[string]any{
 								"kind": "http",
 								"method": "GET",
-								"orig": "/album-mb.php",
+								"orig": "/track.php",
 								"segments": []any{
 									map[string]any{
-										"lit": "album-mb.php",
+										"lit": "track.php",
 									},
 								},
 								"parts": []any{
-									"album-mb.php",
-								},
-								"rename": map[string]any{},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.album`",
-								},
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"name": "i",
-											"orig": "i",
-											"type": "`$STRING`",
-											"kind": "query",
-											"reqd": true,
-											"example": "1dc4c347-a1db-32aa-b14f-bc9cc507b843",
-										},
-									},
-								},
-								"select": map[string]any{
-									"exist": []any{
-										"i",
-									},
-								},
-							},
-							map[string]any{
-								"kind": "http",
-								"method": "GET",
-								"orig": "/artist-mb.php",
-								"segments": []any{
-									map[string]any{
-										"lit": "artist-mb.php",
-									},
-								},
-								"parts": []any{
-									"artist-mb.php",
-								},
-								"rename": map[string]any{},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.artists`",
-								},
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"name": "i",
-											"orig": "i",
-											"type": "`$STRING`",
-											"kind": "query",
-											"reqd": true,
-											"example": "cc197bad-dc9c-440d-a5b5-d52ba2e14234",
-										},
-									},
-								},
-								"select": map[string]any{
-									"exist": []any{
-										"i",
-									},
-								},
-							},
-							map[string]any{
-								"kind": "http",
-								"method": "GET",
-								"orig": "/artist-social.php",
-								"segments": []any{
-									map[string]any{
-										"lit": "artist-social.php",
-									},
-								},
-								"parts": []any{
-									"artist-social.php",
-								},
-								"rename": map[string]any{},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.artists`",
-								},
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"name": "i",
-											"orig": "i",
-											"type": "`$INTEGER`",
-											"kind": "query",
-											"reqd": true,
-											"example": 112024,
-										},
-									},
-								},
-								"select": map[string]any{
-									"exist": []any{
-										"i",
-									},
-								},
-							},
-							map[string]any{
-								"kind": "http",
-								"method": "GET",
-								"orig": "/artist.php",
-								"segments": []any{
-									map[string]any{
-										"lit": "artist.php",
-									},
-								},
-								"parts": []any{
-									"artist.php",
-								},
-								"rename": map[string]any{},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.artists`",
-								},
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"name": "i",
-											"orig": "i",
-											"type": "`$INTEGER`",
-											"kind": "query",
-											"reqd": true,
-											"example": 112024,
-										},
-									},
-								},
-								"select": map[string]any{
-									"exist": []any{
-										"i",
-									},
-								},
-							},
-							map[string]any{
-								"kind": "http",
-								"method": "GET",
-								"orig": "/track-mb.php",
-								"segments": []any{
-									map[string]any{
-										"lit": "track-mb.php",
-									},
-								},
-								"parts": []any{
-									"track-mb.php",
+									"track.php",
 								},
 								"rename": map[string]any{},
 								"transform": map[string]any{
@@ -1509,19 +1546,25 @@ func MakeConfig() map[string]any {
 								"args": map[string]any{
 									"query": []any{
 										map[string]any{
-											"name": "i",
-											"orig": "i",
-											"type": "`$STRING`",
+											"name": "h",
+											"orig": "h",
+											"type": "`$INTEGER`",
 											"kind": "query",
-											"reqd": true,
-											"example": "50369905-68ca-48d2-912d-b37330ff7dc3",
+											"example": 32793500,
+										},
+										map[string]any{
+											"name": "m",
+											"orig": "m",
+											"type": "`$INTEGER`",
+											"kind": "query",
+											"example": 2115888,
 										},
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"i",
-									},
+								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -1537,7 +1580,7 @@ func MakeConfig() map[string]any {
 						"name": "idAlbum",
 						"title": "Id Album",
 						"type": "`$INTEGER`",
-						"short": "Unique album ID",
+						"short": "Album ID",
 					},
 					map[string]any{
 						"name": "idArtist",
@@ -1657,7 +1700,7 @@ func MakeConfig() map[string]any {
 						"name": "intScore",
 						"title": "Int Score",
 						"type": "`$INTEGER`",
-						"short": "Album score",
+						"short": "Track score",
 					},
 					map[string]any{
 						"name": "intScoreVotes",
@@ -1957,7 +2000,7 @@ func MakeConfig() map[string]any {
 						"name": "strDescriptionEN",
 						"title": "Str Description En",
 						"type": "`$STRING`",
-						"short": "Album description in English",
+						"short": "Track description in English",
 					},
 					map[string]any{
 						"name": "strDisbanded",
@@ -1993,7 +2036,7 @@ func MakeConfig() map[string]any {
 						"name": "strGenre",
 						"title": "Str Genre",
 						"type": "`$STRING`",
-						"short": "Album genre",
+						"short": "Track genre",
 					},
 					map[string]any{
 						"name": "strItunesID",
@@ -2035,7 +2078,7 @@ func MakeConfig() map[string]any {
 						"name": "strMood",
 						"title": "Str Mood",
 						"type": "`$STRING`",
-						"short": "Album mood",
+						"short": "Track mood",
 					},
 					map[string]any{
 						"name": "strMusicBrainzAlbumID",
@@ -2053,7 +2096,7 @@ func MakeConfig() map[string]any {
 						"name": "strMusicBrainzID",
 						"title": "Str Music Brainz Id",
 						"type": "`$STRING`",
-						"short": "MusicBrainz Release Group ID",
+						"short": "MusicBrainz Recording ID",
 					},
 					map[string]any{
 						"name": "strMusicMozID",
@@ -2125,13 +2168,13 @@ func MakeConfig() map[string]any {
 						"name": "strStyle",
 						"title": "Str Style",
 						"type": "`$STRING`",
-						"short": "Album style",
+						"short": "Track style",
 					},
 					map[string]any{
 						"name": "strTheme",
 						"title": "Str Theme",
 						"type": "`$STRING`",
-						"short": "Album theme",
+						"short": "Track theme",
 					},
 					map[string]any{
 						"name": "strTrack",
@@ -2185,49 +2228,6 @@ func MakeConfig() map[string]any {
 							map[string]any{
 								"kind": "http",
 								"method": "GET",
-								"orig": "/searchalbum.php",
-								"segments": []any{
-									map[string]any{
-										"lit": "searchalbum.php",
-									},
-								},
-								"parts": []any{
-									"searchalbum.php",
-								},
-								"rename": map[string]any{},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.album`",
-								},
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"name": "a",
-											"orig": "a",
-											"type": "`$STRING`",
-											"kind": "query",
-											"example": "Homework",
-										},
-										map[string]any{
-											"name": "s",
-											"orig": "s",
-											"type": "`$STRING`",
-											"kind": "query",
-											"reqd": true,
-											"example": "daft_punk",
-										},
-									},
-								},
-								"select": map[string]any{
-									"exist": []any{
-										"a",
-										"s",
-									},
-								},
-							},
-							map[string]any{
-								"kind": "http",
-								"method": "GET",
 								"orig": "/searchtrack.php",
 								"segments": []any{
 									map[string]any{
@@ -2268,6 +2268,10 @@ func MakeConfig() map[string]any {
 										"t",
 									},
 								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 							map[string]any{
 								"kind": "http",
@@ -2301,6 +2305,10 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"s",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 							map[string]any{
@@ -2337,6 +2345,10 @@ func MakeConfig() map[string]any {
 										"s",
 									},
 								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 							map[string]any{
 								"kind": "http",
@@ -2371,6 +2383,56 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"s",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
+							},
+							map[string]any{
+								"kind": "http",
+								"method": "GET",
+								"orig": "/searchalbum.php",
+								"segments": []any{
+									map[string]any{
+										"lit": "searchalbum.php",
+									},
+								},
+								"parts": []any{
+									"searchalbum.php",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.album`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "a",
+											"orig": "a",
+											"type": "`$STRING`",
+											"kind": "query",
+											"example": "Homework",
+										},
+										map[string]any{
+											"name": "s",
+											"orig": "s",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+											"example": "daft_punk",
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"s",
+									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -2439,6 +2501,10 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"artist_id",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -2518,6 +2584,10 @@ func MakeConfig() map[string]any {
 										"album_id",
 									},
 								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 							map[string]any{
 								"kind": "http",
@@ -2564,6 +2634,10 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"artist_id",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 							map[string]any{
@@ -2612,6 +2686,10 @@ func MakeConfig() map[string]any {
 										"music_brainz_id",
 									},
 								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 							map[string]any{
 								"kind": "http",
@@ -2658,6 +2736,10 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"music_brainz_id",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 							map[string]any{
@@ -2706,6 +2788,10 @@ func MakeConfig() map[string]any {
 										"music_brainz_id",
 									},
 								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 							map[string]any{
 								"kind": "http",
@@ -2752,6 +2838,10 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"track_id",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -2831,6 +2921,10 @@ func MakeConfig() map[string]any {
 										"album_name",
 									},
 								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 							map[string]any{
 								"kind": "http",
@@ -2878,6 +2972,10 @@ func MakeConfig() map[string]any {
 										"artist_name",
 									},
 								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 							map[string]any{
 								"kind": "http",
@@ -2924,6 +3022,10 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"track_name",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},

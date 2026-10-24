@@ -649,14 +649,10 @@ V1Lookup = Struct.new(
 
 # Request payload for V1Lookup#list.
 #
-# @!attribute [rw] h
-#   @return [Integer, nil]
-#
-# @!attribute [rw] m
-#   @return [Integer, nil]
+# @!attribute [rw] i
+#   @return [String]
 V1LookupListMatch = Struct.new(
-  :h,
-  :m,
+  :i,
   keyword_init: true
 )
 
@@ -1095,18 +1091,18 @@ V1Search = Struct.new(
 
 # Request payload for V1Search#list.
 #
-# @!attribute [rw] a
-#   @return [String, nil]
-#
 # @!attribute [rw] s
 #   @return [String]
 #
 # @!attribute [rw] t
 #   @return [String, nil]
+#
+# @!attribute [rw] a
+#   @return [String, nil]
 V1SearchListMatch = Struct.new(
-  :a,
   :s,
   :t,
+  :a,
   keyword_init: true
 )
 

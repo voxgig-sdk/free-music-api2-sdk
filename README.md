@@ -52,9 +52,8 @@ const client = FreeMusicApi2SDK.test({
   },
 })
 const v2lookup = await client.V2Lookup().load({ album_id: 1 })
-// v2lookup is the V2Lookup entity, populated with mock data
-// — call v2lookup.data() for the record itself
-console.log(v2lookup)
+// v2lookup is the V2Lookup entity; .data() reads its mock record
+console.log(v2lookup.data())
 ```
 
 ### Python
@@ -62,7 +61,7 @@ console.log(v2lookup)
 ```python
 client = FreeMusicApi2SDK.test()
 v2lookup = client.V2Lookup().load({"album_id": 1})
-print(v2lookup)
+print(v2lookup.data_get())
 ```
 
 ### PHP
@@ -70,7 +69,7 @@ print(v2lookup)
 ```php
 // Seed fixture data so offline calls resolve without a live server.
 $client = FreeMusicApi2SDK::test([
-    "entity" => ["v2lookup" => ["test01" => []]],
+    "entity" => ["v2_lookup" => ["test01" => []]],
 ]);
 $v2lookup = $client->V2Lookup()->load(["album_id" => 1]);
 ```
@@ -80,7 +79,7 @@ $v2lookup = $client->V2Lookup()->load(["album_id" => 1]);
 ```go
 client := sdk.Test()
 result, err := client.V2Lookup(nil).Load(
-    nil, nil,
+    map[string]any{"album_id": 1}, nil,
 )
 ```
 
@@ -89,7 +88,7 @@ result, err := client.V2Lookup(nil).Load(
 ```ruby
 # Seed fixture data so offline calls resolve without a live server.
 client = FreeMusicApi2SDK.test({
-  "entity" => { "v2lookup" => { "test01" => {} } },
+  "entity" => { "v2_lookup" => { "test01" => {} } },
 })
 v2lookup = client.V2Lookup.load({ "album_id" => 1 })
 ```
@@ -111,8 +110,8 @@ local result, err = client:V2Lookup():load({ album_id = 1 })
 | Golang | `github.com/voxgig-sdk/free-music-api2-sdk/go` | `go get github.com/voxgig-sdk/free-music-api2-sdk/go@latest` |
 | Ruby | `voxgig-sdk-free-music-api2-sdk` | publish pending — [install from source](rb/README.md#install) |
 | Lua | `voxgig-sdk-free-music-api2-sdk` | publish pending — [install from source](lua/README.md#install) |
-| Go CLI | `github.com/voxgig-sdk/free-music-api2-sdk/go-cli` | `go install github.com/voxgig-sdk/free-music-api2-sdk/go-cli/cmd/free-music-api2@latest` |
-| Go MCP server | `github.com/voxgig-sdk/free-music-api2-sdk/go-mcp` | `go get github.com/voxgig-sdk/free-music-api2-sdk/go-mcp@latest` |
+| Go CLI | `github.com/voxgig-sdk/free-music-api2-sdk/go-cli` | build from source — [go-cli/README.md](go-cli/README.md) |
+| Go MCP server | `github.com/voxgig-sdk/free-music-api2-sdk/go-mcp` | build from source — [go-mcp/README.md](go-mcp/README.md) |
 
 ## Quickstart
 
@@ -125,12 +124,14 @@ const client = new FreeMusicApi2SDK({
   apikey: process.env.FREE_MUSIC_API2_APIKEY,
 })
 
-// List all v1lists (returns V1ListEntity[] — .data() for the record)
+// List all v1lists (returns V1ListEntity[], one entity per record)
 const v1lists = await client.V1List().list({ country: "example", format: "example", type: "example" })
 for (const v1list of v1lists) {
-  console.log(v1list)
+  console.log(v1list.data())
 }
 ```
+
+The client sends the API key in the `X-API-KEY` header.
 
 See the [TypeScript README](ts/README.md) for the full guide.
 
@@ -144,9 +145,10 @@ See the [TypeScript README](ts/README.md) for the full guide.
 
 ## Use it from an AI agent (MCP)
 
-The generated MCP server exposes every operation in this SDK as an
-[MCP](https://modelcontextprotocol.io) tool that Claude, Cursor or Cline
-can call directly. Build and register it:
+The generated MCP server exposes this SDK's list and load operations as
+[MCP](https://modelcontextprotocol.io) tools that Claude, Cursor or Cline
+can call directly. It only reads: create, update, patch and remove become tools when the SDK's model sets
+`main: kit: target: 'go-mcp': tool: write: true`. Build and register it:
 
 ```bash
 cd go-mcp && go build -o free-music-api2-mcp .
@@ -171,8 +173,8 @@ The API exposes 6 entities:
 | Entity | Description | API path |
 | --- | --- | --- |
 | **V1List** | The V1List entity (list). | `/trending.php` |
-| **V1Lookup** | The V1Lookup entity (list). | `/track.php` |
-| **V1Search** | The V1Search entity (list). | `/searchalbum.php` |
+| **V1Lookup** | The V1Lookup entity (list). | `/album-mb.php` |
+| **V1Search** | The V1Search entity (list). | `/searchtrack.php` |
 | **V2List** | The V2List entity (load). | `/list/discography/{artistId}` |
 | **V2Lookup** | The V2Lookup entity (load). | `/lookup/album/{albumId}` |
 | **V2Search** | The V2Search entity (load). | `/search/album/{albumName}` |
@@ -192,10 +194,10 @@ client = FreeMusicApi2SDK({
     "apikey": os.environ.get("FREE_MUSIC_API2_APIKEY"),
 })
 
-# List all v1lists (returns a list, raises on error)
+# List all v1lists (a list of entities, one per record; raises on error)
 v1lists = client.V1List().list({"country": "example", "format": "example", "type": "example"})
 for v1list in v1lists:
-    print(v1list)
+    print(v1list.data_get())
 ```
 
 ### PHP
@@ -208,8 +210,8 @@ $client = new FreeMusicApi2SDK([
     "apikey" => getenv("FREE_MUSIC_API2_APIKEY"),
 ]);
 
-// List all v1lists (returns an array; throws on error)
-$v1lists = $client->V1List()->list();
+// List all v1lists (an array of entities, one per record; throws on error)
+$v1lists = $client->V1List()->list(["country" => "example", "format" => "example", "type" => "example"]);
 print_r(array_map(fn($item) => $item->data_get(), $v1lists));
 ```
 
@@ -222,12 +224,14 @@ client := sdk.NewFreeMusicApi2SDK(map[string]any{
     "apikey": os.Getenv("FREE_MUSIC_API2_APIKEY"),
 })
 
-// List all v1lists
-v1Lists, err := client.V1List(nil).List(nil, nil)
+// List all v1lists (one entity per record; err is non-nil on failure)
+v1Lists, err := client.V1List(nil).List(map[string]any{"country": "example", "format": "example", "type": "example"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(v1Lists)
+for _, v1List := range v1Lists.([]any) {
+    fmt.Println(v1List.(sdk.Entity).Data())
+}
 ```
 
 ### Ruby
@@ -239,23 +243,27 @@ client = FreeMusicApi2SDK.new({
   "apikey" => ENV["FREE_MUSIC_API2_APIKEY"],
 })
 
-# List all v1lists (returns an Array; raises on error)
-v1lists = client.V1List.list
-puts v1lists
+# List all v1lists (an Array of entities, one per record; raises on error)
+v1lists = client.V1List.list({ "country" => "example", "format" => "example", "type" => "example" })
+v1lists.each { |item| puts item.data_get }
 ```
 
 ### Lua
 
 ```lua
 local sdk = require("free-music-api2_sdk")
+local json = require("dkjson")
 
 local client = sdk.new({
   apikey = os.getenv("FREE_MUSIC_API2_APIKEY"),
 })
 
--- List all v1lists
-local v1lists, err = client:V1List():list()
-print(v1lists)
+-- List all v1lists (an array of entities, one per record; err on failure)
+local v1lists, err = client:V1List():list({ country = "example", format = "example", type = "example" })
+if err then error(err) end
+for _, v1list in ipairs(v1lists) do
+  print(json.encode(v1list:data_get()))
+end
 ```
 
 ## Direct and prepare
@@ -281,10 +289,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
-if (result instanceof Error) {
-  throw result
+if (result.ok) {
+  console.log(result.data)
 }
-console.log(result.data)
 ```
 
 **Python:**
@@ -369,23 +376,52 @@ Pass custom features via the `extend` option at construction time.
 This repository contains its own generator (`.sdk/`), so the SDK is
 customizable without forking any upstream tool:
 
-- **The model** (`.sdk/model/`) declares everything this project owns:
-  package names, versions, active features, per-target settings. It is
-  written in [aontu](https://aontu.dev), a JSON-based
+- **The model** (`.sdk/model/`) is what generation reads: the API's
+  entities and operations, the targets, the features, and this project's
+  own settings. It is written in [aontu](https://aontu.dev), a JSON-based
   specification language designed for building ontologies: easy to edit
   by hand, and files unify rather than override, so small declarations
   compose into one model. Regeneration re-reads it every time.
 - **Templates** (`.sdk/tm/`) and **components** (`.sdk/src/cmp/`) are
   the two layers of generation, copied into this repo: templates are the
   literal per-language source, components generate the API-shaped parts.
-- **Regeneration merges.** By default, newly generated content is
-  three-way merged into existing files, so generator updates and local
-  edits usually converge without manual conflict handling. A project can
-  opt for plain overwrite instead.
+- **Regeneration overwrites.** Each run rewrites every generated file from
+  the model, the templates and the components, so an edit made to
+  generated output is lost. Say what this project needs in its own model
+  (`.sdk/model/project.aontu`), or extend a target with a component of its
+  own in `.sdk/src/cmp/<target>/`, registered with `registerComponent`,
+  which `voxgig-sdkgen doctor` reports as an addition rather than drift.
 - **Custom features and entire custom targets** arrive through sdkgen
   packages (`voxgig-sdkgen package add`), on the same rails as the
   bundled languages, and `voxgig-sdkgen doctor` reports any drift from
   what a resync would write.
+
+### Project map
+
+| Path | What it holds | Edit it? |
+| --- | --- | --- |
+| `.sdk/model/project.aontu` | This project's own decisions: package names, versions, features and per-target settings | Yes. The scaffold writes it once and never again. |
+| `.sdk/model/text.aontu` | The README wording, in `main.kit.text`: the tagline, the summary and the entity descriptions | Yes. The scaffold writes it once and never again. |
+| `.sdk/model/guide/guide.aontu` | How the spec's paths map onto entities and operations | Yes. The scaffold writes it once and never again. |
+| `.sdk/model/`, the rest | The API model built from the spec, and the target and feature definitions | Not by hand. Generation, `target add` and a new scaffold run rewrite it. |
+| `.sdk/def/` | The OpenAPI spec | Replace it when the API changes. Generation rebuilds the model from it. |
+| `.sdk/src/cmp/<target>/`, `.sdk/tm/<target>/` | The components and templates that generate each target | Only to add a component of your own. `target add` overwrites the copies. |
+| `.sdk/test/` | The shared test cases the generated tests run | No. |
+| `<target>/`, such as `ts/` | One generated SDK per target, with its own tests | No. Generation overwrites it. |
+| `README.md`, `LICENSE`, `Makefile` and the other root files | The repository's generated files | No. Generation overwrites them. |
+
+### Common commands
+
+Run these from `.sdk/`:
+
+```bash
+npm run generate               # regenerate every target from the model
+npm run add-target <target>    # add a target, or resync one after an sdkgen update
+npm run add-feature <feature>  # add a feature to every target
+npx voxgig-sdkgen doctor       # report where .sdk/ differs from what a resync writes
+```
+
+In an SDK directory, `make test` runs that SDK's tests.
 
 How-to: [customize and propagate templates](https://github.com/voxgig/sdkgen/blob/main/docs/how-to/customize-and-propagate-templates.md).
 The full story: [voxgig.com/sdk/custom](https://voxgig.com/sdk/custom).

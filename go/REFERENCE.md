@@ -165,14 +165,16 @@ fmt.Println(v1List.GetName()) // "v1_list"
 
 #### `List(reqmatch, ctrl map[string]any) (any, error)`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns a `[]any` of entities, one per record; `err` is non-nil on failure.
 
 ```go
-results, err := client.V1List(nil).List(nil, nil)
+results, err := client.V1List(nil).List(map[string]any{"country": "example", "format": "example", "type": "example"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(results)
+for _, item := range results.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 ### Common Methods
@@ -192,6 +194,14 @@ Get or set the entity match criteria. Works the same as `Data()`.
 Create a new `V1ListEntity` instance with the same client and
 options.
 
+#### `Stream(action string, args map[string]any, callopts map[string]any) <-chan StreamItem`
+
+Run an operation through the pipeline and send its result items on the
+returned channel, which closes when the stream ends. A `StreamItem` holds
+one item in `Item`, or in `Err` the error that ended the stream: the
+error the operation itself would return, sent as the last value. Under
+`throw: false` in `callopts["ctrl"]`, no error is sent.
+
 #### `GetName() string`
 
 Return the entity name.
@@ -210,7 +220,7 @@ fmt.Println(v1Lookup.GetName()) // "v1_lookup"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `idAlbum` | `int` | No | Album ID |
+| `idAlbum` | `int` | No | Unique album ID |
 | `idArtist` | `int` | No | Artist ID |
 | `idIMVDB` | `int` | No | IMVDB ID |
 | `idLabel` | `int` | No | Label ID |
@@ -230,7 +240,7 @@ fmt.Println(v1Lookup.GetName()) // "v1_lookup"
 | `intMusicVidLikes` | `int` | No | Number of music video likes |
 | `intMusicVidViews` | `int` | No | Number of music video views |
 | `intSales` | `int` | No | Number of sales |
-| `intScore` | `int` | No | Track score |
+| `intScore` | `int` | No | Album score |
 | `intScoreVotes` | `int` | No | Number of score votes |
 | `intTotalListeners` | `int` | No | Total number of listeners |
 | `intTotalPlays` | `int` | No | Total number of plays |
@@ -281,13 +291,13 @@ fmt.Println(v1Lookup.GetName()) // "v1_lookup"
 | `strBiographySE` | `string` | No | Artist biography in Swedish |
 | `strCountry` | `string` | No | Country of origin |
 | `strCountryCode` | `string` | No | Country code |
-| `strDescriptionEN` | `string` | No | Track description in English |
+| `strDescriptionEN` | `string` | No | Album description in English |
 | `strDisbanded` | `string` | No | Disbanded status |
 | `strDiscogsID` | `string` | No | Discogs ID |
 | `strFacebook` | `string` | No | Facebook page URL |
 | `strGender` | `string` | No | Artist gender |
 | `strGeniusID` | `string` | No | Genius ID |
-| `strGenre` | `string` | No | Track genre |
+| `strGenre` | `string` | No | Album genre |
 | `strInstagram` | `string` | No | Instagram profile URL |
 | `strItunesID` | `string` | No | iTunes ID |
 | `strLabel` | `string` | No | Record label |
@@ -295,10 +305,10 @@ fmt.Println(v1Lookup.GetName()) // "v1_lookup"
 | `strLocation` | `string` | No | Recording location |
 | `strLocked` | `string` | No | Whether the record is locked |
 | `strLyricWikiID` | `string` | No | LyricWiki ID |
-| `strMood` | `string` | No | Track mood |
+| `strMood` | `string` | No | Album mood |
 | `strMusicBrainzAlbumID` | `string` | No | MusicBrainz Album ID |
 | `strMusicBrainzArtistID` | `string` | No | MusicBrainz Artist ID |
-| `strMusicBrainzID` | `string` | No | MusicBrainz Recording ID |
+| `strMusicBrainzID` | `string` | No | MusicBrainz Release Group ID |
 | `strMusicMozID` | `string` | No | MusicMoz ID |
 | `strMusicVid` | `string` | No | URL to music video |
 | `strMusicVidCompany` | `string` | No | Music video production company |
@@ -312,8 +322,8 @@ fmt.Println(v1Lookup.GetName()) // "v1_lookup"
 | `strSoundCloud` | `string` | No | SoundCloud profile URL |
 | `strSpeed` | `string` | No | Album speed |
 | `strSpotify` | `string` | No | Spotify artist URL |
-| `strStyle` | `string` | No | Track style |
-| `strTheme` | `string` | No | Track theme |
+| `strStyle` | `string` | No | Album style |
+| `strTheme` | `string` | No | Album theme |
 | `strTrack` | `string` | No | Track title |
 | `strTrackLyrics` | `string` | No | Track lyrics |
 | `strTrackThumb` | `string` | No | URL to track thumbnail |
@@ -327,14 +337,16 @@ fmt.Println(v1Lookup.GetName()) // "v1_lookup"
 
 #### `List(reqmatch, ctrl map[string]any) (any, error)`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns a `[]any` of entities, one per record; `err` is non-nil on failure.
 
 ```go
-results, err := client.V1Lookup(nil).List(nil, nil)
+results, err := client.V1Lookup(nil).List(map[string]any{"i": "example"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(results)
+for _, item := range results.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 ### Common Methods
@@ -354,6 +366,14 @@ Get or set the entity match criteria. Works the same as `Data()`.
 Create a new `V1LookupEntity` instance with the same client and
 options.
 
+#### `Stream(action string, args map[string]any, callopts map[string]any) <-chan StreamItem`
+
+Run an operation through the pipeline and send its result items on the
+returned channel, which closes when the stream ends. A `StreamItem` holds
+one item in `Item`, or in `Err` the error that ended the stream: the
+error the operation itself would return, sent as the last value. Under
+`throw: false` in `callopts["ctrl"]`, no error is sent.
+
 #### `GetName() string`
 
 Return the entity name.
@@ -372,7 +392,7 @@ fmt.Println(v1Search.GetName()) // "v1_search"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `idAlbum` | `int` | No | Unique album ID |
+| `idAlbum` | `int` | No | Album ID |
 | `idArtist` | `int` | No | Artist ID |
 | `idIMVDB` | `int` | No | IMVDB ID |
 | `idLabel` | `int` | No | Label ID |
@@ -392,7 +412,7 @@ fmt.Println(v1Search.GetName()) // "v1_search"
 | `intMusicVidLikes` | `int` | No | Number of music video likes |
 | `intMusicVidViews` | `int` | No | Number of music video views |
 | `intSales` | `int` | No | Number of sales |
-| `intScore` | `int` | No | Album score |
+| `intScore` | `int` | No | Track score |
 | `intScoreVotes` | `int` | No | Number of score votes |
 | `intTotalListeners` | `int` | No | Total number of listeners |
 | `intTotalPlays` | `int` | No | Total number of plays |
@@ -442,23 +462,23 @@ fmt.Println(v1Search.GetName()) // "v1_search"
 | `strBiographySE` | `string` | No | Artist biography in Swedish |
 | `strCountry` | `string` | No | Country of origin |
 | `strCountryCode` | `string` | No | Country code |
-| `strDescriptionEN` | `string` | No | Album description in English |
+| `strDescriptionEN` | `string` | No | Track description in English |
 | `strDisbanded` | `string` | No | Disbanded status |
 | `strDiscogsID` | `string` | No | Discogs ID |
 | `strFacebook` | `string` | No | Facebook page URL |
 | `strGender` | `string` | No | Artist gender |
 | `strGeniusID` | `string` | No | Genius ID |
-| `strGenre` | `string` | No | Album genre |
+| `strGenre` | `string` | No | Track genre |
 | `strItunesID` | `string` | No | iTunes ID |
 | `strLabel` | `string` | No | Record label |
 | `strLastFMChart` | `string` | No | Last.fm chart URL |
 | `strLocation` | `string` | No | Recording location |
 | `strLocked` | `string` | No | Whether the record is locked |
 | `strLyricWikiID` | `string` | No | LyricWiki ID |
-| `strMood` | `string` | No | Album mood |
+| `strMood` | `string` | No | Track mood |
 | `strMusicBrainzAlbumID` | `string` | No | MusicBrainz Album ID |
 | `strMusicBrainzArtistID` | `string` | No | MusicBrainz Artist ID |
-| `strMusicBrainzID` | `string` | No | MusicBrainz Release Group ID |
+| `strMusicBrainzID` | `string` | No | MusicBrainz Recording ID |
 | `strMusicMozID` | `string` | No | MusicMoz ID |
 | `strMusicVid` | `string` | No | URL to music video |
 | `strMusicVidCompany` | `string` | No | Music video production company |
@@ -470,8 +490,8 @@ fmt.Println(v1Search.GetName()) // "v1_search"
 | `strReleaseFormat` | `string` | No | Release format (CD, Vinyl, etc.) |
 | `strReview` | `string` | No | Album review |
 | `strSpeed` | `string` | No | Album speed |
-| `strStyle` | `string` | No | Album style |
-| `strTheme` | `string` | No | Album theme |
+| `strStyle` | `string` | No | Track style |
+| `strTheme` | `string` | No | Track theme |
 | `strTrack` | `string` | No | Track title |
 | `strTrackLyrics` | `string` | No | Track lyrics |
 | `strTrackThumb` | `string` | No | URL to track thumbnail |
@@ -484,14 +504,16 @@ fmt.Println(v1Search.GetName()) // "v1_search"
 
 #### `List(reqmatch, ctrl map[string]any) (any, error)`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns a `[]any` of entities, one per record; `err` is non-nil on failure.
 
 ```go
-results, err := client.V1Search(nil).List(nil, nil)
+results, err := client.V1Search(nil).List(map[string]any{"s": "example"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(results)
+for _, item := range results.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 ### Common Methods
@@ -510,6 +532,14 @@ Get or set the entity match criteria. Works the same as `Data()`.
 
 Create a new `V1SearchEntity` instance with the same client and
 options.
+
+#### `Stream(action string, args map[string]any, callopts map[string]any) <-chan StreamItem`
+
+Run an operation through the pipeline and send its result items on the
+returned channel, which closes when the stream ends. A `StreamItem` holds
+one item in `Item`, or in `Err` the error that ended the stream: the
+error the operation itself would return, sent as the last value. Under
+`throw: false` in `callopts["ctrl"]`, no error is sent.
 
 #### `GetName() string`
 
@@ -535,14 +565,14 @@ fmt.Println(v2List.GetName()) // "v2_list"
 
 #### `Load(reqmatch, ctrl map[string]any) (any, error)`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity, whose record `Data()` reads; `err` is non-nil on failure.
 
 ```go
 result, err := client.V2List(nil).Load(map[string]any{"artist_id": 1}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(result)
+fmt.Println(result.(sdk.Entity).Data())
 ```
 
 ### Common Methods
@@ -561,6 +591,14 @@ Get or set the entity match criteria. Works the same as `Data()`.
 
 Create a new `V2ListEntity` instance with the same client and
 options.
+
+#### `Stream(action string, args map[string]any, callopts map[string]any) <-chan StreamItem`
+
+Run an operation through the pipeline and send its result items on the
+returned channel, which closes when the stream ends. A `StreamItem` holds
+one item in `Item`, or in `Err` the error that ended the stream: the
+error the operation itself would return, sent as the last value. Under
+`throw: false` in `callopts["ctrl"]`, no error is sent.
 
 #### `GetName() string`
 
@@ -588,14 +626,14 @@ fmt.Println(v2Lookup.GetName()) // "v2_lookup"
 
 #### `Load(reqmatch, ctrl map[string]any) (any, error)`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity, whose record `Data()` reads; `err` is non-nil on failure.
 
 ```go
 result, err := client.V2Lookup(nil).Load(map[string]any{"album_id": 1}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(result)
+fmt.Println(result.(sdk.Entity).Data())
 ```
 
 ### Common Methods
@@ -614,6 +652,14 @@ Get or set the entity match criteria. Works the same as `Data()`.
 
 Create a new `V2LookupEntity` instance with the same client and
 options.
+
+#### `Stream(action string, args map[string]any, callopts map[string]any) <-chan StreamItem`
+
+Run an operation through the pipeline and send its result items on the
+returned channel, which closes when the stream ends. A `StreamItem` holds
+one item in `Item`, or in `Err` the error that ended the stream: the
+error the operation itself would return, sent as the last value. Under
+`throw: false` in `callopts["ctrl"]`, no error is sent.
 
 #### `GetName() string`
 
@@ -641,14 +687,14 @@ fmt.Println(v2Search.GetName()) // "v2_search"
 
 #### `Load(reqmatch, ctrl map[string]any) (any, error)`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity, whose record `Data()` reads; `err` is non-nil on failure.
 
 ```go
 result, err := client.V2Search(nil).Load(map[string]any{"album_name": "album_name"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(result)
+fmt.Println(result.(sdk.Entity).Data())
 ```
 
 ### Common Methods
@@ -667,6 +713,14 @@ Get or set the entity match criteria. Works the same as `Data()`.
 
 Create a new `V2SearchEntity` instance with the same client and
 options.
+
+#### `Stream(action string, args map[string]any, callopts map[string]any) <-chan StreamItem`
+
+Run an operation through the pipeline and send its result items on the
+returned channel, which closes when the stream ends. A `StreamItem` holds
+one item in `Item`, or in `Err` the error that ended the stream: the
+error the operation itself would return, sent as the last value. Under
+`throw: false` in `callopts["ctrl"]`, no error is sent.
 
 #### `GetName() string`
 
@@ -832,6 +886,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

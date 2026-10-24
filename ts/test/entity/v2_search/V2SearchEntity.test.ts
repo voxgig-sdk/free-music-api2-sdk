@@ -9,7 +9,7 @@ import { createLiveTransport } from '../../live-runner'
 import { runLiveEntity } from '../../live-entity'
 
 
-import { FreeMusicApi2SDK, BaseFeature, stdutil } from '../../..'
+import { FreeMusicApi2SDK, BaseFeature, config, stdutil } from '../../..'
 
 import {
   envOverride,
@@ -41,17 +41,29 @@ describe('V2SearchEntity', async () => {
   })
 
 
+  test('validate', async (t) => {
+    if (null == (config as any).feature?.validate) {
+      t.skip('feature not present in this SDK: validate')
+      return
+    }
+    const client = FreeMusicApi2SDK.test(undefined, { feature: { validate: { active: true } } })
+    await assert.rejects(client.V2Search().load({"album_name":1} as any),
+      (err: any) => 'validate_failed' === err.code)
+  })
+
+
+
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.FREE_MUSIC_API2_TEST_LIVE
-    for (const op of ['load']) {
+    for (const op of []) {
       if (!live && maybeSkipControl(t, 'entityOp', 'v2_search.' + op, live)) return
     }
 
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"albums":{"a":true,"h":"Albums","n":"albums","r":false,"t":"`$ARRAY`","key$":"albums","index$":0},"artists":{"a":true,"h":"Artists","n":"artists","r":false,"t":"`$ARRAY`","key$":"artists","index$":1},"tracks":{"a":true,"h":"Tracks","n":"tracks","r":false,"t":"`$ARRAY`","key$":"tracks","index$":2}},"name":"v2_search","op":{"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /search/album/{albumName}","source":"openapi3","version":2},"g":{"params":[{"a":true,"ex":"parachutes","k":"param","n":"album_name","or":"albumName","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"GET","o":"/search/album/{albumName}","q":{"exist":["album_name"]},"r":{"param":{"albumName":"album_name"}},"s":[{"lit":"search"},{"lit":"album"},{"var":"album_name"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0},{"a":true,"co":{"id":"GET /search/artist/{artistName}","source":"openapi3","version":2},"g":{"params":[{"a":true,"ex":"coldplay","k":"param","n":"artist_name","or":"artistName","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"GET","o":"/search/artist/{artistName}","q":{"exist":["artist_name"]},"r":{"param":{"artistName":"artist_name"}},"s":[{"lit":"search"},{"lit":"artist"},{"var":"artist_name"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":1},{"a":true,"co":{"id":"GET /search/track/{trackName}","source":"openapi3","version":2},"g":{"params":[{"a":true,"ex":"yellow","k":"param","n":"track_name","or":"trackName","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"GET","o":"/search/track/{trackName}","q":{"exist":["track_name"]},"r":{"param":{"trackName":"track_name"}},"s":[{"lit":"search"},{"lit":"track"},{"var":"track_name"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":2}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"v2_search","name__orig":"v2_search","Name":"V2Search","name_":"v2_search","name-":"v2-search","NAME":"V2_SEARCH","index$":5}, {"active":true,"entity":"v2_search","key$":"BasicV2SearchFlow","kind":"basic","name":"BasicV2SearchFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"v2_search_ref01","srcdatavar":"v2_search_ref01_data","suffix":"_dt0"},"m":{"id":"v2_search01"},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-v2_search_ref01"}}],"index$":0}]}, 'V2Search', {"GET /search/album/{albumName}":{"protocol":"http","parameters":[{"name":"albumName","in":"path","description":"Album name to search for","required":true,"schema":{"type":"string"},"example":"parachutes","index$":0}]},"GET /search/artist/{artistName}":{"protocol":"http","parameters":[{"name":"artistName","in":"path","description":"Artist name to search for","required":true,"schema":{"type":"string"},"example":"coldplay","index$":0}]},"GET /search/track/{trackName}":{"protocol":"http","parameters":[{"name":"trackName","in":"path","description":"Track name to search for","required":true,"schema":{"type":"string"},"example":"yellow","index$":0}]}})
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"albums":{"a":true,"h":"Albums","n":"albums","r":false,"t":"`$ARRAY`","key$":"albums","index$":0},"artists":{"a":true,"h":"Artists","n":"artists","r":false,"t":"`$ARRAY`","key$":"artists","index$":1},"tracks":{"a":true,"h":"Tracks","n":"tracks","r":false,"t":"`$ARRAY`","key$":"tracks","index$":2}},"name":"v2_search","op":{"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /search/album/{albumName}","source":"openapi3","version":2},"g":{"params":[{"a":true,"ex":"parachutes","k":"param","n":"album_name","or":"albumName","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"GET","o":"/search/album/{albumName}","q":{"exist":["album_name"]},"r":{"param":{"albumName":"album_name"}},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"search"},{"lit":"album"},{"var":"album_name"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0},{"a":true,"co":{"id":"GET /search/artist/{artistName}","source":"openapi3","version":2},"g":{"params":[{"a":true,"ex":"coldplay","k":"param","n":"artist_name","or":"artistName","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"GET","o":"/search/artist/{artistName}","q":{"exist":["artist_name"]},"r":{"param":{"artistName":"artist_name"}},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"search"},{"lit":"artist"},{"var":"artist_name"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":1},{"a":true,"co":{"id":"GET /search/track/{trackName}","source":"openapi3","version":2},"g":{"params":[{"a":true,"ex":"yellow","k":"param","n":"track_name","or":"trackName","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"GET","o":"/search/track/{trackName}","q":{"exist":["track_name"]},"r":{"param":{"trackName":"track_name"}},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"search"},{"lit":"track"},{"var":"track_name"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":2}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"v2_search","name__orig":"v2_search","Name":"V2Search","name_":"v2_search","name-":"v2-search","NAME":"V2_SEARCH","index$":5}, {"active":true,"entity":"v2_search","key$":"BasicV2SearchFlow","kind":"basic","name":"BasicV2SearchFlow","param":{},"step":[{"a":false,"d":{},"i":{"ref":"v2_search_ref01","srcdatavar":"v2_search_ref01_data","suffix":"_dt0"},"m":{"id":"v2_search01"},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-v2_search_ref01"}}],"unreachable":true}]}, 'V2Search', {"GET /search/album/{albumName}":{"protocol":"http","parameters":[{"name":"albumName","in":"path","description":"Album name to search for","required":true,"schema":{"type":"string"},"example":"parachutes","index$":0}]},"GET /search/artist/{artistName}":{"protocol":"http","parameters":[{"name":"artistName","in":"path","description":"Artist name to search for","required":true,"schema":{"type":"string"},"example":"coldplay","index$":0}]},"GET /search/track/{trackName}":{"protocol":"http","parameters":[{"name":"trackName","in":"path","description":"Track name to search for","required":true,"schema":{"type":"string"},"example":"yellow","index$":0}]}}, { strict: LIVE_STRICT, t })
     }
     const client = setup.client
     const struct = setup.struct
@@ -61,15 +73,16 @@ describe('V2SearchEntity', async () => {
 
     let v2_search_ref01_data = Object.values(setup.data.existing.v2_search)[0] as any
 
-    // LOAD: skipped — no entity id field and load requires path params.
-    // Entity-var is declared here so later flow steps still compile.
-    const v2_search_ref01_ent = client.V2Search()
-
-
   })
 })
 
 
+
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true
 
 function basicSetup(extra?: any) {
   // TODO: fix test def options

@@ -464,16 +464,6 @@
     }
   },
   "requests": {
-    "GET /track.php": {
-      "provenance": "operation-contract",
-      "version": 2,
-      "source": "openapi3"
-    },
-    "GET /album.php": {
-      "provenance": "operation-contract",
-      "version": 2,
-      "source": "openapi3"
-    },
     "GET /album-mb.php": {
       "provenance": "operation-contract",
       "version": 2,
@@ -495,6 +485,16 @@
       "source": "openapi3"
     },
     "GET /track-mb.php": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /album.php": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /track.php": {
       "provenance": "operation-contract",
       "version": 2,
       "source": "openapi3"

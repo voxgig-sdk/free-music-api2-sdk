@@ -161,8 +161,7 @@ export interface V1Lookup {
     strYoutube?: string;
 }
 export interface V1LookupListMatch {
-    h?: number;
-    m?: number;
+    i: string;
 }
 export interface V1Search {
     idAlbum?: number;
@@ -274,9 +273,9 @@ export interface V1Search {
     strWikipediaID?: string;
 }
 export interface V1SearchListMatch {
-    a?: string;
     s: string;
     t?: string;
+    a?: string;
 }
 export interface V2List {
     albums?: any[];

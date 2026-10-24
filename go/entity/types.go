@@ -29,8 +29,7 @@ type V1Lookup struct {
 
 // V1LookupListMatch is the typed request payload for V1Lookup.ListTyped.
 type V1LookupListMatch struct {
-	H *int `json:"h,omitempty"`
-	M *int `json:"m,omitempty"`
+	I string `json:"i"`
 }
 
 // V1Search is the typed data model for the v1_search entity.
@@ -39,9 +38,9 @@ type V1Search struct {
 
 // V1SearchListMatch is the typed request payload for V1Search.ListTyped.
 type V1SearchListMatch struct {
-	A *string `json:"a,omitempty"`
 	S string `json:"s"`
 	T *string `json:"t,omitempty"`
+	A *string `json:"a,omitempty"`
 }
 
 // V2List is the typed data model for the v2_list entity.

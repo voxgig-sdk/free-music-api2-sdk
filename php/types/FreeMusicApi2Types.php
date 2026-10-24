@@ -186,8 +186,7 @@ class V1Lookup
 /** Request payload for V1Lookup#list. */
 class V1LookupListMatch
 {
-    public ?int $h = null;
-    public ?int $m = null;
+    public string $i;
 }
 
 /** V1Search entity data model. */
@@ -305,9 +304,9 @@ class V1Search
 /** Request payload for V1Search#list. */
 class V1SearchListMatch
 {
-    public ?string $a = null;
     public string $s;
     public ?string $t = null;
+    public ?string $a = null;
 }
 
 /** V2List entity data model. */

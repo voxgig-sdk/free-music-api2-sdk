@@ -12,7 +12,7 @@ The SDK exposes the API as capitalised, semantic **Entities** — for example `c
 
 ## Install
 This package is not yet published to RubyGems. Install it from the
-GitHub release tag (`rb/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/free-music-api2-sdk/releases)), or
+GitHub release tag (`rb/vX.Y.Z`, see [Tags](https://github.com/voxgig-sdk/free-music-api2-sdk/tags)), or
 from a clone:
 
 ```bash
@@ -29,7 +29,7 @@ gem "voxgig-sdk-free-music-api2-sdk", path: "./free-music-api2-sdk/rb"
 ## Tutorial: your first API call
 
 This tutorial walks through creating a client, listing entities, and
-loading a specific record.
+loading a specific record. The client sends the API key in the `X-API-KEY` header.
 
 ### 1. Create a client
 
@@ -45,10 +45,11 @@ client = FreeMusicApi2SDK.new({
 
 ```ruby
 begin
-  # list returns an Array of V1List records — iterate directly.
-  v1lists = client.V1List.list
+  # list returns an Array of V1List entities, one per record; data_get reads the record.
+  v1lists = client.V1List.list({ "country" => "example", "format" => "example", "type" => "example" })
   v1lists.each do |item|
-    puts "#{item["idAlbum"]}"
+    record = item.data_get
+    puts "#{record["idAlbum"]}"
   end
 rescue => err
   warn "list failed: #{err}"
@@ -131,9 +132,9 @@ Create a mock client for unit testing — no server required:
 client = FreeMusicApi2SDK.test
 
 # Entity ops return the ENTITY (raises on error);
-# call data_get for the mock record.
+# data_get reads its mock record.
 v2lookup = client.V2Lookup.load({ "album_id" => 1 })
-puts v2lookup
+puts v2lookup.data_get
 ```
 
 ### Use a custom fetch function
@@ -224,8 +225,8 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
-| `list` | `(reqmatch = nil, ctrl) -> Array` | List entities matching the criteria (call with no argument to list all). Raises on error. |
+| `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria, and return it. Raises on error. |
+| `list` | `(reqmatch = nil, ctrl) -> Array` | List entities matching the criteria (call with no argument to list all), one per record. Raises on error. |
 | `data_get` | `() -> Hash` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> Hash` | Get entity match criteria. |
@@ -235,9 +236,10 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the result data directly. On failure they
-raise a `FreeMusicApi2Error` (a `StandardError` subclass), so wrap
-calls in `begin`/`rescue` where you need to handle errors.
+Entity operations return the entity, and `list` an `Array` of entities, one
+per record; an entity's `data_get` reads its record. On failure they raise a
+`FreeMusicApi2Error` (a `StandardError` subclass), so wrap calls in
+`begin`/`rescue` where you need to handle errors.
 
 The `direct` escape hatch is the exception: it never raises and instead
 returns a result `Hash` with these keys:
@@ -306,7 +308,7 @@ API path: `/trending.php`
 
 | Field | Description |
 | --- | --- |
-| `idAlbum` | Album ID |
+| `idAlbum` | Unique album ID |
 | `idArtist` | Artist ID |
 | `idIMVDB` | IMVDB ID |
 | `idLabel` | Label ID |
@@ -326,7 +328,7 @@ API path: `/trending.php`
 | `intMusicVidLikes` | Number of music video likes |
 | `intMusicVidViews` | Number of music video views |
 | `intSales` | Number of sales |
-| `intScore` | Track score |
+| `intScore` | Album score |
 | `intScoreVotes` | Number of score votes |
 | `intTotalListeners` | Total number of listeners |
 | `intTotalPlays` | Total number of plays |
@@ -377,13 +379,13 @@ API path: `/trending.php`
 | `strBiographySE` | Artist biography in Swedish |
 | `strCountry` | Country of origin |
 | `strCountryCode` | Country code |
-| `strDescriptionEN` | Track description in English |
+| `strDescriptionEN` | Album description in English |
 | `strDisbanded` | Disbanded status |
 | `strDiscogsID` | Discogs ID |
 | `strFacebook` | Facebook page URL |
 | `strGender` | Artist gender |
 | `strGeniusID` | Genius ID |
-| `strGenre` | Track genre |
+| `strGenre` | Album genre |
 | `strInstagram` | Instagram profile URL |
 | `strItunesID` | iTunes ID |
 | `strLabel` | Record label |
@@ -391,10 +393,10 @@ API path: `/trending.php`
 | `strLocation` | Recording location |
 | `strLocked` | Whether the record is locked |
 | `strLyricWikiID` | LyricWiki ID |
-| `strMood` | Track mood |
+| `strMood` | Album mood |
 | `strMusicBrainzAlbumID` | MusicBrainz Album ID |
 | `strMusicBrainzArtistID` | MusicBrainz Artist ID |
-| `strMusicBrainzID` | MusicBrainz Recording ID |
+| `strMusicBrainzID` | MusicBrainz Release Group ID |
 | `strMusicMozID` | MusicMoz ID |
 | `strMusicVid` | URL to music video |
 | `strMusicVidCompany` | Music video production company |
@@ -408,8 +410,8 @@ API path: `/trending.php`
 | `strSoundCloud` | SoundCloud profile URL |
 | `strSpeed` | Album speed |
 | `strSpotify` | Spotify artist URL |
-| `strStyle` | Track style |
-| `strTheme` | Track theme |
+| `strStyle` | Album style |
+| `strTheme` | Album theme |
 | `strTrack` | Track title |
 | `strTrackLyrics` | Track lyrics |
 | `strTrackThumb` | URL to track thumbnail |
@@ -421,13 +423,13 @@ API path: `/trending.php`
 
 Operations: List.
 
-API path: `/track.php`
+API path: `/album-mb.php`
 
 #### V1Search
 
 | Field | Description |
 | --- | --- |
-| `idAlbum` | Unique album ID |
+| `idAlbum` | Album ID |
 | `idArtist` | Artist ID |
 | `idIMVDB` | IMVDB ID |
 | `idLabel` | Label ID |
@@ -447,7 +449,7 @@ API path: `/track.php`
 | `intMusicVidLikes` | Number of music video likes |
 | `intMusicVidViews` | Number of music video views |
 | `intSales` | Number of sales |
-| `intScore` | Album score |
+| `intScore` | Track score |
 | `intScoreVotes` | Number of score votes |
 | `intTotalListeners` | Total number of listeners |
 | `intTotalPlays` | Total number of plays |
@@ -497,23 +499,23 @@ API path: `/track.php`
 | `strBiographySE` | Artist biography in Swedish |
 | `strCountry` | Country of origin |
 | `strCountryCode` | Country code |
-| `strDescriptionEN` | Album description in English |
+| `strDescriptionEN` | Track description in English |
 | `strDisbanded` | Disbanded status |
 | `strDiscogsID` | Discogs ID |
 | `strFacebook` | Facebook page URL |
 | `strGender` | Artist gender |
 | `strGeniusID` | Genius ID |
-| `strGenre` | Album genre |
+| `strGenre` | Track genre |
 | `strItunesID` | iTunes ID |
 | `strLabel` | Record label |
 | `strLastFMChart` | Last.fm chart URL |
 | `strLocation` | Recording location |
 | `strLocked` | Whether the record is locked |
 | `strLyricWikiID` | LyricWiki ID |
-| `strMood` | Album mood |
+| `strMood` | Track mood |
 | `strMusicBrainzAlbumID` | MusicBrainz Album ID |
 | `strMusicBrainzArtistID` | MusicBrainz Artist ID |
-| `strMusicBrainzID` | MusicBrainz Release Group ID |
+| `strMusicBrainzID` | MusicBrainz Recording ID |
 | `strMusicMozID` | MusicMoz ID |
 | `strMusicVid` | URL to music video |
 | `strMusicVidCompany` | Music video production company |
@@ -525,8 +527,8 @@ API path: `/track.php`
 | `strReleaseFormat` | Release format (CD, Vinyl, etc.) |
 | `strReview` | Album review |
 | `strSpeed` | Album speed |
-| `strStyle` | Album style |
-| `strTheme` | Album theme |
+| `strStyle` | Track style |
+| `strTheme` | Track theme |
 | `strTrack` | Track title |
 | `strTrackLyrics` | Track lyrics |
 | `strTrackThumb` | URL to track thumbnail |
@@ -537,7 +539,7 @@ API path: `/track.php`
 
 Operations: List.
 
-API path: `/searchalbum.php`
+API path: `/searchtrack.php`
 
 #### V2List
 
@@ -637,149 +639,15 @@ Create an instance: `v1_list = client.V1List`
 #### Example: List
 
 ```ruby
-# list returns an Array of V1List records (raises on error).
-v1_lists = client.V1List.list
+# list returns an Array of V1List entities, one per record (raises on error).
+v1_lists = client.V1List.list({ "country" => "example", "format" => "example", "type" => "example" })
+v1_lists.each { |item| puts item.data_get }
 ```
 
 
 ### V1Lookup
 
 Create an instance: `v1_lookup = client.V1Lookup`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `list(match)` | List entities matching the criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `idAlbum` | `Integer` | Album ID |
-| `idArtist` | `Integer` | Artist ID |
-| `idIMVDB` | `Integer` | IMVDB ID |
-| `idLabel` | `Integer` | Label ID |
-| `idLyric` | `Integer` | Lyrics ID |
-| `idTrack` | `Integer` | Unique track ID |
-| `intBornYear` | `Integer` | Birth year of the artist |
-| `intCD` | `Integer` | CD number |
-| `intCharted` | `Integer` | Chart position |
-| `intDiedYear` | `Integer` | Year the artist died (if applicable) |
-| `intDuration` | `Integer` | Track duration in milliseconds |
-| `intFormedYear` | `Integer` | Year the artist/band was formed |
-| `intLoved` | `Integer` | Number of loves/likes |
-| `intMembers` | `Integer` | Number of band members |
-| `intMusicVidComments` | `Integer` | Number of music video comments |
-| `intMusicVidDislikes` | `Integer` | Number of music video dislikes |
-| `intMusicVidFavorites` | `Integer` | Number of music video favorites |
-| `intMusicVidLikes` | `Integer` | Number of music video likes |
-| `intMusicVidViews` | `Integer` | Number of music video views |
-| `intSales` | `Integer` | Number of sales |
-| `intScore` | `Integer` | Track score |
-| `intScoreVotes` | `Integer` | Number of score votes |
-| `intTotalListeners` | `Integer` | Total number of listeners |
-| `intTotalPlays` | `Integer` | Total number of plays |
-| `intTrackNumber` | `Integer` | Track number on album |
-| `intYearReleased` | `Integer` | Year the album was released |
-| `strAlbum` | `String` | Album title |
-| `strAlbum3DCase` | `String` | URL to 3D case image |
-| `strAlbum3DFace` | `String` | URL to 3D face image |
-| `strAlbum3DFlat` | `String` | URL to 3D flat image |
-| `strAlbum3DThumb` | `String` | URL to 3D thumbnail |
-| `strAlbumCDart` | `String` | URL to CD art |
-| `strAlbumSpine` | `String` | URL to album spine image |
-| `strAlbumStripped` | `String` | Album title without special characters |
-| `strAlbumThumb` | `String` | URL to album thumbnail |
-| `strAlbumThumbBack` | `String` | URL to back of album cover |
-| `strAlbumThumbHQ` | `String` | URL to high quality album thumbnail |
-| `strAllMusicID` | `String` | AllMusic ID |
-| `strAmazonID` | `String` | Amazon ID |
-| `strAppleMusic` | `String` | Apple Music artist URL |
-| `strArtist` | `String` | Artist name |
-| `strArtistAlternate` | `String` | Alternate artist name |
-| `strArtistBanner` | `String` | URL to artist banner |
-| `strArtistClearart` | `String` | URL to artist clearart |
-| `strArtistCutout` | `String` | URL to artist cutout image |
-| `strArtistFanart` | `String` | URL to artist fanart |
-| `strArtistFanart2` | `String` | URL to alternate artist fanart |
-| `strArtistFanart3` | `String` | URL to third artist fanart |
-| `strArtistFanart4` | `String` | URL to fourth artist fanart |
-| `strArtistLogo` | `String` | URL to artist logo |
-| `strArtistStripped` | `String` | Artist name without special characters |
-| `strArtistThumb` | `String` | URL to artist thumbnail image |
-| `strArtistWideThumb` | `String` | URL to artist wide thumbnail |
-| `strBBCReviewID` | `String` | BBC Review ID |
-| `strBiographyCN` | `String` | Artist biography in Chinese |
-| `strBiographyDE` | `String` | Artist biography in German |
-| `strBiographyEN` | `String` | Artist biography in English |
-| `strBiographyES` | `String` | Artist biography in Spanish |
-| `strBiographyFR` | `String` | Artist biography in French |
-| `strBiographyHU` | `String` | Artist biography in Hungarian |
-| `strBiographyIL` | `String` | Artist biography in Hebrew |
-| `strBiographyIT` | `String` | Artist biography in Italian |
-| `strBiographyJP` | `String` | Artist biography in Japanese |
-| `strBiographyNL` | `String` | Artist biography in Dutch |
-| `strBiographyNO` | `String` | Artist biography in Norwegian |
-| `strBiographyPL` | `String` | Artist biography in Polish |
-| `strBiographyPT` | `String` | Artist biography in Portuguese |
-| `strBiographyRU` | `String` | Artist biography in Russian |
-| `strBiographySE` | `String` | Artist biography in Swedish |
-| `strCountry` | `String` | Country of origin |
-| `strCountryCode` | `String` | Country code |
-| `strDescriptionEN` | `String` | Track description in English |
-| `strDisbanded` | `String` | Disbanded status |
-| `strDiscogsID` | `String` | Discogs ID |
-| `strFacebook` | `String` | Facebook page URL |
-| `strGender` | `String` | Artist gender |
-| `strGeniusID` | `String` | Genius ID |
-| `strGenre` | `String` | Track genre |
-| `strInstagram` | `String` | Instagram profile URL |
-| `strItunesID` | `String` | iTunes ID |
-| `strLabel` | `String` | Record label |
-| `strLastFMChart` | `String` | Last.fm chart URL |
-| `strLocation` | `String` | Recording location |
-| `strLocked` | `String` | Whether the record is locked |
-| `strLyricWikiID` | `String` | LyricWiki ID |
-| `strMood` | `String` | Track mood |
-| `strMusicBrainzAlbumID` | `String` | MusicBrainz Album ID |
-| `strMusicBrainzArtistID` | `String` | MusicBrainz Artist ID |
-| `strMusicBrainzID` | `String` | MusicBrainz Recording ID |
-| `strMusicMozID` | `String` | MusicMoz ID |
-| `strMusicVid` | `String` | URL to music video |
-| `strMusicVidCompany` | `String` | Music video production company |
-| `strMusicVidDirector` | `String` | Music video director |
-| `strMusicVidScreen1` | `String` | URL to music video screenshot 1 |
-| `strMusicVidScreen2` | `String` | URL to music video screenshot 2 |
-| `strMusicVidScreen3` | `String` | URL to music video screenshot 3 |
-| `strRateYourMusicID` | `String` | RateYourMusic ID |
-| `strReleaseFormat` | `String` | Release format (CD, Vinyl, etc.) |
-| `strReview` | `String` | Album review |
-| `strSoundCloud` | `String` | SoundCloud profile URL |
-| `strSpeed` | `String` | Album speed |
-| `strSpotify` | `String` | Spotify artist URL |
-| `strStyle` | `String` | Track style |
-| `strTheme` | `String` | Track theme |
-| `strTrack` | `String` | Track title |
-| `strTrackLyrics` | `String` | Track lyrics |
-| `strTrackThumb` | `String` | URL to track thumbnail |
-| `strTwitter` | `String` | Twitter profile URL |
-| `strWebsite` | `String` | Official website URL |
-| `strWikidataID` | `String` | Wikidata ID |
-| `strWikipediaID` | `String` | Wikipedia ID |
-| `strYoutube` | `String` | YouTube channel URL |
-
-#### Example: List
-
-```ruby
-# list returns an Array of V1Lookup records (raises on error).
-v1_lookups = client.V1Lookup.list
-```
-
-
-### V1Search
-
-Create an instance: `v1_search = client.V1Search`
 
 #### Operations
 
@@ -830,6 +698,7 @@ Create an instance: `v1_search = client.V1Search`
 | `strAlbumThumbHQ` | `String` | URL to high quality album thumbnail |
 | `strAllMusicID` | `String` | AllMusic ID |
 | `strAmazonID` | `String` | Amazon ID |
+| `strAppleMusic` | `String` | Apple Music artist URL |
 | `strArtist` | `String` | Artist name |
 | `strArtistAlternate` | `String` | Alternate artist name |
 | `strArtistBanner` | `String` | URL to artist banner |
@@ -868,6 +737,7 @@ Create an instance: `v1_search = client.V1Search`
 | `strGender` | `String` | Artist gender |
 | `strGeniusID` | `String` | Genius ID |
 | `strGenre` | `String` | Album genre |
+| `strInstagram` | `String` | Instagram profile URL |
 | `strItunesID` | `String` | iTunes ID |
 | `strLabel` | `String` | Record label |
 | `strLastFMChart` | `String` | Last.fm chart URL |
@@ -888,9 +758,143 @@ Create an instance: `v1_search = client.V1Search`
 | `strRateYourMusicID` | `String` | RateYourMusic ID |
 | `strReleaseFormat` | `String` | Release format (CD, Vinyl, etc.) |
 | `strReview` | `String` | Album review |
+| `strSoundCloud` | `String` | SoundCloud profile URL |
 | `strSpeed` | `String` | Album speed |
+| `strSpotify` | `String` | Spotify artist URL |
 | `strStyle` | `String` | Album style |
 | `strTheme` | `String` | Album theme |
+| `strTrack` | `String` | Track title |
+| `strTrackLyrics` | `String` | Track lyrics |
+| `strTrackThumb` | `String` | URL to track thumbnail |
+| `strTwitter` | `String` | Twitter profile URL |
+| `strWebsite` | `String` | Official website URL |
+| `strWikidataID` | `String` | Wikidata ID |
+| `strWikipediaID` | `String` | Wikipedia ID |
+| `strYoutube` | `String` | YouTube channel URL |
+
+#### Example: List
+
+```ruby
+# list returns an Array of V1Lookup entities, one per record (raises on error).
+v1_lookups = client.V1Lookup.list({ "i" => "example" })
+v1_lookups.each { |item| puts item.data_get }
+```
+
+
+### V1Search
+
+Create an instance: `v1_search = client.V1Search`
+
+#### Operations
+
+| Method | Description |
+| --- | --- |
+| `list(match)` | List entities matching the criteria. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `idAlbum` | `Integer` | Album ID |
+| `idArtist` | `Integer` | Artist ID |
+| `idIMVDB` | `Integer` | IMVDB ID |
+| `idLabel` | `Integer` | Label ID |
+| `idLyric` | `Integer` | Lyrics ID |
+| `idTrack` | `Integer` | Unique track ID |
+| `intBornYear` | `Integer` | Birth year of the artist |
+| `intCD` | `Integer` | CD number |
+| `intCharted` | `Integer` | Chart position |
+| `intDiedYear` | `Integer` | Year the artist died (if applicable) |
+| `intDuration` | `Integer` | Track duration in milliseconds |
+| `intFormedYear` | `Integer` | Year the artist/band was formed |
+| `intLoved` | `Integer` | Number of loves/likes |
+| `intMembers` | `Integer` | Number of band members |
+| `intMusicVidComments` | `Integer` | Number of music video comments |
+| `intMusicVidDislikes` | `Integer` | Number of music video dislikes |
+| `intMusicVidFavorites` | `Integer` | Number of music video favorites |
+| `intMusicVidLikes` | `Integer` | Number of music video likes |
+| `intMusicVidViews` | `Integer` | Number of music video views |
+| `intSales` | `Integer` | Number of sales |
+| `intScore` | `Integer` | Track score |
+| `intScoreVotes` | `Integer` | Number of score votes |
+| `intTotalListeners` | `Integer` | Total number of listeners |
+| `intTotalPlays` | `Integer` | Total number of plays |
+| `intTrackNumber` | `Integer` | Track number on album |
+| `intYearReleased` | `Integer` | Year the album was released |
+| `strAlbum` | `String` | Album title |
+| `strAlbum3DCase` | `String` | URL to 3D case image |
+| `strAlbum3DFace` | `String` | URL to 3D face image |
+| `strAlbum3DFlat` | `String` | URL to 3D flat image |
+| `strAlbum3DThumb` | `String` | URL to 3D thumbnail |
+| `strAlbumCDart` | `String` | URL to CD art |
+| `strAlbumSpine` | `String` | URL to album spine image |
+| `strAlbumStripped` | `String` | Album title without special characters |
+| `strAlbumThumb` | `String` | URL to album thumbnail |
+| `strAlbumThumbBack` | `String` | URL to back of album cover |
+| `strAlbumThumbHQ` | `String` | URL to high quality album thumbnail |
+| `strAllMusicID` | `String` | AllMusic ID |
+| `strAmazonID` | `String` | Amazon ID |
+| `strArtist` | `String` | Artist name |
+| `strArtistAlternate` | `String` | Alternate artist name |
+| `strArtistBanner` | `String` | URL to artist banner |
+| `strArtistClearart` | `String` | URL to artist clearart |
+| `strArtistCutout` | `String` | URL to artist cutout image |
+| `strArtistFanart` | `String` | URL to artist fanart |
+| `strArtistFanart2` | `String` | URL to alternate artist fanart |
+| `strArtistFanart3` | `String` | URL to third artist fanart |
+| `strArtistFanart4` | `String` | URL to fourth artist fanart |
+| `strArtistLogo` | `String` | URL to artist logo |
+| `strArtistStripped` | `String` | Artist name without special characters |
+| `strArtistThumb` | `String` | URL to artist thumbnail image |
+| `strArtistWideThumb` | `String` | URL to artist wide thumbnail |
+| `strBBCReviewID` | `String` | BBC Review ID |
+| `strBiographyCN` | `String` | Artist biography in Chinese |
+| `strBiographyDE` | `String` | Artist biography in German |
+| `strBiographyEN` | `String` | Artist biography in English |
+| `strBiographyES` | `String` | Artist biography in Spanish |
+| `strBiographyFR` | `String` | Artist biography in French |
+| `strBiographyHU` | `String` | Artist biography in Hungarian |
+| `strBiographyIL` | `String` | Artist biography in Hebrew |
+| `strBiographyIT` | `String` | Artist biography in Italian |
+| `strBiographyJP` | `String` | Artist biography in Japanese |
+| `strBiographyNL` | `String` | Artist biography in Dutch |
+| `strBiographyNO` | `String` | Artist biography in Norwegian |
+| `strBiographyPL` | `String` | Artist biography in Polish |
+| `strBiographyPT` | `String` | Artist biography in Portuguese |
+| `strBiographyRU` | `String` | Artist biography in Russian |
+| `strBiographySE` | `String` | Artist biography in Swedish |
+| `strCountry` | `String` | Country of origin |
+| `strCountryCode` | `String` | Country code |
+| `strDescriptionEN` | `String` | Track description in English |
+| `strDisbanded` | `String` | Disbanded status |
+| `strDiscogsID` | `String` | Discogs ID |
+| `strFacebook` | `String` | Facebook page URL |
+| `strGender` | `String` | Artist gender |
+| `strGeniusID` | `String` | Genius ID |
+| `strGenre` | `String` | Track genre |
+| `strItunesID` | `String` | iTunes ID |
+| `strLabel` | `String` | Record label |
+| `strLastFMChart` | `String` | Last.fm chart URL |
+| `strLocation` | `String` | Recording location |
+| `strLocked` | `String` | Whether the record is locked |
+| `strLyricWikiID` | `String` | LyricWiki ID |
+| `strMood` | `String` | Track mood |
+| `strMusicBrainzAlbumID` | `String` | MusicBrainz Album ID |
+| `strMusicBrainzArtistID` | `String` | MusicBrainz Artist ID |
+| `strMusicBrainzID` | `String` | MusicBrainz Recording ID |
+| `strMusicMozID` | `String` | MusicMoz ID |
+| `strMusicVid` | `String` | URL to music video |
+| `strMusicVidCompany` | `String` | Music video production company |
+| `strMusicVidDirector` | `String` | Music video director |
+| `strMusicVidScreen1` | `String` | URL to music video screenshot 1 |
+| `strMusicVidScreen2` | `String` | URL to music video screenshot 2 |
+| `strMusicVidScreen3` | `String` | URL to music video screenshot 3 |
+| `strRateYourMusicID` | `String` | RateYourMusic ID |
+| `strReleaseFormat` | `String` | Release format (CD, Vinyl, etc.) |
+| `strReview` | `String` | Album review |
+| `strSpeed` | `String` | Album speed |
+| `strStyle` | `String` | Track style |
+| `strTheme` | `String` | Track theme |
 | `strTrack` | `String` | Track title |
 | `strTrackLyrics` | `String` | Track lyrics |
 | `strTrackThumb` | `String` | URL to track thumbnail |
@@ -902,8 +906,9 @@ Create an instance: `v1_search = client.V1Search`
 #### Example: List
 
 ```ruby
-# list returns an Array of V1Search records (raises on error).
-v1_searchs = client.V1Search.list
+# list returns an Array of V1Search entities, one per record (raises on error).
+v1_searchs = client.V1Search.list({ "s" => "example" })
+v1_searchs.each { |item| puts item.data_get }
 ```
 
 

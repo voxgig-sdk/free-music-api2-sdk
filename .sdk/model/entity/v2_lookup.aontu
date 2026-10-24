@@ -60,6 +60,10 @@ main: kit: entity: v2_lookup: {
               albumId: "album_id"
             }
           }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "lookup"
@@ -105,6 +109,10 @@ main: kit: entity: v2_lookup: {
             param: {
               artistId: "artist_id"
             }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -152,6 +160,10 @@ main: kit: entity: v2_lookup: {
               musicBrainzId: "music_brainz_id"
             }
           }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "lookup"
@@ -197,6 +209,10 @@ main: kit: entity: v2_lookup: {
             param: {
               musicBrainzId: "music_brainz_id"
             }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -244,6 +260,10 @@ main: kit: entity: v2_lookup: {
               musicBrainzId: "music_brainz_id"
             }
           }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "lookup"
@@ -289,6 +309,10 @@ main: kit: entity: v2_lookup: {
             param: {
               trackId: "track_id"
             }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

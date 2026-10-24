@@ -3,5 +3,22 @@
     "SUMMARY.md"
   ],
   "config": ".sdk/doc/qa/vale.ini",
-  "routes": {}
+  "routes": {},
+  "quoted": {
+    "SUMMARY.md": [
+      "API key for v2 endpoints (Premium users only)",
+      "Album ID",
+      "Artist ID",
+      "IMVDB ID",
+      "Label ID",
+      "Lyrics ID",
+      "Successful response",
+      "The Free Music API by TheAudioDB provides access to various music-related data, including artist details, album information, track listings, and music charts. It supports multiple query types, allowing users to search by artist or album name, retrieve top tracks, and manage user ratings.",
+      "Track ID",
+      "Unique album ID",
+      "v1 API Server (Free Tier)",
+      "v1 API Server (Premium Tier)",
+      "v2 API Server (Premium Only)"
+    ]
+  }
 }

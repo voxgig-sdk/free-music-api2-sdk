@@ -12,6 +12,19 @@ import { FreeMusicApi2EntityBase } from './FreeMusicApi2EntityBase';
 import { Utility } from './utility/Utility';
 import { BaseFeature } from './feature/base/BaseFeature';
 declare const stdutil: Utility;
+type DirectResult = {
+    ok: false;
+    err: any;
+    status?: undefined;
+    headers?: undefined;
+    data?: undefined;
+} | {
+    ok: boolean;
+    status: number;
+    headers: any;
+    data: any;
+    err?: any;
+};
 declare class FreeMusicApi2SDK {
     _mode: string;
     _options: any;
@@ -22,32 +35,8 @@ declare class FreeMusicApi2SDK {
     options(): any;
     utility(): any;
     prepare(fetchargs?: any): Promise<any>;
-    direct(fetchargs?: any): Promise<Error | {
-        ok: boolean;
-        err: any;
-        status?: undefined;
-        headers?: undefined;
-        data?: undefined;
-    } | {
-        ok: boolean;
-        status: number;
-        headers: any;
-        data: any;
-        err?: undefined;
-    }>;
-    _rawRequest(fetchargs?: any): Promise<Error | {
-        ok: boolean;
-        err: any;
-        status?: undefined;
-        headers?: undefined;
-        data?: undefined;
-    } | {
-        ok: boolean;
-        status: number;
-        headers: any;
-        data: any;
-        err?: undefined;
-    }>;
+    direct(fetchargs?: any): Promise<DirectResult>;
+    _rawRequest(fetchargs?: any): Promise<DirectResult>;
     graphql(query: string, variables?: any, ctrl?: any): Promise<any>;
     V1List(entopts?: Record<string, any>): V1ListEntity;
     V1Lookup(entopts?: Record<string, any>): V1LookupEntity;
@@ -65,3 +54,4 @@ declare class FreeMusicApi2SDK {
 }
 declare const SDK: typeof FreeMusicApi2SDK;
 export { stdutil, config, BaseFeature, FreeMusicApi2EntityBase, FreeMusicApi2SDK, SDK, };
+export type { DirectResult };

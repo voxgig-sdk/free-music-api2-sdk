@@ -129,9 +129,12 @@ class V1LookupEntity extends FreeMusicApi2EntityBase<V1Lookup> {
     catch (err: any) {
       // What a hook throws here must not escape the cleaning below.
       try {
+        // Once per operation: makeError fires it for its own error.
+        if (!ctx.unexpectedFired) {
 
-        fres = featureHook(ctx, 'PreUnexpected')
-        if (fres instanceof Promise) { await fres }
+          fres = featureHook(ctx, 'PreUnexpected')
+          if (fres instanceof Promise) { await fres }
+        }
       }
       catch (hookerr: any) {
         err = hookerr
@@ -144,11 +147,12 @@ class V1LookupEntity extends FreeMusicApi2EntityBase<V1Lookup> {
       }
       else {
         // Off-happy-path (throw disabled): typed as any so the method's
-        // Promise<V1Lookup[]> return stays clean under strict null checks.
+        // Promise<V1LookupEntity[]> return stays clean under strict null checks.
         return undefined as any
       }
     }
   }
+
 
 
 

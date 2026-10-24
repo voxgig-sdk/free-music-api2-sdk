@@ -12,6 +12,8 @@ type FreeMusicApi2Error struct {
 	Ctx    *Context `json:"-"`
 	Result any
 	Spec   any
+	// The HTTP status, -1 when there was no response.
+	Status int
 }
 
 func NewFreeMusicApi2Error(code string, msg string, ctx *Context) *FreeMusicApi2Error {
@@ -21,7 +23,12 @@ func NewFreeMusicApi2Error(code string, msg string, ctx *Context) *FreeMusicApi2
 		Code:               code,
 		Msg:                msg,
 		Ctx:                ctx,
+		Status:             -1,
 	}
+}
+
+func (e *FreeMusicApi2Error) NotFound() bool {
+	return 404 == e.Status
 }
 
 func (e *FreeMusicApi2Error) Error() string {
@@ -35,6 +42,7 @@ func (e *FreeMusicApi2Error) Record() map[string]any {
 		"sdk":     e.Sdk,
 		"code":    e.Code,
 		"message": e.Msg,
+		"status":  e.Status,
 		"result":  e.Result,
 		"spec":    e.Spec,
 	}

@@ -340,6 +340,10 @@ main: kit: entity: v1_list: {
               "type"
             ]
           }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "trending.php"
@@ -374,6 +378,10 @@ main: kit: entity: v1_list: {
             exist: [
               "format"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -410,6 +418,10 @@ main: kit: entity: v1_list: {
               "i"
             ]
           }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "mvid-mb.php"
@@ -444,6 +456,10 @@ main: kit: entity: v1_list: {
             exist: [
               "i"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -480,6 +496,10 @@ main: kit: entity: v1_list: {
               "s"
             ]
           }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "track-top10-mb.php"
@@ -514,6 +534,10 @@ main: kit: entity: v1_list: {
             exist: [
               "s"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

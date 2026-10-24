@@ -34,7 +34,7 @@ SDK operations: `list`.
 
 Key fields to recognise:
 
-- `idAlbum`: Album ID
+- `idAlbum`: Unique album ID
 - `idArtist`: Artist ID
 - `idIMVDB`: IMVDB ID
 - `idLabel`: Label ID
@@ -48,7 +48,7 @@ SDK operations: `list`.
 
 Key fields to recognise:
 
-- `idAlbum`: Unique album ID
+- `idAlbum`: Album ID
 - `idArtist`: Artist ID
 - `idIMVDB`: IMVDB ID
 - `idLabel`: Label ID
@@ -84,18 +84,18 @@ Use this map to locate a capability. Consult the entity reference before supplyi
 | V1List | `list` | `GET /mvid.php` | See reference |
 | V1List | `list` | `GET /track-top10-mb.php` | See reference |
 | V1List | `list` | `GET /track-top10.php` | See reference |
-| V1Lookup | `list` | `GET /track.php` | See reference |
-| V1Lookup | `list` | `GET /album.php` | See reference |
 | V1Lookup | `list` | `GET /album-mb.php` | See reference |
 | V1Lookup | `list` | `GET /artist-mb.php` | See reference |
 | V1Lookup | `list` | `GET /artist-social.php` | See reference |
 | V1Lookup | `list` | `GET /artist.php` | See reference |
 | V1Lookup | `list` | `GET /track-mb.php` | See reference |
-| V1Search | `list` | `GET /searchalbum.php` | See reference |
+| V1Lookup | `list` | `GET /album.php` | See reference |
+| V1Lookup | `list` | `GET /track.php` | See reference |
 | V1Search | `list` | `GET /searchtrack.php` | See reference |
 | V1Search | `list` | `GET /discography-mb.php` | See reference |
 | V1Search | `list` | `GET /discography.php` | See reference |
 | V1Search | `list` | `GET /search.php` | See reference |
+| V1Search | `list` | `GET /searchalbum.php` | See reference |
 | V2List | `load` | `GET /list/discography/{artistId}` | Required |
 | V2Lookup | `load` | `GET /lookup/album/{albumId}` | Required |
 | V2Lookup | `load` | `GET /lookup/artist/{artistId}` | Required |

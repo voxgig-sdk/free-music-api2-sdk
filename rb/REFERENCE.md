@@ -160,10 +160,11 @@ v1_list = client.V1List
 
 #### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array of entities, one per record; `data_get` reads each record. Raises on error.
 
 ```ruby
-results = client.V1List.list
+results = client.V1List.list({ "country" => "example", "format" => "example", "type" => "example" })
+results.each { |item| puts item.data_get }
 ```
 
 ### Common Methods
@@ -206,7 +207,7 @@ v1_lookup = client.V1Lookup
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `idAlbum` | `Integer` | No | Album ID |
+| `idAlbum` | `Integer` | No | Unique album ID |
 | `idArtist` | `Integer` | No | Artist ID |
 | `idIMVDB` | `Integer` | No | IMVDB ID |
 | `idLabel` | `Integer` | No | Label ID |
@@ -226,7 +227,7 @@ v1_lookup = client.V1Lookup
 | `intMusicVidLikes` | `Integer` | No | Number of music video likes |
 | `intMusicVidViews` | `Integer` | No | Number of music video views |
 | `intSales` | `Integer` | No | Number of sales |
-| `intScore` | `Integer` | No | Track score |
+| `intScore` | `Integer` | No | Album score |
 | `intScoreVotes` | `Integer` | No | Number of score votes |
 | `intTotalListeners` | `Integer` | No | Total number of listeners |
 | `intTotalPlays` | `Integer` | No | Total number of plays |
@@ -277,13 +278,13 @@ v1_lookup = client.V1Lookup
 | `strBiographySE` | `String` | No | Artist biography in Swedish |
 | `strCountry` | `String` | No | Country of origin |
 | `strCountryCode` | `String` | No | Country code |
-| `strDescriptionEN` | `String` | No | Track description in English |
+| `strDescriptionEN` | `String` | No | Album description in English |
 | `strDisbanded` | `String` | No | Disbanded status |
 | `strDiscogsID` | `String` | No | Discogs ID |
 | `strFacebook` | `String` | No | Facebook page URL |
 | `strGender` | `String` | No | Artist gender |
 | `strGeniusID` | `String` | No | Genius ID |
-| `strGenre` | `String` | No | Track genre |
+| `strGenre` | `String` | No | Album genre |
 | `strInstagram` | `String` | No | Instagram profile URL |
 | `strItunesID` | `String` | No | iTunes ID |
 | `strLabel` | `String` | No | Record label |
@@ -291,10 +292,10 @@ v1_lookup = client.V1Lookup
 | `strLocation` | `String` | No | Recording location |
 | `strLocked` | `String` | No | Whether the record is locked |
 | `strLyricWikiID` | `String` | No | LyricWiki ID |
-| `strMood` | `String` | No | Track mood |
+| `strMood` | `String` | No | Album mood |
 | `strMusicBrainzAlbumID` | `String` | No | MusicBrainz Album ID |
 | `strMusicBrainzArtistID` | `String` | No | MusicBrainz Artist ID |
-| `strMusicBrainzID` | `String` | No | MusicBrainz Recording ID |
+| `strMusicBrainzID` | `String` | No | MusicBrainz Release Group ID |
 | `strMusicMozID` | `String` | No | MusicMoz ID |
 | `strMusicVid` | `String` | No | URL to music video |
 | `strMusicVidCompany` | `String` | No | Music video production company |
@@ -308,8 +309,8 @@ v1_lookup = client.V1Lookup
 | `strSoundCloud` | `String` | No | SoundCloud profile URL |
 | `strSpeed` | `String` | No | Album speed |
 | `strSpotify` | `String` | No | Spotify artist URL |
-| `strStyle` | `String` | No | Track style |
-| `strTheme` | `String` | No | Track theme |
+| `strStyle` | `String` | No | Album style |
+| `strTheme` | `String` | No | Album theme |
 | `strTrack` | `String` | No | Track title |
 | `strTrackLyrics` | `String` | No | Track lyrics |
 | `strTrackThumb` | `String` | No | URL to track thumbnail |
@@ -323,10 +324,11 @@ v1_lookup = client.V1Lookup
 
 #### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array of entities, one per record; `data_get` reads each record. Raises on error.
 
 ```ruby
-results = client.V1Lookup.list
+results = client.V1Lookup.list({ "i" => "example" })
+results.each { |item| puts item.data_get }
 ```
 
 ### Common Methods
@@ -369,7 +371,7 @@ v1_search = client.V1Search
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `idAlbum` | `Integer` | No | Unique album ID |
+| `idAlbum` | `Integer` | No | Album ID |
 | `idArtist` | `Integer` | No | Artist ID |
 | `idIMVDB` | `Integer` | No | IMVDB ID |
 | `idLabel` | `Integer` | No | Label ID |
@@ -389,7 +391,7 @@ v1_search = client.V1Search
 | `intMusicVidLikes` | `Integer` | No | Number of music video likes |
 | `intMusicVidViews` | `Integer` | No | Number of music video views |
 | `intSales` | `Integer` | No | Number of sales |
-| `intScore` | `Integer` | No | Album score |
+| `intScore` | `Integer` | No | Track score |
 | `intScoreVotes` | `Integer` | No | Number of score votes |
 | `intTotalListeners` | `Integer` | No | Total number of listeners |
 | `intTotalPlays` | `Integer` | No | Total number of plays |
@@ -439,23 +441,23 @@ v1_search = client.V1Search
 | `strBiographySE` | `String` | No | Artist biography in Swedish |
 | `strCountry` | `String` | No | Country of origin |
 | `strCountryCode` | `String` | No | Country code |
-| `strDescriptionEN` | `String` | No | Album description in English |
+| `strDescriptionEN` | `String` | No | Track description in English |
 | `strDisbanded` | `String` | No | Disbanded status |
 | `strDiscogsID` | `String` | No | Discogs ID |
 | `strFacebook` | `String` | No | Facebook page URL |
 | `strGender` | `String` | No | Artist gender |
 | `strGeniusID` | `String` | No | Genius ID |
-| `strGenre` | `String` | No | Album genre |
+| `strGenre` | `String` | No | Track genre |
 | `strItunesID` | `String` | No | iTunes ID |
 | `strLabel` | `String` | No | Record label |
 | `strLastFMChart` | `String` | No | Last.fm chart URL |
 | `strLocation` | `String` | No | Recording location |
 | `strLocked` | `String` | No | Whether the record is locked |
 | `strLyricWikiID` | `String` | No | LyricWiki ID |
-| `strMood` | `String` | No | Album mood |
+| `strMood` | `String` | No | Track mood |
 | `strMusicBrainzAlbumID` | `String` | No | MusicBrainz Album ID |
 | `strMusicBrainzArtistID` | `String` | No | MusicBrainz Artist ID |
-| `strMusicBrainzID` | `String` | No | MusicBrainz Release Group ID |
+| `strMusicBrainzID` | `String` | No | MusicBrainz Recording ID |
 | `strMusicMozID` | `String` | No | MusicMoz ID |
 | `strMusicVid` | `String` | No | URL to music video |
 | `strMusicVidCompany` | `String` | No | Music video production company |
@@ -467,8 +469,8 @@ v1_search = client.V1Search
 | `strReleaseFormat` | `String` | No | Release format (CD, Vinyl, etc.) |
 | `strReview` | `String` | No | Album review |
 | `strSpeed` | `String` | No | Album speed |
-| `strStyle` | `String` | No | Album style |
-| `strTheme` | `String` | No | Album theme |
+| `strStyle` | `String` | No | Track style |
+| `strTheme` | `String` | No | Track theme |
 | `strTrack` | `String` | No | Track title |
 | `strTrackLyrics` | `String` | No | Track lyrics |
 | `strTrackThumb` | `String` | No | URL to track thumbnail |
@@ -481,10 +483,11 @@ v1_search = client.V1Search
 
 #### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array of entities, one per record; `data_get` reads each record. Raises on error.
 
 ```ruby
-results = client.V1Search.list
+results = client.V1Search.list({ "s" => "example" })
+results.each { |item| puts item.data_get }
 ```
 
 ### Common Methods
@@ -533,7 +536,7 @@ v2_list = client.V2List
 
 #### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria. Raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get` reads, and raises on error.
 
 ```ruby
 result = client.V2List.load({ "artist_id" => 1 })
@@ -587,7 +590,7 @@ v2_lookup = client.V2Lookup
 
 #### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria. Raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get` reads, and raises on error.
 
 ```ruby
 result = client.V2Lookup.load({ "album_id" => 1 })
@@ -641,7 +644,7 @@ v2_search = client.V2Search
 
 #### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria. Raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get` reads, and raises on error.
 
 ```ruby
 result = client.V2Search.load({ "album_name" => "album_name" })
@@ -834,6 +837,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

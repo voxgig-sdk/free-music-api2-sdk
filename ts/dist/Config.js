@@ -87,6 +87,7 @@ class Config {
             },
             "optspec": {
                 "clearTimer": "`$FUNCTION`",
+                "now": "`$FUNCTION`",
                 "setTimer": "`$FUNCTION`"
             },
             "strict": false,
@@ -416,6 +417,10 @@ class Config {
                                     "format",
                                     "type"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         },
                         {
@@ -451,6 +456,10 @@ class Config {
                                 "exist": [
                                     "format"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         },
                         {
@@ -486,6 +495,10 @@ class Config {
                                 "exist": [
                                     "i"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         },
                         {
@@ -521,6 +534,10 @@ class Config {
                                 "exist": [
                                     "i"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         },
                         {
@@ -556,6 +573,10 @@ class Config {
                                 "exist": [
                                     "s"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         },
                         {
@@ -591,6 +612,10 @@ class Config {
                                 "exist": [
                                     "s"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]
@@ -606,7 +631,7 @@ class Config {
                     "name": "idAlbum",
                     "title": "Id Album",
                     "type": "`$INTEGER`",
-                    "short": "Album ID"
+                    "short": "Unique album ID"
                 },
                 {
                     "name": "idArtist",
@@ -726,7 +751,7 @@ class Config {
                     "name": "intScore",
                     "title": "Int Score",
                     "type": "`$INTEGER`",
-                    "short": "Track score"
+                    "short": "Album score"
                 },
                 {
                     "name": "intScoreVotes",
@@ -1032,7 +1057,7 @@ class Config {
                     "name": "strDescriptionEN",
                     "title": "Str Description En",
                     "type": "`$STRING`",
-                    "short": "Track description in English"
+                    "short": "Album description in English"
                 },
                 {
                     "name": "strDisbanded",
@@ -1068,7 +1093,7 @@ class Config {
                     "name": "strGenre",
                     "title": "Str Genre",
                     "type": "`$STRING`",
-                    "short": "Track genre"
+                    "short": "Album genre"
                 },
                 {
                     "name": "strInstagram",
@@ -1116,7 +1141,7 @@ class Config {
                     "name": "strMood",
                     "title": "Str Mood",
                     "type": "`$STRING`",
-                    "short": "Track mood"
+                    "short": "Album mood"
                 },
                 {
                     "name": "strMusicBrainzAlbumID",
@@ -1134,7 +1159,7 @@ class Config {
                     "name": "strMusicBrainzID",
                     "title": "Str Music Brainz Id",
                     "type": "`$STRING`",
-                    "short": "MusicBrainz Recording ID"
+                    "short": "MusicBrainz Release Group ID"
                 },
                 {
                     "name": "strMusicMozID",
@@ -1218,13 +1243,13 @@ class Config {
                     "name": "strStyle",
                     "title": "Str Style",
                     "type": "`$STRING`",
-                    "short": "Track style"
+                    "short": "Album style"
                 },
                 {
                     "name": "strTheme",
                     "title": "Str Theme",
                     "type": "`$STRING`",
-                    "short": "Track theme"
+                    "short": "Album theme"
                 },
                 {
                     "name": "strTrack",
@@ -1284,14 +1309,170 @@ class Config {
                         {
                             "kind": "http",
                             "method": "GET",
-                            "orig": "/track.php",
+                            "orig": "/album-mb.php",
                             "segments": [
                                 {
-                                    "lit": "track.php"
+                                    "lit": "album-mb.php"
                                 }
                             ],
                             "parts": [
-                                "track.php"
+                                "album-mb.php"
+                            ],
+                            "rename": {},
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body.album`"
+                            },
+                            "args": {
+                                "query": [
+                                    {
+                                        "name": "i",
+                                        "orig": "i",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "reqd": true,
+                                        "example": "1dc4c347-a1db-32aa-b14f-bc9cc507b843"
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "i"
+                                ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
+                            }
+                        },
+                        {
+                            "kind": "http",
+                            "method": "GET",
+                            "orig": "/artist-mb.php",
+                            "segments": [
+                                {
+                                    "lit": "artist-mb.php"
+                                }
+                            ],
+                            "parts": [
+                                "artist-mb.php"
+                            ],
+                            "rename": {},
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body.artists`"
+                            },
+                            "args": {
+                                "query": [
+                                    {
+                                        "name": "i",
+                                        "orig": "i",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "reqd": true,
+                                        "example": "cc197bad-dc9c-440d-a5b5-d52ba2e14234"
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "i"
+                                ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
+                            }
+                        },
+                        {
+                            "kind": "http",
+                            "method": "GET",
+                            "orig": "/artist-social.php",
+                            "segments": [
+                                {
+                                    "lit": "artist-social.php"
+                                }
+                            ],
+                            "parts": [
+                                "artist-social.php"
+                            ],
+                            "rename": {},
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body.artists`"
+                            },
+                            "args": {
+                                "query": [
+                                    {
+                                        "name": "i",
+                                        "orig": "i",
+                                        "type": "`$INTEGER`",
+                                        "kind": "query",
+                                        "reqd": true,
+                                        "example": 112024
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "i"
+                                ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
+                            }
+                        },
+                        {
+                            "kind": "http",
+                            "method": "GET",
+                            "orig": "/artist.php",
+                            "segments": [
+                                {
+                                    "lit": "artist.php"
+                                }
+                            ],
+                            "parts": [
+                                "artist.php"
+                            ],
+                            "rename": {},
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body.artists`"
+                            },
+                            "args": {
+                                "query": [
+                                    {
+                                        "name": "i",
+                                        "orig": "i",
+                                        "type": "`$INTEGER`",
+                                        "kind": "query",
+                                        "reqd": true,
+                                        "example": 112024
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "i"
+                                ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
+                            }
+                        },
+                        {
+                            "kind": "http",
+                            "method": "GET",
+                            "orig": "/track-mb.php",
+                            "segments": [
+                                {
+                                    "lit": "track-mb.php"
+                                }
+                            ],
+                            "parts": [
+                                "track-mb.php"
                             ],
                             "rename": {},
                             "transform": {
@@ -1301,26 +1482,23 @@ class Config {
                             "args": {
                                 "query": [
                                     {
-                                        "name": "h",
-                                        "orig": "h",
-                                        "type": "`$INTEGER`",
+                                        "name": "i",
+                                        "orig": "i",
+                                        "type": "`$STRING`",
                                         "kind": "query",
-                                        "example": 32793500
-                                    },
-                                    {
-                                        "name": "m",
-                                        "orig": "m",
-                                        "type": "`$INTEGER`",
-                                        "kind": "query",
-                                        "example": 2115888
+                                        "reqd": true,
+                                        "example": "50369905-68ca-48d2-912d-b37330ff7dc3"
                                     }
                                 ]
                             },
                             "select": {
                                 "exist": [
-                                    "h",
-                                    "m"
+                                    "i"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         },
                         {
@@ -1358,164 +1536,23 @@ class Config {
                                     }
                                 ]
                             },
-                            "select": {
-                                "exist": [
-                                    "i",
-                                    "m"
-                                ]
+                            "select": {},
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         },
                         {
                             "kind": "http",
                             "method": "GET",
-                            "orig": "/album-mb.php",
+                            "orig": "/track.php",
                             "segments": [
                                 {
-                                    "lit": "album-mb.php"
+                                    "lit": "track.php"
                                 }
                             ],
                             "parts": [
-                                "album-mb.php"
-                            ],
-                            "rename": {},
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body.album`"
-                            },
-                            "args": {
-                                "query": [
-                                    {
-                                        "name": "i",
-                                        "orig": "i",
-                                        "type": "`$STRING`",
-                                        "kind": "query",
-                                        "reqd": true,
-                                        "example": "1dc4c347-a1db-32aa-b14f-bc9cc507b843"
-                                    }
-                                ]
-                            },
-                            "select": {
-                                "exist": [
-                                    "i"
-                                ]
-                            }
-                        },
-                        {
-                            "kind": "http",
-                            "method": "GET",
-                            "orig": "/artist-mb.php",
-                            "segments": [
-                                {
-                                    "lit": "artist-mb.php"
-                                }
-                            ],
-                            "parts": [
-                                "artist-mb.php"
-                            ],
-                            "rename": {},
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body.artists`"
-                            },
-                            "args": {
-                                "query": [
-                                    {
-                                        "name": "i",
-                                        "orig": "i",
-                                        "type": "`$STRING`",
-                                        "kind": "query",
-                                        "reqd": true,
-                                        "example": "cc197bad-dc9c-440d-a5b5-d52ba2e14234"
-                                    }
-                                ]
-                            },
-                            "select": {
-                                "exist": [
-                                    "i"
-                                ]
-                            }
-                        },
-                        {
-                            "kind": "http",
-                            "method": "GET",
-                            "orig": "/artist-social.php",
-                            "segments": [
-                                {
-                                    "lit": "artist-social.php"
-                                }
-                            ],
-                            "parts": [
-                                "artist-social.php"
-                            ],
-                            "rename": {},
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body.artists`"
-                            },
-                            "args": {
-                                "query": [
-                                    {
-                                        "name": "i",
-                                        "orig": "i",
-                                        "type": "`$INTEGER`",
-                                        "kind": "query",
-                                        "reqd": true,
-                                        "example": 112024
-                                    }
-                                ]
-                            },
-                            "select": {
-                                "exist": [
-                                    "i"
-                                ]
-                            }
-                        },
-                        {
-                            "kind": "http",
-                            "method": "GET",
-                            "orig": "/artist.php",
-                            "segments": [
-                                {
-                                    "lit": "artist.php"
-                                }
-                            ],
-                            "parts": [
-                                "artist.php"
-                            ],
-                            "rename": {},
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body.artists`"
-                            },
-                            "args": {
-                                "query": [
-                                    {
-                                        "name": "i",
-                                        "orig": "i",
-                                        "type": "`$INTEGER`",
-                                        "kind": "query",
-                                        "reqd": true,
-                                        "example": 112024
-                                    }
-                                ]
-                            },
-                            "select": {
-                                "exist": [
-                                    "i"
-                                ]
-                            }
-                        },
-                        {
-                            "kind": "http",
-                            "method": "GET",
-                            "orig": "/track-mb.php",
-                            "segments": [
-                                {
-                                    "lit": "track-mb.php"
-                                }
-                            ],
-                            "parts": [
-                                "track-mb.php"
+                                "track.php"
                             ],
                             "rename": {},
                             "transform": {
@@ -1525,19 +1562,25 @@ class Config {
                             "args": {
                                 "query": [
                                     {
-                                        "name": "i",
-                                        "orig": "i",
-                                        "type": "`$STRING`",
+                                        "name": "h",
+                                        "orig": "h",
+                                        "type": "`$INTEGER`",
                                         "kind": "query",
-                                        "reqd": true,
-                                        "example": "50369905-68ca-48d2-912d-b37330ff7dc3"
+                                        "example": 32793500
+                                    },
+                                    {
+                                        "name": "m",
+                                        "orig": "m",
+                                        "type": "`$INTEGER`",
+                                        "kind": "query",
+                                        "example": 2115888
                                     }
                                 ]
                             },
-                            "select": {
-                                "exist": [
-                                    "i"
-                                ]
+                            "select": {},
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]
@@ -1553,7 +1596,7 @@ class Config {
                     "name": "idAlbum",
                     "title": "Id Album",
                     "type": "`$INTEGER`",
-                    "short": "Unique album ID"
+                    "short": "Album ID"
                 },
                 {
                     "name": "idArtist",
@@ -1673,7 +1716,7 @@ class Config {
                     "name": "intScore",
                     "title": "Int Score",
                     "type": "`$INTEGER`",
-                    "short": "Album score"
+                    "short": "Track score"
                 },
                 {
                     "name": "intScoreVotes",
@@ -1973,7 +2016,7 @@ class Config {
                     "name": "strDescriptionEN",
                     "title": "Str Description En",
                     "type": "`$STRING`",
-                    "short": "Album description in English"
+                    "short": "Track description in English"
                 },
                 {
                     "name": "strDisbanded",
@@ -2009,7 +2052,7 @@ class Config {
                     "name": "strGenre",
                     "title": "Str Genre",
                     "type": "`$STRING`",
-                    "short": "Album genre"
+                    "short": "Track genre"
                 },
                 {
                     "name": "strItunesID",
@@ -2051,7 +2094,7 @@ class Config {
                     "name": "strMood",
                     "title": "Str Mood",
                     "type": "`$STRING`",
-                    "short": "Album mood"
+                    "short": "Track mood"
                 },
                 {
                     "name": "strMusicBrainzAlbumID",
@@ -2069,7 +2112,7 @@ class Config {
                     "name": "strMusicBrainzID",
                     "title": "Str Music Brainz Id",
                     "type": "`$STRING`",
-                    "short": "MusicBrainz Release Group ID"
+                    "short": "MusicBrainz Recording ID"
                 },
                 {
                     "name": "strMusicMozID",
@@ -2141,13 +2184,13 @@ class Config {
                     "name": "strStyle",
                     "title": "Str Style",
                     "type": "`$STRING`",
-                    "short": "Album style"
+                    "short": "Track style"
                 },
                 {
                     "name": "strTheme",
                     "title": "Str Theme",
                     "type": "`$STRING`",
-                    "short": "Album theme"
+                    "short": "Track theme"
                 },
                 {
                     "name": "strTrack",
@@ -2201,49 +2244,6 @@ class Config {
                         {
                             "kind": "http",
                             "method": "GET",
-                            "orig": "/searchalbum.php",
-                            "segments": [
-                                {
-                                    "lit": "searchalbum.php"
-                                }
-                            ],
-                            "parts": [
-                                "searchalbum.php"
-                            ],
-                            "rename": {},
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body.album`"
-                            },
-                            "args": {
-                                "query": [
-                                    {
-                                        "name": "a",
-                                        "orig": "a",
-                                        "type": "`$STRING`",
-                                        "kind": "query",
-                                        "example": "Homework"
-                                    },
-                                    {
-                                        "name": "s",
-                                        "orig": "s",
-                                        "type": "`$STRING`",
-                                        "kind": "query",
-                                        "reqd": true,
-                                        "example": "daft_punk"
-                                    }
-                                ]
-                            },
-                            "select": {
-                                "exist": [
-                                    "a",
-                                    "s"
-                                ]
-                            }
-                        },
-                        {
-                            "kind": "http",
-                            "method": "GET",
                             "orig": "/searchtrack.php",
                             "segments": [
                                 {
@@ -2283,6 +2283,10 @@ class Config {
                                     "s",
                                     "t"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         },
                         {
@@ -2317,6 +2321,10 @@ class Config {
                                 "exist": [
                                     "s"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         },
                         {
@@ -2352,6 +2360,10 @@ class Config {
                                 "exist": [
                                     "s"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         },
                         {
@@ -2387,6 +2399,56 @@ class Config {
                                 "exist": [
                                     "s"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
+                            }
+                        },
+                        {
+                            "kind": "http",
+                            "method": "GET",
+                            "orig": "/searchalbum.php",
+                            "segments": [
+                                {
+                                    "lit": "searchalbum.php"
+                                }
+                            ],
+                            "parts": [
+                                "searchalbum.php"
+                            ],
+                            "rename": {},
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body.album`"
+                            },
+                            "args": {
+                                "query": [
+                                    {
+                                        "name": "a",
+                                        "orig": "a",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "example": "Homework"
+                                    },
+                                    {
+                                        "name": "s",
+                                        "orig": "s",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "reqd": true,
+                                        "example": "daft_punk"
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "s"
+                                ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]
@@ -2455,6 +2517,10 @@ class Config {
                                 "exist": [
                                     "artist_id"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]
@@ -2533,6 +2599,10 @@ class Config {
                                 "exist": [
                                     "album_id"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         },
                         {
@@ -2580,6 +2650,10 @@ class Config {
                                 "exist": [
                                     "artist_id"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         },
                         {
@@ -2627,6 +2701,10 @@ class Config {
                                 "exist": [
                                     "music_brainz_id"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         },
                         {
@@ -2674,6 +2752,10 @@ class Config {
                                 "exist": [
                                     "music_brainz_id"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         },
                         {
@@ -2721,6 +2803,10 @@ class Config {
                                 "exist": [
                                     "music_brainz_id"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         },
                         {
@@ -2768,6 +2854,10 @@ class Config {
                                 "exist": [
                                     "track_id"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]
@@ -2846,6 +2936,10 @@ class Config {
                                 "exist": [
                                     "album_name"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         },
                         {
@@ -2893,6 +2987,10 @@ class Config {
                                 "exist": [
                                     "artist_name"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         },
                         {
@@ -2940,6 +3038,10 @@ class Config {
                                 "exist": [
                                     "track_name"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]

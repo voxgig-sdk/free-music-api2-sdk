@@ -157,10 +157,10 @@ local v1_list = client:V1List(nil)
 
 #### `list(reqmatch, ctrl) -> any, err`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array of entities, one per record, or `nil` and an error on failure.
 
 ```lua
-local results, err = client:V1List():list()
+local results, err = client:V1List():list({ country = "example", format = "example", type = "example" })
 ```
 
 ### Common Methods
@@ -203,7 +203,7 @@ local v1_lookup = client:V1Lookup(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `idAlbum` | `number` | No | Album ID |
+| `idAlbum` | `number` | No | Unique album ID |
 | `idArtist` | `number` | No | Artist ID |
 | `idIMVDB` | `number` | No | IMVDB ID |
 | `idLabel` | `number` | No | Label ID |
@@ -223,7 +223,7 @@ local v1_lookup = client:V1Lookup(nil)
 | `intMusicVidLikes` | `number` | No | Number of music video likes |
 | `intMusicVidViews` | `number` | No | Number of music video views |
 | `intSales` | `number` | No | Number of sales |
-| `intScore` | `number` | No | Track score |
+| `intScore` | `number` | No | Album score |
 | `intScoreVotes` | `number` | No | Number of score votes |
 | `intTotalListeners` | `number` | No | Total number of listeners |
 | `intTotalPlays` | `number` | No | Total number of plays |
@@ -274,13 +274,13 @@ local v1_lookup = client:V1Lookup(nil)
 | `strBiographySE` | `string` | No | Artist biography in Swedish |
 | `strCountry` | `string` | No | Country of origin |
 | `strCountryCode` | `string` | No | Country code |
-| `strDescriptionEN` | `string` | No | Track description in English |
+| `strDescriptionEN` | `string` | No | Album description in English |
 | `strDisbanded` | `string` | No | Disbanded status |
 | `strDiscogsID` | `string` | No | Discogs ID |
 | `strFacebook` | `string` | No | Facebook page URL |
 | `strGender` | `string` | No | Artist gender |
 | `strGeniusID` | `string` | No | Genius ID |
-| `strGenre` | `string` | No | Track genre |
+| `strGenre` | `string` | No | Album genre |
 | `strInstagram` | `string` | No | Instagram profile URL |
 | `strItunesID` | `string` | No | iTunes ID |
 | `strLabel` | `string` | No | Record label |
@@ -288,10 +288,10 @@ local v1_lookup = client:V1Lookup(nil)
 | `strLocation` | `string` | No | Recording location |
 | `strLocked` | `string` | No | Whether the record is locked |
 | `strLyricWikiID` | `string` | No | LyricWiki ID |
-| `strMood` | `string` | No | Track mood |
+| `strMood` | `string` | No | Album mood |
 | `strMusicBrainzAlbumID` | `string` | No | MusicBrainz Album ID |
 | `strMusicBrainzArtistID` | `string` | No | MusicBrainz Artist ID |
-| `strMusicBrainzID` | `string` | No | MusicBrainz Recording ID |
+| `strMusicBrainzID` | `string` | No | MusicBrainz Release Group ID |
 | `strMusicMozID` | `string` | No | MusicMoz ID |
 | `strMusicVid` | `string` | No | URL to music video |
 | `strMusicVidCompany` | `string` | No | Music video production company |
@@ -305,8 +305,8 @@ local v1_lookup = client:V1Lookup(nil)
 | `strSoundCloud` | `string` | No | SoundCloud profile URL |
 | `strSpeed` | `string` | No | Album speed |
 | `strSpotify` | `string` | No | Spotify artist URL |
-| `strStyle` | `string` | No | Track style |
-| `strTheme` | `string` | No | Track theme |
+| `strStyle` | `string` | No | Album style |
+| `strTheme` | `string` | No | Album theme |
 | `strTrack` | `string` | No | Track title |
 | `strTrackLyrics` | `string` | No | Track lyrics |
 | `strTrackThumb` | `string` | No | URL to track thumbnail |
@@ -320,10 +320,10 @@ local v1_lookup = client:V1Lookup(nil)
 
 #### `list(reqmatch, ctrl) -> any, err`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array of entities, one per record, or `nil` and an error on failure.
 
 ```lua
-local results, err = client:V1Lookup():list()
+local results, err = client:V1Lookup():list({ i = "example" })
 ```
 
 ### Common Methods
@@ -366,7 +366,7 @@ local v1_search = client:V1Search(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `idAlbum` | `number` | No | Unique album ID |
+| `idAlbum` | `number` | No | Album ID |
 | `idArtist` | `number` | No | Artist ID |
 | `idIMVDB` | `number` | No | IMVDB ID |
 | `idLabel` | `number` | No | Label ID |
@@ -386,7 +386,7 @@ local v1_search = client:V1Search(nil)
 | `intMusicVidLikes` | `number` | No | Number of music video likes |
 | `intMusicVidViews` | `number` | No | Number of music video views |
 | `intSales` | `number` | No | Number of sales |
-| `intScore` | `number` | No | Album score |
+| `intScore` | `number` | No | Track score |
 | `intScoreVotes` | `number` | No | Number of score votes |
 | `intTotalListeners` | `number` | No | Total number of listeners |
 | `intTotalPlays` | `number` | No | Total number of plays |
@@ -436,23 +436,23 @@ local v1_search = client:V1Search(nil)
 | `strBiographySE` | `string` | No | Artist biography in Swedish |
 | `strCountry` | `string` | No | Country of origin |
 | `strCountryCode` | `string` | No | Country code |
-| `strDescriptionEN` | `string` | No | Album description in English |
+| `strDescriptionEN` | `string` | No | Track description in English |
 | `strDisbanded` | `string` | No | Disbanded status |
 | `strDiscogsID` | `string` | No | Discogs ID |
 | `strFacebook` | `string` | No | Facebook page URL |
 | `strGender` | `string` | No | Artist gender |
 | `strGeniusID` | `string` | No | Genius ID |
-| `strGenre` | `string` | No | Album genre |
+| `strGenre` | `string` | No | Track genre |
 | `strItunesID` | `string` | No | iTunes ID |
 | `strLabel` | `string` | No | Record label |
 | `strLastFMChart` | `string` | No | Last.fm chart URL |
 | `strLocation` | `string` | No | Recording location |
 | `strLocked` | `string` | No | Whether the record is locked |
 | `strLyricWikiID` | `string` | No | LyricWiki ID |
-| `strMood` | `string` | No | Album mood |
+| `strMood` | `string` | No | Track mood |
 | `strMusicBrainzAlbumID` | `string` | No | MusicBrainz Album ID |
 | `strMusicBrainzArtistID` | `string` | No | MusicBrainz Artist ID |
-| `strMusicBrainzID` | `string` | No | MusicBrainz Release Group ID |
+| `strMusicBrainzID` | `string` | No | MusicBrainz Recording ID |
 | `strMusicMozID` | `string` | No | MusicMoz ID |
 | `strMusicVid` | `string` | No | URL to music video |
 | `strMusicVidCompany` | `string` | No | Music video production company |
@@ -464,8 +464,8 @@ local v1_search = client:V1Search(nil)
 | `strReleaseFormat` | `string` | No | Release format (CD, Vinyl, etc.) |
 | `strReview` | `string` | No | Album review |
 | `strSpeed` | `string` | No | Album speed |
-| `strStyle` | `string` | No | Album style |
-| `strTheme` | `string` | No | Album theme |
+| `strStyle` | `string` | No | Track style |
+| `strTheme` | `string` | No | Track theme |
 | `strTrack` | `string` | No | Track title |
 | `strTrackLyrics` | `string` | No | Track lyrics |
 | `strTrackThumb` | `string` | No | URL to track thumbnail |
@@ -478,10 +478,10 @@ local v1_search = client:V1Search(nil)
 
 #### `list(reqmatch, ctrl) -> any, err`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array of entities, one per record, or `nil` and an error on failure.
 
 ```lua
-local results, err = client:V1Search():list()
+local results, err = client:V1Search():list({ s = "example" })
 ```
 
 ### Common Methods
@@ -530,7 +530,7 @@ local v2_list = client:V2List(nil)
 
 #### `load(reqmatch, ctrl) -> any, err`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:V2List():load({ artist_id = 1 })
@@ -584,7 +584,7 @@ local v2_lookup = client:V2Lookup(nil)
 
 #### `load(reqmatch, ctrl) -> any, err`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:V2Lookup():load({ album_id = 1 })
@@ -638,7 +638,7 @@ local v2_search = client:V2Search(nil)
 
 #### `load(reqmatch, ctrl) -> any, err`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:V2Search():load({ album_name = "album_name" })
@@ -831,6 +831,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

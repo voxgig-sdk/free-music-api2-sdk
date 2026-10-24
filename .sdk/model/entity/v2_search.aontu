@@ -60,6 +60,10 @@ main: kit: entity: v2_search: {
               albumName: "album_name"
             }
           }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "search"
@@ -106,6 +110,10 @@ main: kit: entity: v2_search: {
               artistName: "artist_name"
             }
           }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "search"
@@ -151,6 +159,10 @@ main: kit: entity: v2_search: {
             param: {
               trackName: "track_name"
             }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

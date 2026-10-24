@@ -21,10 +21,28 @@ const PLAN = [
             "type": "itunes"
         },
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [
             "country",
             "type",
             "format"
+        ],
+        "queryArgs": [
+            {
+                "name": "country",
+                "wire": "country"
+            },
+            {
+                "name": "format",
+                "wire": "format"
+            },
+            {
+                "name": "type",
+                "wire": "type"
+            }
         ],
         "auth": [],
         "status": 200,
@@ -46,221 +64,24 @@ const PLAN = [
             "format": "track"
         },
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [
             "format"
+        ],
+        "queryArgs": [
+            {
+                "name": "format",
+                "wire": "format"
+            }
         ],
         "auth": [],
         "status": 200,
         "sample": {
             "loved": [
                 {}
-            ]
-        },
-        "idField": "id"
-    },
-    {
-        "entity": "v1_lookup",
-        "accessor": "V1Lookup",
-        "op": "list",
-        "method": "GET",
-        "path": "/track.php",
-        "args": [],
-        "select": {
-            "h": 32793500,
-            "m": 2115888
-        },
-        "headers": [],
-        "query": [
-            "m",
-            "h"
-        ],
-        "auth": [],
-        "status": 200,
-        "sample": {
-            "track": [
-                {
-                    "idAlbum": 1,
-                    "idArtist": 1,
-                    "idIMVDB": 1,
-                    "idLyric": 1,
-                    "idTrack": 1,
-                    "intCD": 1,
-                    "intDuration": 1,
-                    "intLoved": 1,
-                    "intMusicVidComments": 1,
-                    "intMusicVidDislikes": 1,
-                    "intMusicVidFavorites": 1,
-                    "intMusicVidLikes": 1,
-                    "intMusicVidViews": 1,
-                    "intScore": 1,
-                    "intScoreVotes": 1,
-                    "intTotalListeners": 1,
-                    "intTotalPlays": 1,
-                    "intTrackNumber": 1,
-                    "strAlbum": "x",
-                    "strArtist": "x",
-                    "strArtistAlternate": "x",
-                    "strDescriptionEN": "x",
-                    "strGenre": "x",
-                    "strLocked": "x",
-                    "strMood": "x",
-                    "strMusicBrainzAlbumID": "x",
-                    "strMusicBrainzArtistID": "x",
-                    "strMusicBrainzID": "x",
-                    "strMusicVid": "x",
-                    "strMusicVidCompany": "x",
-                    "strMusicVidDirector": "x",
-                    "strMusicVidScreen1": "x",
-                    "strMusicVidScreen2": "x",
-                    "strMusicVidScreen3": "x",
-                    "strStyle": "x",
-                    "strTheme": "x",
-                    "strTrack": "x",
-                    "strTrackLyrics": "x",
-                    "strTrackThumb": "x"
-                }
-            ]
-        },
-        "idField": "id"
-    },
-    {
-        "entity": "v1_lookup",
-        "accessor": "V1Lookup",
-        "op": "list",
-        "method": "GET",
-        "path": "/album.php",
-        "args": [],
-        "select": {
-            "i": 112024,
-            "m": 2115888
-        },
-        "headers": [],
-        "query": [
-            "i",
-            "m"
-        ],
-        "auth": [],
-        "status": 200,
-        "sample": {
-            "album": [
-                {
-                    "idAlbum": 1,
-                    "idArtist": 1,
-                    "idLabel": 1,
-                    "intLoved": 1,
-                    "intSales": 1,
-                    "intScore": 1,
-                    "intScoreVotes": 1,
-                    "intYearReleased": 1,
-                    "strAlbum": "x",
-                    "strAlbum3DCase": "x",
-                    "strAlbum3DFace": "x",
-                    "strAlbum3DFlat": "x",
-                    "strAlbum3DThumb": "x",
-                    "strAlbumCDart": "x",
-                    "strAlbumSpine": "x",
-                    "strAlbumStripped": "x",
-                    "strAlbumThumb": "x",
-                    "strAlbumThumbBack": "x",
-                    "strAlbumThumbHQ": "x",
-                    "strAllMusicID": "x",
-                    "strAmazonID": "x",
-                    "strArtist": "x",
-                    "strArtistStripped": "x",
-                    "strBBCReviewID": "x",
-                    "strDescriptionEN": "x",
-                    "strDiscogsID": "x",
-                    "strGeniusID": "x",
-                    "strGenre": "x",
-                    "strItunesID": "x",
-                    "strLabel": "x",
-                    "strLocation": "x",
-                    "strLocked": "x",
-                    "strLyricWikiID": "x",
-                    "strMood": "x",
-                    "strMusicBrainzArtistID": "x",
-                    "strMusicBrainzID": "x",
-                    "strMusicMozID": "x",
-                    "strRateYourMusicID": "x",
-                    "strReleaseFormat": "x",
-                    "strReview": "x",
-                    "strSpeed": "x",
-                    "strStyle": "x",
-                    "strTheme": "x",
-                    "strWikidataID": "x",
-                    "strWikipediaID": "x"
-                }
-            ]
-        },
-        "idField": "id"
-    },
-    {
-        "entity": "v1_search",
-        "accessor": "V1Search",
-        "op": "list",
-        "method": "GET",
-        "path": "/searchalbum.php",
-        "args": [],
-        "select": {
-            "a": "Homework",
-            "s": "daft_punk"
-        },
-        "headers": [],
-        "query": [
-            "s",
-            "a"
-        ],
-        "auth": [],
-        "status": 200,
-        "sample": {
-            "album": [
-                {
-                    "idAlbum": 1,
-                    "idArtist": 1,
-                    "idLabel": 1,
-                    "intLoved": 1,
-                    "intSales": 1,
-                    "intScore": 1,
-                    "intScoreVotes": 1,
-                    "intYearReleased": 1,
-                    "strAlbum": "x",
-                    "strAlbum3DCase": "x",
-                    "strAlbum3DFace": "x",
-                    "strAlbum3DFlat": "x",
-                    "strAlbum3DThumb": "x",
-                    "strAlbumCDart": "x",
-                    "strAlbumSpine": "x",
-                    "strAlbumStripped": "x",
-                    "strAlbumThumb": "x",
-                    "strAlbumThumbBack": "x",
-                    "strAlbumThumbHQ": "x",
-                    "strAllMusicID": "x",
-                    "strAmazonID": "x",
-                    "strArtist": "x",
-                    "strArtistStripped": "x",
-                    "strBBCReviewID": "x",
-                    "strDescriptionEN": "x",
-                    "strDiscogsID": "x",
-                    "strGeniusID": "x",
-                    "strGenre": "x",
-                    "strItunesID": "x",
-                    "strLabel": "x",
-                    "strLocation": "x",
-                    "strLocked": "x",
-                    "strLyricWikiID": "x",
-                    "strMood": "x",
-                    "strMusicBrainzArtistID": "x",
-                    "strMusicBrainzID": "x",
-                    "strMusicMozID": "x",
-                    "strRateYourMusicID": "x",
-                    "strReleaseFormat": "x",
-                    "strReview": "x",
-                    "strSpeed": "x",
-                    "strStyle": "x",
-                    "strTheme": "x",
-                    "strWikidataID": "x",
-                    "strWikipediaID": "x"
-                }
             ]
         },
         "idField": "id"
@@ -277,54 +98,68 @@ const PLAN = [
             "t": "yellow"
         },
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [
             "s",
             "t"
+        ],
+        "queryArgs": [
+            {
+                "name": "s",
+                "wire": "s"
+            },
+            {
+                "name": "t",
+                "wire": "t"
+            }
         ],
         "auth": [],
         "status": 200,
         "sample": {
             "track": [
                 {
+                    "idTrack": 1,
                     "idAlbum": 1,
                     "idArtist": 1,
-                    "idIMVDB": 1,
                     "idLyric": 1,
-                    "idTrack": 1,
+                    "idIMVDB": 1,
+                    "strTrack": "x",
+                    "strAlbum": "x",
+                    "strArtist": "x",
+                    "strArtistAlternate": "x",
                     "intCD": 1,
                     "intDuration": 1,
-                    "intLoved": 1,
-                    "intMusicVidComments": 1,
+                    "strGenre": "x",
+                    "strMood": "x",
+                    "strStyle": "x",
+                    "strTheme": "x",
+                    "strDescriptionEN": "x",
+                    "strTrackThumb": "x",
+                    "strTrackLyrics": "x",
+                    "strMusicVid": "x",
+                    "strMusicVidDirector": "x",
+                    "strMusicVidCompany": "x",
+                    "strMusicVidScreen1": "x",
+                    "strMusicVidScreen2": "x",
+                    "strMusicVidScreen3": "x",
+                    "intMusicVidViews": 1,
+                    "intMusicVidLikes": 1,
                     "intMusicVidDislikes": 1,
                     "intMusicVidFavorites": 1,
-                    "intMusicVidLikes": 1,
-                    "intMusicVidViews": 1,
+                    "intMusicVidComments": 1,
+                    "intTrackNumber": 1,
+                    "intLoved": 1,
                     "intScore": 1,
                     "intScoreVotes": 1,
                     "intTotalListeners": 1,
                     "intTotalPlays": 1,
-                    "intTrackNumber": 1,
-                    "strAlbum": "x",
-                    "strArtist": "x",
-                    "strArtistAlternate": "x",
-                    "strDescriptionEN": "x",
-                    "strGenre": "x",
-                    "strLocked": "x",
-                    "strMood": "x",
+                    "strMusicBrainzID": "x",
                     "strMusicBrainzAlbumID": "x",
                     "strMusicBrainzArtistID": "x",
-                    "strMusicBrainzID": "x",
-                    "strMusicVid": "x",
-                    "strMusicVidCompany": "x",
-                    "strMusicVidDirector": "x",
-                    "strMusicVidScreen1": "x",
-                    "strMusicVidScreen2": "x",
-                    "strMusicVidScreen3": "x",
-                    "strStyle": "x",
-                    "strTheme": "x",
-                    "strTrack": "x",
-                    "strTrackLyrics": "x",
-                    "strTrackThumb": "x"
+                    "strLocked": "x"
                 }
             ]
         },
@@ -345,7 +180,12 @@ const PLAN = [
         ],
         "select": {},
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [],
+        "queryArgs": [],
         "auth": [
             [
                 {
@@ -423,7 +263,12 @@ const PLAN = [
         ],
         "select": {},
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [],
+        "queryArgs": [],
         "auth": [
             [
                 {
@@ -501,7 +346,12 @@ const PLAN = [
         ],
         "select": {},
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [],
+        "queryArgs": [],
         "auth": [
             [
                 {
@@ -582,7 +432,12 @@ const PLAN = [
         ],
         "select": {},
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [],
+        "queryArgs": [],
         "auth": [
             [
                 {
@@ -654,7 +509,12 @@ const PLAN = [
         ],
         "select": {},
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [],
+        "queryArgs": [],
         "auth": [
             [
                 {
@@ -732,7 +592,12 @@ const PLAN = [
         ],
         "select": {},
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [],
+        "queryArgs": [],
         "auth": [
             [
                 {
@@ -813,7 +678,12 @@ const PLAN = [
         ],
         "select": {},
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [],
+        "queryArgs": [],
         "auth": [
             [
                 {

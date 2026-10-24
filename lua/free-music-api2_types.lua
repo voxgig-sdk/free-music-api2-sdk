@@ -169,8 +169,7 @@
 ---@field strYoutube? string
 
 ---@class V1LookupListMatch
----@field h? number
----@field m? number
+---@field i string
 
 ---@class V1Search
 ---@field idAlbum? number
@@ -282,9 +281,9 @@
 ---@field strWikipediaID? string
 
 ---@class V1SearchListMatch
----@field a? string
 ---@field s string
 ---@field t? string
+---@field a? string
 
 ---@class V2List
 ---@field albums? table

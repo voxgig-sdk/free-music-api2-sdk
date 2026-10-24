@@ -152,14 +152,14 @@ v1_list = client.V1List()
 
 ### Operations
 
-#### `list(reqmatch=None, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list[V1ListEntity]`
 
-List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list of entities, one per record, and raises on error.
 
 ```python
 results = client.V1List().list({"country": "example", "format": "example", "type": "example"})
 for v1_list in results:
-    print(v1_list)
+    print(v1_list.data_get())
 ```
 
 ### Common Methods
@@ -201,7 +201,7 @@ v1_lookup = client.V1Lookup()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `idAlbum` | `int` | No | Album ID |
+| `idAlbum` | `int` | No | Unique album ID |
 | `idArtist` | `int` | No | Artist ID |
 | `idIMVDB` | `int` | No | IMVDB ID |
 | `idLabel` | `int` | No | Label ID |
@@ -221,7 +221,7 @@ v1_lookup = client.V1Lookup()
 | `intMusicVidLikes` | `int` | No | Number of music video likes |
 | `intMusicVidViews` | `int` | No | Number of music video views |
 | `intSales` | `int` | No | Number of sales |
-| `intScore` | `int` | No | Track score |
+| `intScore` | `int` | No | Album score |
 | `intScoreVotes` | `int` | No | Number of score votes |
 | `intTotalListeners` | `int` | No | Total number of listeners |
 | `intTotalPlays` | `int` | No | Total number of plays |
@@ -272,13 +272,13 @@ v1_lookup = client.V1Lookup()
 | `strBiographySE` | `str` | No | Artist biography in Swedish |
 | `strCountry` | `str` | No | Country of origin |
 | `strCountryCode` | `str` | No | Country code |
-| `strDescriptionEN` | `str` | No | Track description in English |
+| `strDescriptionEN` | `str` | No | Album description in English |
 | `strDisbanded` | `str` | No | Disbanded status |
 | `strDiscogsID` | `str` | No | Discogs ID |
 | `strFacebook` | `str` | No | Facebook page URL |
 | `strGender` | `str` | No | Artist gender |
 | `strGeniusID` | `str` | No | Genius ID |
-| `strGenre` | `str` | No | Track genre |
+| `strGenre` | `str` | No | Album genre |
 | `strInstagram` | `str` | No | Instagram profile URL |
 | `strItunesID` | `str` | No | iTunes ID |
 | `strLabel` | `str` | No | Record label |
@@ -286,10 +286,10 @@ v1_lookup = client.V1Lookup()
 | `strLocation` | `str` | No | Recording location |
 | `strLocked` | `str` | No | Whether the record is locked |
 | `strLyricWikiID` | `str` | No | LyricWiki ID |
-| `strMood` | `str` | No | Track mood |
+| `strMood` | `str` | No | Album mood |
 | `strMusicBrainzAlbumID` | `str` | No | MusicBrainz Album ID |
 | `strMusicBrainzArtistID` | `str` | No | MusicBrainz Artist ID |
-| `strMusicBrainzID` | `str` | No | MusicBrainz Recording ID |
+| `strMusicBrainzID` | `str` | No | MusicBrainz Release Group ID |
 | `strMusicMozID` | `str` | No | MusicMoz ID |
 | `strMusicVid` | `str` | No | URL to music video |
 | `strMusicVidCompany` | `str` | No | Music video production company |
@@ -303,8 +303,8 @@ v1_lookup = client.V1Lookup()
 | `strSoundCloud` | `str` | No | SoundCloud profile URL |
 | `strSpeed` | `str` | No | Album speed |
 | `strSpotify` | `str` | No | Spotify artist URL |
-| `strStyle` | `str` | No | Track style |
-| `strTheme` | `str` | No | Track theme |
+| `strStyle` | `str` | No | Album style |
+| `strTheme` | `str` | No | Album theme |
 | `strTrack` | `str` | No | Track title |
 | `strTrackLyrics` | `str` | No | Track lyrics |
 | `strTrackThumb` | `str` | No | URL to track thumbnail |
@@ -316,14 +316,14 @@ v1_lookup = client.V1Lookup()
 
 ### Operations
 
-#### `list(reqmatch=None, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list[V1LookupEntity]`
 
-List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list of entities, one per record, and raises on error.
 
 ```python
-results = client.V1Lookup().list()
+results = client.V1Lookup().list({"i": "example"})
 for v1_lookup in results:
-    print(v1_lookup)
+    print(v1_lookup.data_get())
 ```
 
 ### Common Methods
@@ -365,7 +365,7 @@ v1_search = client.V1Search()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `idAlbum` | `int` | No | Unique album ID |
+| `idAlbum` | `int` | No | Album ID |
 | `idArtist` | `int` | No | Artist ID |
 | `idIMVDB` | `int` | No | IMVDB ID |
 | `idLabel` | `int` | No | Label ID |
@@ -385,7 +385,7 @@ v1_search = client.V1Search()
 | `intMusicVidLikes` | `int` | No | Number of music video likes |
 | `intMusicVidViews` | `int` | No | Number of music video views |
 | `intSales` | `int` | No | Number of sales |
-| `intScore` | `int` | No | Album score |
+| `intScore` | `int` | No | Track score |
 | `intScoreVotes` | `int` | No | Number of score votes |
 | `intTotalListeners` | `int` | No | Total number of listeners |
 | `intTotalPlays` | `int` | No | Total number of plays |
@@ -435,23 +435,23 @@ v1_search = client.V1Search()
 | `strBiographySE` | `str` | No | Artist biography in Swedish |
 | `strCountry` | `str` | No | Country of origin |
 | `strCountryCode` | `str` | No | Country code |
-| `strDescriptionEN` | `str` | No | Album description in English |
+| `strDescriptionEN` | `str` | No | Track description in English |
 | `strDisbanded` | `str` | No | Disbanded status |
 | `strDiscogsID` | `str` | No | Discogs ID |
 | `strFacebook` | `str` | No | Facebook page URL |
 | `strGender` | `str` | No | Artist gender |
 | `strGeniusID` | `str` | No | Genius ID |
-| `strGenre` | `str` | No | Album genre |
+| `strGenre` | `str` | No | Track genre |
 | `strItunesID` | `str` | No | iTunes ID |
 | `strLabel` | `str` | No | Record label |
 | `strLastFMChart` | `str` | No | Last.fm chart URL |
 | `strLocation` | `str` | No | Recording location |
 | `strLocked` | `str` | No | Whether the record is locked |
 | `strLyricWikiID` | `str` | No | LyricWiki ID |
-| `strMood` | `str` | No | Album mood |
+| `strMood` | `str` | No | Track mood |
 | `strMusicBrainzAlbumID` | `str` | No | MusicBrainz Album ID |
 | `strMusicBrainzArtistID` | `str` | No | MusicBrainz Artist ID |
-| `strMusicBrainzID` | `str` | No | MusicBrainz Release Group ID |
+| `strMusicBrainzID` | `str` | No | MusicBrainz Recording ID |
 | `strMusicMozID` | `str` | No | MusicMoz ID |
 | `strMusicVid` | `str` | No | URL to music video |
 | `strMusicVidCompany` | `str` | No | Music video production company |
@@ -463,8 +463,8 @@ v1_search = client.V1Search()
 | `strReleaseFormat` | `str` | No | Release format (CD, Vinyl, etc.) |
 | `strReview` | `str` | No | Album review |
 | `strSpeed` | `str` | No | Album speed |
-| `strStyle` | `str` | No | Album style |
-| `strTheme` | `str` | No | Album theme |
+| `strStyle` | `str` | No | Track style |
+| `strTheme` | `str` | No | Track theme |
 | `strTrack` | `str` | No | Track title |
 | `strTrackLyrics` | `str` | No | Track lyrics |
 | `strTrackThumb` | `str` | No | URL to track thumbnail |
@@ -475,14 +475,14 @@ v1_search = client.V1Search()
 
 ### Operations
 
-#### `list(reqmatch=None, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list[V1SearchEntity]`
 
-List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list of entities, one per record, and raises on error.
 
 ```python
 results = client.V1Search().list({"s": "example"})
 for v1_search in results:
-    print(v1_search)
+    print(v1_search.data_get())
 ```
 
 ### Common Methods
@@ -528,9 +528,9 @@ v2_list = client.V2List()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> dict`
+#### `load(reqmatch, ctrl=None) -> V2ListEntity`
 
-Load a single entity matching the given criteria. Returns the entity data and raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and raises on error.
 
 ```python
 result = client.V2List().load({"artist_id": 1})
@@ -581,9 +581,9 @@ v2_lookup = client.V2Lookup()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> dict`
+#### `load(reqmatch, ctrl=None) -> V2LookupEntity`
 
-Load a single entity matching the given criteria. Returns the entity data and raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and raises on error.
 
 ```python
 result = client.V2Lookup().load({"album_id": 1})
@@ -634,9 +634,9 @@ v2_search = client.V2Search()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> dict`
+#### `load(reqmatch, ctrl=None) -> V2SearchEntity`
 
-Load a single entity matching the given criteria. Returns the entity data and raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and raises on error.
 
 ```python
 result = client.V2Search().load({"album_name": "album_name"})
@@ -828,6 +828,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

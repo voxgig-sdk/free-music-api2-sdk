@@ -9,7 +9,7 @@ main: kit: entity: v1_search: {
       h: "Id Album"
       n: "idAlbum"
       r: false
-      sh: "Unique album ID"
+      sh: "Album ID"
       t: "`$INTEGER`"
     }
     idArtist: {
@@ -149,7 +149,7 @@ main: kit: entity: v1_search: {
       h: "Int Score"
       n: "intScore"
       r: false
-      sh: "Album score"
+      sh: "Track score"
       t: "`$INTEGER`"
     }
     intScoreVotes: {
@@ -499,7 +499,7 @@ main: kit: entity: v1_search: {
       h: "Str Description En"
       n: "strDescriptionEN"
       r: false
-      sh: "Album description in English"
+      sh: "Track description in English"
       t: "`$STRING`"
     }
     strDisbanded: {
@@ -541,7 +541,7 @@ main: kit: entity: v1_search: {
       h: "Str Genre"
       n: "strGenre"
       r: false
-      sh: "Album genre"
+      sh: "Track genre"
       t: "`$STRING`"
     }
     strItunesID: {
@@ -590,7 +590,7 @@ main: kit: entity: v1_search: {
       h: "Str Mood"
       n: "strMood"
       r: false
-      sh: "Album mood"
+      sh: "Track mood"
       t: "`$STRING`"
     }
     strMusicBrainzAlbumID: {
@@ -611,7 +611,7 @@ main: kit: entity: v1_search: {
       h: "Str Music Brainz Id"
       n: "strMusicBrainzID"
       r: false
-      sh: "MusicBrainz Release Group ID"
+      sh: "MusicBrainz Recording ID"
       t: "`$STRING`"
     }
     strMusicMozID: {
@@ -695,14 +695,14 @@ main: kit: entity: v1_search: {
       h: "Str Style"
       n: "strStyle"
       r: false
-      sh: "Album style"
+      sh: "Track style"
       t: "`$STRING`"
     }
     strTheme: {
       h: "Str Theme"
       n: "strTheme"
       r: false
-      sh: "Album theme"
+      sh: "Track theme"
       t: "`$STRING`"
     }
     strTrack: {
@@ -763,50 +763,6 @@ main: kit: entity: v1_search: {
       points: [
         {
           co: {
-            id: "GET /searchalbum.php"
-            source: "openapi3"
-            version: 2
-          }
-          g: {
-            query: [
-              {
-                ex: "Homework"
-                k: "query"
-                n: "a"
-                or: "a"
-                r: false
-                t: "`$STRING`"
-              }
-              {
-                ex: "daft_punk"
-                k: "query"
-                n: "s"
-                or: "s"
-                r: true
-                t: "`$STRING`"
-              }
-            ]
-          }
-          m: "GET"
-          o: "/searchalbum.php"
-          q: {
-            exist: [
-              "a"
-              "s"
-            ]
-          }
-          s: [
-            {
-              lit: "searchalbum.php"
-            }
-          ]
-          t: {
-            req: "`reqdata`"
-            res: "`body.album`"
-          }
-        }
-        {
-          co: {
             id: "GET /searchtrack.php"
             source: "openapi3"
             version: 2
@@ -838,6 +794,10 @@ main: kit: entity: v1_search: {
               "s"
               "t"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -872,6 +832,10 @@ main: kit: entity: v1_search: {
             exist: [
               "s"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -908,6 +872,10 @@ main: kit: entity: v1_search: {
               "s"
             ]
           }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "discography.php"
@@ -943,6 +911,10 @@ main: kit: entity: v1_search: {
               "s"
             ]
           }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "search.php"
@@ -951,6 +923,53 @@ main: kit: entity: v1_search: {
           t: {
             req: "`reqdata`"
             res: "`body.artists`"
+          }
+        }
+        {
+          co: {
+            id: "GET /searchalbum.php"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: "Homework"
+                k: "query"
+                n: "a"
+                or: "a"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "daft_punk"
+                k: "query"
+                n: "s"
+                or: "s"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/searchalbum.php"
+          q: {
+            exist: [
+              "s"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "searchalbum.php"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.album`"
           }
         }
       ]

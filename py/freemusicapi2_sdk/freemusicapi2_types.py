@@ -181,9 +181,8 @@ class V1Lookup(TypedDict, total=False):
     strYoutube: str
 
 
-class V1LookupListMatch(TypedDict, total=False):
-    h: int
-    m: int
+class V1LookupListMatch(TypedDict):
+    i: str
 
 
 class V1Search(TypedDict, total=False):
@@ -301,8 +300,8 @@ class V1SearchListMatchRequired(TypedDict):
 
 
 class V1SearchListMatch(V1SearchListMatchRequired, total=False):
-    a: str
     t: str
+    a: str
 
 
 class V2List(TypedDict, total=False):

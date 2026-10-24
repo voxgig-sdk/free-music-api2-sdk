@@ -444,11 +444,6 @@
     }
   },
   "requests": {
-    "GET /searchalbum.php": {
-      "provenance": "operation-contract",
-      "version": 2,
-      "source": "openapi3"
-    },
     "GET /searchtrack.php": {
       "provenance": "operation-contract",
       "version": 2,
@@ -465,6 +460,11 @@
       "source": "openapi3"
     },
     "GET /search.php": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /searchalbum.php": {
       "provenance": "operation-contract",
       "version": 2,
       "source": "openapi3"

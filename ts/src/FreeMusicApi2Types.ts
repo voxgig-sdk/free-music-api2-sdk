@@ -171,8 +171,7 @@ export interface V1Lookup {
 }
 
 export interface V1LookupListMatch {
-  h?: number
-  m?: number
+  i: string
 }
 
 export interface V1Search {
@@ -286,9 +285,9 @@ export interface V1Search {
 }
 
 export interface V1SearchListMatch {
-  a?: string
   s: string
   t?: string
+  a?: string
 }
 
 export interface V2List {
