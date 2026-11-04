@@ -37,7 +37,7 @@ class TestV2LookupEntity:
         client = FreeMusicApi2SDK.test(
             None, {"feature": {"validate": {"active": True}}})
         with pytest.raises(Exception) as err:
-            client.V2Lookup(None).load({"album_id": "x"}, None)
+            client.V2Lookup(None).list({"album_id": "x"}, None)
         assert "validate_failed" == getattr(err.value, "code", None)
 
     def test_should_run_basic_flow(self):
@@ -46,7 +46,7 @@ class TestV2LookupEntity:
         # multiple ops; skipping any one skips the whole flow (steps depend
         # on each other).
         _live = setup.get("live", False)
-        for _op in []:
+        for _op in ["list"]:
             _skip, _reason = runner.is_control_skipped("entityOp", "v2_lookup." + _op, "live" if _live else "unit")
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
@@ -59,6 +59,21 @@ class TestV2LookupEntity:
         v2_lookup_ref01_data = None
         if len(v2_lookup_ref01_data_raw) > 0:
             v2_lookup_ref01_data = helpers.to_map(v2_lookup_ref01_data_raw[0][1])
+
+        if setup["live"]:
+            runner.live_pace()
+        # LIST
+        v2_lookup_ref01_ent = client.V2Lookup(None)
+        v2_lookup_ref01_match = {
+            "track_id": setup["idmap"].get("track01"),
+        }
+        if setup["live"]:
+            v2_lookup_ref01_match["album_id"] = 2109615
+            if setup.get("synthetic_only") or setup["idmap"].get("track01") is None:
+                v2_lookup_ref01_match.pop("track_id", None)
+
+        v2_lookup_ref01_list_result = v2_lookup_ref01_ent.list(v2_lookup_ref01_match, None)
+        assert isinstance(v2_lookup_ref01_list_result, list)
 
 
 
@@ -78,7 +93,7 @@ def _v2_lookup_basic_setup(extra):
 
     # Generate idmap via transform.
     idmap = vs.transform(
-        ["v2_lookup01", "v2_lookup02", "v2_lookup03"],
+        ["v2_lookup01", "v2_lookup02", "v2_lookup03", "track01"],
         {
             "`$PACK`": ["", {
                 "`$KEY`": "`$COPY`",

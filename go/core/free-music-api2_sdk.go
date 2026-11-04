@@ -192,6 +192,20 @@ func (sdk *FreeMusicApi2SDK) Prepare(fetchargs map[string]any) (map[string]any, 
 		}
 	}
 
+	// A raw request has no point to declare its response type, so it asks
+	// for the JSON it reads: an API that negotiates on Accept otherwise
+	// answers in its own default format. A caller's own accept wins.
+	hasAccept := false
+	for k := range ctx.Spec.Headers {
+		if strings.ToLower(k) == "accept" {
+			hasAccept = true
+			break
+		}
+	}
+	if !hasAccept {
+		ctx.Spec.Headers["accept"] = "application/json"
+	}
+
 	_, err := utility.PrepareAuth(ctx)
 	if err != nil {
 		return nil, err
@@ -375,7 +389,7 @@ func (sdk *FreeMusicApi2SDK) Graphql(
 // V1List returns a V1List entity bound to this client.
 // Idiomatic usage: client.V1List(nil).List(nil, nil) or
 // client.V1List(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *FreeMusicApi2SDK) V1List(data map[string]any) FreeMusicApi2Entity {
+func (sdk *FreeMusicApi2SDK) V1List(data map[string]any) FreeMusicApi2EntityBase {
 	return NewV1ListEntityFunc(sdk, data)
 }
 
@@ -383,7 +397,7 @@ func (sdk *FreeMusicApi2SDK) V1List(data map[string]any) FreeMusicApi2Entity {
 // V1Lookup returns a V1Lookup entity bound to this client.
 // Idiomatic usage: client.V1Lookup(nil).List(nil, nil) or
 // client.V1Lookup(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *FreeMusicApi2SDK) V1Lookup(data map[string]any) FreeMusicApi2Entity {
+func (sdk *FreeMusicApi2SDK) V1Lookup(data map[string]any) FreeMusicApi2EntityBase {
 	return NewV1LookupEntityFunc(sdk, data)
 }
 
@@ -391,7 +405,7 @@ func (sdk *FreeMusicApi2SDK) V1Lookup(data map[string]any) FreeMusicApi2Entity {
 // V1Search returns a V1Search entity bound to this client.
 // Idiomatic usage: client.V1Search(nil).List(nil, nil) or
 // client.V1Search(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *FreeMusicApi2SDK) V1Search(data map[string]any) FreeMusicApi2Entity {
+func (sdk *FreeMusicApi2SDK) V1Search(data map[string]any) FreeMusicApi2EntityBase {
 	return NewV1SearchEntityFunc(sdk, data)
 }
 
@@ -399,7 +413,7 @@ func (sdk *FreeMusicApi2SDK) V1Search(data map[string]any) FreeMusicApi2Entity {
 // V2List returns a V2List entity bound to this client.
 // Idiomatic usage: client.V2List(nil).List(nil, nil) or
 // client.V2List(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *FreeMusicApi2SDK) V2List(data map[string]any) FreeMusicApi2Entity {
+func (sdk *FreeMusicApi2SDK) V2List(data map[string]any) FreeMusicApi2EntityBase {
 	return NewV2ListEntityFunc(sdk, data)
 }
 
@@ -407,7 +421,7 @@ func (sdk *FreeMusicApi2SDK) V2List(data map[string]any) FreeMusicApi2Entity {
 // V2Lookup returns a V2Lookup entity bound to this client.
 // Idiomatic usage: client.V2Lookup(nil).List(nil, nil) or
 // client.V2Lookup(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *FreeMusicApi2SDK) V2Lookup(data map[string]any) FreeMusicApi2Entity {
+func (sdk *FreeMusicApi2SDK) V2Lookup(data map[string]any) FreeMusicApi2EntityBase {
 	return NewV2LookupEntityFunc(sdk, data)
 }
 
@@ -415,7 +429,7 @@ func (sdk *FreeMusicApi2SDK) V2Lookup(data map[string]any) FreeMusicApi2Entity {
 // V2Search returns a V2Search entity bound to this client.
 // Idiomatic usage: client.V2Search(nil).List(nil, nil) or
 // client.V2Search(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *FreeMusicApi2SDK) V2Search(data map[string]any) FreeMusicApi2Entity {
+func (sdk *FreeMusicApi2SDK) V2Search(data map[string]any) FreeMusicApi2EntityBase {
 	return NewV2SearchEntityFunc(sdk, data)
 }
 

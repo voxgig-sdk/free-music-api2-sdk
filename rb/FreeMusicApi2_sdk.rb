@@ -153,6 +153,13 @@ class FreeMusicApi2SDK
       uh.each { |k, v| ctx.spec.headers[k] = v }
     end
 
+    # A raw request has no point to declare its response type, so it asks
+    # for the JSON it reads: an API that negotiates on Accept otherwise
+    # answers in its own default format. A caller's own accept wins.
+    unless ctx.spec.headers.keys.any? { |k| k.to_s.downcase == "accept" }
+      ctx.spec.headers["accept"] = "application/json"
+    end
+
     _, err = utility.prepare_auth.call(ctx)
     raise err if err
 
@@ -185,9 +192,9 @@ class FreeMusicApi2SDK
     {
       "ok" => false,
       "err" => FreeMusicApi2Error.new(
-        "#{op}_allow",
         "FreeMusicApi2SDK: #{op}: operation not allowed by" \
-        " SDK option allow.op value: \"#{allow_op}\""),
+        " SDK option allow.op value: \"#{allow_op}\"",
+        code: "#{op}_allow"),
     }
   end
 
@@ -306,7 +313,7 @@ class FreeMusicApi2SDK
       msg = "graphql error" if msg.nil? || msg.to_s.empty?
       res["ok"] = false
       res["err"] = FreeMusicApi2Error.new(
-        "graphql_error", "FreeMusicApi2SDK: graphql: #{msg}")
+        "FreeMusicApi2SDK: graphql: #{msg}", code: "graphql_error")
       res["graphql"] = errors
     end
 

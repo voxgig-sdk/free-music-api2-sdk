@@ -33,7 +33,7 @@ class V2SearchEntityTest extends TestCase
         $client = FreeMusicApi2SDK::test(null, ["feature" => ["validate" => ["active" => true]]]);
         $err = null;
         try {
-            $client->V2Search(null)->load(["album_name" => 1], null);
+            $client->V2Search(null)->list(["album_name" => 1], null);
         } catch (\Throwable $e) {
             $err = $e;
         }
@@ -45,7 +45,7 @@ class V2SearchEntityTest extends TestCase
         $setup = v2_search_basic_setup(null);
         // Per-op sdk-test-control.json skip.
         $_live = !empty($setup["live"]);
-        foreach ([] as $_op) {
+        foreach (["list"] as $_op) {
             [$_shouldSkip, $_reason] = Runner::is_control_skipped("entityOp", "v2_search." . $_op, $_live ? "live" : "unit");
             if ($_shouldSkip) {
                 $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
@@ -61,6 +61,24 @@ class V2SearchEntityTest extends TestCase
         if (count($v2_search_ref01_data_raw) > 0) {
             $v2_search_ref01_data = Helpers::to_map($v2_search_ref01_data_raw[0][1]);
         }
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
+        // LIST
+        $v2_search_ref01_ent = $client->V2Search(null);
+        $v2_search_ref01_match = [
+            "track_name" => $setup["idmap"]["track_name01"] ?? null,
+        ];
+        if (!empty($setup["live"])) {
+            $v2_search_ref01_match["album_name"] = 'parachutes';
+            if (!empty($setup["synthetic_only"]) || null === ($setup["idmap"]["track_name01"] ?? null)) {
+                unset($v2_search_ref01_match["track_name"]);
+            }
+        }
+
+        $v2_search_ref01_list_result = $v2_search_ref01_ent->list($v2_search_ref01_match, null);
+        $this->assertIsArray($v2_search_ref01_list_result);
 
     }
 }
@@ -80,7 +98,7 @@ function v2_search_basic_setup($extra)
 
     // Generate idmap.
     $idmap = [];
-    foreach (["v2_search01", "v2_search02", "v2_search03"] as $k) {
+    foreach (["v2_search01", "v2_search02", "v2_search03", "track_name01"] as $k) {
         $idmap[$k] = strtoupper($k);
     }
 

@@ -153,9 +153,15 @@ class TestV1ListEntity:
         if len(v1_list_ref01_data_raw) > 0:
             v1_list_ref01_data = helpers.to_map(v1_list_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         v1_list_ref01_ent = client.V1List(None)
         v1_list_ref01_match = {}
+        if setup["live"]:
+            v1_list_ref01_match["country"] = "us"
+            v1_list_ref01_match["format"] = "albums"
+            v1_list_ref01_match["type"] = "itunes"
 
         v1_list_ref01_list_result = v1_list_ref01_ent.list(v1_list_ref01_match, None)
         assert isinstance(v1_list_ref01_list_result, list)

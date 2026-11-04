@@ -33,13 +33,23 @@ func TestV1SearchDirect(t *testing.T) {
 			t.Skip(_reason)
 			return
 		}
+		if setup.live {
+			livePace()
+		}
 		client := setup.client
 
+		params := map[string]any{}
+		query := map[string]any{}
+		if setup.live {
+			query["s"] = "coldplay"
+			query["t"] = "yellow"
+		}
 
 		result, err := client.Direct(map[string]any{
 			"path":   "searchtrack.php",
 			"method": "GET",
-			"params": map[string]any{},
+			"params": params,
+			"query":  query,
 		})
 		if setup.live {
 			if err != nil {

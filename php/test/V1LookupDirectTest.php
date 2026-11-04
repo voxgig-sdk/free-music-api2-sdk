@@ -33,14 +33,22 @@ class V1LookupDirectTest extends TestCase
             $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
             return;
         }
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         $client = $setup["client"];
 
         $params = [];
+        $query = [];
+        if ($setup["live"]) {
+            $query["i"] = '1dc4c347-a1db-32aa-b14f-bc9cc507b843';
+        }
 
         $result = $client->direct([
             "path" => "album-mb.php",
             "method" => "GET",
             "params" => $params,
+            "query" => $query,
         ]);
         if ($setup["live"]) {
             if (!self::liveOk($result)) {

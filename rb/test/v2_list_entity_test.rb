@@ -25,7 +25,7 @@ class V2ListEntityTest < Minitest::Test
     end
     client = FreeMusicApi2SDK.test(nil, { "feature" => { "validate" => { "active" => true } } })
     err = assert_raises(StandardError) do
-      client.V2List(nil).load({ "artist_id" => "x" }, nil)
+      client.V2List(nil).list({ "artist_id" => "x" }, nil)
     end
     assert_equal "validate_failed", err.code
   end
@@ -34,11 +34,18 @@ class V2ListEntityTest < Minitest::Test
     setup = v2_list_basic_setup(nil)
     # Per-op sdk-test-control.json skip.
     _live = setup[:live] || false
-    [].each do |_op|
+    ["list"].each do |_op|
       _should_skip, _reason = Runner.is_control_skipped("entityOp", "v2_list." + _op, _live ? "live" : "unit")
       if _should_skip
         skip(_reason || "skipped via sdk-test-control.json")
         return
+      end
+    end
+    if setup[:live]
+      { "artist01" => 111239 }.each do |_live_key, _live_ex|
+        if setup[:synthetic_only] || setup[:idmap][_live_key].nil?
+          setup[:idmap][_live_key] = _live_ex
+        end
       end
     end
     client = setup[:client]
@@ -50,6 +57,16 @@ class V2ListEntityTest < Minitest::Test
     if v2_list_ref01_data_raw.length > 0
       v2_list_ref01_data = Helpers.to_map(v2_list_ref01_data_raw[0][1])
     end
+
+    Runner.live_pace if setup[:live]
+    # LIST
+    v2_list_ref01_ent = client.V2List(nil)
+    v2_list_ref01_match = {
+      "artist_id" => setup[:idmap]["artist01"],
+    }
+
+    v2_list_ref01_list_result = v2_list_ref01_ent.list(v2_list_ref01_match, nil)
+    assert v2_list_ref01_list_result.is_a?(Array)
 
   end
 end
@@ -68,7 +85,7 @@ def v2_list_basic_setup(extra)
 
   # Generate idmap via transform.
   idmap = Vs.transform(
-    ["v2_list01", "v2_list02", "v2_list03"],
+    ["v2_list01", "v2_list02", "v2_list03", "artist01"],
     {
       "`$PACK`" => ["", {
         "`$KEY`" => "`$COPY`",

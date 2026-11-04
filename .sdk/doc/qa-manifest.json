@@ -12,6 +12,8 @@
       "IMVDB ID",
       "Label ID",
       "Lyrics ID",
+      "Number of loves/likes",
+      "Number of sales",
       "Successful response",
       "The Free Music API by TheAudioDB provides access to various music-related data, including artist details, album information, track listings, and music charts. It supports multiple query types, allowing users to search by artist or album name, retrieve top tracks, and manage user ratings.",
       "Track ID",

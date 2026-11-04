@@ -181,9 +181,14 @@ class V1SearchEntityTest < Minitest::Test
       v1_search_ref01_data = Helpers.to_map(v1_search_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LIST
     v1_search_ref01_ent = client.V1Search(nil)
     v1_search_ref01_match = {}
+    if setup[:live]
+      v1_search_ref01_match["s"] = "coldplay"
+      v1_search_ref01_match["t"] = "yellow"
+    end
 
     v1_search_ref01_list_result = v1_search_ref01_ent.list(v1_search_ref01_match, nil)
     assert v1_search_ref01_list_result.is_a?(Array)

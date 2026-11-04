@@ -229,9 +229,15 @@ class V1LookupEntityTest extends TestCase
             $v1_lookup_ref01_data = Helpers::to_map($v1_lookup_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $v1_lookup_ref01_ent = $client->V1Lookup(null);
         $v1_lookup_ref01_match = [];
+        if (!empty($setup["live"])) {
+            $v1_lookup_ref01_match["i"] = '1dc4c347-a1db-32aa-b14f-bc9cc507b843';
+        }
 
         $v1_lookup_ref01_list_result = $v1_lookup_ref01_ent->list($v1_lookup_ref01_match, null);
         $this->assertIsArray($v1_lookup_ref01_list_result);

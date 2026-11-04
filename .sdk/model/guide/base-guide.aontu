@@ -92,49 +92,59 @@ guide: {
   entity: v2_list: {
     path: "/list/discography/{artistId}": {
       rename: param: "artistId": *"artist_id"
-      op: load: method: *GET
+      op: list: method: *GET
+      op: list: transform: res: *("`body.albums`")|top
     }
   }
 
   entity: v2_lookup: {
     path: "/lookup/album/{albumId}": {
       rename: param: "albumId": *"album_id"
-      op: load: method: *GET
+      op: list: method: *GET
+      op: list: transform: res: *("`body.albums`")|top
     }
     path: "/lookup/album_mb/{musicBrainzId}": {
       rename: param: "musicBrainzId": *"music_brainz_id"
-      op: load: method: *GET
+      op: list: method: *GET
+      op: list: transform: res: *("`body.albums`")|top
     }
     path: "/lookup/artist/{artistId}": {
       rename: param: "artistId": *"artist_id"
-      op: load: method: *GET
+      op: list: method: *GET
+      op: list: transform: res: *("`body.artists`")|top
     }
     path: "/lookup/artist_mb/{musicBrainzId}": {
       rename: param: "musicBrainzId": *"music_brainz_id"
-      op: load: method: *GET
+      op: list: method: *GET
+      op: list: transform: res: *("`body.artists`")|top
     }
     path: "/lookup/track/{trackId}": {
       rename: param: "trackId": *"track_id"
-      op: load: method: *GET
+      op: list: method: *GET
+      op: list: transform: res: *("`body.tracks`")|top
     }
     path: "/lookup/track_mb/{musicBrainzId}": {
       rename: param: "musicBrainzId": *"music_brainz_id"
-      op: load: method: *GET
+      op: list: method: *GET
+      op: list: transform: res: *("`body.tracks`")|top
     }
   }
 
   entity: v2_search: {
     path: "/search/album/{albumName}": {
       rename: param: "albumName": *"album_name"
-      op: load: method: *GET
+      op: list: method: *GET
+      op: list: transform: res: *("`body.albums`")|top
     }
     path: "/search/artist/{artistName}": {
       rename: param: "artistName": *"artist_name"
-      op: load: method: *GET
+      op: list: method: *GET
+      op: list: transform: res: *("`body.artists`")|top
     }
     path: "/search/track/{trackName}": {
       rename: param: "trackName": *"track_name"
-      op: load: method: *GET
+      op: list: method: *GET
+      op: list: transform: res: *("`body.tracks`")|top
     }
   }
 

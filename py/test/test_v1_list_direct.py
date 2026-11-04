@@ -1,6 +1,7 @@
 # V1List direct test
 
 import json
+import os
 import pytest
 
 from freemusicapi2_sdk.utility.voxgig_struct import voxgig_struct as vs
@@ -32,14 +33,22 @@ class TestV1ListDirect:
         if _skip:
             pytest.skip(_reason or "skipped via sdk-test-control.json")
             return
+        if setup["live"]:
+            runner.live_pace()
         client = setup["client"]
 
         params = {}
+        query = {}
+        if setup["live"]:
+            query["country"] = "us"
+            query["format"] = "albums"
+            query["type"] = "itunes"
 
         result = client.direct({
             "path": "trending.php",
             "method": "GET",
             "params": params,
+            "query": query,
         })
         if setup["live"]:
             if not _live_ok(result):

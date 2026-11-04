@@ -29,7 +29,7 @@ describe("V2SearchEntity", function()
       return
     end
     local client = sdk.test(nil, { feature = { validate = { active = true } } })
-    local _, err = client:V2Search(nil):load({ ["album_name"] = 1 }, nil)
+    local _, err = client:V2Search(nil):list({ ["album_name"] = 1 }, nil)
     assert.are.equal("validate_failed", type(err) == "table" and err.code or nil)
   end)
 
@@ -37,7 +37,7 @@ describe("V2SearchEntity", function()
     local setup = v2_search_basic_setup(nil)
     -- Per-op sdk-test-control.json skip.
     local _live = setup.live or false
-    for _, _op in ipairs({}) do
+    for _, _op in ipairs({"list"}) do
       local _should_skip, _reason = runner.is_control_skipped("entityOp", "v2_search." .. _op, _live and "live" or "unit")
       if _should_skip then
         pending(_reason or "skipped via sdk-test-control.json")
@@ -53,6 +53,25 @@ describe("V2SearchEntity", function()
     if #v2_search_ref01_data_raw > 0 then
       v2_search_ref01_data = helpers.to_map(v2_search_ref01_data_raw[1][2])
     end
+
+    if setup.live then
+      runner.live_pace()
+    end
+    -- LIST
+    local v2_search_ref01_ent = client:V2Search(nil)
+    local v2_search_ref01_match = {
+      ["track_name"] = setup.idmap["track_name01"],
+    }
+    if setup.live then
+      v2_search_ref01_match["album_name"] = "parachutes"
+      if setup.synthetic_only or setup.idmap["track_name01"] == nil then
+        v2_search_ref01_match["track_name"] = nil
+      end
+    end
+
+    local v2_search_ref01_list_result, err = v2_search_ref01_ent:list(v2_search_ref01_match, nil)
+    assert.is_nil(err)
+    assert.is_table(v2_search_ref01_list_result)
 
   end)
 end)
@@ -77,7 +96,7 @@ function v2_search_basic_setup(extra)
 
   -- Generate idmap via transform.
   local idmap = vs.transform(
-    { "v2_search01", "v2_search02", "v2_search03" },
+    { "v2_search01", "v2_search02", "v2_search03", "track_name01" },
     {
       ["`$PACK`"] = { "", {
         ["`$KEY`"] = "`$COPY`",

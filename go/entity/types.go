@@ -47,8 +47,8 @@ type V1SearchListMatch struct {
 type V2List struct {
 }
 
-// V2ListLoadMatch is the typed request payload for V2List.LoadTyped.
-type V2ListLoadMatch struct {
+// V2ListListMatch is the typed request payload for V2List.ListTyped.
+type V2ListListMatch struct {
 	ArtistId int `json:"artist_id"`
 }
 
@@ -56,8 +56,8 @@ type V2ListLoadMatch struct {
 type V2Lookup struct {
 }
 
-// V2LookupLoadMatch is the typed request payload for V2Lookup.LoadTyped.
-type V2LookupLoadMatch struct {
+// V2LookupListMatch is the typed request payload for V2Lookup.ListTyped.
+type V2LookupListMatch struct {
 	AlbumId int `json:"album_id"`
 }
 
@@ -65,8 +65,8 @@ type V2LookupLoadMatch struct {
 type V2Search struct {
 }
 
-// V2SearchLoadMatch is the typed request payload for V2Search.LoadTyped.
-type V2SearchLoadMatch struct {
+// V2SearchListMatch is the typed request payload for V2Search.ListTyped.
+type V2SearchListMatch struct {
 	AlbumName string `json:"album_name"`
 }
 

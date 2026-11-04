@@ -17,25 +17,39 @@ import (
 const v2_listDirectLiveStrict = true
 
 func TestV2ListDirect(t *testing.T) {
-	t.Run("direct-load-v2_list", func(t *testing.T) {
-		setup := v2_listDirectSetup(map[string]any{"id": "direct01"})
+	t.Run("direct-list-v2_list", func(t *testing.T) {
+		setup := v2_listDirectSetup([]any{
+			map[string]any{"id": "direct01"},
+			map[string]any{"id": "direct02"},
+		})
 		_mode := "unit"
 		if setup.live {
 			_mode = "live"
 		}
-		if _shouldSkip, _reason := isControlSkipped("direct", "direct-load-v2_list", _mode); _shouldSkip {
+		if _shouldSkip, _reason := isControlSkipped("direct", "direct-list-v2_list", _mode); _shouldSkip {
 			if _reason == "" {
 				_reason = "skipped via sdk-test-control.json"
 			}
 			t.Skip(_reason)
 			return
 		}
+		if setup.live {
+			for _, _liveKey := range []string{"artist01"} {
+				if v := setup.idmap[_liveKey]; v == nil {
+					liveMiss(t, v2_listDirectLiveStrict, "Live test blocked: needs %s via FREE_MUSIC_API2_TEST_V2_LIST_ENTID", _liveKey)
+					return
+				}
+			}
+		}
+		if setup.live {
+			livePace()
+		}
 		client := setup.client
 
 		params := map[string]any{}
 		query := map[string]any{}
 		if setup.live {
-			params["artist_id"] = 111239
+			params["artist_id"] = setup.idmap["artist01"]
 		} else {
 			params["artist_id"] = "direct01"
 		}
@@ -48,13 +62,13 @@ func TestV2ListDirect(t *testing.T) {
 		})
 		if setup.live {
 			if err != nil {
-				liveMiss(t, v2_listDirectLiveStrict, "Live load failed: %v", err)
+				liveMiss(t, v2_listDirectLiveStrict, "Live list failed: %v", err)
 			}
 			if status := core.ToInt(result["status"]); result["ok"] != true || status < 200 || status >= 300 {
-				liveMiss(t, v2_listDirectLiveStrict, "Live load failed: %s", liveDescribe(result))
+				liveMiss(t, v2_listDirectLiveStrict, "Live list failed: %s", liveDescribe(result))
 			}
-			if result["data"] == nil {
-				liveMiss(t, v2_listDirectLiveStrict, "Live load returned no data: %s", liveDescribe(result))
+			if _, ok := liveList(result["data"]); !ok {
+				liveMiss(t, v2_listDirectLiveStrict, "Live list returned no list: %s", liveDescribe(result))
 			}
 		} else {
 			if err != nil {
@@ -66,16 +80,15 @@ func TestV2ListDirect(t *testing.T) {
 			if core.ToInt(result["status"]) != 200 {
 				t.Fatalf("expected status 200, got %v", result["status"])
 			}
-			if result["data"] == nil {
-				t.Fatal("expected data to be non-nil")
-			}
 		}
 
 		if !setup.live {
-			if dataMap, ok := result["data"].(map[string]any); ok {
-				if dataMap["id"] != "direct01" {
-					t.Fatalf("expected data.id to be direct01, got %v", dataMap["id"])
+			if dataList, ok := result["data"].([]any); ok {
+				if len(dataList) != 2 {
+					t.Fatalf("expected 2 items, got %d", len(dataList))
 				}
+			} else {
+				t.Fatalf("expected data to be an array, got %T", result["data"])
 			}
 
 			if len(*setup.calls) != 1 {
@@ -137,6 +150,12 @@ func v2_listDirectSetup(mockres any) *v2_listDirectSetupResult {
 				json.Unmarshal([]byte(entidStr), &idmap)
 			} else if entidMap, ok := entidRaw.(map[string]any); ok {
 				idmap = entidMap
+			}
+		}
+		// A path parameter's example stands in for an id *_ENTID does not give.
+		for k, v := range map[string]any{"artist01": 111239} {
+			if idmap[k] == nil {
+				idmap[k] = v
 			}
 		}
 

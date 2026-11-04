@@ -33,13 +33,22 @@ func TestV1LookupDirect(t *testing.T) {
 			t.Skip(_reason)
 			return
 		}
+		if setup.live {
+			livePace()
+		}
 		client := setup.client
 
+		params := map[string]any{}
+		query := map[string]any{}
+		if setup.live {
+			query["i"] = "1dc4c347-a1db-32aa-b14f-bc9cc507b843"
+		}
 
 		result, err := client.Direct(map[string]any{
 			"path":   "album-mb.php",
 			"method": "GET",
-			"params": map[string]any{},
+			"params": params,
+			"query":  query,
 		})
 		if setup.live {
 			if err != nil {

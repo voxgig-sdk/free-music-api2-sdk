@@ -29,7 +29,7 @@ describe("V2LookupEntity", function()
       return
     end
     local client = sdk.test(nil, { feature = { validate = { active = true } } })
-    local _, err = client:V2Lookup(nil):load({ ["album_id"] = "x" }, nil)
+    local _, err = client:V2Lookup(nil):list({ ["album_id"] = "x" }, nil)
     assert.are.equal("validate_failed", type(err) == "table" and err.code or nil)
   end)
 
@@ -37,7 +37,7 @@ describe("V2LookupEntity", function()
     local setup = v2_lookup_basic_setup(nil)
     -- Per-op sdk-test-control.json skip.
     local _live = setup.live or false
-    for _, _op in ipairs({}) do
+    for _, _op in ipairs({"list"}) do
       local _should_skip, _reason = runner.is_control_skipped("entityOp", "v2_lookup." .. _op, _live and "live" or "unit")
       if _should_skip then
         pending(_reason or "skipped via sdk-test-control.json")
@@ -53,6 +53,25 @@ describe("V2LookupEntity", function()
     if #v2_lookup_ref01_data_raw > 0 then
       v2_lookup_ref01_data = helpers.to_map(v2_lookup_ref01_data_raw[1][2])
     end
+
+    if setup.live then
+      runner.live_pace()
+    end
+    -- LIST
+    local v2_lookup_ref01_ent = client:V2Lookup(nil)
+    local v2_lookup_ref01_match = {
+      ["track_id"] = setup.idmap["track01"],
+    }
+    if setup.live then
+      v2_lookup_ref01_match["album_id"] = 2109615
+      if setup.synthetic_only or setup.idmap["track01"] == nil then
+        v2_lookup_ref01_match["track_id"] = nil
+      end
+    end
+
+    local v2_lookup_ref01_list_result, err = v2_lookup_ref01_ent:list(v2_lookup_ref01_match, nil)
+    assert.is_nil(err)
+    assert.is_table(v2_lookup_ref01_list_result)
 
   end)
 end)
@@ -77,7 +96,7 @@ function v2_lookup_basic_setup(extra)
 
   -- Generate idmap via transform.
   local idmap = vs.transform(
-    { "v2_lookup01", "v2_lookup02", "v2_lookup03" },
+    { "v2_lookup01", "v2_lookup02", "v2_lookup03", "track01" },
     {
       ["`$PACK`"] = { "", {
         ["`$KEY`"] = "`$COPY`",

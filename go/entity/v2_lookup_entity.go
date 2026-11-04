@@ -294,11 +294,16 @@ func (e *V2LookupEntity) streamSteps(ctx *core.Context) error {
 	return nil
 }
 
+func (e *V2LookupEntity) Load(_ map[string]any, _ map[string]any) (any, error) {
+	return core.UnsupportedOp("load", e.name)
+}
 
-func (e *V2LookupEntity) Load(reqmatch map[string]any, ctrl map[string]any) (any, error) {
+
+
+func (e *V2LookupEntity) List(reqmatch map[string]any, ctrl map[string]any) (any, error) {
 	utility := e.utility
 	ctx := utility.MakeContext(map[string]any{
-		"opname":   "load",
+		"opname":   "list",
 		"ctrl":     ctrl,
 		"match":    e.match,
 		"data":     e.data,
@@ -310,32 +315,21 @@ func (e *V2LookupEntity) Load(reqmatch map[string]any, ctrl map[string]any) (any
 			if ctx.Result.Resmatch != nil {
 				e.match = ctx.Result.Resmatch
 			}
-			if ctx.Result.Resdata != nil {
-				e.data = map[string]any{}
-				if data := core.ToMapAny(vs.Clone(ctx.Result.Resdata)); data != nil {
-					e.data = data
-				}
-			}
 		}
 	})
 }
 
-// LoadTyped is the statically-typed variant of Load: it takes an
-// V2LookupLoadMatch and returns an V2Lookup. It delegates to the untyped
-// Load (identical runtime) and converts at the typed boundary.
-func (e *V2LookupEntity) LoadTyped(reqmatch V2LookupLoadMatch, ctrl map[string]any) (V2Lookup, error) {
-	res, err := e.Load(asMap(reqmatch), ctrl)
+// ListTyped is the statically-typed variant of List: it takes an
+// V2LookupListMatch and returns []V2Lookup. It delegates to the untyped
+// List (identical runtime) and converts at the typed boundary.
+func (e *V2LookupEntity) ListTyped(reqmatch V2LookupListMatch, ctrl map[string]any) ([]V2Lookup, error) {
+	res, err := e.List(asMap(reqmatch), ctrl)
 	if err != nil {
-		return V2Lookup{}, err
+		return nil, err
 	}
-	return typedFrom[V2Lookup](res), nil
+	return typedSliceFrom[V2Lookup](res), nil
 }
 
-
-
-func (e *V2LookupEntity) List(_ map[string]any, _ map[string]any) (any, error) {
-	return core.UnsupportedOp("list", e.name)
-}
 
 
 func (e *V2LookupEntity) Create(_ map[string]any, _ map[string]any) (any, error) {

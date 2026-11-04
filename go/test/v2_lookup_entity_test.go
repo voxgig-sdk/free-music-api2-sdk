@@ -38,7 +38,7 @@ func TestV2LookupEntity(t *testing.T) {
 		client := sdk.TestSDK(nil, map[string]any{
 			"feature": map[string]any{"validate": map[string]any{"active": true}},
 		})
-		_, err := client.V2Lookup(nil).Load(map[string]any{"album_id": "x"}, nil)
+		_, err := client.V2Lookup(nil).List(map[string]any{"album_id": "x"}, nil)
 		if sdkerr, ok := err.(*core.FreeMusicApi2Error); !ok || "validate_failed" != sdkerr.Code {
 			t.Fatalf("expected validate_failed, got %v", err)
 		}
@@ -53,7 +53,7 @@ func TestV2LookupEntity(t *testing.T) {
 		if setup.live {
 			_mode = "live"
 		}
-		for _, _op := range []string{} {
+		for _, _op := range []string{"list"} {
 			if _shouldSkip, _reason := isControlSkipped("entityOp", "v2_lookup." + _op, _mode); _shouldSkip {
 				if _reason == "" {
 					_reason = "skipped via sdk-test-control.json"
@@ -62,6 +62,9 @@ func TestV2LookupEntity(t *testing.T) {
 				return
 			}
 		}
+		client := setup.client
+		_ = client
+
 		// Bootstrap entity data from existing test data (no create step in flow).
 		v2LookupRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.v2_lookup")))
 		var v2LookupRef01Data map[string]any
@@ -71,6 +74,30 @@ func TestV2LookupEntity(t *testing.T) {
 		// Discard guards against Go's unused-var check when the flow's steps
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = v2LookupRef01Data
+
+		if setup.live {
+			livePace()
+		}
+		// LIST
+		v2LookupRef01Ent := client.V2Lookup(nil)
+		v2LookupRef01Match := map[string]any{
+			"track_id": setup.idmap["track01"],
+		}
+		if setup.live {
+			v2LookupRef01Match["album_id"] = 2109615
+			if setup.syntheticOnly || setup.idmap["track01"] == nil {
+				delete(v2LookupRef01Match, "track_id")
+			}
+		}
+
+		v2LookupRef01ListResult, err := v2LookupRef01Ent.List(v2LookupRef01Match, nil)
+		if err != nil {
+			t.Fatalf("list failed: %v", err)
+		}
+		_, v2LookupRef01ListOk := v2LookupRef01ListResult.([]any)
+		if !v2LookupRef01ListOk {
+			t.Fatalf("expected list result to be an array, got %T", v2LookupRef01ListResult)
+		}
 
 	})
 }
@@ -100,7 +127,7 @@ func v2_lookupBasicSetup(extra map[string]any) *entityTestSetup {
 
 	// Generate idmap via transform, matching TS pattern.
 	idmap, _ := vs.Transform(
-		[]any{"v2_lookup01", "v2_lookup02", "v2_lookup03"},
+		[]any{"v2_lookup01", "v2_lookup02", "v2_lookup03", "track01"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
 				"`$KEY`": "`$COPY`",

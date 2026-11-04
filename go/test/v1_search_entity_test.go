@@ -212,9 +212,16 @@ func TestV1SearchEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = v1SearchRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		v1SearchRef01Ent := client.V1Search(nil)
 		v1SearchRef01Match := map[string]any{}
+		if setup.live {
+			v1SearchRef01Match["s"] = "coldplay"
+			v1SearchRef01Match["t"] = "yellow"
+		}
 
 		v1SearchRef01ListResult, err := v1SearchRef01Ent.List(v1SearchRef01Match, nil)
 		if err != nil {

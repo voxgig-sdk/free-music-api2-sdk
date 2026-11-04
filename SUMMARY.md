@@ -58,19 +58,43 @@ Key fields to recognise:
 
 Results: Successful response.
 
-SDK operations: `load`.
+SDK operations: `list`.
+
+Key fields to recognise:
+
+- `idAlbum`: Unique album ID
+- `idArtist`: Artist ID
+- `idLabel`: Label ID
+- `intLoved`: Number of loves/likes
+- `intSales`: Number of sales
 
 ### V2Lookup
 
 Results: Successful response.
 
-SDK operations: `load`.
+SDK operations: `list`.
+
+Key fields to recognise:
+
+- `idAlbum`: Unique album ID
+- `idArtist`: Artist ID
+- `idIMVDB`: IMVDB ID
+- `idLabel`: Label ID
+- `idLyric`: Lyrics ID
 
 ### V2Search
 
 Results: Successful response.
 
-SDK operations: `load`.
+SDK operations: `list`.
+
+Key fields to recognise:
+
+- `idAlbum`: Unique album ID
+- `idArtist`: Artist ID
+- `idIMVDB`: IMVDB ID
+- `idLabel`: Label ID
+- `idLyric`: Lyrics ID
 
 ### Route map
 
@@ -96,16 +120,16 @@ Use this map to locate a capability. Consult the entity reference before supplyi
 | V1Search | `list` | `GET /discography.php` | See reference |
 | V1Search | `list` | `GET /search.php` | See reference |
 | V1Search | `list` | `GET /searchalbum.php` | See reference |
-| V2List | `load` | `GET /list/discography/{artistId}` | Required |
-| V2Lookup | `load` | `GET /lookup/album/{albumId}` | Required |
-| V2Lookup | `load` | `GET /lookup/artist/{artistId}` | Required |
-| V2Lookup | `load` | `GET /lookup/album_mb/{musicBrainzId}` | Required |
-| V2Lookup | `load` | `GET /lookup/artist_mb/{musicBrainzId}` | Required |
-| V2Lookup | `load` | `GET /lookup/track_mb/{musicBrainzId}` | Required |
-| V2Lookup | `load` | `GET /lookup/track/{trackId}` | Required |
-| V2Search | `load` | `GET /search/album/{albumName}` | Required |
-| V2Search | `load` | `GET /search/artist/{artistName}` | Required |
-| V2Search | `load` | `GET /search/track/{trackName}` | Required |
+| V2List | `list` | `GET /list/discography/{artistId}` | Required |
+| V2Lookup | `list` | `GET /lookup/album/{albumId}` | Required |
+| V2Lookup | `list` | `GET /lookup/artist/{artistId}` | Required |
+| V2Lookup | `list` | `GET /lookup/album_mb/{musicBrainzId}` | Required |
+| V2Lookup | `list` | `GET /lookup/artist_mb/{musicBrainzId}` | Required |
+| V2Lookup | `list` | `GET /lookup/track_mb/{musicBrainzId}` | Required |
+| V2Lookup | `list` | `GET /lookup/track/{trackId}` | Required |
+| V2Search | `list` | `GET /search/album/{albumName}` | Required |
+| V2Search | `list` | `GET /search/artist/{artistName}` | Required |
+| V2Search | `list` | `GET /search/track/{trackName}` | Required |
 
 ## Connect to the API
 
@@ -159,8 +183,8 @@ Use the MCP server to expose supported API operations to an MCP client.
 
 Repository directory: `go-mcp/`. Not published. Build from the go-mcp directory.
 
-- `free-music-api2_list`: List records for an entity. Supported entities: `v1_list`, `v1_lookup`, `v1_search`.
-- `free-music-api2_load`: Load one record for an entity. Supported entities: `v2_list`, `v2_lookup`, `v2_search`.
+- `free-music-api2_list`: List records for an entity. Supported entities: `v1_list`, `v1_lookup`, `v1_search`, `v2_list`, `v2_lookup`, `v2_search`.
+- `free-music-api2_load`: Load one record for an entity. No active entity supports this operation.
 
 ## Operational features
 

@@ -7,22 +7,16 @@ main: kit: flow: BasicV2SearchFlow:
   name: "BasicV2SearchFlow",
   step: [
     {
-      i: {
-        ref: "v2_search_ref01",
-        srcdatavar: "v2_search_ref01_data",
-        suffix: "_dt0"
-      }
-
       m: {
-        id: "v2_search01"
+        track_name: "track_name01"
       }
 
-      o: "load",
+      o: "list",
       v: [
         {
-          apply: "TextFieldMark",
+          apply: "ItemExists",
           def: {
-            mark: "Mark01-v2_search_ref01"
+            ref: "v2_search_ref01"
           }
         }
       ]

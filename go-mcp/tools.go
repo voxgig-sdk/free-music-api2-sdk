@@ -13,14 +13,8 @@ import (
 
 // ListArgs is what an agent sends to free-music-api2_list.
 type ListArgs struct {
-	Entity string         `json:"entity" jsonschema:"one of: v1_list | v1_lookup | v1_search"`
+	Entity string         `json:"entity" jsonschema:"one of: v1_list | v1_lookup | v1_search | v2_list | v2_lookup | v2_search"`
 	Query  map[string]any `json:"query,omitempty" jsonschema:"optional filter map; omit it for the first page"`
-}
-
-// LoadArgs is what an agent sends to free-music-api2_load.
-type LoadArgs struct {
-	Entity string         `json:"entity" jsonschema:"one of: v2_list | v2_lookup | v2_search"`
-	Query  map[string]any `json:"query" jsonschema:"match map naming the record, such as {\"id\":1}"`
 }
 
 func registerTools(server *mcp.Server, client *sdk.FreeMusicApi2SDK) {
@@ -28,17 +22,9 @@ func registerTools(server *mcp.Server, client *sdk.FreeMusicApi2SDK) {
 		Name:        "free-music-api2_list",
 		Description: "List records from FreeMusicApi2. Args: entity, query (optional filter map; omit it for the first page). Returns the first page of records as JSON.",
 		Annotations: &mcp.ToolAnnotations{ReadOnlyHint: true},
-		InputSchema: entitySchema[ListArgs]("v1_list", "v1_lookup", "v1_search"),
+		InputSchema: entitySchema[ListArgs]("v1_list", "v1_lookup", "v1_search", "v2_list", "v2_lookup", "v2_search"),
 	}, func(ctx context.Context, req *mcp.CallToolRequest, args ListArgs) (*mcp.CallToolResult, any, error) {
 		return runOp(ctx, client, "list", args.Entity, args.Query)
-	})
-	mcp.AddTool(server, &mcp.Tool{
-		Name:        "free-music-api2_load",
-		Description: "Load one record from FreeMusicApi2. Args: entity, query (match map naming the record, such as {\"id\":1}). Returns the record as JSON.",
-		Annotations: &mcp.ToolAnnotations{ReadOnlyHint: true},
-		InputSchema: entitySchema[LoadArgs]("v2_list", "v2_lookup", "v2_search"),
-	}, func(ctx context.Context, req *mcp.CallToolRequest, args LoadArgs) (*mcp.CallToolResult, any, error) {
-		return runOp(ctx, client, "load", args.Entity, args.Query)
 	})
 }
 
@@ -101,7 +87,7 @@ func runOp(_ context.Context, client *sdk.FreeMusicApi2SDK, op string, entity st
 
 // entityFor dispatches on the lowercase entity name. The generator
 // emits one `case "<name>":` per entity defined in the SDK model.
-func entityFor(client *sdk.FreeMusicApi2SDK, name string) (sdk.FreeMusicApi2Entity, error) {
+func entityFor(client *sdk.FreeMusicApi2SDK, name string) (sdk.FreeMusicApi2EntityBase, error) {
 	switch strings.ToLower(name) {
 	case "v1_list":
 		return client.V1List(nil), nil

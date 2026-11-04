@@ -229,9 +229,17 @@ class V1ListEntityTest extends TestCase
             $v1_list_ref01_data = Helpers::to_map($v1_list_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $v1_list_ref01_ent = $client->V1List(null);
         $v1_list_ref01_match = [];
+        if (!empty($setup["live"])) {
+            $v1_list_ref01_match["country"] = 'us';
+            $v1_list_ref01_match["format"] = 'albums';
+            $v1_list_ref01_match["type"] = 'itunes';
+        }
 
         $v1_list_ref01_list_result = $v1_list_ref01_ent->list($v1_list_ref01_match, null);
         $this->assertIsArray($v1_list_ref01_list_result);

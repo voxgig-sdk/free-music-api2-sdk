@@ -70,9 +70,9 @@
 
 {
   point: "warning"
-  note: "Points GET /lookup/album_mb/{musicBrainzId}, GET /lookup/artist_mb/{musicBrainzId} and GET /lookup/track_mb/{musicBrainzId} on entity=v2_lookup op=load have the same selector (exist: music_brainz_id), so only GET /lookup/album_mb/{musicBrainzId} is ever chosen. An action or another entity in guide.aontu tells them apart."
+  note: "Points GET /lookup/album_mb/{musicBrainzId}, GET /lookup/artist_mb/{musicBrainzId} and GET /lookup/track_mb/{musicBrainzId} on entity=v2_lookup op=list have the same selector (exist: music_brainz_id), so only GET /lookup/album_mb/{musicBrainzId} is ever chosen. An action or another entity in guide.aontu tells them apart."
   entity: "v2_lookup"
-  op: "load"
+  op: "list"
   points: [
     "GET /lookup/album_mb/{musicBrainzId}"
     "GET /lookup/artist_mb/{musicBrainzId}"

@@ -1,7 +1,7 @@
 # free-music-api2-mcp
 
 [MCP](https://modelcontextprotocol.io) server exposing the FreeMusicApi2 SDK as
-2 agent tools, `free-music-api2_list` and `free-music-api2_load`, built on the
+1 agent tool, `free-music-api2_list`, built on the
 [official Go MCP SDK](https://github.com/modelcontextprotocol/go-sdk) and the
 sibling Go SDK at `../go`. Runs over **stdio** (default, for spawnable installs)
 or **streamable HTTP** (one shared server for several agents).
@@ -32,9 +32,6 @@ Tool-call arguments (what an agent sends):
 ```jsonc
 // free-music-api2_list: first page of records
 { "entity": "v1_list", "query": { "country": "example", "format": "example", "type": "example" } }
-
-// free-music-api2_load: one record
-{ "entity": "v2_list", "query": { "artist_id": 1 } }
 ```
 
 > The rest of this guide follows the [Diátaxis](https://diataxis.fr) framework:
@@ -62,7 +59,7 @@ Tool-call arguments (what an agent sends):
      -- "$PWD"/dist/*/free-music-api2-mcp -transport stdio
    ```
 
-4. **Restart Claude Code.** The `free-music-api2_list` and `free-music-api2_load` tools now appear in new
+4. **Restart Claude Code.** The `free-music-api2_list` tool now appear in new
    sessions. Ask the agent to *"list v1_list using free-music-api2"*
    and it calls `free-music-api2_list` with `{"entity":"v1_list","query":{"country":"example","format":"example","type":"example"}}`.
 
@@ -98,15 +95,6 @@ Returns the first page of records as JSON:
 { "entity": "v1_list", "query": { "country": "example", "format": "example", "type": "example" } }
 ```
 
-### Call the `free-music-api2_load` tool
-
-Args: `entity` (required), `query` (required: match map naming the record, such as {"id":1}).
-Returns the record as JSON:
-
-```jsonc
-{ "entity": "v2_list", "query": { "artist_id": 1 } }
-```
-
 ### Turn on the write tools
 
 In the SDK's own model (`.sdk/model/sdk.aontu`), then regenerate:
@@ -129,7 +117,6 @@ make build-all   # linux/darwin/windows x amd64/arm64, under dist/<os>-<arch>/
 | Tool | Args | Returns | MCP hints |
 |------|------|---------|-----------|
 | `free-music-api2_list` | `entity`, `query` (optional map) | The first page of records as JSON | read-only |
-| `free-music-api2_load` | `entity`, `query` (required map) | The record as JSON | read-only |
 
 On error, a tool returns an MCP error result (`isError: true`) whose text is the
 failure message (e.g. unknown entity, or an API error).
@@ -141,8 +128,7 @@ operation, of the 6 the SDK has:
 
 | Tool | Entities |
 |------|----------|
-| `free-music-api2_list` | v1_list, v1_lookup, v1_search |
-| `free-music-api2_load` | v2_list, v2_lookup, v2_search |
+| `free-music-api2_list` | v1_list, v1_lookup, v1_search, v2_list, v2_lookup, v2_search |
 
 JSON schemas are emitted by the SDK from each tool's argument struct's
 `json` / `jsonschema` tags — no schema is hand-written. Each tool's

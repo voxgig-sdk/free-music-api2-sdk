@@ -212,9 +212,17 @@ func TestV1ListEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = v1ListRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		v1ListRef01Ent := client.V1List(nil)
 		v1ListRef01Match := map[string]any{}
+		if setup.live {
+			v1ListRef01Match["country"] = "us"
+			v1ListRef01Match["format"] = "albums"
+			v1ListRef01Match["type"] = "itunes"
+		}
 
 		v1ListRef01ListResult, err := v1ListRef01Ent.List(v1ListRef01Match, nil)
 		if err != nil {

@@ -17,25 +17,39 @@ import (
 const v2_searchDirectLiveStrict = true
 
 func TestV2SearchDirect(t *testing.T) {
-	t.Run("direct-load-v2_search", func(t *testing.T) {
-		setup := v2_searchDirectSetup(map[string]any{"id": "direct01"})
+	t.Run("direct-list-v2_search", func(t *testing.T) {
+		setup := v2_searchDirectSetup([]any{
+			map[string]any{"id": "direct01"},
+			map[string]any{"id": "direct02"},
+		})
 		_mode := "unit"
 		if setup.live {
 			_mode = "live"
 		}
-		if _shouldSkip, _reason := isControlSkipped("direct", "direct-load-v2_search", _mode); _shouldSkip {
+		if _shouldSkip, _reason := isControlSkipped("direct", "direct-list-v2_search", _mode); _shouldSkip {
 			if _reason == "" {
 				_reason = "skipped via sdk-test-control.json"
 			}
 			t.Skip(_reason)
 			return
 		}
+		if setup.live {
+			for _, _liveKey := range []string{"album_name01"} {
+				if v := setup.idmap[_liveKey]; v == nil {
+					liveMiss(t, v2_searchDirectLiveStrict, "Live test blocked: needs %s via FREE_MUSIC_API2_TEST_V2_SEARCH_ENTID", _liveKey)
+					return
+				}
+			}
+		}
+		if setup.live {
+			livePace()
+		}
 		client := setup.client
 
 		params := map[string]any{}
 		query := map[string]any{}
 		if setup.live {
-			params["album_name"] = "parachutes"
+			params["album_name"] = setup.idmap["album_name01"]
 		} else {
 			params["album_name"] = "direct01"
 		}
@@ -48,13 +62,13 @@ func TestV2SearchDirect(t *testing.T) {
 		})
 		if setup.live {
 			if err != nil {
-				liveMiss(t, v2_searchDirectLiveStrict, "Live load failed: %v", err)
+				liveMiss(t, v2_searchDirectLiveStrict, "Live list failed: %v", err)
 			}
 			if status := core.ToInt(result["status"]); result["ok"] != true || status < 200 || status >= 300 {
-				liveMiss(t, v2_searchDirectLiveStrict, "Live load failed: %s", liveDescribe(result))
+				liveMiss(t, v2_searchDirectLiveStrict, "Live list failed: %s", liveDescribe(result))
 			}
-			if result["data"] == nil {
-				liveMiss(t, v2_searchDirectLiveStrict, "Live load returned no data: %s", liveDescribe(result))
+			if _, ok := liveList(result["data"]); !ok {
+				liveMiss(t, v2_searchDirectLiveStrict, "Live list returned no list: %s", liveDescribe(result))
 			}
 		} else {
 			if err != nil {
@@ -66,16 +80,15 @@ func TestV2SearchDirect(t *testing.T) {
 			if core.ToInt(result["status"]) != 200 {
 				t.Fatalf("expected status 200, got %v", result["status"])
 			}
-			if result["data"] == nil {
-				t.Fatal("expected data to be non-nil")
-			}
 		}
 
 		if !setup.live {
-			if dataMap, ok := result["data"].(map[string]any); ok {
-				if dataMap["id"] != "direct01" {
-					t.Fatalf("expected data.id to be direct01, got %v", dataMap["id"])
+			if dataList, ok := result["data"].([]any); ok {
+				if len(dataList) != 2 {
+					t.Fatalf("expected 2 items, got %d", len(dataList))
 				}
+			} else {
+				t.Fatalf("expected data to be an array, got %T", result["data"])
 			}
 
 			if len(*setup.calls) != 1 {
@@ -137,6 +150,12 @@ func v2_searchDirectSetup(mockres any) *v2_searchDirectSetupResult {
 				json.Unmarshal([]byte(entidStr), &idmap)
 			} else if entidMap, ok := entidRaw.(map[string]any); ok {
 				idmap = entidMap
+			}
+		}
+		// A path parameter's example stands in for an id *_ENTID does not give.
+		for k, v := range map[string]any{"album_name01": "parachutes"} {
+			if idmap[k] == nil {
+				idmap[k] = v
 			}
 		}
 

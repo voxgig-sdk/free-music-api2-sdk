@@ -153,9 +153,14 @@ class TestV1SearchEntity:
         if len(v1_search_ref01_data_raw) > 0:
             v1_search_ref01_data = helpers.to_map(v1_search_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         v1_search_ref01_ent = client.V1Search(None)
         v1_search_ref01_match = {}
+        if setup["live"]:
+            v1_search_ref01_match["s"] = "coldplay"
+            v1_search_ref01_match["t"] = "yellow"
 
         v1_search_ref01_list_result = v1_search_ref01_ent.list(v1_search_ref01_match, None)
         assert isinstance(v1_search_ref01_list_result, list)

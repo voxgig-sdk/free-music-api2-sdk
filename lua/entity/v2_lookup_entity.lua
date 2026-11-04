@@ -308,14 +308,16 @@ end
 
 
 
----@param reqmatch V2LookupLoadMatch
+
+
+---@param reqmatch V2LookupListMatch
 ---@param ctrl? table
----@return V2LookupEntity
+---@return V2LookupEntity[]
 ---@return string? err
-function V2LookupEntity:load(reqmatch, ctrl)
+function V2LookupEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
-    opname = "load",
+    opname = "list",
     ctrl = ctrl,
     match = self._match,
     data = self._data,
@@ -327,14 +329,9 @@ function V2LookupEntity:load(reqmatch, ctrl)
       if ctx.result.resmatch ~= nil then
         self._match = ctx.result.resmatch
       end
-      if ctx.result.resdata ~= nil then
-        self._data = helpers.to_map(vs.clone(ctx.result.resdata)) or {}
-      end
     end
   end)
 end
-
-
 
 
 

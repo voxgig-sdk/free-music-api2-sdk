@@ -222,37 +222,35 @@ class V2ListEntity
   end
 
   
-  # Load a single V2List.
+
+  
+  # List V2List items matching the given filter.
   #
-  # @param reqmatch [V2ListLoadMatch, Hash, nil] match criteria (id/query fields);
-  #   optional — an entity with no id-like key loads with no match (nil is treated
-  #   as an empty match, so client.V2List.load works with no args).
+  # @param reqmatch [V2ListListMatch, Hash, nil] match filter (any subset of
+  #   V2List fields); defaults to nil, treated as an empty match that lists all.
   # @param ctrl [Object, nil] optional per-call control
-  # @return [V2ListEntity] the loaded V2List entity (data_get reads its record);
-  #   raises FreeMusicApi2Error on failure
-  def load(reqmatch = nil, ctrl = nil)
+  # @return [Array<V2ListEntity>] the matching V2List items, one entity per
+  #   record (data_get reads the record); raises FreeMusicApi2Error on failure
+  def list(reqmatch = nil, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({
-      "opname" => "load",
+      "opname" => "list",
       "ctrl" => ctrl,
       "match" => @_match,
       "data" => @_data,
       "reqmatch" => reqmatch,
     }, @_entctx)
 
-    _run_op(ctx) do
+    records = _run_op(ctx) do
       if ctx.result
         @_match = ctx.result.resmatch if ctx.result.resmatch
-        if ctx.result.resdata
-          @_data = FreeMusicApi2Helpers.to_map(VoxgigStruct.clone(ctx.result.resdata)) || {}
-        end
       end
     end
+
+    records
   end
 
 
-
-  
 
   
 

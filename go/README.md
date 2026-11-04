@@ -4,7 +4,7 @@
 
 The Golang SDK for the FreeMusicApi2 API — an entity-oriented client using standard Go conventions. No generics required; data flows as `map[string]any`.
 
-It exposes the API as capitalised, semantic **Entities** — e.g. `client.V1List(nil)` — each with the same small set of operations (`List`, `Load`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
+It exposes the API as capitalised, semantic **Entities** — e.g. `client.V1List(nil)` — each with the same small set of operations (`List`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
 
 > Also generated from this model: `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb`, `ts` — see
 > the [top-level README](../README.md).
@@ -72,12 +72,12 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-v2lookup, err := client.V2Lookup(nil).Load(map[string]any{"album_id": 1}, nil)
+v1searchs, err := client.V1Search(nil).List(map[string]any{"s": "example"}, nil)
 if err != nil {
     // handle err
     return
 }
-_ = v2lookup
+_ = v1searchs
 ```
 
 `Direct` follows the same `(value, error)` convention:
@@ -141,13 +141,16 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-v2Lookup, err := client.V2Lookup(nil).Load(
-    map[string]any{"album_id": 1}, nil,
+v1Searchs, err := client.V1Search(nil).List(
+    map[string]any{"s": "example"}, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(v2Lookup.(sdk.Entity).Data()) // the entity's mock record
+// A []any of entities, one per mock record.
+for _, item := range v1Searchs.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 ### Use a custom fetch function
@@ -226,20 +229,19 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `GetUtility` | `() *Utility` | Copy of the SDK utility object. |
 | `Prepare` | `(fetchargs map[string]any) (map[string]any, error)` | Build an HTTP request definition without sending. |
 | `Direct` | `(fetchargs map[string]any) (map[string]any, error)` | Build and send an HTTP request. |
-| `V1List` | `(data map[string]any) FreeMusicApi2Entity` | Create a V1List entity instance. |
-| `V1Lookup` | `(data map[string]any) FreeMusicApi2Entity` | Create a V1Lookup entity instance. |
-| `V1Search` | `(data map[string]any) FreeMusicApi2Entity` | Create a V1Search entity instance. |
-| `V2List` | `(data map[string]any) FreeMusicApi2Entity` | Create a V2List entity instance. |
-| `V2Lookup` | `(data map[string]any) FreeMusicApi2Entity` | Create a V2Lookup entity instance. |
-| `V2Search` | `(data map[string]any) FreeMusicApi2Entity` | Create a V2Search entity instance. |
+| `V1List` | `(data map[string]any) FreeMusicApi2EntityBase` | Create a V1List entity instance. |
+| `V1Lookup` | `(data map[string]any) FreeMusicApi2EntityBase` | Create a V1Lookup entity instance. |
+| `V1Search` | `(data map[string]any) FreeMusicApi2EntityBase` | Create a V1Search entity instance. |
+| `V2List` | `(data map[string]any) FreeMusicApi2EntityBase` | Create a V2List entity instance. |
+| `V2Lookup` | `(data map[string]any) FreeMusicApi2EntityBase` | Create a V2Lookup entity instance. |
+| `V2Search` | `(data map[string]any) FreeMusicApi2EntityBase` | Create a V2Search entity instance. |
 
-### Entity interface (FreeMusicApi2Entity)
+### Entity interface (FreeMusicApi2EntityBase)
 
-All entities implement the `FreeMusicApi2Entity` interface.
+All entities implement the `FreeMusicApi2EntityBase` interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `Load` | `(reqmatch, ctrl map[string]any) (any, error)` | Load a single entity by match criteria, and return it. |
 | `List` | `(reqmatch, ctrl map[string]any) (any, error)` | List entities matching the criteria, one per record. |
 | `Data` | `(args ...any) any` | Get or set entity data. |
 | `Match` | `(args ...any) any` | Get or set entity match criteria. |
@@ -253,7 +255,6 @@ itself — there is no wrapper:
 
 | Operation | `value` |
 | --- | --- |
-| `Load` | the entity, whose `Data()` reads its record (`map[string]any`) |
 | `List` | a `[]any` of entities, one per record |
 
 Check `err` first, then use the value directly (or the typed
@@ -560,9 +561,53 @@ API path: `/searchtrack.php`
 
 | Field | Description |
 | --- | --- |
-| `"albums"` |  |
+| `"idAlbum"` | Unique album ID |
+| `"idArtist"` | Artist ID |
+| `"idLabel"` | Label ID |
+| `"intLoved"` | Number of loves/likes |
+| `"intSales"` | Number of sales |
+| `"intScore"` | Album score |
+| `"intScoreVotes"` | Number of score votes |
+| `"intYearReleased"` | Year the album was released |
+| `"strAlbum"` | Album title |
+| `"strAlbum3DCase"` | URL to 3D case image |
+| `"strAlbum3DFace"` | URL to 3D face image |
+| `"strAlbum3DFlat"` | URL to 3D flat image |
+| `"strAlbum3DThumb"` | URL to 3D thumbnail |
+| `"strAlbumCDart"` | URL to CD art |
+| `"strAlbumSpine"` | URL to album spine image |
+| `"strAlbumStripped"` | Album title without special characters |
+| `"strAlbumThumb"` | URL to album thumbnail |
+| `"strAlbumThumbBack"` | URL to back of album cover |
+| `"strAlbumThumbHQ"` | URL to high quality album thumbnail |
+| `"strAllMusicID"` | AllMusic ID |
+| `"strAmazonID"` | Amazon ID |
+| `"strArtist"` | Artist name |
+| `"strArtistStripped"` | Artist name without special characters |
+| `"strBBCReviewID"` | BBC Review ID |
+| `"strDescriptionEN"` | Album description in English |
+| `"strDiscogsID"` | Discogs ID |
+| `"strGeniusID"` | Genius ID |
+| `"strGenre"` | Album genre |
+| `"strItunesID"` | iTunes ID |
+| `"strLabel"` | Record label |
+| `"strLocation"` | Recording location |
+| `"strLocked"` | Whether the record is locked |
+| `"strLyricWikiID"` | LyricWiki ID |
+| `"strMood"` | Album mood |
+| `"strMusicBrainzArtistID"` | MusicBrainz Artist ID |
+| `"strMusicBrainzID"` | MusicBrainz Release Group ID |
+| `"strMusicMozID"` | MusicMoz ID |
+| `"strRateYourMusicID"` | RateYourMusic ID |
+| `"strReleaseFormat"` | Release format (CD, Vinyl, etc.) |
+| `"strReview"` | Album review |
+| `"strSpeed"` | Album speed |
+| `"strStyle"` | Album style |
+| `"strTheme"` | Album theme |
+| `"strWikidataID"` | Wikidata ID |
+| `"strWikipediaID"` | Wikipedia ID |
 
-Operations: Load.
+Operations: List.
 
 API path: `/list/discography/{artistId}`
 
@@ -570,11 +615,115 @@ API path: `/list/discography/{artistId}`
 
 | Field | Description |
 | --- | --- |
-| `"albums"` |  |
-| `"artists"` |  |
-| `"tracks"` |  |
+| `"idAlbum"` | Unique album ID |
+| `"idArtist"` | Artist ID |
+| `"idIMVDB"` | IMVDB ID |
+| `"idLabel"` | Label ID |
+| `"idLyric"` | Lyrics ID |
+| `"idTrack"` | Unique track ID |
+| `"intBornYear"` | Birth year of the artist |
+| `"intCD"` | CD number |
+| `"intCharted"` | Chart position |
+| `"intDiedYear"` | Year the artist died (if applicable) |
+| `"intDuration"` | Track duration in milliseconds |
+| `"intFormedYear"` | Year the artist/band was formed |
+| `"intLoved"` | Number of loves/likes |
+| `"intMembers"` | Number of band members |
+| `"intMusicVidComments"` | Number of music video comments |
+| `"intMusicVidDislikes"` | Number of music video dislikes |
+| `"intMusicVidFavorites"` | Number of music video favorites |
+| `"intMusicVidLikes"` | Number of music video likes |
+| `"intMusicVidViews"` | Number of music video views |
+| `"intSales"` | Number of sales |
+| `"intScore"` | Album score |
+| `"intScoreVotes"` | Number of score votes |
+| `"intTotalListeners"` | Total number of listeners |
+| `"intTotalPlays"` | Total number of plays |
+| `"intTrackNumber"` | Track number on album |
+| `"intYearReleased"` | Year the album was released |
+| `"strAlbum"` | Album title |
+| `"strAlbum3DCase"` | URL to 3D case image |
+| `"strAlbum3DFace"` | URL to 3D face image |
+| `"strAlbum3DFlat"` | URL to 3D flat image |
+| `"strAlbum3DThumb"` | URL to 3D thumbnail |
+| `"strAlbumCDart"` | URL to CD art |
+| `"strAlbumSpine"` | URL to album spine image |
+| `"strAlbumStripped"` | Album title without special characters |
+| `"strAlbumThumb"` | URL to album thumbnail |
+| `"strAlbumThumbBack"` | URL to back of album cover |
+| `"strAlbumThumbHQ"` | URL to high quality album thumbnail |
+| `"strAllMusicID"` | AllMusic ID |
+| `"strAmazonID"` | Amazon ID |
+| `"strArtist"` | Artist name |
+| `"strArtistAlternate"` | Alternate artist name |
+| `"strArtistBanner"` | URL to artist banner |
+| `"strArtistClearart"` | URL to artist clearart |
+| `"strArtistCutout"` | URL to artist cutout image |
+| `"strArtistFanart"` | URL to artist fanart |
+| `"strArtistFanart2"` | URL to alternate artist fanart |
+| `"strArtistFanart3"` | URL to third artist fanart |
+| `"strArtistFanart4"` | URL to fourth artist fanart |
+| `"strArtistLogo"` | URL to artist logo |
+| `"strArtistStripped"` | Artist name without special characters |
+| `"strArtistThumb"` | URL to artist thumbnail image |
+| `"strArtistWideThumb"` | URL to artist wide thumbnail |
+| `"strBBCReviewID"` | BBC Review ID |
+| `"strBiographyCN"` | Artist biography in Chinese |
+| `"strBiographyDE"` | Artist biography in German |
+| `"strBiographyEN"` | Artist biography in English |
+| `"strBiographyES"` | Artist biography in Spanish |
+| `"strBiographyFR"` | Artist biography in French |
+| `"strBiographyHU"` | Artist biography in Hungarian |
+| `"strBiographyIL"` | Artist biography in Hebrew |
+| `"strBiographyIT"` | Artist biography in Italian |
+| `"strBiographyJP"` | Artist biography in Japanese |
+| `"strBiographyNL"` | Artist biography in Dutch |
+| `"strBiographyNO"` | Artist biography in Norwegian |
+| `"strBiographyPL"` | Artist biography in Polish |
+| `"strBiographyPT"` | Artist biography in Portuguese |
+| `"strBiographyRU"` | Artist biography in Russian |
+| `"strBiographySE"` | Artist biography in Swedish |
+| `"strCountry"` | Country of origin |
+| `"strCountryCode"` | Country code |
+| `"strDescriptionEN"` | Album description in English |
+| `"strDisbanded"` | Disbanded status |
+| `"strDiscogsID"` | Discogs ID |
+| `"strFacebook"` | Facebook page URL |
+| `"strGender"` | Artist gender |
+| `"strGeniusID"` | Genius ID |
+| `"strGenre"` | Album genre |
+| `"strItunesID"` | iTunes ID |
+| `"strLabel"` | Record label |
+| `"strLastFMChart"` | Last.fm chart URL |
+| `"strLocation"` | Recording location |
+| `"strLocked"` | Whether the record is locked |
+| `"strLyricWikiID"` | LyricWiki ID |
+| `"strMood"` | Album mood |
+| `"strMusicBrainzAlbumID"` | MusicBrainz Album ID |
+| `"strMusicBrainzArtistID"` | MusicBrainz Artist ID |
+| `"strMusicBrainzID"` | MusicBrainz Release Group ID |
+| `"strMusicMozID"` | MusicMoz ID |
+| `"strMusicVid"` | URL to music video |
+| `"strMusicVidCompany"` | Music video production company |
+| `"strMusicVidDirector"` | Music video director |
+| `"strMusicVidScreen1"` | URL to music video screenshot 1 |
+| `"strMusicVidScreen2"` | URL to music video screenshot 2 |
+| `"strMusicVidScreen3"` | URL to music video screenshot 3 |
+| `"strRateYourMusicID"` | RateYourMusic ID |
+| `"strReleaseFormat"` | Release format (CD, Vinyl, etc.) |
+| `"strReview"` | Album review |
+| `"strSpeed"` | Album speed |
+| `"strStyle"` | Album style |
+| `"strTheme"` | Album theme |
+| `"strTrack"` | Track title |
+| `"strTrackLyrics"` | Track lyrics |
+| `"strTrackThumb"` | URL to track thumbnail |
+| `"strTwitter"` | Twitter profile URL |
+| `"strWebsite"` | Official website URL |
+| `"strWikidataID"` | Wikidata ID |
+| `"strWikipediaID"` | Wikipedia ID |
 
-Operations: Load.
+Operations: List.
 
 API path: `/lookup/album/{albumId}`
 
@@ -582,11 +731,115 @@ API path: `/lookup/album/{albumId}`
 
 | Field | Description |
 | --- | --- |
-| `"albums"` |  |
-| `"artists"` |  |
-| `"tracks"` |  |
+| `"idAlbum"` | Unique album ID |
+| `"idArtist"` | Artist ID |
+| `"idIMVDB"` | IMVDB ID |
+| `"idLabel"` | Label ID |
+| `"idLyric"` | Lyrics ID |
+| `"idTrack"` | Unique track ID |
+| `"intBornYear"` | Birth year of the artist |
+| `"intCD"` | CD number |
+| `"intCharted"` | Chart position |
+| `"intDiedYear"` | Year the artist died (if applicable) |
+| `"intDuration"` | Track duration in milliseconds |
+| `"intFormedYear"` | Year the artist/band was formed |
+| `"intLoved"` | Number of loves/likes |
+| `"intMembers"` | Number of band members |
+| `"intMusicVidComments"` | Number of music video comments |
+| `"intMusicVidDislikes"` | Number of music video dislikes |
+| `"intMusicVidFavorites"` | Number of music video favorites |
+| `"intMusicVidLikes"` | Number of music video likes |
+| `"intMusicVidViews"` | Number of music video views |
+| `"intSales"` | Number of sales |
+| `"intScore"` | Album score |
+| `"intScoreVotes"` | Number of score votes |
+| `"intTotalListeners"` | Total number of listeners |
+| `"intTotalPlays"` | Total number of plays |
+| `"intTrackNumber"` | Track number on album |
+| `"intYearReleased"` | Year the album was released |
+| `"strAlbum"` | Album title |
+| `"strAlbum3DCase"` | URL to 3D case image |
+| `"strAlbum3DFace"` | URL to 3D face image |
+| `"strAlbum3DFlat"` | URL to 3D flat image |
+| `"strAlbum3DThumb"` | URL to 3D thumbnail |
+| `"strAlbumCDart"` | URL to CD art |
+| `"strAlbumSpine"` | URL to album spine image |
+| `"strAlbumStripped"` | Album title without special characters |
+| `"strAlbumThumb"` | URL to album thumbnail |
+| `"strAlbumThumbBack"` | URL to back of album cover |
+| `"strAlbumThumbHQ"` | URL to high quality album thumbnail |
+| `"strAllMusicID"` | AllMusic ID |
+| `"strAmazonID"` | Amazon ID |
+| `"strArtist"` | Artist name |
+| `"strArtistAlternate"` | Alternate artist name |
+| `"strArtistBanner"` | URL to artist banner |
+| `"strArtistClearart"` | URL to artist clearart |
+| `"strArtistCutout"` | URL to artist cutout image |
+| `"strArtistFanart"` | URL to artist fanart |
+| `"strArtistFanart2"` | URL to alternate artist fanart |
+| `"strArtistFanart3"` | URL to third artist fanart |
+| `"strArtistFanart4"` | URL to fourth artist fanart |
+| `"strArtistLogo"` | URL to artist logo |
+| `"strArtistStripped"` | Artist name without special characters |
+| `"strArtistThumb"` | URL to artist thumbnail image |
+| `"strArtistWideThumb"` | URL to artist wide thumbnail |
+| `"strBBCReviewID"` | BBC Review ID |
+| `"strBiographyCN"` | Artist biography in Chinese |
+| `"strBiographyDE"` | Artist biography in German |
+| `"strBiographyEN"` | Artist biography in English |
+| `"strBiographyES"` | Artist biography in Spanish |
+| `"strBiographyFR"` | Artist biography in French |
+| `"strBiographyHU"` | Artist biography in Hungarian |
+| `"strBiographyIL"` | Artist biography in Hebrew |
+| `"strBiographyIT"` | Artist biography in Italian |
+| `"strBiographyJP"` | Artist biography in Japanese |
+| `"strBiographyNL"` | Artist biography in Dutch |
+| `"strBiographyNO"` | Artist biography in Norwegian |
+| `"strBiographyPL"` | Artist biography in Polish |
+| `"strBiographyPT"` | Artist biography in Portuguese |
+| `"strBiographyRU"` | Artist biography in Russian |
+| `"strBiographySE"` | Artist biography in Swedish |
+| `"strCountry"` | Country of origin |
+| `"strCountryCode"` | Country code |
+| `"strDescriptionEN"` | Album description in English |
+| `"strDisbanded"` | Disbanded status |
+| `"strDiscogsID"` | Discogs ID |
+| `"strFacebook"` | Facebook page URL |
+| `"strGender"` | Artist gender |
+| `"strGeniusID"` | Genius ID |
+| `"strGenre"` | Album genre |
+| `"strItunesID"` | iTunes ID |
+| `"strLabel"` | Record label |
+| `"strLastFMChart"` | Last.fm chart URL |
+| `"strLocation"` | Recording location |
+| `"strLocked"` | Whether the record is locked |
+| `"strLyricWikiID"` | LyricWiki ID |
+| `"strMood"` | Album mood |
+| `"strMusicBrainzAlbumID"` | MusicBrainz Album ID |
+| `"strMusicBrainzArtistID"` | MusicBrainz Artist ID |
+| `"strMusicBrainzID"` | MusicBrainz Release Group ID |
+| `"strMusicMozID"` | MusicMoz ID |
+| `"strMusicVid"` | URL to music video |
+| `"strMusicVidCompany"` | Music video production company |
+| `"strMusicVidDirector"` | Music video director |
+| `"strMusicVidScreen1"` | URL to music video screenshot 1 |
+| `"strMusicVidScreen2"` | URL to music video screenshot 2 |
+| `"strMusicVidScreen3"` | URL to music video screenshot 3 |
+| `"strRateYourMusicID"` | RateYourMusic ID |
+| `"strReleaseFormat"` | Release format (CD, Vinyl, etc.) |
+| `"strReview"` | Album review |
+| `"strSpeed"` | Album speed |
+| `"strStyle"` | Album style |
+| `"strTheme"` | Album theme |
+| `"strTrack"` | Track title |
+| `"strTrackLyrics"` | Track lyrics |
+| `"strTrackThumb"` | URL to track thumbnail |
+| `"strTwitter"` | Twitter profile URL |
+| `"strWebsite"` | Official website URL |
+| `"strWikidataID"` | Wikidata ID |
+| `"strWikipediaID"` | Wikipedia ID |
 
-Operations: Load.
+Operations: List.
 
 API path: `/search/album/{albumName}`
 
@@ -950,22 +1203,69 @@ Create an instance: `v2List := client.V2List(nil)`
 
 | Method | Description |
 | --- | --- |
-| `Load(match, ctrl)` | Load a single entity by match criteria. |
+| `List(match, ctrl)` | List entities matching the criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `albums` | `[]any` |  |
+| `idAlbum` | `int` | Unique album ID |
+| `idArtist` | `int` | Artist ID |
+| `idLabel` | `int` | Label ID |
+| `intLoved` | `int` | Number of loves/likes |
+| `intSales` | `int` | Number of sales |
+| `intScore` | `int` | Album score |
+| `intScoreVotes` | `int` | Number of score votes |
+| `intYearReleased` | `int` | Year the album was released |
+| `strAlbum` | `string` | Album title |
+| `strAlbum3DCase` | `string` | URL to 3D case image |
+| `strAlbum3DFace` | `string` | URL to 3D face image |
+| `strAlbum3DFlat` | `string` | URL to 3D flat image |
+| `strAlbum3DThumb` | `string` | URL to 3D thumbnail |
+| `strAlbumCDart` | `string` | URL to CD art |
+| `strAlbumSpine` | `string` | URL to album spine image |
+| `strAlbumStripped` | `string` | Album title without special characters |
+| `strAlbumThumb` | `string` | URL to album thumbnail |
+| `strAlbumThumbBack` | `string` | URL to back of album cover |
+| `strAlbumThumbHQ` | `string` | URL to high quality album thumbnail |
+| `strAllMusicID` | `string` | AllMusic ID |
+| `strAmazonID` | `string` | Amazon ID |
+| `strArtist` | `string` | Artist name |
+| `strArtistStripped` | `string` | Artist name without special characters |
+| `strBBCReviewID` | `string` | BBC Review ID |
+| `strDescriptionEN` | `string` | Album description in English |
+| `strDiscogsID` | `string` | Discogs ID |
+| `strGeniusID` | `string` | Genius ID |
+| `strGenre` | `string` | Album genre |
+| `strItunesID` | `string` | iTunes ID |
+| `strLabel` | `string` | Record label |
+| `strLocation` | `string` | Recording location |
+| `strLocked` | `string` | Whether the record is locked |
+| `strLyricWikiID` | `string` | LyricWiki ID |
+| `strMood` | `string` | Album mood |
+| `strMusicBrainzArtistID` | `string` | MusicBrainz Artist ID |
+| `strMusicBrainzID` | `string` | MusicBrainz Release Group ID |
+| `strMusicMozID` | `string` | MusicMoz ID |
+| `strRateYourMusicID` | `string` | RateYourMusic ID |
+| `strReleaseFormat` | `string` | Release format (CD, Vinyl, etc.) |
+| `strReview` | `string` | Album review |
+| `strSpeed` | `string` | Album speed |
+| `strStyle` | `string` | Album style |
+| `strTheme` | `string` | Album theme |
+| `strWikidataID` | `string` | Wikidata ID |
+| `strWikipediaID` | `string` | Wikipedia ID |
 
-#### Example: Load
+#### Example: List
 
 ```go
-v2List, err := client.V2List(nil).Load(map[string]any{"artist_id": 1}, nil)
+v2Lists, err := client.V2List(nil).List(map[string]any{"artist_id": 1}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(v2List.(sdk.Entity).Data()) // the loaded entity's record
+// A []any of entities, one per record.
+for _, item := range v2Lists.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 
@@ -977,24 +1277,131 @@ Create an instance: `v2Lookup := client.V2Lookup(nil)`
 
 | Method | Description |
 | --- | --- |
-| `Load(match, ctrl)` | Load a single entity by match criteria. |
+| `List(match, ctrl)` | List entities matching the criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `albums` | `[]any` |  |
-| `artists` | `[]any` |  |
-| `tracks` | `[]any` |  |
+| `idAlbum` | `int` | Unique album ID |
+| `idArtist` | `int` | Artist ID |
+| `idIMVDB` | `int` | IMVDB ID |
+| `idLabel` | `int` | Label ID |
+| `idLyric` | `int` | Lyrics ID |
+| `idTrack` | `int` | Unique track ID |
+| `intBornYear` | `int` | Birth year of the artist |
+| `intCD` | `int` | CD number |
+| `intCharted` | `int` | Chart position |
+| `intDiedYear` | `int` | Year the artist died (if applicable) |
+| `intDuration` | `int` | Track duration in milliseconds |
+| `intFormedYear` | `int` | Year the artist/band was formed |
+| `intLoved` | `int` | Number of loves/likes |
+| `intMembers` | `int` | Number of band members |
+| `intMusicVidComments` | `int` | Number of music video comments |
+| `intMusicVidDislikes` | `int` | Number of music video dislikes |
+| `intMusicVidFavorites` | `int` | Number of music video favorites |
+| `intMusicVidLikes` | `int` | Number of music video likes |
+| `intMusicVidViews` | `int` | Number of music video views |
+| `intSales` | `int` | Number of sales |
+| `intScore` | `int` | Album score |
+| `intScoreVotes` | `int` | Number of score votes |
+| `intTotalListeners` | `int` | Total number of listeners |
+| `intTotalPlays` | `int` | Total number of plays |
+| `intTrackNumber` | `int` | Track number on album |
+| `intYearReleased` | `int` | Year the album was released |
+| `strAlbum` | `string` | Album title |
+| `strAlbum3DCase` | `string` | URL to 3D case image |
+| `strAlbum3DFace` | `string` | URL to 3D face image |
+| `strAlbum3DFlat` | `string` | URL to 3D flat image |
+| `strAlbum3DThumb` | `string` | URL to 3D thumbnail |
+| `strAlbumCDart` | `string` | URL to CD art |
+| `strAlbumSpine` | `string` | URL to album spine image |
+| `strAlbumStripped` | `string` | Album title without special characters |
+| `strAlbumThumb` | `string` | URL to album thumbnail |
+| `strAlbumThumbBack` | `string` | URL to back of album cover |
+| `strAlbumThumbHQ` | `string` | URL to high quality album thumbnail |
+| `strAllMusicID` | `string` | AllMusic ID |
+| `strAmazonID` | `string` | Amazon ID |
+| `strArtist` | `string` | Artist name |
+| `strArtistAlternate` | `string` | Alternate artist name |
+| `strArtistBanner` | `string` | URL to artist banner |
+| `strArtistClearart` | `string` | URL to artist clearart |
+| `strArtistCutout` | `string` | URL to artist cutout image |
+| `strArtistFanart` | `string` | URL to artist fanart |
+| `strArtistFanart2` | `string` | URL to alternate artist fanart |
+| `strArtistFanart3` | `string` | URL to third artist fanart |
+| `strArtistFanart4` | `string` | URL to fourth artist fanart |
+| `strArtistLogo` | `string` | URL to artist logo |
+| `strArtistStripped` | `string` | Artist name without special characters |
+| `strArtistThumb` | `string` | URL to artist thumbnail image |
+| `strArtistWideThumb` | `string` | URL to artist wide thumbnail |
+| `strBBCReviewID` | `string` | BBC Review ID |
+| `strBiographyCN` | `string` | Artist biography in Chinese |
+| `strBiographyDE` | `string` | Artist biography in German |
+| `strBiographyEN` | `string` | Artist biography in English |
+| `strBiographyES` | `string` | Artist biography in Spanish |
+| `strBiographyFR` | `string` | Artist biography in French |
+| `strBiographyHU` | `string` | Artist biography in Hungarian |
+| `strBiographyIL` | `string` | Artist biography in Hebrew |
+| `strBiographyIT` | `string` | Artist biography in Italian |
+| `strBiographyJP` | `string` | Artist biography in Japanese |
+| `strBiographyNL` | `string` | Artist biography in Dutch |
+| `strBiographyNO` | `string` | Artist biography in Norwegian |
+| `strBiographyPL` | `string` | Artist biography in Polish |
+| `strBiographyPT` | `string` | Artist biography in Portuguese |
+| `strBiographyRU` | `string` | Artist biography in Russian |
+| `strBiographySE` | `string` | Artist biography in Swedish |
+| `strCountry` | `string` | Country of origin |
+| `strCountryCode` | `string` | Country code |
+| `strDescriptionEN` | `string` | Album description in English |
+| `strDisbanded` | `string` | Disbanded status |
+| `strDiscogsID` | `string` | Discogs ID |
+| `strFacebook` | `string` | Facebook page URL |
+| `strGender` | `string` | Artist gender |
+| `strGeniusID` | `string` | Genius ID |
+| `strGenre` | `string` | Album genre |
+| `strItunesID` | `string` | iTunes ID |
+| `strLabel` | `string` | Record label |
+| `strLastFMChart` | `string` | Last.fm chart URL |
+| `strLocation` | `string` | Recording location |
+| `strLocked` | `string` | Whether the record is locked |
+| `strLyricWikiID` | `string` | LyricWiki ID |
+| `strMood` | `string` | Album mood |
+| `strMusicBrainzAlbumID` | `string` | MusicBrainz Album ID |
+| `strMusicBrainzArtistID` | `string` | MusicBrainz Artist ID |
+| `strMusicBrainzID` | `string` | MusicBrainz Release Group ID |
+| `strMusicMozID` | `string` | MusicMoz ID |
+| `strMusicVid` | `string` | URL to music video |
+| `strMusicVidCompany` | `string` | Music video production company |
+| `strMusicVidDirector` | `string` | Music video director |
+| `strMusicVidScreen1` | `string` | URL to music video screenshot 1 |
+| `strMusicVidScreen2` | `string` | URL to music video screenshot 2 |
+| `strMusicVidScreen3` | `string` | URL to music video screenshot 3 |
+| `strRateYourMusicID` | `string` | RateYourMusic ID |
+| `strReleaseFormat` | `string` | Release format (CD, Vinyl, etc.) |
+| `strReview` | `string` | Album review |
+| `strSpeed` | `string` | Album speed |
+| `strStyle` | `string` | Album style |
+| `strTheme` | `string` | Album theme |
+| `strTrack` | `string` | Track title |
+| `strTrackLyrics` | `string` | Track lyrics |
+| `strTrackThumb` | `string` | URL to track thumbnail |
+| `strTwitter` | `string` | Twitter profile URL |
+| `strWebsite` | `string` | Official website URL |
+| `strWikidataID` | `string` | Wikidata ID |
+| `strWikipediaID` | `string` | Wikipedia ID |
 
-#### Example: Load
+#### Example: List
 
 ```go
-v2Lookup, err := client.V2Lookup(nil).Load(map[string]any{"album_id": 1}, nil)
+v2Lookups, err := client.V2Lookup(nil).List(map[string]any{"album_id": 1}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(v2Lookup.(sdk.Entity).Data()) // the loaded entity's record
+// A []any of entities, one per record.
+for _, item := range v2Lookups.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 
@@ -1006,24 +1413,131 @@ Create an instance: `v2Search := client.V2Search(nil)`
 
 | Method | Description |
 | --- | --- |
-| `Load(match, ctrl)` | Load a single entity by match criteria. |
+| `List(match, ctrl)` | List entities matching the criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `albums` | `[]any` |  |
-| `artists` | `[]any` |  |
-| `tracks` | `[]any` |  |
+| `idAlbum` | `int` | Unique album ID |
+| `idArtist` | `int` | Artist ID |
+| `idIMVDB` | `int` | IMVDB ID |
+| `idLabel` | `int` | Label ID |
+| `idLyric` | `int` | Lyrics ID |
+| `idTrack` | `int` | Unique track ID |
+| `intBornYear` | `int` | Birth year of the artist |
+| `intCD` | `int` | CD number |
+| `intCharted` | `int` | Chart position |
+| `intDiedYear` | `int` | Year the artist died (if applicable) |
+| `intDuration` | `int` | Track duration in milliseconds |
+| `intFormedYear` | `int` | Year the artist/band was formed |
+| `intLoved` | `int` | Number of loves/likes |
+| `intMembers` | `int` | Number of band members |
+| `intMusicVidComments` | `int` | Number of music video comments |
+| `intMusicVidDislikes` | `int` | Number of music video dislikes |
+| `intMusicVidFavorites` | `int` | Number of music video favorites |
+| `intMusicVidLikes` | `int` | Number of music video likes |
+| `intMusicVidViews` | `int` | Number of music video views |
+| `intSales` | `int` | Number of sales |
+| `intScore` | `int` | Album score |
+| `intScoreVotes` | `int` | Number of score votes |
+| `intTotalListeners` | `int` | Total number of listeners |
+| `intTotalPlays` | `int` | Total number of plays |
+| `intTrackNumber` | `int` | Track number on album |
+| `intYearReleased` | `int` | Year the album was released |
+| `strAlbum` | `string` | Album title |
+| `strAlbum3DCase` | `string` | URL to 3D case image |
+| `strAlbum3DFace` | `string` | URL to 3D face image |
+| `strAlbum3DFlat` | `string` | URL to 3D flat image |
+| `strAlbum3DThumb` | `string` | URL to 3D thumbnail |
+| `strAlbumCDart` | `string` | URL to CD art |
+| `strAlbumSpine` | `string` | URL to album spine image |
+| `strAlbumStripped` | `string` | Album title without special characters |
+| `strAlbumThumb` | `string` | URL to album thumbnail |
+| `strAlbumThumbBack` | `string` | URL to back of album cover |
+| `strAlbumThumbHQ` | `string` | URL to high quality album thumbnail |
+| `strAllMusicID` | `string` | AllMusic ID |
+| `strAmazonID` | `string` | Amazon ID |
+| `strArtist` | `string` | Artist name |
+| `strArtistAlternate` | `string` | Alternate artist name |
+| `strArtistBanner` | `string` | URL to artist banner |
+| `strArtistClearart` | `string` | URL to artist clearart |
+| `strArtistCutout` | `string` | URL to artist cutout image |
+| `strArtistFanart` | `string` | URL to artist fanart |
+| `strArtistFanart2` | `string` | URL to alternate artist fanart |
+| `strArtistFanart3` | `string` | URL to third artist fanart |
+| `strArtistFanart4` | `string` | URL to fourth artist fanart |
+| `strArtistLogo` | `string` | URL to artist logo |
+| `strArtistStripped` | `string` | Artist name without special characters |
+| `strArtistThumb` | `string` | URL to artist thumbnail image |
+| `strArtistWideThumb` | `string` | URL to artist wide thumbnail |
+| `strBBCReviewID` | `string` | BBC Review ID |
+| `strBiographyCN` | `string` | Artist biography in Chinese |
+| `strBiographyDE` | `string` | Artist biography in German |
+| `strBiographyEN` | `string` | Artist biography in English |
+| `strBiographyES` | `string` | Artist biography in Spanish |
+| `strBiographyFR` | `string` | Artist biography in French |
+| `strBiographyHU` | `string` | Artist biography in Hungarian |
+| `strBiographyIL` | `string` | Artist biography in Hebrew |
+| `strBiographyIT` | `string` | Artist biography in Italian |
+| `strBiographyJP` | `string` | Artist biography in Japanese |
+| `strBiographyNL` | `string` | Artist biography in Dutch |
+| `strBiographyNO` | `string` | Artist biography in Norwegian |
+| `strBiographyPL` | `string` | Artist biography in Polish |
+| `strBiographyPT` | `string` | Artist biography in Portuguese |
+| `strBiographyRU` | `string` | Artist biography in Russian |
+| `strBiographySE` | `string` | Artist biography in Swedish |
+| `strCountry` | `string` | Country of origin |
+| `strCountryCode` | `string` | Country code |
+| `strDescriptionEN` | `string` | Album description in English |
+| `strDisbanded` | `string` | Disbanded status |
+| `strDiscogsID` | `string` | Discogs ID |
+| `strFacebook` | `string` | Facebook page URL |
+| `strGender` | `string` | Artist gender |
+| `strGeniusID` | `string` | Genius ID |
+| `strGenre` | `string` | Album genre |
+| `strItunesID` | `string` | iTunes ID |
+| `strLabel` | `string` | Record label |
+| `strLastFMChart` | `string` | Last.fm chart URL |
+| `strLocation` | `string` | Recording location |
+| `strLocked` | `string` | Whether the record is locked |
+| `strLyricWikiID` | `string` | LyricWiki ID |
+| `strMood` | `string` | Album mood |
+| `strMusicBrainzAlbumID` | `string` | MusicBrainz Album ID |
+| `strMusicBrainzArtistID` | `string` | MusicBrainz Artist ID |
+| `strMusicBrainzID` | `string` | MusicBrainz Release Group ID |
+| `strMusicMozID` | `string` | MusicMoz ID |
+| `strMusicVid` | `string` | URL to music video |
+| `strMusicVidCompany` | `string` | Music video production company |
+| `strMusicVidDirector` | `string` | Music video director |
+| `strMusicVidScreen1` | `string` | URL to music video screenshot 1 |
+| `strMusicVidScreen2` | `string` | URL to music video screenshot 2 |
+| `strMusicVidScreen3` | `string` | URL to music video screenshot 3 |
+| `strRateYourMusicID` | `string` | RateYourMusic ID |
+| `strReleaseFormat` | `string` | Release format (CD, Vinyl, etc.) |
+| `strReview` | `string` | Album review |
+| `strSpeed` | `string` | Album speed |
+| `strStyle` | `string` | Album style |
+| `strTheme` | `string` | Album theme |
+| `strTrack` | `string` | Track title |
+| `strTrackLyrics` | `string` | Track lyrics |
+| `strTrackThumb` | `string` | URL to track thumbnail |
+| `strTwitter` | `string` | Twitter profile URL |
+| `strWebsite` | `string` | Official website URL |
+| `strWikidataID` | `string` | Wikidata ID |
+| `strWikipediaID` | `string` | Wikipedia ID |
 
-#### Example: Load
+#### Example: List
 
 ```go
-v2Search, err := client.V2Search(nil).Load(map[string]any{"album_name": "album_name"}, nil)
+v2Searchs, err := client.V2Search(nil).List(map[string]any{"album_name": "example"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(v2Search.(sdk.Entity).Data()) // the loaded entity's record
+// A []any of entities, one per record.
+for _, item := range v2Searchs.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 ## Features
@@ -1182,15 +1696,15 @@ like `core.ToMapAny`.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `Load`, the entity
+Entity instances are stateful. After a successful `List`, the entity
 stores the returned data and match criteria internally.
 
 ```go
-v2lookup := client.V2Lookup(nil)
-v2lookup.Load(map[string]any{"album_id": 1}, nil)
+v1search := client.V1Search(nil)
+v1search.List(map[string]any{"s": "example"}, nil)
 
-// v2lookup.Data() now returns the v2lookup data from the last load
-// v2lookup.Match() returns the last match criteria
+// v1search.Data() now returns the v1search data from the last list
+// v1search.Match() returns the last match criteria
 ```
 
 Call `Make()` to create a fresh instance with the same configuration

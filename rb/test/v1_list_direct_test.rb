@@ -27,14 +27,22 @@ class V1ListDirectTest < Minitest::Test
       skip(_reason || "skipped via sdk-test-control.json")
       return
     end
+    Runner.live_pace if setup[:live]
     client = setup[:client]
 
     params = {}
+    query = {}
+    if setup[:live]
+      query["country"] = "us"
+      query["format"] = "albums"
+      query["type"] = "itunes"
+    end
 
     result = client.direct({
       "path" => "trending.php",
       "method" => "GET",
       "params" => params,
+      "query" => query,
     })
     if setup[:live]
       unless live_ok(result)

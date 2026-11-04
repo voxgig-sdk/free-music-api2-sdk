@@ -181,9 +181,13 @@ class V1LookupEntityTest < Minitest::Test
       v1_lookup_ref01_data = Helpers.to_map(v1_lookup_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LIST
     v1_lookup_ref01_ent = client.V1Lookup(nil)
     v1_lookup_ref01_match = {}
+    if setup[:live]
+      v1_lookup_ref01_match["i"] = "1dc4c347-a1db-32aa-b14f-bc9cc507b843"
+    end
 
     v1_lookup_ref01_list_result = v1_lookup_ref01_ent.list(v1_lookup_ref01_match, nil)
     assert v1_lookup_ref01_list_result.is_a?(Array)

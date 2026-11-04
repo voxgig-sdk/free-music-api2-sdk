@@ -25,7 +25,7 @@ class V2SearchEntityTest < Minitest::Test
     end
     client = FreeMusicApi2SDK.test(nil, { "feature" => { "validate" => { "active" => true } } })
     err = assert_raises(StandardError) do
-      client.V2Search(nil).load({ "album_name" => 1 }, nil)
+      client.V2Search(nil).list({ "album_name" => 1 }, nil)
     end
     assert_equal "validate_failed", err.code
   end
@@ -34,7 +34,7 @@ class V2SearchEntityTest < Minitest::Test
     setup = v2_search_basic_setup(nil)
     # Per-op sdk-test-control.json skip.
     _live = setup[:live] || false
-    [].each do |_op|
+    ["list"].each do |_op|
       _should_skip, _reason = Runner.is_control_skipped("entityOp", "v2_search." + _op, _live ? "live" : "unit")
       if _should_skip
         skip(_reason || "skipped via sdk-test-control.json")
@@ -50,6 +50,20 @@ class V2SearchEntityTest < Minitest::Test
     if v2_search_ref01_data_raw.length > 0
       v2_search_ref01_data = Helpers.to_map(v2_search_ref01_data_raw[0][1])
     end
+
+    Runner.live_pace if setup[:live]
+    # LIST
+    v2_search_ref01_ent = client.V2Search(nil)
+    v2_search_ref01_match = {
+      "track_name" => setup[:idmap]["track_name01"],
+    }
+    if setup[:live]
+      v2_search_ref01_match["album_name"] = "parachutes"
+      v2_search_ref01_match.delete("track_name") if setup[:synthetic_only] || setup[:idmap]["track_name01"].nil?
+    end
+
+    v2_search_ref01_list_result = v2_search_ref01_ent.list(v2_search_ref01_match, nil)
+    assert v2_search_ref01_list_result.is_a?(Array)
 
   end
 end
@@ -68,7 +82,7 @@ def v2_search_basic_setup(extra)
 
   # Generate idmap via transform.
   idmap = Vs.transform(
-    ["v2_search01", "v2_search02", "v2_search03"],
+    ["v2_search01", "v2_search02", "v2_search03", "track_name01"],
     {
       "`$PACK`" => ["", {
         "`$KEY`" => "`$COPY`",

@@ -365,10 +365,11 @@ declare class Config {
                 name: string;
                 title: string;
                 type: string;
+                short: string;
             }[];
             name: string;
             op: {
-                load: {
+                list: {
                     input: string;
                     name: string;
                     points: {
@@ -421,10 +422,11 @@ declare class Config {
                 name: string;
                 title: string;
                 type: string;
+                short: string;
             }[];
             name: string;
             op: {
-                load: {
+                list: {
                     input: string;
                     name: string;
                     points: ({
@@ -603,10 +605,11 @@ declare class Config {
                 name: string;
                 title: string;
                 type: string;
+                short: string;
             }[];
             name: string;
             op: {
-                load: {
+                list: {
                     input: string;
                     name: string;
                     points: ({

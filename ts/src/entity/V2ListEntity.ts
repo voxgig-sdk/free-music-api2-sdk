@@ -16,7 +16,7 @@ import type {
 
 import type {
   V2List,
-  V2ListLoadMatch,
+  V2ListListMatch,
 } from '../FreeMusicApi2Types'
 
 class V2ListEntity extends FreeMusicApi2EntityBase<V2List> {
@@ -35,7 +35,8 @@ class V2ListEntity extends FreeMusicApi2EntityBase<V2List> {
 
 
 
-  async load(this: any, reqmatch?: V2ListLoadMatch, ctrl?: Control): Promise<V2ListEntity> {
+
+  async list(this: any, reqmatch?: V2ListListMatch, ctrl?: Control): Promise<V2ListEntity[]> {
 
     const utility = this._utility
 
@@ -55,7 +56,7 @@ class V2ListEntity extends FreeMusicApi2EntityBase<V2List> {
     let fres: Promise<any> | undefined = undefined
 
     let ctx: Context = makeContext({
-      opname: 'load',
+      opname: 'list',
       ctrl,
       match: this._match,
       data: this._data,
@@ -121,15 +122,9 @@ class V2ListEntity extends FreeMusicApi2EntityBase<V2List> {
         if (null != ctx.result.resmatch) {
           this._match = ctx.result.resmatch
         }
-
-        if (null != ctx.result.resdata) {
-          this._data = ctx.result.resdata
-        }
       }
 
-      const out = done(ctx)
-
-      return (ctx.result && ctx.result.ok) ? this : out
+      return done(ctx)
     }
     catch (err: any) {
       // What a hook throws here must not escape the cleaning below.
@@ -152,12 +147,11 @@ class V2ListEntity extends FreeMusicApi2EntityBase<V2List> {
       }
       else {
         // Off-happy-path (throw disabled): typed as any so the method's
-        // Promise<V2ListEntity> return stays clean under strict null checks.
+        // Promise<V2ListEntity[]> return stays clean under strict null checks.
         return undefined as any
       }
     }
   }
-
 
 
 

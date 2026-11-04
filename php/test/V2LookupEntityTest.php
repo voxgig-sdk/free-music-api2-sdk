@@ -33,7 +33,7 @@ class V2LookupEntityTest extends TestCase
         $client = FreeMusicApi2SDK::test(null, ["feature" => ["validate" => ["active" => true]]]);
         $err = null;
         try {
-            $client->V2Lookup(null)->load(["album_id" => 'x'], null);
+            $client->V2Lookup(null)->list(["album_id" => 'x'], null);
         } catch (\Throwable $e) {
             $err = $e;
         }
@@ -45,7 +45,7 @@ class V2LookupEntityTest extends TestCase
         $setup = v2_lookup_basic_setup(null);
         // Per-op sdk-test-control.json skip.
         $_live = !empty($setup["live"]);
-        foreach ([] as $_op) {
+        foreach (["list"] as $_op) {
             [$_shouldSkip, $_reason] = Runner::is_control_skipped("entityOp", "v2_lookup." . $_op, $_live ? "live" : "unit");
             if ($_shouldSkip) {
                 $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
@@ -61,6 +61,24 @@ class V2LookupEntityTest extends TestCase
         if (count($v2_lookup_ref01_data_raw) > 0) {
             $v2_lookup_ref01_data = Helpers::to_map($v2_lookup_ref01_data_raw[0][1]);
         }
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
+        // LIST
+        $v2_lookup_ref01_ent = $client->V2Lookup(null);
+        $v2_lookup_ref01_match = [
+            "track_id" => $setup["idmap"]["track01"] ?? null,
+        ];
+        if (!empty($setup["live"])) {
+            $v2_lookup_ref01_match["album_id"] = 2109615;
+            if (!empty($setup["synthetic_only"]) || null === ($setup["idmap"]["track01"] ?? null)) {
+                unset($v2_lookup_ref01_match["track_id"]);
+            }
+        }
+
+        $v2_lookup_ref01_list_result = $v2_lookup_ref01_ent->list($v2_lookup_ref01_match, null);
+        $this->assertIsArray($v2_lookup_ref01_list_result);
 
     }
 }
@@ -80,7 +98,7 @@ function v2_lookup_basic_setup($extra)
 
     // Generate idmap.
     $idmap = [];
-    foreach (["v2_lookup01", "v2_lookup02", "v2_lookup03"] as $k) {
+    foreach (["v2_lookup01", "v2_lookup02", "v2_lookup03", "track01"] as $k) {
         $idmap[$k] = strtoupper($k);
     }
 

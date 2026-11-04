@@ -229,9 +229,16 @@ class V1SearchEntityTest extends TestCase
             $v1_search_ref01_data = Helpers::to_map($v1_search_ref01_data_raw[0][1]);
         }
 
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
         // LIST
         $v1_search_ref01_ent = $client->V1Search(null);
         $v1_search_ref01_match = [];
+        if (!empty($setup["live"])) {
+            $v1_search_ref01_match["s"] = 'coldplay';
+            $v1_search_ref01_match["t"] = 'yellow';
+        }
 
         $v1_search_ref01_list_result = $v1_search_ref01_ent->list($v1_search_ref01_match, null);
         $this->assertIsArray($v1_search_ref01_list_result);

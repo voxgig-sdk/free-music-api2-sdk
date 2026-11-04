@@ -7,22 +7,16 @@ main: kit: flow: BasicV2LookupFlow:
   name: "BasicV2LookupFlow",
   step: [
     {
-      i: {
-        ref: "v2_lookup_ref01",
-        srcdatavar: "v2_lookup_ref01_data",
-        suffix: "_dt0"
-      }
-
       m: {
-        id: "v2_lookup01"
+        track_id: "track01"
       }
 
-      o: "load",
+      o: "list",
       v: [
         {
-          apply: "TextFieldMark",
+          apply: "ItemExists",
           def: {
-            mark: "Mark01-v2_lookup_ref01"
+            ref: "v2_lookup_ref01"
           }
         }
       ]

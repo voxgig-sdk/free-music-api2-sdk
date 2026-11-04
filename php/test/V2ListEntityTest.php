@@ -33,7 +33,7 @@ class V2ListEntityTest extends TestCase
         $client = FreeMusicApi2SDK::test(null, ["feature" => ["validate" => ["active" => true]]]);
         $err = null;
         try {
-            $client->V2List(null)->load(["artist_id" => 'x'], null);
+            $client->V2List(null)->list(["artist_id" => 'x'], null);
         } catch (\Throwable $e) {
             $err = $e;
         }
@@ -45,11 +45,18 @@ class V2ListEntityTest extends TestCase
         $setup = v2_list_basic_setup(null);
         // Per-op sdk-test-control.json skip.
         $_live = !empty($setup["live"]);
-        foreach ([] as $_op) {
+        foreach (["list"] as $_op) {
             [$_shouldSkip, $_reason] = Runner::is_control_skipped("entityOp", "v2_list." . $_op, $_live ? "live" : "unit");
             if ($_shouldSkip) {
                 $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
                 return;
+            }
+        }
+        if (!empty($setup["live"])) {
+            foreach (["artist01" => 111239] as $_liveKey => $_liveEx) {
+                if (!empty($setup["synthetic_only"]) || null === ($setup["idmap"][$_liveKey] ?? null)) {
+                    $setup["idmap"][$_liveKey] = $_liveEx;
+                }
             }
         }
         $client = $setup["client"];
@@ -61,6 +68,18 @@ class V2ListEntityTest extends TestCase
         if (count($v2_list_ref01_data_raw) > 0) {
             $v2_list_ref01_data = Helpers::to_map($v2_list_ref01_data_raw[0][1]);
         }
+
+        if (!empty($setup["live"])) {
+            Runner::live_pace();
+        }
+        // LIST
+        $v2_list_ref01_ent = $client->V2List(null);
+        $v2_list_ref01_match = [
+            "artist_id" => $setup["idmap"]["artist01"],
+        ];
+
+        $v2_list_ref01_list_result = $v2_list_ref01_ent->list($v2_list_ref01_match, null);
+        $this->assertIsArray($v2_list_ref01_list_result);
 
     }
 }
@@ -80,7 +99,7 @@ function v2_list_basic_setup($extra)
 
     // Generate idmap.
     $idmap = [];
-    foreach (["v2_list01", "v2_list02", "v2_list03"] as $k) {
+    foreach (["v2_list01", "v2_list02", "v2_list03", "artist01"] as $k) {
         $idmap[$k] = strtoupper($k);
     }
 

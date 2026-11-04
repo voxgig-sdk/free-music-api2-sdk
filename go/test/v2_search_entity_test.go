@@ -38,7 +38,7 @@ func TestV2SearchEntity(t *testing.T) {
 		client := sdk.TestSDK(nil, map[string]any{
 			"feature": map[string]any{"validate": map[string]any{"active": true}},
 		})
-		_, err := client.V2Search(nil).Load(map[string]any{"album_name": 1}, nil)
+		_, err := client.V2Search(nil).List(map[string]any{"album_name": 1}, nil)
 		if sdkerr, ok := err.(*core.FreeMusicApi2Error); !ok || "validate_failed" != sdkerr.Code {
 			t.Fatalf("expected validate_failed, got %v", err)
 		}
@@ -53,7 +53,7 @@ func TestV2SearchEntity(t *testing.T) {
 		if setup.live {
 			_mode = "live"
 		}
-		for _, _op := range []string{} {
+		for _, _op := range []string{"list"} {
 			if _shouldSkip, _reason := isControlSkipped("entityOp", "v2_search." + _op, _mode); _shouldSkip {
 				if _reason == "" {
 					_reason = "skipped via sdk-test-control.json"
@@ -62,6 +62,9 @@ func TestV2SearchEntity(t *testing.T) {
 				return
 			}
 		}
+		client := setup.client
+		_ = client
+
 		// Bootstrap entity data from existing test data (no create step in flow).
 		v2SearchRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.v2_search")))
 		var v2SearchRef01Data map[string]any
@@ -71,6 +74,30 @@ func TestV2SearchEntity(t *testing.T) {
 		// Discard guards against Go's unused-var check when the flow's steps
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = v2SearchRef01Data
+
+		if setup.live {
+			livePace()
+		}
+		// LIST
+		v2SearchRef01Ent := client.V2Search(nil)
+		v2SearchRef01Match := map[string]any{
+			"track_name": setup.idmap["track_name01"],
+		}
+		if setup.live {
+			v2SearchRef01Match["album_name"] = "parachutes"
+			if setup.syntheticOnly || setup.idmap["track_name01"] == nil {
+				delete(v2SearchRef01Match, "track_name")
+			}
+		}
+
+		v2SearchRef01ListResult, err := v2SearchRef01Ent.List(v2SearchRef01Match, nil)
+		if err != nil {
+			t.Fatalf("list failed: %v", err)
+		}
+		_, v2SearchRef01ListOk := v2SearchRef01ListResult.([]any)
+		if !v2SearchRef01ListOk {
+			t.Fatalf("expected list result to be an array, got %T", v2SearchRef01ListResult)
+		}
 
 	})
 }
@@ -100,7 +127,7 @@ func v2_searchBasicSetup(extra map[string]any) *entityTestSetup {
 
 	// Generate idmap via transform, matching TS pattern.
 	idmap, _ := vs.Transform(
-		[]any{"v2_search01", "v2_search02", "v2_search03"},
+		[]any{"v2_search01", "v2_search02", "v2_search03", "track_name01"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
 				"`$KEY`": "`$COPY`",

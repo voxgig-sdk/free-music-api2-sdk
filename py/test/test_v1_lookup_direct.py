@@ -1,6 +1,7 @@
 # V1Lookup direct test
 
 import json
+import os
 import pytest
 
 from freemusicapi2_sdk.utility.voxgig_struct import voxgig_struct as vs
@@ -32,14 +33,20 @@ class TestV1LookupDirect:
         if _skip:
             pytest.skip(_reason or "skipped via sdk-test-control.json")
             return
+        if setup["live"]:
+            runner.live_pace()
         client = setup["client"]
 
         params = {}
+        query = {}
+        if setup["live"]:
+            query["i"] = "1dc4c347-a1db-32aa-b14f-bc9cc507b843"
 
         result = client.direct({
             "path": "album-mb.php",
             "method": "GET",
             "params": params,
+            "query": query,
         })
         if setup["live"]:
             if not _live_ok(result):

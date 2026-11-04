@@ -212,9 +212,15 @@ func TestV1LookupEntity(t *testing.T) {
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = v1LookupRef01Data
 
+		if setup.live {
+			livePace()
+		}
 		// LIST
 		v1LookupRef01Ent := client.V1Lookup(nil)
 		v1LookupRef01Match := map[string]any{}
+		if setup.live {
+			v1LookupRef01Match["i"] = "1dc4c347-a1db-32aa-b14f-bc9cc507b843"
+		}
 
 		v1LookupRef01ListResult, err := v1LookupRef01Ent.List(v1LookupRef01Match, nil)
 		if err != nil {

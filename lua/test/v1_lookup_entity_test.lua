@@ -164,9 +164,15 @@ describe("V1LookupEntity", function()
       v1_lookup_ref01_data = helpers.to_map(v1_lookup_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local v1_lookup_ref01_ent = client:V1Lookup(nil)
     local v1_lookup_ref01_match = {}
+    if setup.live then
+      v1_lookup_ref01_match["i"] = "1dc4c347-a1db-32aa-b14f-bc9cc507b843"
+    end
 
     local v1_lookup_ref01_list_result, err = v1_lookup_ref01_ent:list(v1_lookup_ref01_match, nil)
     assert.is_nil(err)

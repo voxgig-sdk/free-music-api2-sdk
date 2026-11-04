@@ -25,7 +25,7 @@ class V2LookupEntityTest < Minitest::Test
     end
     client = FreeMusicApi2SDK.test(nil, { "feature" => { "validate" => { "active" => true } } })
     err = assert_raises(StandardError) do
-      client.V2Lookup(nil).load({ "album_id" => "x" }, nil)
+      client.V2Lookup(nil).list({ "album_id" => "x" }, nil)
     end
     assert_equal "validate_failed", err.code
   end
@@ -34,7 +34,7 @@ class V2LookupEntityTest < Minitest::Test
     setup = v2_lookup_basic_setup(nil)
     # Per-op sdk-test-control.json skip.
     _live = setup[:live] || false
-    [].each do |_op|
+    ["list"].each do |_op|
       _should_skip, _reason = Runner.is_control_skipped("entityOp", "v2_lookup." + _op, _live ? "live" : "unit")
       if _should_skip
         skip(_reason || "skipped via sdk-test-control.json")
@@ -50,6 +50,20 @@ class V2LookupEntityTest < Minitest::Test
     if v2_lookup_ref01_data_raw.length > 0
       v2_lookup_ref01_data = Helpers.to_map(v2_lookup_ref01_data_raw[0][1])
     end
+
+    Runner.live_pace if setup[:live]
+    # LIST
+    v2_lookup_ref01_ent = client.V2Lookup(nil)
+    v2_lookup_ref01_match = {
+      "track_id" => setup[:idmap]["track01"],
+    }
+    if setup[:live]
+      v2_lookup_ref01_match["album_id"] = 2109615
+      v2_lookup_ref01_match.delete("track_id") if setup[:synthetic_only] || setup[:idmap]["track01"].nil?
+    end
+
+    v2_lookup_ref01_list_result = v2_lookup_ref01_ent.list(v2_lookup_ref01_match, nil)
+    assert v2_lookup_ref01_list_result.is_a?(Array)
 
   end
 end
@@ -68,7 +82,7 @@ def v2_lookup_basic_setup(extra)
 
   # Generate idmap via transform.
   idmap = Vs.transform(
-    ["v2_lookup01", "v2_lookup02", "v2_lookup03"],
+    ["v2_lookup01", "v2_lookup02", "v2_lookup03", "track01"],
     {
       "`$PACK`" => ["", {
         "`$KEY`" => "`$COPY`",

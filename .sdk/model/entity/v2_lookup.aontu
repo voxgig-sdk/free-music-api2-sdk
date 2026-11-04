@@ -5,30 +5,761 @@ main: kit: entity: v2_lookup: {
   alias: field: {}
 
   fields: {
-    albums: {
-      h: "Albums"
-      n: "albums"
+    idAlbum: {
+      h: "Id Album"
+      n: "idAlbum"
       r: false
-      t: "`$ARRAY`"
+      sh: "Unique album ID"
+      t: "`$INTEGER`"
     }
-    artists: {
-      h: "Artists"
-      n: "artists"
+    idArtist: {
+      h: "Id Artist"
+      n: "idArtist"
       r: false
-      t: "`$ARRAY`"
+      sh: "Artist ID"
+      t: "`$INTEGER`"
     }
-    tracks: {
-      h: "Tracks"
-      n: "tracks"
+    idIMVDB: {
+      h: "Id Imvdb"
+      n: "idIMVDB"
       r: false
-      t: "`$ARRAY`"
+      sh: "IMVDB ID"
+      t: "`$INTEGER`"
+    }
+    idLabel: {
+      h: "Id Label"
+      n: "idLabel"
+      r: false
+      sh: "Label ID"
+      t: "`$INTEGER`"
+    }
+    idLyric: {
+      h: "Id Lyric"
+      n: "idLyric"
+      r: false
+      sh: "Lyrics ID"
+      t: "`$INTEGER`"
+    }
+    idTrack: {
+      h: "Id Track"
+      n: "idTrack"
+      r: false
+      sh: "Unique track ID"
+      t: "`$INTEGER`"
+    }
+    intBornYear: {
+      h: "Int Born Year"
+      n: "intBornYear"
+      r: false
+      sh: "Birth year of the artist"
+      t: "`$INTEGER`"
+    }
+    intCD: {
+      h: "Int Cd"
+      n: "intCD"
+      r: false
+      sh: "CD number"
+      t: "`$INTEGER`"
+    }
+    intCharted: {
+      h: "Int Charted"
+      n: "intCharted"
+      r: false
+      sh: "Chart position"
+      t: "`$INTEGER`"
+    }
+    intDiedYear: {
+      h: "Int Died Year"
+      n: "intDiedYear"
+      r: false
+      sh: "Year the artist died (if applicable)"
+      t: "`$INTEGER`"
+    }
+    intDuration: {
+      h: "Int Duration"
+      n: "intDuration"
+      r: false
+      sh: "Track duration in milliseconds"
+      t: "`$INTEGER`"
+    }
+    intFormedYear: {
+      h: "Int Formed Year"
+      n: "intFormedYear"
+      r: false
+      sh: "Year the artist/band was formed"
+      t: "`$INTEGER`"
+    }
+    intLoved: {
+      h: "Int Loved"
+      n: "intLoved"
+      r: false
+      sh: "Number of loves/likes"
+      t: "`$INTEGER`"
+    }
+    intMembers: {
+      h: "Int Members"
+      n: "intMembers"
+      r: false
+      sh: "Number of band members"
+      t: "`$INTEGER`"
+    }
+    intMusicVidComments: {
+      h: "Int Music Vid Comments"
+      n: "intMusicVidComments"
+      r: false
+      sh: "Number of music video comments"
+      t: "`$INTEGER`"
+    }
+    intMusicVidDislikes: {
+      h: "Int Music Vid Dislikes"
+      n: "intMusicVidDislikes"
+      r: false
+      sh: "Number of music video dislikes"
+      t: "`$INTEGER`"
+    }
+    intMusicVidFavorites: {
+      h: "Int Music Vid Favorites"
+      n: "intMusicVidFavorites"
+      r: false
+      sh: "Number of music video favorites"
+      t: "`$INTEGER`"
+    }
+    intMusicVidLikes: {
+      h: "Int Music Vid Likes"
+      n: "intMusicVidLikes"
+      r: false
+      sh: "Number of music video likes"
+      t: "`$INTEGER`"
+    }
+    intMusicVidViews: {
+      h: "Int Music Vid Views"
+      n: "intMusicVidViews"
+      r: false
+      sh: "Number of music video views"
+      t: "`$INTEGER`"
+    }
+    intSales: {
+      h: "Int Sales"
+      n: "intSales"
+      r: false
+      sh: "Number of sales"
+      t: "`$INTEGER`"
+    }
+    intScore: {
+      h: "Int Score"
+      n: "intScore"
+      r: false
+      sh: "Album score"
+      t: "`$INTEGER`"
+    }
+    intScoreVotes: {
+      h: "Int Score Votes"
+      n: "intScoreVotes"
+      r: false
+      sh: "Number of score votes"
+      t: "`$INTEGER`"
+    }
+    intTotalListeners: {
+      h: "Int Total Listeners"
+      n: "intTotalListeners"
+      r: false
+      sh: "Total number of listeners"
+      t: "`$INTEGER`"
+    }
+    intTotalPlays: {
+      h: "Int Total Plays"
+      n: "intTotalPlays"
+      r: false
+      sh: "Total number of plays"
+      t: "`$INTEGER`"
+    }
+    intTrackNumber: {
+      h: "Int Track Number"
+      n: "intTrackNumber"
+      r: false
+      sh: "Track number on album"
+      t: "`$INTEGER`"
+    }
+    intYearReleased: {
+      h: "Int Year Released"
+      n: "intYearReleased"
+      r: false
+      sh: "Year the album was released"
+      t: "`$INTEGER`"
+    }
+    strAlbum: {
+      h: "Str Album"
+      n: "strAlbum"
+      r: false
+      sh: "Album title"
+      t: "`$STRING`"
+    }
+    strAlbum3DCase: {
+      h: "Str Album3 D Case"
+      n: "strAlbum3DCase"
+      r: false
+      sh: "URL to 3D case image"
+      t: "`$STRING`"
+    }
+    strAlbum3DFace: {
+      h: "Str Album3 D Face"
+      n: "strAlbum3DFace"
+      r: false
+      sh: "URL to 3D face image"
+      t: "`$STRING`"
+    }
+    strAlbum3DFlat: {
+      h: "Str Album3 D Flat"
+      n: "strAlbum3DFlat"
+      r: false
+      sh: "URL to 3D flat image"
+      t: "`$STRING`"
+    }
+    strAlbum3DThumb: {
+      h: "Str Album3 D Thumb"
+      n: "strAlbum3DThumb"
+      r: false
+      sh: "URL to 3D thumbnail"
+      t: "`$STRING`"
+    }
+    strAlbumCDart: {
+      h: "Str Album C Dart"
+      n: "strAlbumCDart"
+      r: false
+      sh: "URL to CD art"
+      t: "`$STRING`"
+    }
+    strAlbumSpine: {
+      h: "Str Album Spine"
+      n: "strAlbumSpine"
+      r: false
+      sh: "URL to album spine image"
+      t: "`$STRING`"
+    }
+    strAlbumStripped: {
+      h: "Str Album Stripped"
+      n: "strAlbumStripped"
+      r: false
+      sh: "Album title without special characters"
+      t: "`$STRING`"
+    }
+    strAlbumThumb: {
+      h: "Str Album Thumb"
+      n: "strAlbumThumb"
+      r: false
+      sh: "URL to album thumbnail"
+      t: "`$STRING`"
+    }
+    strAlbumThumbBack: {
+      h: "Str Album Thumb Back"
+      n: "strAlbumThumbBack"
+      r: false
+      sh: "URL to back of album cover"
+      t: "`$STRING`"
+    }
+    strAlbumThumbHQ: {
+      h: "Str Album Thumb Hq"
+      n: "strAlbumThumbHQ"
+      r: false
+      sh: "URL to high quality album thumbnail"
+      t: "`$STRING`"
+    }
+    strAllMusicID: {
+      h: "Str All Music Id"
+      n: "strAllMusicID"
+      r: false
+      sh: "AllMusic ID"
+      t: "`$STRING`"
+    }
+    strAmazonID: {
+      h: "Str Amazon Id"
+      n: "strAmazonID"
+      r: false
+      sh: "Amazon ID"
+      t: "`$STRING`"
+    }
+    strArtist: {
+      h: "Str Artist"
+      n: "strArtist"
+      r: false
+      sh: "Artist name"
+      t: "`$STRING`"
+    }
+    strArtistAlternate: {
+      h: "Str Artist Alternate"
+      n: "strArtistAlternate"
+      r: false
+      sh: "Alternate artist name"
+      t: "`$STRING`"
+    }
+    strArtistBanner: {
+      h: "Str Artist Banner"
+      n: "strArtistBanner"
+      r: false
+      sh: "URL to artist banner"
+      t: "`$STRING`"
+    }
+    strArtistClearart: {
+      h: "Str Artist Clearart"
+      n: "strArtistClearart"
+      r: false
+      sh: "URL to artist clearart"
+      t: "`$STRING`"
+    }
+    strArtistCutout: {
+      h: "Str Artist Cutout"
+      n: "strArtistCutout"
+      r: false
+      sh: "URL to artist cutout image"
+      t: "`$STRING`"
+    }
+    strArtistFanart: {
+      h: "Str Artist Fanart"
+      n: "strArtistFanart"
+      r: false
+      sh: "URL to artist fanart"
+      t: "`$STRING`"
+    }
+    strArtistFanart2: {
+      h: "Str Artist Fanart2"
+      n: "strArtistFanart2"
+      r: false
+      sh: "URL to alternate artist fanart"
+      t: "`$STRING`"
+    }
+    strArtistFanart3: {
+      h: "Str Artist Fanart3"
+      n: "strArtistFanart3"
+      r: false
+      sh: "URL to third artist fanart"
+      t: "`$STRING`"
+    }
+    strArtistFanart4: {
+      h: "Str Artist Fanart4"
+      n: "strArtistFanart4"
+      r: false
+      sh: "URL to fourth artist fanart"
+      t: "`$STRING`"
+    }
+    strArtistLogo: {
+      h: "Str Artist Logo"
+      n: "strArtistLogo"
+      r: false
+      sh: "URL to artist logo"
+      t: "`$STRING`"
+    }
+    strArtistStripped: {
+      h: "Str Artist Stripped"
+      n: "strArtistStripped"
+      r: false
+      sh: "Artist name without special characters"
+      t: "`$STRING`"
+    }
+    strArtistThumb: {
+      h: "Str Artist Thumb"
+      n: "strArtistThumb"
+      r: false
+      sh: "URL to artist thumbnail image"
+      t: "`$STRING`"
+    }
+    strArtistWideThumb: {
+      h: "Str Artist Wide Thumb"
+      n: "strArtistWideThumb"
+      r: false
+      sh: "URL to artist wide thumbnail"
+      t: "`$STRING`"
+    }
+    strBBCReviewID: {
+      h: "Str Bbc Review Id"
+      n: "strBBCReviewID"
+      r: false
+      sh: "BBC Review ID"
+      t: "`$STRING`"
+    }
+    strBiographyCN: {
+      h: "Str Biography Cn"
+      n: "strBiographyCN"
+      r: false
+      sh: "Artist biography in Chinese"
+      t: "`$STRING`"
+    }
+    strBiographyDE: {
+      h: "Str Biography De"
+      n: "strBiographyDE"
+      r: false
+      sh: "Artist biography in German"
+      t: "`$STRING`"
+    }
+    strBiographyEN: {
+      h: "Str Biography En"
+      n: "strBiographyEN"
+      r: false
+      sh: "Artist biography in English"
+      t: "`$STRING`"
+    }
+    strBiographyES: {
+      h: "Str Biography Es"
+      n: "strBiographyES"
+      r: false
+      sh: "Artist biography in Spanish"
+      t: "`$STRING`"
+    }
+    strBiographyFR: {
+      h: "Str Biography Fr"
+      n: "strBiographyFR"
+      r: false
+      sh: "Artist biography in French"
+      t: "`$STRING`"
+    }
+    strBiographyHU: {
+      h: "Str Biography Hu"
+      n: "strBiographyHU"
+      r: false
+      sh: "Artist biography in Hungarian"
+      t: "`$STRING`"
+    }
+    strBiographyIL: {
+      h: "Str Biography Il"
+      n: "strBiographyIL"
+      r: false
+      sh: "Artist biography in Hebrew"
+      t: "`$STRING`"
+    }
+    strBiographyIT: {
+      h: "Str Biography It"
+      n: "strBiographyIT"
+      r: false
+      sh: "Artist biography in Italian"
+      t: "`$STRING`"
+    }
+    strBiographyJP: {
+      h: "Str Biography Jp"
+      n: "strBiographyJP"
+      r: false
+      sh: "Artist biography in Japanese"
+      t: "`$STRING`"
+    }
+    strBiographyNL: {
+      h: "Str Biography Nl"
+      n: "strBiographyNL"
+      r: false
+      sh: "Artist biography in Dutch"
+      t: "`$STRING`"
+    }
+    strBiographyNO: {
+      h: "Str Biography No"
+      n: "strBiographyNO"
+      r: false
+      sh: "Artist biography in Norwegian"
+      t: "`$STRING`"
+    }
+    strBiographyPL: {
+      h: "Str Biography Pl"
+      n: "strBiographyPL"
+      r: false
+      sh: "Artist biography in Polish"
+      t: "`$STRING`"
+    }
+    strBiographyPT: {
+      h: "Str Biography Pt"
+      n: "strBiographyPT"
+      r: false
+      sh: "Artist biography in Portuguese"
+      t: "`$STRING`"
+    }
+    strBiographyRU: {
+      h: "Str Biography Ru"
+      n: "strBiographyRU"
+      r: false
+      sh: "Artist biography in Russian"
+      t: "`$STRING`"
+    }
+    strBiographySE: {
+      h: "Str Biography Se"
+      n: "strBiographySE"
+      r: false
+      sh: "Artist biography in Swedish"
+      t: "`$STRING`"
+    }
+    strCountry: {
+      h: "Str Country"
+      n: "strCountry"
+      r: false
+      sh: "Country of origin"
+      t: "`$STRING`"
+    }
+    strCountryCode: {
+      h: "Str Country Code"
+      n: "strCountryCode"
+      r: false
+      sh: "Country code"
+      t: "`$STRING`"
+    }
+    strDescriptionEN: {
+      h: "Str Description En"
+      n: "strDescriptionEN"
+      r: false
+      sh: "Album description in English"
+      t: "`$STRING`"
+    }
+    strDisbanded: {
+      h: "Str Disbanded"
+      n: "strDisbanded"
+      r: false
+      sh: "Disbanded status"
+      t: "`$STRING`"
+    }
+    strDiscogsID: {
+      h: "Str Discogs Id"
+      n: "strDiscogsID"
+      r: false
+      sh: "Discogs ID"
+      t: "`$STRING`"
+    }
+    strFacebook: {
+      h: "Str Facebook"
+      n: "strFacebook"
+      r: false
+      sh: "Facebook page URL"
+      t: "`$STRING`"
+    }
+    strGender: {
+      h: "Str Gender"
+      n: "strGender"
+      r: false
+      sh: "Artist gender"
+      t: "`$STRING`"
+    }
+    strGeniusID: {
+      h: "Str Genius Id"
+      n: "strGeniusID"
+      r: false
+      sh: "Genius ID"
+      t: "`$STRING`"
+    }
+    strGenre: {
+      h: "Str Genre"
+      n: "strGenre"
+      r: false
+      sh: "Album genre"
+      t: "`$STRING`"
+    }
+    strItunesID: {
+      h: "Str Itunes Id"
+      n: "strItunesID"
+      r: false
+      sh: "iTunes ID"
+      t: "`$STRING`"
+    }
+    strLabel: {
+      h: "Str Label"
+      n: "strLabel"
+      r: false
+      sh: "Record label"
+      t: "`$STRING`"
+    }
+    strLastFMChart: {
+      h: "Str Last Fm Chart"
+      n: "strLastFMChart"
+      r: false
+      sh: "Last.fm chart URL"
+      t: "`$STRING`"
+    }
+    strLocation: {
+      h: "Str Location"
+      n: "strLocation"
+      r: false
+      sh: "Recording location"
+      t: "`$STRING`"
+    }
+    strLocked: {
+      h: "Str Locked"
+      n: "strLocked"
+      r: false
+      sh: "Whether the record is locked"
+      t: "`$STRING`"
+    }
+    strLyricWikiID: {
+      h: "Str Lyric Wiki Id"
+      n: "strLyricWikiID"
+      r: false
+      sh: "LyricWiki ID"
+      t: "`$STRING`"
+    }
+    strMood: {
+      h: "Str Mood"
+      n: "strMood"
+      r: false
+      sh: "Album mood"
+      t: "`$STRING`"
+    }
+    strMusicBrainzAlbumID: {
+      h: "Str Music Brainz Album Id"
+      n: "strMusicBrainzAlbumID"
+      r: false
+      sh: "MusicBrainz Album ID"
+      t: "`$STRING`"
+    }
+    strMusicBrainzArtistID: {
+      h: "Str Music Brainz Artist Id"
+      n: "strMusicBrainzArtistID"
+      r: false
+      sh: "MusicBrainz Artist ID"
+      t: "`$STRING`"
+    }
+    strMusicBrainzID: {
+      h: "Str Music Brainz Id"
+      n: "strMusicBrainzID"
+      r: false
+      sh: "MusicBrainz Release Group ID"
+      t: "`$STRING`"
+    }
+    strMusicMozID: {
+      h: "Str Music Moz Id"
+      n: "strMusicMozID"
+      r: false
+      sh: "MusicMoz ID"
+      t: "`$STRING`"
+    }
+    strMusicVid: {
+      h: "Str Music Vid"
+      n: "strMusicVid"
+      r: false
+      sh: "URL to music video"
+      t: "`$STRING`"
+    }
+    strMusicVidCompany: {
+      h: "Str Music Vid Company"
+      n: "strMusicVidCompany"
+      r: false
+      sh: "Music video production company"
+      t: "`$STRING`"
+    }
+    strMusicVidDirector: {
+      h: "Str Music Vid Director"
+      n: "strMusicVidDirector"
+      r: false
+      sh: "Music video director"
+      t: "`$STRING`"
+    }
+    strMusicVidScreen1: {
+      h: "Str Music Vid Screen1"
+      n: "strMusicVidScreen1"
+      r: false
+      sh: "URL to music video screenshot 1"
+      t: "`$STRING`"
+    }
+    strMusicVidScreen2: {
+      h: "Str Music Vid Screen2"
+      n: "strMusicVidScreen2"
+      r: false
+      sh: "URL to music video screenshot 2"
+      t: "`$STRING`"
+    }
+    strMusicVidScreen3: {
+      h: "Str Music Vid Screen3"
+      n: "strMusicVidScreen3"
+      r: false
+      sh: "URL to music video screenshot 3"
+      t: "`$STRING`"
+    }
+    strRateYourMusicID: {
+      h: "Str Rate Your Music Id"
+      n: "strRateYourMusicID"
+      r: false
+      sh: "RateYourMusic ID"
+      t: "`$STRING`"
+    }
+    strReleaseFormat: {
+      h: "Str Release Format"
+      n: "strReleaseFormat"
+      r: false
+      sh: "Release format (CD, Vinyl, etc.)"
+      t: "`$STRING`"
+    }
+    strReview: {
+      h: "Str Review"
+      n: "strReview"
+      r: false
+      sh: "Album review"
+      t: "`$STRING`"
+    }
+    strSpeed: {
+      h: "Str Speed"
+      n: "strSpeed"
+      r: false
+      sh: "Album speed"
+      t: "`$STRING`"
+    }
+    strStyle: {
+      h: "Str Style"
+      n: "strStyle"
+      r: false
+      sh: "Album style"
+      t: "`$STRING`"
+    }
+    strTheme: {
+      h: "Str Theme"
+      n: "strTheme"
+      r: false
+      sh: "Album theme"
+      t: "`$STRING`"
+    }
+    strTrack: {
+      h: "Str Track"
+      n: "strTrack"
+      r: false
+      sh: "Track title"
+      t: "`$STRING`"
+    }
+    strTrackLyrics: {
+      h: "Str Track Lyrics"
+      n: "strTrackLyrics"
+      r: false
+      sh: "Track lyrics"
+      t: "`$STRING`"
+    }
+    strTrackThumb: {
+      h: "Str Track Thumb"
+      n: "strTrackThumb"
+      r: false
+      sh: "URL to track thumbnail"
+      t: "`$STRING`"
+    }
+    strTwitter: {
+      h: "Str Twitter"
+      n: "strTwitter"
+      r: false
+      sh: "Twitter profile URL"
+      t: "`$STRING`"
+    }
+    strWebsite: {
+      h: "Str Website"
+      n: "strWebsite"
+      r: false
+      sh: "Official website URL"
+      t: "`$STRING`"
+    }
+    strWikidataID: {
+      h: "Str Wikidata Id"
+      n: "strWikidataID"
+      r: false
+      sh: "Wikidata ID"
+      t: "`$STRING`"
+    }
+    strWikipediaID: {
+      h: "Str Wikipedia Id"
+      n: "strWikipediaID"
+      r: false
+      sh: "Wikipedia ID"
+      t: "`$STRING`"
     }
   }
 
   name: "v2_lookup"
   op: {
-    load: {
-      name: "load"
+    list: {
+      name: "list"
       points: [
         {
           co: {
@@ -77,7 +808,7 @@ main: kit: entity: v2_lookup: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.albums`"
           }
         }
         {
@@ -127,7 +858,7 @@ main: kit: entity: v2_lookup: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.artists`"
           }
         }
         {
@@ -177,7 +908,7 @@ main: kit: entity: v2_lookup: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.albums`"
           }
         }
         {
@@ -227,7 +958,7 @@ main: kit: entity: v2_lookup: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.artists`"
           }
         }
         {
@@ -277,7 +1008,7 @@ main: kit: entity: v2_lookup: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.tracks`"
           }
         }
         {
@@ -327,7 +1058,7 @@ main: kit: entity: v2_lookup: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.tracks`"
           }
         }
       ]

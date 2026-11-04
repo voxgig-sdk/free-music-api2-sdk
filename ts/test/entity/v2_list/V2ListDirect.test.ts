@@ -39,16 +39,17 @@ describe('V2ListDirect', async () => {
   })
 
 
-  test('direct-load-v2_list', async (t: any) => {
+  test('direct-list-v2_list', async (t: any) => {
     if (liveScenariosActive()) { t.skip('Covered by live operation scenarios'); return }
-    const setup = directSetup({ id: 'direct01' })
-    if (maybeSkipControl(t, 'direct', 'direct-load-v2_list', setup.live)) return
+    const setup = directSetup([{ id: 'direct01' }, { id: 'direct02' }])
+    if (maybeSkipControl(t, 'direct', 'direct-list-v2_list', setup.live)) return
+    if (skipIfMissingIds(t, setup, ["artist01"], LIVE_STRICT)) return
     const { client, calls } = setup
 
     const params: any = {}
     const query: any = {}
     if (setup.live) {
-      params.artist_id = 111239
+      params.artist_id = setup.idmap['artist01']
     } else {
       params.artist_id = 'direct01'
     }
@@ -62,16 +63,18 @@ describe('V2ListDirect', async () => {
 
     if (setup.live) {
       if (!result.ok || result.status < 200 || result.status >= 300) {
-        return void liveMiss(t, LIVE_STRICT, 'Live load failed: ' + describeLive(result))
+        return void liveMiss(t, LIVE_STRICT, 'Live list failed: ' + describeLive(result))
       }
-      if (!(null != result.data)) {
-        return void liveMiss(t, LIVE_STRICT, 'Live load returned no data: ' + describeLive(result))
+      if (!(Array.isArray(unwrapListData(result.data)))) {
+        return void liveMiss(t, LIVE_STRICT, 'Live list returned no list: ' + describeLive(result))
       }
     } else {
       assert(result.ok === true)
       assert(result.status === 200)
       assert(null != result.data)
-      assert(result.data.id === 'direct01')
+      const listArr = unwrapListData(result.data)
+      assert(Array.isArray(listArr))
+      assert(listArr!.length === 2)
       assert(calls.length === 1)
       assert(calls[0].init.method === 'GET')
       assert(calls[0].url.includes('direct01'))
@@ -113,6 +116,9 @@ function directSetup(mockres?: any) {
     if ('string' === typeof idmap && idmap.startsWith('{')) {
       idmap = JSON.parse(idmap)
     }
+    // A path parameter's example stands in for an id *_ENTID does not give.
+    idmap = Object.assign({ artist01: 111239 },
+      'object' === typeof idmap ? idmap : {})
 
     return { client, calls, live, idmap, transport }
   }

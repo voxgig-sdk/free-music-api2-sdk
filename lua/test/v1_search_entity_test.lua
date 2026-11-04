@@ -164,9 +164,16 @@ describe("V1SearchEntity", function()
       v1_search_ref01_data = helpers.to_map(v1_search_ref01_data_raw[1][2])
     end
 
+    if setup.live then
+      runner.live_pace()
+    end
     -- LIST
     local v1_search_ref01_ent = client:V1Search(nil)
     local v1_search_ref01_match = {}
+    if setup.live then
+      v1_search_ref01_match["s"] = "coldplay"
+      v1_search_ref01_match["t"] = "yellow"
+    end
 
     local v1_search_ref01_list_result, err = v1_search_ref01_ent:list(v1_search_ref01_match, nil)
     assert.is_nil(err)

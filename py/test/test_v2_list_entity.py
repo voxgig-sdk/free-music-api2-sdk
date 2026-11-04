@@ -37,7 +37,7 @@ class TestV2ListEntity:
         client = FreeMusicApi2SDK.test(
             None, {"feature": {"validate": {"active": True}}})
         with pytest.raises(Exception) as err:
-            client.V2List(None).load({"artist_id": "x"}, None)
+            client.V2List(None).list({"artist_id": "x"}, None)
         assert "validate_failed" == getattr(err.value, "code", None)
 
     def test_should_run_basic_flow(self):
@@ -46,11 +46,15 @@ class TestV2ListEntity:
         # multiple ops; skipping any one skips the whole flow (steps depend
         # on each other).
         _live = setup.get("live", False)
-        for _op in []:
+        for _op in ["list"]:
             _skip, _reason = runner.is_control_skipped("entityOp", "v2_list." + _op, "live" if _live else "unit")
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
+        if setup["live"]:
+            for _live_key, _live_ex in {"artist01": 111239}.items():
+                if setup.get("synthetic_only") or setup["idmap"].get(_live_key) is None:
+                    setup["idmap"][_live_key] = _live_ex
         client = setup["client"]
 
         # Bootstrap entity data from existing test data.
@@ -59,6 +63,17 @@ class TestV2ListEntity:
         v2_list_ref01_data = None
         if len(v2_list_ref01_data_raw) > 0:
             v2_list_ref01_data = helpers.to_map(v2_list_ref01_data_raw[0][1])
+
+        if setup["live"]:
+            runner.live_pace()
+        # LIST
+        v2_list_ref01_ent = client.V2List(None)
+        v2_list_ref01_match = {
+            "artist_id": setup["idmap"]["artist01"],
+        }
+
+        v2_list_ref01_list_result = v2_list_ref01_ent.list(v2_list_ref01_match, None)
+        assert isinstance(v2_list_ref01_list_result, list)
 
 
 
@@ -78,7 +93,7 @@ def _v2_list_basic_setup(extra):
 
     # Generate idmap via transform.
     idmap = vs.transform(
-        ["v2_list01", "v2_list02", "v2_list03"],
+        ["v2_list01", "v2_list02", "v2_list03", "artist01"],
         {
             "`$PACK`": ["", {
                 "`$KEY`": "`$COPY`",

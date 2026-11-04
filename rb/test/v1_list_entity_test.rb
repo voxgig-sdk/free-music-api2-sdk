@@ -181,9 +181,15 @@ class V1ListEntityTest < Minitest::Test
       v1_list_ref01_data = Helpers.to_map(v1_list_ref01_data_raw[0][1])
     end
 
+    Runner.live_pace if setup[:live]
     # LIST
     v1_list_ref01_ent = client.V1List(nil)
     v1_list_ref01_match = {}
+    if setup[:live]
+      v1_list_ref01_match["country"] = "us"
+      v1_list_ref01_match["format"] = "albums"
+      v1_list_ref01_match["type"] = "itunes"
+    end
 
     v1_list_ref01_list_result = v1_list_ref01_ent.list(v1_list_ref01_match, nil)
     assert v1_list_ref01_list_result.is_a?(Array)

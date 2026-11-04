@@ -12,15 +12,15 @@ var NewTestFeatureFunc func() Feature
 
 var NewTimeoutFeatureFunc func() Feature
 
-var NewV1ListEntityFunc func(client *FreeMusicApi2SDK, entopts map[string]any) FreeMusicApi2Entity
+var NewV1ListEntityFunc func(client *FreeMusicApi2SDK, entopts map[string]any) FreeMusicApi2EntityBase
 
-var NewV1LookupEntityFunc func(client *FreeMusicApi2SDK, entopts map[string]any) FreeMusicApi2Entity
+var NewV1LookupEntityFunc func(client *FreeMusicApi2SDK, entopts map[string]any) FreeMusicApi2EntityBase
 
-var NewV1SearchEntityFunc func(client *FreeMusicApi2SDK, entopts map[string]any) FreeMusicApi2Entity
+var NewV1SearchEntityFunc func(client *FreeMusicApi2SDK, entopts map[string]any) FreeMusicApi2EntityBase
 
-var NewV2ListEntityFunc func(client *FreeMusicApi2SDK, entopts map[string]any) FreeMusicApi2Entity
+var NewV2ListEntityFunc func(client *FreeMusicApi2SDK, entopts map[string]any) FreeMusicApi2EntityBase
 
-var NewV2LookupEntityFunc func(client *FreeMusicApi2SDK, entopts map[string]any) FreeMusicApi2Entity
+var NewV2LookupEntityFunc func(client *FreeMusicApi2SDK, entopts map[string]any) FreeMusicApi2EntityBase
 
-var NewV2SearchEntityFunc func(client *FreeMusicApi2SDK, entopts map[string]any) FreeMusicApi2Entity
+var NewV2SearchEntityFunc func(client *FreeMusicApi2SDK, entopts map[string]any) FreeMusicApi2EntityBase
 

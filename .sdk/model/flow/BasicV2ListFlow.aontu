@@ -7,22 +7,16 @@ main: kit: flow: BasicV2ListFlow:
   name: "BasicV2ListFlow",
   step: [
     {
-      i: {
-        ref: "v2_list_ref01",
-        srcdatavar: "v2_list_ref01_data",
-        suffix: "_dt0"
-      }
-
       m: {
-        id: "v2_list01"
+        artist_id: "artist01"
       }
 
-      o: "load",
+      o: "list",
       v: [
         {
-          apply: "TextFieldMark",
+          apply: "ItemExists",
           def: {
-            mark: "Mark01-v2_list_ref01"
+            ref: "v2_list_ref01"
           }
         }
       ]

@@ -290,20 +290,22 @@ class V2SearchEntity
     }
 
     
+
+    
     /**
-     * Load a single V2Search.
+     * List V2Search items matching the given filter.
      *
-     * @param V2SearchLoadMatch|array|null $reqmatch Match criteria (id/query
-     *   fields) as an assoc-array; a typed V2SearchLoadMatch names the shape.
+     * @param V2SearchListMatch|array|null $reqmatch Match filter (any subset
+     *   of V2Search fields) as an assoc-array; V2SearchListMatch names the shape.
      * @param mixed $ctrl Optional per-call control overrides.
-     * @return V2SearchEntity The loaded V2Search entity, whose data_get() reads
-     *   its record; throws FreeMusicApi2Error on failure (item-5 convention).
+     * @return V2SearchEntity[] The V2Search entities, one per record, each read
+     *   with data_get(); throws FreeMusicApi2Error on failure (item-5 convention).
      */
-    public function load(?array $reqmatch = null, $ctrl = null): mixed
+    public function list(?array $reqmatch = null, $ctrl = null): mixed
     {
         $utility = $this->_utility;
         $ctx = ($utility->make_context)([
-            "opname" => "load",
+            "opname" => "list",
             "ctrl" => $ctrl,
             "match" => $this->_match,
             "data" => $this->_data,
@@ -315,16 +317,11 @@ class V2SearchEntity
                 if ($ctx->result->resmatch) {
                     $this->_match = $ctx->result->resmatch;
                 }
-                if ($ctx->result->resdata) {
-                    $this->_data = FreeMusicApi2Helpers::to_map(Struct::clone($ctx->result->resdata)) ?? [];
-                }
             }
         });
     }
 
 
-
-    
 
     
 

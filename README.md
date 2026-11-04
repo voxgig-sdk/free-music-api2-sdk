@@ -23,7 +23,7 @@ Metadata kindly supplied by [www.freepublicapis.com](https://www.freepublicapis.
 This SDK exposes the API as a small set of **semantic entities** — V1List, V1Lookup, V1Search, V2List, V2Lookup and V2Search — that you
 call directly, instead of assembling URL paths and query strings. Entities are
 **Capitalised** to mark them as the primary surface, each with the operations they
-support (`list`, `load`):
+support (`list`):
 
 ```ts
 const client = new FreeMusicApi2SDK()
@@ -46,22 +46,22 @@ network, and no credentials:
 // Shape: { entity: { <entity-name>: { <id>: <record> } } }
 const client = FreeMusicApi2SDK.test({
   entity: {
-    v2_lookup: {
-      test01: { id: 'test01' },
+    v1_search: {
+      test01: { id: 'test01', s: 'example_s' },
     },
   },
 })
-const v2lookup = await client.V2Lookup().load({ album_id: 1 })
-// v2lookup is the V2Lookup entity; .data() reads its mock record
-console.log(v2lookup.data())
+const v1searchs = await client.V1Search().list({ s: 'example_s' })
+// v1searchs is an array of V1Search entities, one per mock record
+console.log(v1searchs.map((v1search) => v1search.data()))
 ```
 
 ### Python
 
 ```python
 client = FreeMusicApi2SDK.test()
-v2lookup = client.V2Lookup().load({"album_id": 1})
-print(v2lookup.data_get())
+v1searchs = client.V1Search().list({"s": "example"})
+print([item.data_get() for item in v1searchs])
 ```
 
 ### PHP
@@ -69,17 +69,17 @@ print(v2lookup.data_get())
 ```php
 // Seed fixture data so offline calls resolve without a live server.
 $client = FreeMusicApi2SDK::test([
-    "entity" => ["v2_lookup" => ["test01" => []]],
+    "entity" => ["v1_search" => ["test01" => ["s" => "example"]]],
 ]);
-$v2lookup = $client->V2Lookup()->load(["album_id" => 1]);
+$v1searchs = $client->V1Search()->list(["s" => "example"]);
 ```
 
 ### Golang
 
 ```go
 client := sdk.Test()
-result, err := client.V2Lookup(nil).Load(
-    map[string]any{"album_id": 1}, nil,
+result, err := client.V1Search(nil).List(
+    map[string]any{"s": "example"}, nil,
 )
 ```
 
@@ -88,16 +88,16 @@ result, err := client.V2Lookup(nil).Load(
 ```ruby
 # Seed fixture data so offline calls resolve without a live server.
 client = FreeMusicApi2SDK.test({
-  "entity" => { "v2_lookup" => { "test01" => {} } },
+  "entity" => { "v1_search" => { "test01" => { "s" => "example" } } },
 })
-v2lookup = client.V2Lookup.load({ "album_id" => 1 })
+v1searchs = client.V1Search.list({ "s" => "example" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:V2Lookup():load({ album_id = 1 })
+local results, err = client:V1Search():list({ s = "example" })
 ```
 
 ## Packages
@@ -145,7 +145,7 @@ See the [TypeScript README](ts/README.md) for the full guide.
 
 ## Use it from an AI agent (MCP)
 
-The generated MCP server exposes this SDK's list and load operations as
+The generated MCP server exposes this SDK's list operations as
 [MCP](https://modelcontextprotocol.io) tools that Claude, Cursor or Cline
 can call directly. It only reads: create, update, patch and remove become tools when the SDK's model sets
 `main: kit: target: 'go-mcp': tool: write: true`. Build and register it:
@@ -175,11 +175,11 @@ The API exposes 6 entities:
 | **V1List** | The V1List entity (list). | `/trending.php` |
 | **V1Lookup** | The V1Lookup entity (list). | `/album-mb.php` |
 | **V1Search** | The V1Search entity (list). | `/searchtrack.php` |
-| **V2List** | The V2List entity (load). | `/list/discography/{artistId}` |
-| **V2Lookup** | The V2Lookup entity (load). | `/lookup/album/{albumId}` |
-| **V2Search** | The V2Search entity (load). | `/search/album/{albumName}` |
+| **V2List** | The V2List entity (list). | `/list/discography/{artistId}` |
+| **V2Lookup** | The V2Lookup entity (list). | `/lookup/album/{albumId}` |
+| **V2Search** | The V2Search entity (list). | `/search/album/{albumName}` |
 
-The operations available across these entities are **load**, **list** — see each entity's
+The operations available across these entities are **list** — see each entity's
 own list above for exactly which it supports.
 
 ## Quickstart in other languages

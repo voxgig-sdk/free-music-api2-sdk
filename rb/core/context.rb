@@ -115,7 +115,7 @@ class FreeMusicApi2Context
   end
 
   def make_error(code, msg)
-    FreeMusicApi2Error.new(code, msg, self)
+    FreeMusicApi2Error.new(msg, code: code, ctx: self)
   end
 
   # The serialised context leaves the pipeline (a logger, an error dump), so

@@ -168,7 +168,7 @@ const PLAN: any[] = [
   {
     "entity": "v2_list",
     "accessor": "V2List",
-    "op": "load",
+    "op": "list",
     "method": "GET",
     "path": "/list/discography/{artistId}",
     "args": [
@@ -251,7 +251,7 @@ const PLAN: any[] = [
   {
     "entity": "v2_lookup",
     "accessor": "V2Lookup",
-    "op": "load",
+    "op": "list",
     "method": "GET",
     "path": "/lookup/album/{albumId}",
     "args": [
@@ -334,7 +334,7 @@ const PLAN: any[] = [
   {
     "entity": "v2_lookup",
     "accessor": "V2Lookup",
-    "op": "load",
+    "op": "list",
     "method": "GET",
     "path": "/lookup/artist/{artistId}",
     "args": [
@@ -420,7 +420,7 @@ const PLAN: any[] = [
   {
     "entity": "v2_lookup",
     "accessor": "V2Lookup",
-    "op": "load",
+    "op": "list",
     "method": "GET",
     "path": "/lookup/track/{trackId}",
     "args": [
@@ -497,7 +497,7 @@ const PLAN: any[] = [
   {
     "entity": "v2_search",
     "accessor": "V2Search",
-    "op": "load",
+    "op": "list",
     "method": "GET",
     "path": "/search/album/{albumName}",
     "args": [
@@ -580,7 +580,7 @@ const PLAN: any[] = [
   {
     "entity": "v2_search",
     "accessor": "V2Search",
-    "op": "load",
+    "op": "list",
     "method": "GET",
     "path": "/search/artist/{artistName}",
     "args": [
@@ -666,7 +666,7 @@ const PLAN: any[] = [
   {
     "entity": "v2_search",
     "accessor": "V2Search",
-    "op": "load",
+    "op": "list",
     "method": "GET",
     "path": "/search/track/{trackName}",
     "args": [

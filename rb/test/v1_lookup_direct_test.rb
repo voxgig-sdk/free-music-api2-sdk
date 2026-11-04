@@ -27,14 +27,20 @@ class V1LookupDirectTest < Minitest::Test
       skip(_reason || "skipped via sdk-test-control.json")
       return
     end
+    Runner.live_pace if setup[:live]
     client = setup[:client]
 
     params = {}
+    query = {}
+    if setup[:live]
+      query["i"] = "1dc4c347-a1db-32aa-b14f-bc9cc507b843"
+    end
 
     result = client.direct({
       "path" => "album-mb.php",
       "method" => "GET",
       "params" => params,
+      "query" => query,
     })
     if setup[:live]
       unless live_ok(result)

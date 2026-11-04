@@ -38,7 +38,7 @@ func TestV2ListEntity(t *testing.T) {
 		client := sdk.TestSDK(nil, map[string]any{
 			"feature": map[string]any{"validate": map[string]any{"active": true}},
 		})
-		_, err := client.V2List(nil).Load(map[string]any{"artist_id": "x"}, nil)
+		_, err := client.V2List(nil).List(map[string]any{"artist_id": "x"}, nil)
 		if sdkerr, ok := err.(*core.FreeMusicApi2Error); !ok || "validate_failed" != sdkerr.Code {
 			t.Fatalf("expected validate_failed, got %v", err)
 		}
@@ -53,7 +53,7 @@ func TestV2ListEntity(t *testing.T) {
 		if setup.live {
 			_mode = "live"
 		}
-		for _, _op := range []string{} {
+		for _, _op := range []string{"list"} {
 			if _shouldSkip, _reason := isControlSkipped("entityOp", "v2_list." + _op, _mode); _shouldSkip {
 				if _reason == "" {
 					_reason = "skipped via sdk-test-control.json"
@@ -62,6 +62,16 @@ func TestV2ListEntity(t *testing.T) {
 				return
 			}
 		}
+		if setup.live {
+			for _liveKey, _liveEx := range map[string]any{"artist01": float64(111239)} {
+				if setup.syntheticOnly || setup.idmap[_liveKey] == nil {
+					setup.idmap[_liveKey] = _liveEx
+				}
+			}
+		}
+		client := setup.client
+		_ = client
+
 		// Bootstrap entity data from existing test data (no create step in flow).
 		v2ListRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.v2_list")))
 		var v2ListRef01Data map[string]any
@@ -71,6 +81,24 @@ func TestV2ListEntity(t *testing.T) {
 		// Discard guards against Go's unused-var check when the flow's steps
 		// happen not to consume the bootstrap data (e.g. list-only flows).
 		_ = v2ListRef01Data
+
+		if setup.live {
+			livePace()
+		}
+		// LIST
+		v2ListRef01Ent := client.V2List(nil)
+		v2ListRef01Match := map[string]any{
+			"artist_id": setup.idmap["artist01"],
+		}
+
+		v2ListRef01ListResult, err := v2ListRef01Ent.List(v2ListRef01Match, nil)
+		if err != nil {
+			t.Fatalf("list failed: %v", err)
+		}
+		_, v2ListRef01ListOk := v2ListRef01ListResult.([]any)
+		if !v2ListRef01ListOk {
+			t.Fatalf("expected list result to be an array, got %T", v2ListRef01ListResult)
+		}
 
 	})
 }
@@ -100,7 +128,7 @@ func v2_listBasicSetup(extra map[string]any) *entityTestSetup {
 
 	// Generate idmap via transform, matching TS pattern.
 	idmap, _ := vs.Transform(
-		[]any{"v2_list01", "v2_list02", "v2_list03"},
+		[]any{"v2_list01", "v2_list02", "v2_list03", "artist01"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
 				"`$KEY`": "`$COPY`",

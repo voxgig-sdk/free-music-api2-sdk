@@ -17,22 +17,29 @@ class V2SearchDirectTest < Minitest::Test
     result["err"].nil? && result["ok"] && status >= 200 && status < 300
   end
 
-  def test_direct_load_v2_search
-    setup = v2_search_direct_setup({ "id" => "direct01" })
-    _should_skip, _reason = Runner.is_control_skipped("direct", "direct-load-v2_search", setup[:live] ? "live" : "unit")
+  def test_direct_list_v2_search
+    setup = v2_search_direct_setup([
+      { "id" => "direct01" },
+      { "id" => "direct02" },
+    ])
+    _should_skip, _reason = Runner.is_control_skipped("direct", "direct-list-v2_search", setup[:live] ? "live" : "unit")
     if _should_skip
       skip(_reason || "skipped via sdk-test-control.json")
       return
     end
+    if setup[:live]
+      ["album_name01"].each do |_live_key|
+        if setup[:idmap][_live_key].nil?
+          Runner.live_miss(LIVE_STRICT, "Live test blocked: needs #{_live_key} via FREE_MUSIC_API2_TEST_V2_SEARCH_ENTID")
+        end
+      end
+    end
+    Runner.live_pace if setup[:live]
     client = setup[:client]
 
     params = {}
     query = {}
-    if setup[:live]
-      params["album_name"] = "parachutes"
-    else
-      params["album_name"] = "direct01"
-    end
+    params["album_name"] = setup[:live] ? setup[:idmap]["album_name01"] : "direct01"
 
     result = client.direct({
       "path" => "search/album/{album_name}",
@@ -42,20 +49,18 @@ class V2SearchDirectTest < Minitest::Test
     })
     if setup[:live]
       unless live_ok(result)
-        Runner.live_miss(LIVE_STRICT, "Live load failed: " + Runner.live_describe(result))
+        Runner.live_miss(LIVE_STRICT, "Live list failed: " + Runner.live_describe(result))
       end
-      if result["data"].nil?
-        Runner.live_miss(LIVE_STRICT, "Live load returned no data: " + Runner.live_describe(result))
+      if Runner.live_list(result["data"]).nil?
+        Runner.live_miss(LIVE_STRICT, "Live list returned no list: " + Runner.live_describe(result))
       end
-      assert !result["data"].nil?
+      assert Runner.live_list(result["data"]).is_a?(Array)
     else
       assert_nil result["err"]
       assert result["ok"]
       assert_equal 200, Helpers.to_int(result["status"])
-      assert !result["data"].nil?
-      if result["data"].is_a?(Hash)
-        assert_equal "direct01", result["data"]["id"]
-      end
+      assert result["data"].is_a?(Array)
+      assert_equal 2, result["data"].length
       assert_equal 1, setup[:calls].length
     end
   end
@@ -84,6 +89,9 @@ def v2_search_direct_setup(mockres)
     })
     client = FreeMusicApi2SDK.new(merged_opts)
     idmap = env["FREE_MUSIC_API2_TEST_V2_SEARCH_ENTID"]
+    # A path parameter's example stands in for an id *_ENTID does not give.
+    idmap = { "album_name01" => "parachutes" }
+      .merge(idmap.is_a?(Hash) ? idmap : {})
     return {
       client: client,
       calls: calls,

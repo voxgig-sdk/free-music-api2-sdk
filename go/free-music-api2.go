@@ -13,7 +13,11 @@ type Context = core.Context
 type Utility = core.Utility
 type Feature = core.Feature
 type Entity = core.Entity
-type FreeMusicApi2Entity = core.FreeMusicApi2Entity
+type FreeMusicApi2EntityBase = core.FreeMusicApi2EntityBase
+
+// Deprecated: use FreeMusicApi2EntityBase.
+type FreeMusicApi2Entity = core.FreeMusicApi2EntityBase
+
 type StreamItem = core.StreamItem
 type FetcherFunc = core.FetcherFunc
 type Spec = core.Spec
@@ -42,22 +46,22 @@ func init() {
 	core.NewTimeoutFeatureFunc = func() core.Feature {
 		return feature.NewTimeoutFeature()
 	}
-	core.NewV1ListEntityFunc = func(client *core.FreeMusicApi2SDK, entopts map[string]any) core.FreeMusicApi2Entity {
+	core.NewV1ListEntityFunc = func(client *core.FreeMusicApi2SDK, entopts map[string]any) core.FreeMusicApi2EntityBase {
 		return entity.NewV1ListEntity(client, entopts)
 	}
-	core.NewV1LookupEntityFunc = func(client *core.FreeMusicApi2SDK, entopts map[string]any) core.FreeMusicApi2Entity {
+	core.NewV1LookupEntityFunc = func(client *core.FreeMusicApi2SDK, entopts map[string]any) core.FreeMusicApi2EntityBase {
 		return entity.NewV1LookupEntity(client, entopts)
 	}
-	core.NewV1SearchEntityFunc = func(client *core.FreeMusicApi2SDK, entopts map[string]any) core.FreeMusicApi2Entity {
+	core.NewV1SearchEntityFunc = func(client *core.FreeMusicApi2SDK, entopts map[string]any) core.FreeMusicApi2EntityBase {
 		return entity.NewV1SearchEntity(client, entopts)
 	}
-	core.NewV2ListEntityFunc = func(client *core.FreeMusicApi2SDK, entopts map[string]any) core.FreeMusicApi2Entity {
+	core.NewV2ListEntityFunc = func(client *core.FreeMusicApi2SDK, entopts map[string]any) core.FreeMusicApi2EntityBase {
 		return entity.NewV2ListEntity(client, entopts)
 	}
-	core.NewV2LookupEntityFunc = func(client *core.FreeMusicApi2SDK, entopts map[string]any) core.FreeMusicApi2Entity {
+	core.NewV2LookupEntityFunc = func(client *core.FreeMusicApi2SDK, entopts map[string]any) core.FreeMusicApi2EntityBase {
 		return entity.NewV2LookupEntity(client, entopts)
 	}
-	core.NewV2SearchEntityFunc = func(client *core.FreeMusicApi2SDK, entopts map[string]any) core.FreeMusicApi2Entity {
+	core.NewV2SearchEntityFunc = func(client *core.FreeMusicApi2SDK, entopts map[string]any) core.FreeMusicApi2EntityBase {
 		return entity.NewV2SearchEntity(client, entopts)
 	}
 }

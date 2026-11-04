@@ -153,9 +153,13 @@ class TestV1LookupEntity:
         if len(v1_lookup_ref01_data_raw) > 0:
             v1_lookup_ref01_data = helpers.to_map(v1_lookup_ref01_data_raw[0][1])
 
+        if setup["live"]:
+            runner.live_pace()
         # LIST
         v1_lookup_ref01_ent = client.V1Lookup(None)
         v1_lookup_ref01_match = {}
+        if setup["live"]:
+            v1_lookup_ref01_match["i"] = "1dc4c347-a1db-32aa-b14f-bc9cc507b843"
 
         v1_lookup_ref01_list_result = v1_lookup_ref01_ent.list(v1_lookup_ref01_match, None)
         assert isinstance(v1_lookup_ref01_list_result, list)

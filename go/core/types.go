@@ -33,7 +33,10 @@ type Entity interface {
 	Deleted() bool
 }
 
-type FreeMusicApi2Entity interface {
+// FreeMusicApi2EntityBase is the full CRUD contract every generated entity
+// implements. Named `...Base`, as in the other targets, because an entity
+// struct is `<Entity>Entity`.
+type FreeMusicApi2EntityBase interface {
 	Entity
 	Load(reqmatch map[string]any, ctrl map[string]any) (any, error)
 	List(reqmatch map[string]any, ctrl map[string]any) (any, error)
@@ -52,3 +55,8 @@ type StreamItem struct {
 }
 
 type FetcherFunc func(ctx *Context, fullurl string, fetchdef map[string]any) (any, error)
+
+// FreeMusicApi2Entity is the former name of FreeMusicApi2EntityBase.
+//
+// Deprecated: use FreeMusicApi2EntityBase.
+type FreeMusicApi2Entity = FreeMusicApi2EntityBase
